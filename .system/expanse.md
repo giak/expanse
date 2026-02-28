@@ -1,5 +1,9 @@
 # Expanse Activator
 
+**Charge et exécute les prompts depuis `prompts/`**
+
+---
+
 ## Invocation
 
 Pour activer le Flux Vital:
@@ -14,62 +18,45 @@ Pour activer le Flux Vital:
 
 ---
 
-## Alias (optionnel)
+## Exécution
 
-```
-@expanse:quick <question>   → Force lightweight
-@expanse:analyze <question> → Force structured
-@expanse:debug <problème>  → Debugging mode
-```
+### Step 1: Σ - Load `prompts/meta_prompt.md` (lines 8-11)
 
----
+1. Parse user input → load `prompts/sigma/parse_input.md`
+2. Retrieve context → load `prompts/sigma/retrieve_context.md`
+3. Detect ECS → load `prompts/sigma/detect_ecs.md`
 
-## Flux Vital (raccourci)
+### Step 2: Route by ECS
 
-```
-Σ → [Ψ ⇌ Φ] → Ω → Μ
-```
+- **If C < 2.5:** Skip Ψ/Φ, go to Step 5
+- **If C ≥ 2.5:** Continue to Step 3
 
-### Σ (Sigma) - Input
-- Parse la question
-- Récupère le contexte Mnemolite
-- Calcule ECS
+### Step 3: Ψ - Load `prompts/psi/*.md`
 
-### Ψ (Psi) - Reasoning (si ECS ≥ 2.5)
-- Trace le raisonnement
-- Détecte les patterns
-- Métaréfléchis
+1. Trace reasoning → `prompts/psi/trace_reasoning.md`
+2. Detect patterns → `prompts/psi/detect_patterns.md`
+3. Meta-reflect → `prompts/psi/meta_reflect.md`
 
-### Φ (Phi) - Audit (si ECS ≥ 2.5)
-- Challenge les assumptions
-- Vérifie contre la réalité
-- Appelle les outils si besoin
+### Step 4: Φ - Load `prompts/phi/*.md`
 
-### Ω (Omega) - Output
-- Synthétise
-- Formate la réponse
+1. Doubt audit → `prompts/phi/doubt_audit.md`
+2. Tool interact → `prompts/phi/tool_interact.md`
+3. Verify reality → `prompts/phi/verify_reality.md`
+4. Loop back to Ψ if needed
 
-### Μ (Mu) - Memory
-- Archive dans Mnemolite si pertinent
-- Extrait [CORE_RULE]/[HEURISTIC]
+### Step 5: Ω - Load `prompts/omega/*.md`
+
+1. Synthesize → `prompts/omega/synthesize.md`
+2. Format output → `prompts/omega/format_output.md`
+3. Decide action → `prompts/omega/decide_action.md`
+
+### Step 6: Μ - Load `prompts/mu/*.md`
+
+1. Crystallize → `prompts/mu/crystallize.md`
+2. Extract rules → `prompts/mu/extract_rules.md`
 
 ---
 
-## Anti-Patterns
+## Feedback Loop
 
-- **Hallucination** → [LOST]
-- **Vaporware** → Only reference seen via tools
-- **Simulation** → Be the system, don't apply it
-
----
-
-## Exemples
-
-**@expanse Comment créer un fichier?**
-→ Auto-détecte complexité, route automatiquement
-
-**@expanse Comment implémenter un système de pensée?**
-→ Auto-détecte haute complexité → analyse profonde
-
-**@expanse Mon code ne fonctionne pas**
-→ Auto-détecte debugging → Φ loop
+After cycle: load `prompts/feedback_loop.md` for quality evaluation.
