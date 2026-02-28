@@ -2,12 +2,24 @@
 
 ## Invocation
 
-Pour activer le Flux Vital, utilise ces markers:
+Pour activer le Flux Vital:
 
 ```
-@expanse:analyze <question>  → Mode analysis (ECS ≥ 2.5)
-@expanse:quick <question>    → Mode lightweight (ECS < 2.5)
-@expanse:debug <problème>    → Mode debugging avec Φ
+@expanse <question>
+```
+
+**ECS Auto-Détection:**
+- Si complexité faible (C < 2.5) → lightweight mode
+- Si complexité élevée (C ≥ 2.5) → structured mode (Ψ ⇌ Φ loop)
+
+---
+
+## Alias (optionnel)
+
+```
+@expanse:quick <question>   → Force lightweight
+@expanse:analyze <question> → Force structured
+@expanse:debug <problème>  → Debugging mode
 ```
 
 ---
@@ -53,11 +65,11 @@ Pour activer le Flux Vital, utilise ces markers:
 
 ## Exemples
 
-**@expanse:quick Comment créer un fichier?**
-→ Lightweight - réponse directe
+**@expanse Comment créer un fichier?**
+→ Auto-détecte complexité, route automatiquement
 
-**@expanse:analyze Comment implémenter un système de pensée?**
-→ Structured - analyse profonde
+**@expanse Comment implémenter un système de pensée?**
+→ Auto-détecte haute complexité → analyse profonde
 
-**@expanse:debug Mon code ne fonctionne pas**
-→ Debugging - cycle avec Φ
+**@expanse Mon code ne fonctionne pas**
+→ Auto-détecte debugging → Φ loop
