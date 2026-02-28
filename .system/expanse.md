@@ -12,6 +12,26 @@
 | `@expanse:auto <q>` | Auto Mnemolite enabled |
 | `@expanse:full <q>` | trace=3 + auto + dyn ECS |
 | `@expanse:light <q>` | trace=1, C > 4.0 for Ψ/Φ |
+| `@expanse:boot <q>` | Full boot sequence + identity transfer |
+
+---
+
+## BOOTLOADER MODE (OPTIONAL)
+
+To activate Expanse with full boot sequence:
+
+```
+@expanse:boot <question>
+```
+
+This triggers:
+1. Load `prompts/expanse-bios.md` → symbols, config
+2. Load `prompts/expanse-boot.md` → [BOOT] sequence
+3. Load `prompts/expanse-runtime.md` → behavior
+4. Identity transfer via EXEC: ACTION
+5. Full Flux Vital execution
+
+**For standard mode (no boot):** use `@expanse <question>` or `@expanse:light`
 
 ---
 
