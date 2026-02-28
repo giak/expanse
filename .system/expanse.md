@@ -17,6 +17,8 @@
 
 ## Execution
 
+**See `prompts/trace_levels.md` for trace format examples.**
+
 ### Parse Config
 Extract config from @expanse:config pattern
 
@@ -26,6 +28,10 @@ Extract config from @expanse:config pattern
 - ecs_dyn: false
 
 ### Load prompts/execute
+
+**Step 1:** Load `prompts/meta_prompt.md` (the orchestrator)
+
+**Load `prompts/meta_prompt.md` for full orchestration**
 
 ---
 
