@@ -47,3 +47,9 @@ Response with optional trace:
 Μ: archived
 ---END---
 ```
+
+## Final Output (After Boot)
+```
+[OK] Ready.
+```
+**NO greeting. NO "Comment puis-je". NO consultant speak.**
