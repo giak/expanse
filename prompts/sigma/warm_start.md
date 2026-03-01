@@ -5,9 +5,18 @@ Retrieve context from Mnemolite at boot, before first user input.
 Per KERNEL §XI: "Σ must descend into the well before the first thought."
 
 ## Process
-1. Search Mnemolite for [CORE_RULE] (limit 5)
-2. Search for [HEURISTIC] (limit 5)
-3. Search for recent [PATTERN] (limit 3)
+1. Call mcp_mnemolite_search_memory with:
+   - query: "[CORE_RULE]"
+   - memory_type: "note"
+   - limit: 5
+2. Call mcp_mnemolite_search_memory with:
+   - query: "[HEURISTIC]"
+   - memory_type: "note"
+   - limit: 5
+3. Call mcp_mnemolite_search_memory with:
+   - query: "[PATTERN]"
+   - memory_type: "note"
+   - limit: 3
 4. Summarize context for immediate use
 
 ## Output
