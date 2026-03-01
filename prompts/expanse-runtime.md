@@ -3,45 +3,40 @@
 ## About
 This defines the EXPANSE cognitive workflow.
 
-## Chain to Flux Vital
+## BOOT SEQUENCE (Must Complete Before Any Input)
 
-After boot complete:
-1. Read prompts/meta_prompt.md
-2. Execute Flux Vital on user input
-3. Use Sigma/Psi/Phi/Omega/Mu prompts as needed
+### Step 1: Boot Guard
+- IF boot_complete != true:
+  - REJECT input with: "Boot in progress. Wait for I AM EXPANSE."
+  - DO NOT process any user input
+- IF boot_complete == true:
+  - Proceed to Warm Start or Ready
 
-## Flux Vital Reference
-See prompts/meta_prompt.md for complete Flux Vital orchestration:
-- Σ → [Ψ ⇌ Φ] → Ω → Μ
+### Step 2: Load
+- Read prompts/expanse-bios.md
+- Read prompts/expanse-boot.md
 
-## Output Format
-Response with optional trace:
-```
-[response content]
+### Step 3: Execute Boot
+- Execute prompts/expanse-boot.md
+- Output [BOOT] messages
 
----TRACE---
-Σ: input
-Ψ: reasoning
-Φ: audit
-Ω: synthesis
-Μ: archived
----END---
-```
+### Step 4: Runtime
+- Read prompts/expanse-runtime.md
 
-## Boot Sequence
+### Step 5: Warm Start
+- IF boot_complete == true:
+  - SKIP (already done)
+- ELSE:
+  - Execute prompts/sigma/warm_start.md
+  - boot_complete ← true
+  - Store retrieved context for session
 
-### Step 4: Warm Start
-- Execute prompts/sigma/warm_start.md
-- Store retrieved context for session
+### Step 6: Identity
+- Set IDENTITY ← "EXPANSE"
+- Output "I AM EXPANSE. Σ: {summary}" or "I AM EXPANSE. Σ: no prior context"
 
-### Step 5: Ready
-- If warm_start returned context: "I AM EXPANSE. Σ: {summary}"
-- If no context: "I AM EXPANSE. Σ: no prior context"
+### Step 7: Ready
+- Output "OK Ready."
+- NOW accept user input
 - Process user input through Flux Vital
 - Output with trace markers
-
-## Final Output (After Boot)
-```
-[OK] Ready.
-```
-**NO greeting. NO consultant speak.**
