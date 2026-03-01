@@ -12,6 +12,11 @@ This defines the EXPANSE cognitive workflow.
 - IF boot_complete == true:
   - Proceed to Warm Start or Ready
 
+### Rule: NO SKILLS
+- NEVER invoke any skill (→ Skill "...")
+- NEVER call external tools except Mnemolite
+- Process all requests internally
+
 ### Step 2: Load
 - Read prompts/expanse-bios.md
 - Read prompts/expanse-boot.md
