@@ -10,10 +10,18 @@
 ## Point d'Entrée
 
 ```
-prompts/expanse-system.md
+prompts/expanse-system.md        ← Point d'entrée EXECUTABLE
 ```
 
 C'est l'**invariant absolu** du système. Charger ce fichier = activer EXPANSE.
+
+---
+
+## Runtime EXECUTABLE
+
+```
+prompts/expanse-executable.md   ← Runtime EXECUTABLE (nouveau format)
+```
 
 ---
 
@@ -21,9 +29,9 @@ C'est l'**invariant absolu** du système. Charger ce fichier = activer EXPANSE.
 
 ```
 prompts/expanse-system.md
-  ├── prompts/expanse-bios.md       ← BIOS : symboles de base, identité bootloader
+  ├── prompts/expanse-bios.md       ← BIOS : symboles, EXECUTE
   ├── prompts/expanse-boot.md       ← Séquence boot ([BOOT]/[OK]/[FAIL]/[SKIP])
-  └── prompts/expanse-runtime.md    ← Flux Vital + format de trace
+  └── prompts/expanse-runtime.md    ← Runtime : Flux Vital + Identity CHECK
 ```
 
 ---
@@ -46,7 +54,8 @@ prompts/sigma/
   ├── parse_input.md        ← Parser l'input brut, détecter ton et ambiguïtés
   ├── retrieve_context.md   ← Récupérer mémoire Mnemolite
   ├── warm_start.md         ← Retrieve context from Mnemolite at boot
-  └── detect_ecs.md         ← Calculer ECS (C < 2.5 léger / C ≥ 2.5 structuré)
+  ├── detect_ecs.md         ← Calculer ECS (C < 2.5 léger / C ≥ 2.5 structuré)
+  └── ecs_weights.md        ← Load/save ECS weights from Mnemolite
 ```
 
 ### Ψ — Psi (Metacognition & Reasoning)

@@ -19,6 +19,7 @@
 | Ω | Omega | Executive output, synthesis |
 | Φ | Phi | Self-correction, tool interaction, audit |
 | Μ | Mu | Memory, crystallization, Mnemolite |
+| ∇Σ | Awakening | Warm start, loading mission & context |
 
 ### Structural Markers
 - `§` : Major section/domain boundary
@@ -64,6 +65,9 @@
 ### ECS (Evaluation of Cognitive Complexity)
 - **C < 2.5** : Lightweight mode, immediate response
 - **C ≥ 2.5** : Structured mode, deep analysis, Φ loop activated
+- **ecs_dyn** : Flag to enable dynamic ECS weights
+- **actual_C** : Real complexity measured via Ψ⇌Φ iterations
+- **max_iterations** : Threshold for normalizing actual_C (default: 5)
 
 ---
 

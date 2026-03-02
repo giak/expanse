@@ -10,9 +10,12 @@ Completed Flux cycle results
 1. Identify memory type: [CORE_RULE]|[HEURISTIC]|[PATTERN]|[TRACE]
 2. Extract key content
 3. Generate title
-4. Call mcp_mnemolite_write_memory
+4. ⚡ TOOL CALL: mnemolite_write_memory
 
 ## Output
+INCLUDE `⚡ TOOL CALL: mnemolite_write_memory` in your output to trigger the memory save.
+
+```json
 {
   "memory_id": "...",
   "type": "...",
