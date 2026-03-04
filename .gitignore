@@ -1,0 +1,3 @@
+# Ignore worktrees
+.worktrees/
+worktrees/
