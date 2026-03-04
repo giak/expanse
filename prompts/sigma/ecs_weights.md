@@ -45,18 +45,18 @@ Load ECS weights from Mnemolite, fallback to defaults if not found.
 
 ### save_weights(weights)
 
-Save ECS weights to Mnemolite with memory_type="core_config".
+Save ECS weights to Mnemolite with memory_type="[CORE_RULE]".
 
 **Process:**
 1. ⚡ TOOL CALL: mnemolite_search_memory query="ECS_WEIGHTS" limit=1
 2. If existing memory found → ⚡ TOOL CALL: mnemolite_update_memory with updated values
-3. If no existing memory → ⚡ TOOL CALL: mnemolite_write_memory with memory_type="core_config"
+3. If no existing memory → ⚡ TOOL CALL: mnemolite_write_memory with memory_type="[CORE_RULE]"
 
 **Template:**
 ```json
 {
   "title": "ECS_WEIGHTS",
-  "memory_type": "core_config",
+  "memory_type": "[CORE_RULE]",
   "content": {
     "w_amb": 0.25,
     "w_know": 0.25,

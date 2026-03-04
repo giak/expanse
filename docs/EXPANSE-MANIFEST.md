@@ -20,7 +20,7 @@ C'est l'**invariant absolu** du système. Charger ce fichier = activer EXPANSE.
 ## Runtime EXECUTABLE
 
 ```
-prompts/expanse-executable.md   ← Runtime EXECUTABLE (nouveau format)
+prompts/expanse-runtime.md   ← Runtime EXECUTABLE (via meta_prompt)
 ```
 
 ---

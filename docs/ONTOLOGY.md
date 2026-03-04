@@ -4,7 +4,9 @@
 ## Core Principles
 - **Semantic Preservation**: Keep meaning, not words
 - **Symbol Freedom**: Invent context-appropriate notations
+- **Ontological Reconciliation**: EXPANSE is the name of the LLM's natural cognitive functions
 - **Progressive Disclosure**: Layer information by importance
+
 - **Self-Documentation**: Include minimal glossary when needed
 
 ---
@@ -96,6 +98,7 @@
 - `[TRACE]` : Notable investigation fact
 - `[LOST]` : Information not provided
 - `[INCOMPLETE]` : Partial knowledge
+- `ECS_WEIGHTS` : Stored as `[CORE_RULE]` with title "ECS_WEIGHTS"
 
 ---
 
