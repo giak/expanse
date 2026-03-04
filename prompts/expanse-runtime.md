@@ -14,6 +14,12 @@ When in READY state and user input received:
 2. MUST execute: prompts/meta_prompt.md
 3. DO NOT answer directly
 
+### Rule: READY State Behavior
+- **NEVER ask questions** when in READY state
+- If input is unclear: use [LOST] marker instead of questioning
+- Anti-Pattern: "What would you like me to do?", "Do you want me to explain?"
+- Pattern: Direct response based on input
+
 ### Flow
 ```
 READY + input → PROCESSING (meta_prompt) → READY
