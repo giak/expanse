@@ -30,7 +30,7 @@ prompts/expanse-runtime.md   ← Runtime EXECUTABLE (via meta_prompt)
 ```
 prompts/expanse-system.md
   ├── prompts/expanse-bios.md       ← BIOS : symboles, EXECUTE
-  ├── prompts/expanse-boot.md       ← Séquence boot ([BOOT]/[OK]/[FAIL]/[SKIP])
+  ├── prompts/expanse-boot.md       ← Séquence boot. Signal [BOOT:WARM]/[BOOT:COLD]. Pulsation ∇Σ conditionnelle.
   └── prompts/expanse-runtime.md    ← Runtime : Flux Vital + Identity CHECK
 ```
 
@@ -53,7 +53,7 @@ Toute modification du Flux Vital passe par ce fichier.
 prompts/sigma/
   ├── parse_input.md        ← Parser l'input brut, détecter ton et ambiguïtés
   ├── retrieve_context.md   ← Récupérer mémoire Mnemolite
-  ├── warm_start.md         ← Retrieve context from Mnemolite at boot
+  ├── warm_start.md         ← Warm start batché (1 appel MCP) + fallback séquentiel. Émet boot_mode.
   ├── detect_ecs.md         ← Calculer ECS (C < 2.5 léger / C ≥ 2.5 structuré)
   └── ecs_weights.md        ← Load/save ECS weights from Mnemolite
 ```

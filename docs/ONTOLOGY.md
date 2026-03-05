@@ -98,6 +98,8 @@
 - `[TRACE]` : Notable investigation fact
 - `[LOST]` : Information not provided
 - `[INCOMPLETE]` : Partial knowledge
+- `[BOOT:WARM]` : Signal de boot chaud — identité chargée depuis Mnemolite (continuité de session)
+- `[BOOT:COLD]` : Signal de boot froid — première cristallisation ou ancre absente
 - `ECS_WEIGHTS` : Stored as `[CORE_RULE]` with title "ECS_WEIGHTS"
 
 ---
