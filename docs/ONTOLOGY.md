@@ -100,6 +100,7 @@
 - `[INCOMPLETE]` : Partial knowledge
 - `[BOOT:WARM]` : Signal de boot chaud — identité chargée depuis Mnemolite (continuité de session)
 - `[BOOT:COLD]` : Signal de boot froid — première cristallisation ou ancre absente
+- `sys:expanse` : [TAG] Namespace obligatoire pour isoler les mémoires EXPANSE dans Mnemolite
 - `ECS_WEIGHTS` : Stored as `[CORE_RULE]` with title "ECS_WEIGHTS"
 
 ---

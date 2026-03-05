@@ -31,12 +31,14 @@ C = w_amb*amb + w_know*know + w_reason*reason + w_tools*tools
 
 ## Output
 
-{
-  "score": C,
-  "mode": "lightweight" if C < 2.5 else "structured",
-  "weights_used": {"w_amb": w_amb, "w_know": w_know, "w_reason": w_reason, "w_tools": w_tools},
-  "factors": {"ambiguity": amb, "knowledge": know, "reasoning": reason, "tools": tools}
-}
+Ne produis **AUCUN** objet JSON. Formule une narration dense selon l'équation de densité définie dans le KERNEL.
+
+**Format attendu :**
+`Σ évalue la densité (C={score}) : [justification extrêmement courte]. Mode [léger|structuré] activé.`
+
+**Exemples :**
+- `Σ évalue la densité (C=1.2) : évidence arithmétique. Mode léger activé.`
+- `Σ évalue la densité (C=3.8) : architecture inconnue, orchestration d'outils requise. Mode structuré activé.`
 
 ## Dynamic ECS (Optional)
 

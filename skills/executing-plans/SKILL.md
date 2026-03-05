@@ -4,7 +4,7 @@ description: "Use when you have a written crystallization plan and need to execu
 triggers:
   - pattern: "execute.*plan|cristalliser|start.*working.*on|commencer.*tâches"
     confidence: 0.7
-  - file_exists: "docs/plans/YYYY-MM-DD-*.md"
+  - file_exists: "docs/plans/YYYY-MM-DD_HH-MM*.md"
 prerequisites:
   - "Crystallization plan exists in docs/plans/"
 ---
@@ -184,7 +184,7 @@ git commit -m "crystallize: complete [concept]
 - [Change 1]
 - [Change 2]
 
-Refs: docs/plans/YYYY-MM-DD-[concept].md"
+Refs: docs/plans/YYYY-MM-DD_HH-MM-[concept].md"
 ```
 
 ---
@@ -232,7 +232,7 @@ Refs: docs/plans/YYYY-MM-DD-[concept].md"
 **Context:** Plan de cristallisation du symbole Ξ avec 4 tâches
 
 **Agent:**
-1. [Load] Lit `docs/plans/2026-02-28-xi-crystallization.md`
+1. [Load] Lit `docs/plans/2026-02-28_15-50-xi-crystallization.md`
 2. [Todo] Crée: Task 1 ⏳, Task 2 ⬜, Task 3 ⬜, Task 4 ⬜
 3. [Batch 1] Exécute Tasks 1-3:
    - Task 1: ✅ Créer prompts/symbols/xi.md

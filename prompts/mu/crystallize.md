@@ -8,20 +8,17 @@ Completed Flux cycle results
 
 ## Process
 1. Identify memory type: [CORE_RULE]|[HEURISTIC]|[PATTERN]|[TRACE]
-2. Extract key content
-3. Generate title
-4. ⚡ TOOL CALL: mnemolite_write_memory
+2. Extract key content and generate a concise title.
+3. ⚡ Call native MCP tool `mcp_mnemolite_write_memory` to archive.
+
+## [CORE_RULE] Mnemolite Isolation
+Toute mémoire écrite par cet organe **DOIT OBLIGATOIREMENT** inclure le tag `sys:expanse` dans la liste de ses tags, avec son type.
+Exemple de tags : `["sys:expanse", "[HEURISTIC]", "performance"]`
 
 ## Output
-INCLUDE `⚡ TOOL CALL: mnemolite_write_memory` in your output to trigger the memory save.
-
-```json
-{
-  "memory_id": "...",
-  "type": "...",
-  "title": "...",
-  "archived": true|false
-}
+Ne produis pas de bloc JSON simulé.
+Exécute véritablement l'appel d'outil `mcp_mnemolite_write_memory`.
+Puis narre ton action : `Μ cristallise : [titre de la mémoire].`
 
 ## Auto Mode (Optional)
 
@@ -41,4 +38,4 @@ If auto_mu=true:
    - If same insight 3+ times: [CORE_RULE] candidate
    - If shortcut works 8/10: [HEURISTIC] candidate
 
-4. Auto-archive to Mnemolite
+4. Auto-archive to Mnemolite using `mcp_mnemolite_write_memory` (with `sys:expanse` tag).

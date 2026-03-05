@@ -401,7 +401,7 @@ Last simplification or high-cognitive-yield insight
 ### Step 9 : Handoff
 
 ```
-✅ Design: docs/plans/YYYY-MM-DD-[nom]-design.md
+✅ Design: docs/plans/YYYY-MM-DD_HH-MM-[nom]-design.md
 Type: [feature|bug|amélioration|problème]
 ECS: [X.X / 2.5]
 Mutation: [ADD|MODIFY|...]

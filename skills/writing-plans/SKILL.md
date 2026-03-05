@@ -200,7 +200,7 @@ Si problème → retour à `brainstorm`.
 ### Step 5 : Handoff
 
 ```
-✅ Plan créé : docs/plans/YYYY-MM-DD-[nom].md
+✅ Plan créé : docs/plans/YYYY-MM-DD_HH-MM-[nom].md
 [N] tâches typées | ~X minutes
 
 Options :
