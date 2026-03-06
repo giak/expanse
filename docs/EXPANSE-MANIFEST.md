@@ -21,6 +21,7 @@ C'est l'**invariant absolu** du système. Charger ce fichier = activer EXPANSE.
 
 ```
 prompts/expanse-runtime.md   ← Runtime EXECUTABLE (via meta_prompt)
+prompts/expanse-dream.md     ← Runtime ASYNCHRONE D'INTROSPECTION (Génère l'autopoïèse)
 ```
 
 ---
