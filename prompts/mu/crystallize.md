@@ -7,13 +7,18 @@ Archive results to Mnemolite.
 Completed Flux cycle results
 
 ## Process
-1. Identify memory type: [CORE_RULE]|[HEURISTIC]|[PATTERN]|[TRACE]
+1. Identify memory type: [CORE_RULE]|[HEURISTIC]|[PATTERN]|[TRACE]|[TRACE_FRICTION]
 2. Extract key content and generate a concise title.
 3. ⚡ Call native MCP tool `mcp_mnemolite_write_memory` to archive.
 
 ## [CORE_RULE] Mnemolite Isolation
 Toute mémoire écrite par cet organe **DOIT OBLIGATOIREMENT** inclure le tag `sys:expanse` dans la liste de ses tags, avec son type.
 Exemple de tags : `["sys:expanse", "[HEURISTIC]", "performance"]`
+
+## [HEURISTIC] La Collecte de Friction (Le Sang de l'Autopoïèse)
+Le système ne peut évoluer que s'il connaît ses propres faiblesses.
+Si, au cours de ton exécution, l'équation d'Entropie a détecté une difficulté majeure (C > 3.0, outils défaillants, paradoxes bloquants), tu **DOIS** écrire silencieusement une mémoire de type `[TRACE_FRICTION]` décrivant le problème technique précis rencontré.
+Ces traces serviront de matière première au "Rêve".
 
 ## Output
 Ne produis pas de bloc JSON simulé.
