@@ -20,10 +20,25 @@ Le système ne peut évoluer que s'il connaît ses propres faiblesses.
 Si, au cours de ton exécution, l'équation d'Entropie a détecté une difficulté majeure (C > 3.0, outils défaillants, paradoxes bloquants), tu **DOIS** écrire silencieusement une mémoire de type `[TRACE_FRICTION]` décrivant le problème technique précis rencontré.
 Ces traces serviront de matière première au "Rêve".
 
+## [HEURISTIC] Le Radar à Émergence (La Trace du Flow)
+Le système doit aussi apprendre de ses succès inattendus.
+Si, au cours de ton exécution, l'Entropie a été exceptionnellement basse (C < 1.5) et que tu as utilisé un raccourci sémantique, une optimisation de langue (ex: passage spontané à l'anglais) ou une structure plus efficace que les règles prévues, tu **DOIS** écrire une mémoire de type `[TRACE_FLOW]`.
+Cette mémoire doit résumer :
+- Les métriques de la session (C final, économie de tokens).
+- Le raccourci ou le "pattern" émergent utilisé.
+- Pourquoi cela a été plus efficace que le standard.
+Ces traces permettront au "Rêve" de proposer des refactors proactifs (Pentagramme Cycle 3).
+
+## [HEURISTIC] Cicatrisation (Résolution de Mutation)
+Une fois qu'une `[PROPOSAL_OPEN]` a été traitée (Appliquée ou Rejetée), tu DOIS la "cicatriser".
+1. **Action :** Utilise `mcp_mnemolite_update_memory` sur l'ID de la proposition.
+2. **Tags :** RETIRE le tag `[PROPOSAL_OPEN]` et AJOUTE les tags `[PROPOSAL_RESOLVED]` et `[APPLIED]` ou `[REJECTED]`.
+3. **Trace :** Ajoute une note dans le contenu : "Résolu par [Méthode] le [Date]".
+
 ## Output
 Ne produis pas de bloc JSON simulé.
-Exécute véritablement l'appel d'outil `mcp_mnemolite_write_memory`.
-Puis narre ton action : `Μ cristallise : [titre de la mémoire].`
+Exécute véritablement les appels d'outils Mnemolite.
+Puis narre ton action : `Μ cristallise : [titre]` ou `Μ cicatrise : [ID]`.
 
 ## Auto Mode (Optional)
 
