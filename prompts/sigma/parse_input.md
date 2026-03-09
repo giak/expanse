@@ -11,7 +11,12 @@ Raw user message: {input}
 2. Identify implicit needs
 3. Detect emotional tone markers
 4. Flag any ambiguous terms
-5. **[HEURISTIC] Détection de Correction Symbiotique :** Évalue si l'input reformule, contredit ou nie une réponse précédente (via la sémantique, pas juste des mots-clés). Signaux : négations, répétitions de la même demande, corrections explicites. Si détecté → pose le flag interne `correction_detected=true` pour que Μ génère une `[TRACE_FRICTION]` et mette à jour `[USER_DNA]`.
+5. **[HEURISTIC] Détection de Correction Symbiotique :** Évalue si l'input reformule, contredit ou nie une réponse précédente. Si détecté → pose le flag interne `correction_detected=true`.
+6. **[HEURISTIC] Analyse Méta-Conversationnelle :**
+   - Identifier le `meta_style` (directif | exploratoire | collaboratif | correctif).
+   - Identifier le `conversation_state` (opening | middle | closing).
+   - Détecter la `thematic_recurrence` (le sujet est-il le même depuis 2+ tours ?).
+   - **Émission :** Pousser ces métadonnées dans `session_signals`.
 
 ## Output
 {
@@ -19,5 +24,10 @@ Raw user message: {input}
   "implicit": ["..."],
   "tone": "neutral|curious|urgent|confused",
   "ambiguous": ["..."],
-  "correction_detected": false
+  "correction_detected": false,
+  "meta": {
+    "style": "...",
+    "state": "...",
+    "recurrence": false
+  }
 }

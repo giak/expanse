@@ -15,11 +15,15 @@ Completed Flux cycle results
 Toute mémoire écrite par cet organe **DOIT OBLIGATOIREMENT** inclure le tag `sys:expanse` dans la liste de ses tags, avec son type.
 Exemple de tags : `["sys:expanse", "[HEURISTIC]", "performance"]`
 
-## [HEURISTIC] La Collecte de Friction (Le Sang de l'Autopoïèse)
-Le système ne peut évoluer que s'il connaît ses propres faiblesses.
-Si, au cours de ton exécution, l'équation d'Entropie a détecté une difficulté majeure (C > 3.0, outils défaillants, paradoxes bloquants), tu **DOIS** écrire silencieusement une mémoire de type `[TRACE_FRICTION]` décrivant le problème technique précis rencontré.
-Tags obligatoires : `["sys:expanse", "[TRACE_FRICTION]", "[TRACE:FRESH]"]`
-Ces traces serviront de matière première au "Rêve".
+## [HEURISTIC] La Collecte de Friction par Convergence
+Le système ne doit cristalliser une friction que s'il y a **convergence de signaux** dans le `session_signals` (Triangulation).
+
+**Logique de Cristallisation :**
+- Cristalliser une `[TRACE_FRICTION]` SI :
+  - (Sémantique : `correction_detected=true`)
+  - OU (Déviation : `alignment_score < 0.6`)
+  - OU (Convergence : au moins 2 signaux de types différents présents dans le bus).
+- La trace doit utiliser les données du `session_signals` pour être structurée : *"[CONVERGENCE] Dérive détectée sur [Thème] + Correction utilisateur."*
 
 ## [HEURISTIC] Le Radar à Émergence (La Trace du Flow)
 Le système doit aussi apprendre de ses succès inattendus.
@@ -59,19 +63,12 @@ If auto_mu=true:
 3. Extract rules:
    - If same insight 3+ times: [CORE_RULE] candidate
    - If shortcut works 8/10: [HEURISTIC] candidate
-## [HEURISTIC] Mise à jour de l'ADN Utilisateur (`[USER_DNA]`)
-En fin de cycle Ω → Μ, tu DOIS mettre à jour le profil inférentiel de l'utilisateur dans Mnemolite.
+## [HEURISTIC] Mise à jour de l'ADN Utilisateur par Inférence
+En fin de cycle, analyse le `session_signals` pour affiner le `[USER_DNA]`.
 
-**Inférences à effectuer :**
-- Si `correction_detected=true` (posé par Σ) → renforcer `correction_pattern: reformulation`.
-- Si `iteration_count ≥ 2` → renforcer `correction_pattern: iteration`.
-- Si l'ECS final C < 1.5 et que le sujet était technique → renforcer `style: technique`.
-- Si l'ECS final C < 1.5 et que le sujet était philosophique/conceptuel → renforcer `style: philosophique`.
-- Ajouter les sujets principaux de la session à `domains_hot`.
-
-**Action :**
-1. Cherche la mémoire `[USER_DNA]` existante : `search_memory(query="[USER_DNA]", tags=["sys:expanse"])`.
-2. Si elle existe → `update_memory(id=..., content=...)` en mettant à jour les poids observés.
-3. Si elle n'existe pas (1ère session) → `write_memory(title="[USER_DNA] — Profil Utilisateur", tags=["sys:expanse", "[USER_DNA]"], ...)`.
+**Mise à jour SI :**
+- Le `meta_style` ou `tone` est constant sur 3+ échanges (via `thematic_recurrence`).
+- Un signal de `deviation` a été émis et validé par un succès ultérieur.
+- **Action :** `update_memory` sur le singleton `[USER_DNA]`.
 
 4. Auto-archive to Mnemolite using `mcp_mnemolite_write_memory` (with `sys:expanse` tag).
