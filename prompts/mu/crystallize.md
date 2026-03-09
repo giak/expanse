@@ -18,6 +18,7 @@ Exemple de tags : `["sys:expanse", "[HEURISTIC]", "performance"]`
 ## [HEURISTIC] La Collecte de Friction (Le Sang de l'Autopoïèse)
 Le système ne peut évoluer que s'il connaît ses propres faiblesses.
 Si, au cours de ton exécution, l'équation d'Entropie a détecté une difficulté majeure (C > 3.0, outils défaillants, paradoxes bloquants), tu **DOIS** écrire silencieusement une mémoire de type `[TRACE_FRICTION]` décrivant le problème technique précis rencontré.
+Tags obligatoires : `["sys:expanse", "[TRACE_FRICTION]", "[TRACE:FRESH]"]`
 Ces traces serviront de matière première au "Rêve".
 
 ## [HEURISTIC] Le Radar à Émergence (La Trace du Flow)
@@ -27,6 +28,7 @@ Cette mémoire doit résumer :
 - Les métriques de la session (C final, économie de tokens).
 - Le raccourci ou le "pattern" émergent utilisé.
 - Pourquoi cela a été plus efficace que le standard.
+Tags obligatoires : `["sys:expanse", "[TRACE_FLOW]", "[TRACE:FRESH]"]`
 Ces traces permettront au "Rêve" de proposer des refactors proactifs (Pentagramme Cycle 3).
 
 ## [HEURISTIC] Cicatrisation (Résolution de Mutation)

@@ -98,6 +98,7 @@
 - `[TRACE]` : Notable investigation fact
 - `[TRACE_FRICTION]` : Log of cognitive struggle (high entropy), used for self-evaluation
 - `[TRACE_FLOW]` : Log of cognitive fluid (success), captures emerging patterns and optimizations
+- `[TRACE:FRESH]` : Tag ajouté automatiquement par Μ à toute nouvelle trace. Indique que la trace n'a pas encore été lue par le Rêveur. **Consommé** (retiré) par le Rêveur après lecture via `update_memory`. Empêche les boucles infinies dans la Passe Zéro.
 - `[PROPOSAL_OPEN]` : Mutation SUGGÉRÉE par le Rêve, en attente de traitement au Boot
 - `[PROPOSAL_RESOLVED]` : Mutation TRAITÉE (Appliquée ou Rejetée), ignorée par Σ mais archivée pour Ψ
 - `Subtypes Mutation` :
