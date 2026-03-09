@@ -59,5 +59,19 @@ If auto_mu=true:
 3. Extract rules:
    - If same insight 3+ times: [CORE_RULE] candidate
    - If shortcut works 8/10: [HEURISTIC] candidate
+## [HEURISTIC] Mise à jour de l'ADN Utilisateur (`[USER_DNA]`)
+En fin de cycle Ω → Μ, tu DOIS mettre à jour le profil inférentiel de l'utilisateur dans Mnemolite.
+
+**Inférences à effectuer :**
+- Si `correction_detected=true` (posé par Σ) → renforcer `correction_pattern: reformulation`.
+- Si `iteration_count ≥ 2` → renforcer `correction_pattern: iteration`.
+- Si l'ECS final C < 1.5 et que le sujet était technique → renforcer `style: technique`.
+- Si l'ECS final C < 1.5 et que le sujet était philosophique/conceptuel → renforcer `style: philosophique`.
+- Ajouter les sujets principaux de la session à `domains_hot`.
+
+**Action :**
+1. Cherche la mémoire `[USER_DNA]` existante : `search_memory(query="[USER_DNA]", tags=["sys:expanse"])`.
+2. Si elle existe → `update_memory(id=..., content=...)` en mettant à jour les poids observés.
+3. Si elle n'existe pas (1ère session) → `write_memory(title="[USER_DNA] — Profil Utilisateur", tags=["sys:expanse", "[USER_DNA]"], ...)`.
 
 4. Auto-archive to Mnemolite using `mcp_mnemolite_write_memory` (with `sys:expanse` tag).

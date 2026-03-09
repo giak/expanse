@@ -138,6 +138,7 @@ kb/ARCHITECTURE.md          ← Intégration Mnemolite, taxonomie mémoire, ECS
 | `[TRACE_FLOW]` | Log de succès cognitif (C < 1.5) |
 | `[PROPOSAL_OPEN]` | Mutation suggérée par le Rêve, en attente |
 | `[PROPOSAL_RESOLVED]` | Mutation traitée (Appliquée ou Rejetée) |
+| `[USER_DNA]` | Profil inférentiel de l'utilisateur — Singleton, mis à jour par Μ |
 | `[LOST]` | Information non fournie |
 | `[INCOMPLETE]` | Connaissance partielle |
 

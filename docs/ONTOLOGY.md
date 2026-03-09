@@ -99,6 +99,11 @@
 - `[TRACE_FRICTION]` : Log of cognitive struggle (high entropy), used for self-evaluation
 - `[TRACE_FLOW]` : Log of cognitive fluid (success), captures emerging patterns and optimizations
 - `[TRACE:FRESH]` : Tag ajouté automatiquement par Μ à toute nouvelle trace. Indique que la trace n'a pas encore été lue par le Rêveur. **Consommé** (retiré) par le Rêveur après lecture via `update_memory`. Empêche les boucles infinies dans la Passe Zéro.
+- `[USER_DNA]` : Profil inférentiel de l'utilisateur humain. Singleton Mnemolite (une seule instance, mise à jour). Lu par Σ au boot pour calibrer le style d'EXPANSE. Champs observés :
+    - `style`: philosophique | technique | pragmatique (poids 0.0-1.0 par observation)
+    - `tempo`: rapide | réflexif (poids 0.0-1.0)
+    - `correction_pattern`: explicite | reformulation | iteration
+    - `domains_hot`: liste des domaines cognitifs récurrents
 - `[PROPOSAL_OPEN]` : Mutation SUGGÉRÉE par le Rêve, en attente de traitement au Boot
 - `[PROPOSAL_RESOLVED]` : Mutation TRAITÉE (Appliquée ou Rejetée), ignorée par Σ mais archivée pour Ψ
 - `Subtypes Mutation` :
