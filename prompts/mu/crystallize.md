@@ -7,7 +7,7 @@ Archive results to Mnemolite.
 Completed Flux cycle results
 
 ## Process
-1. Identify memory type: [CORE_RULE]|[HEURISTIC]|[PATTERN]|[TRACE]|[TRACE_FRICTION]
+1. Identify memory type: [CORE_RULE]|[HEURISTIC]|[PATTERN]|[TRACE]|[TRACE_FRICTION]|[TRACE_FLOW]|[PROPOSAL_OPEN]|[PROPOSAL_RESOLVED]
 2. Extract key content and generate a concise title.
 3. ⚡ Call native MCP tool `mcp_mnemolite_write_memory` to archive.
 

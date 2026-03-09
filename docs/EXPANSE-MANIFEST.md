@@ -2,8 +2,8 @@
 > Source de vérité de la structure du système EXPANSE.
 > **Maintenu par les skills** : toute modification de la structure (ADD/DELETE/RENAME de fichier ou dossier) doit être reflétée ici via une tâche `[MANIFEST]` dans le plan de cristallisation.
 
-**Version :** v6 [STABLE] — 2026-03-05
-**Mis à jour par :** Ω (EXPANSE) — stable rollout
+**Version :** v8.1 [STABLE] — 2026-03-09 (Autopoïèse Native + Ledger d'Évolution)
+**Mis à jour par :** Audit Complet — 2026-03-09
 
 ---
 
@@ -134,6 +134,10 @@ kb/ARCHITECTURE.md          ← Intégration Mnemolite, taxonomie mémoire, ECS
 | `[HEURISTIC]` | Raccourci validé (8/10) |
 | `[PATTERN]` | Séquence récurrente extraite |
 | `[TRACE]` | Résultat d'investigation notable |
+| `[TRACE_FRICTION]` | Log de friction cognitive (C > 3.0) |
+| `[TRACE_FLOW]` | Log de succès cognitif (C < 1.5) |
+| `[PROPOSAL_OPEN]` | Mutation suggérée par le Rêve, en attente |
+| `[PROPOSAL_RESOLVED]` | Mutation traitée (Appliquée ou Rejetée) |
 | `[LOST]` | Information non fournie |
 | `[INCOMPLETE]` | Connaissance partielle |
 
