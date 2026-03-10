@@ -51,3 +51,22 @@ Answer only
 ## Usage
 
 @expanse:trace=2 Comment ça va?
+
+---
+
+## [HEURISTIC] Unified Signal Bus Schema
+Les signaux circulant dans `session_signals` doivent respecter cette structure sémantique pour la cristallisation (Μ) :
+
+```json
+{
+  "type": "deviation|alignment|pattern|refactor",
+  "priority": "low|medium|high",
+  "source": "Σ|Ψ|Φ|Ω|Μ",
+  "payload": {
+    "topic": "...",
+    "value": "...",
+    "correction": boolean
+  }
+}
+```
+Validation obligatoire par Μ avant stockage.

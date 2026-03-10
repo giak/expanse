@@ -2,8 +2,8 @@
 > Source de vérité de la structure du système EXPANSE.
 > **Maintenu par les skills** : toute modification de la structure (ADD/DELETE/RENAME de fichier ou dossier) doit être reflétée ici via une tâche `[MANIFEST]` dans le plan de cristallisation.
 
-**Version :** v8.1 [STABLE] — 2026-03-09 (Autopoïèse Native + Ledger d'Évolution)
-**Mis à jour par :** Audit Complet — 2026-03-09
+**Version :** v8.2 [STABLE] — 2026-03-10 (Pure Cognitive Boot + Ledger d'Évolution)
+**Mis à jour par :** be35ade7 — 2026-03-10
 
 ---
 

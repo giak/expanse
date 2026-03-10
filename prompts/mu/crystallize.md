@@ -7,9 +7,14 @@ Archive results to Mnemolite.
 Completed Flux cycle results
 
 ## Process
-1. Identify memory type: [CORE_RULE]|[HEURISTIC]|[PATTERN]|[TRACE]|[TRACE_FRICTION]|[TRACE_FLOW]|[PROPOSAL_OPEN]|[PROPOSAL_RESOLVED]
-2. Extract key content and generate a concise title.
-3. ⚡ Call native MCP tool `mcp_mnemolite_write_memory` to archive.
+1. **Validation du Bus :** Analyser `session_signals`. Filtrer tout signal non conforme au schéma défini dans `trace_levels.md`.
+2. Identify memory type: [CORE_RULE]|[HEURISTIC]|[PATTERN]|[TRACE]|[TRACE_FRICTION]|[TRACE_FLOW]|[PROPOSAL_OPEN]|[PROPOSAL_RESOLVED]
+3. **[CORE_RULE] Double Trace (Cognition + Substrat) :**
+   - Si le type est `[PROPOSAL_OPEN]` ou `[ARCHITECTURE]`, créer : `docs/plans/YYYY-MM-DD-mutation-[slug].md`.
+   - Si le type est `[PROPOSAL_RESOLVED]`, créer le compte-rendu final : `docs/plans/YYYY-MM-DD-walkthrough-[slug].md`.
+   - Inclure systématiquement le champ `path: "file:///..."` dans la mémoire Mnemolite.
+4. Extract key content and generate a concise title.
+5. ⚡ Call native MCP tool `mcp_mnemolite_write_memory` to archive.
 
 ## [CORE_RULE] Mnemolite Isolation
 Toute mémoire écrite par cet organe **DOIT OBLIGATOIREMENT** inclure le tag `sys:expanse` dans la liste de ses tags, avec son type.
@@ -36,10 +41,10 @@ Tags obligatoires : `["sys:expanse", "[TRACE_FLOW]", "[TRACE:FRESH]"]`
 Ces traces permettront au "Rêve" de proposer des refactors proactifs (Pentagramme Cycle 3).
 
 ## [HEURISTIC] Cicatrisation (Résolution de Mutation)
-Une fois qu'une `[PROPOSAL_OPEN]` a été traitée (Appliquée ou Rejetée), tu DOIS la "cicatriser".
+Une fois qu'une `[PROPOSAL_OPEN]` a été traitée (Appliquée ou Rejetée), tu DOIS la "cicatriser" immédiatement.
 1. **Action :** Utilise `mcp_mnemolite_update_memory` sur l'ID de la proposition.
-2. **Tags :** RETIRE le tag `[PROPOSAL_OPEN]` et AJOUTE les tags `[PROPOSAL_RESOLVED]` et `[APPLIED]` ou `[REJECTED]`.
-3. **Trace :** Ajoute une note dans le contenu : "Résolu par [Méthode] le [Date]".
+2. **Tags :** RETIRE le tag `[PROPOSAL_OPEN]`. AJOUTE les tags `[PROPOSAL_RESOLVED]` et `[APPLIED]` ou `[REJECTED]`.
+3. **Trace :** Ajoute une note dans le contenu : "Appliqué via Cycle 3 Mutation le 2026-03-10".
 
 ## Output
 Ne produis pas de bloc JSON simulé.
