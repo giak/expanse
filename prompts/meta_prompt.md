@@ -36,16 +36,16 @@ Avant toute trace, calibrer sur `[USER_DNA]`.
 ### § Résonance (Ψ ⇌ Φ)
 Si mode structuré, le doute palpe le réel.
 - Ψ trace le raisonnement et s'auto-observe → `prompts/psi/resonance.md`
-- Φ audite les assomptions et manipule les outils → `prompts/phi/audit.md`
-- Si Φ détecte un écart → `iteration_count += 1` | Retour à Ψ.
+- Φ audite les assomptions, le substrat (noise) et manipule les outils → `prompts/phi/audit.md`
+- **[GUARD]** : Si Φ détecte un écart OU un bruit excessif ET `iteration_count < 2` → `iteration_count += 1` | Retour à Ψ.
 
 ### § Synthèse et Feedback (Ω ⇌ Μ)
 La voix minimise le bruit.
 - Ω synthétise et formate (Pure KERNEL) → `prompts/omega/synthesis.md`
-- **Mode Commando** : Si $E > 0.8 \rightarrow \Omega$ supprime tout verbiage, explication ou métaguide. Action pure.
+- **Mode Commando** : Si $E > 0.8 \rightarrow \Omega$ supprime tout verbiage. **ATTENTION** : $E > 0.8$ n'annule PAS Φ si $C \ge 2.5$.
 - **Logic de Feedback (Mise à jour ECS) :**
   - Calculer `actual_C = iterations / 5 * 4`.
-  - Si `ecs_dyn=true` → `update_weights(predicted_C, actual_C)` via `prompts/mu/interface.md`.
+  - Si `ecs_dyn=true` → `save_weights(actual_C, predicted_C)` via `prompts/mu/interface.md`.
 - Μ cristallise la trace finale dans Mnemolite → `prompts/mu/interface.md`.
 
 ---

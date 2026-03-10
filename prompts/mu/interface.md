@@ -49,9 +49,11 @@ Utiliser `mcp_mnemolite_update_memory` pour passer une `[PROPOSAL_OPEN]` en `[PR
 1. ⚡ SEARCH `query="ECS_WEIGHTS"`.
 2. Fallback Defaults: `{"w_amb": 0.25, "w_know": 0.25, "w_reason": 0.25, "w_tools": 0.25}`.
 
-### save_weights(weights)
-1. ⚡ UPDATE ou WRITE `title="ECS_WEIGHTS"` (memory_type="[CORE_RULE]").
-2. Inclure `prediction_errors` et `total_predictions`.
+### save_weights(actual_C, predicted_C)
+1. **[HEURISTIC] Weight Decay** : `w_i = w_i + ((actual_C - predicted_C) * learning_rate)`.
+2. **[GUARD] Normalisation** : Garantir $\sum w_i = 1.0$. Bornes $[0.1, 0.5]$.
+3. ⚡ UPDATE ou WRITE `title="ECS_WEIGHTS"` (memory_type="[CORE_RULE]").
+4. Inclure `prediction_errors` et `total_predictions`.
 
 ---
 

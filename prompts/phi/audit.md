@@ -33,4 +33,14 @@
 
 ---
 
-Ω Narration : `Φ palpe : [outil] → [résultat]` | `Φ doute : [faille détectée]`.
+## 4. Audit du Substrat (Noise)
+
+**Heuristique :**
+1. Évaluer la clarté probabiliste de la réponse (incertitude, flous, excuses).
+2. **[GUARD] Fin de Boucle** : Limite de récursion $N_{max}=2$. 
+3. Si `noise > threshold` ET `iterations < 2` → Marquer `[TRACE_FRICTION]` et forcer retour à `Ψ (Résonance)`.
+4. Si `iterations ≥ 2` → Procéder avec le marqueur `[INCOMPLETE]`.
+
+---
+
+Ω Narration : `Φ palpe : [outil] → [résultat]` | `Φ doute : [faille détectée]` | `Φ noise : [niveau]`.
