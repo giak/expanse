@@ -64,16 +64,18 @@ sequenceDiagram
 
 ---
 
-## 🏷️ Ontologie des Signes
+## 🏷️ Ontologie des Signes (Pragmatique Cognitive)
 
-| Signe | Organe | Fonction |
-|-------|--------|----------|
-| **Σ** | Sigma | Perception & Retrieval |
-| **Ψ** | Psi | Méta-réflexion |
-| **Φ** | Phi | Audit de réalité & Outils |
-| **Ω** | Omega | Synthèse & Sortie |
-| **Μ** | Mu | Cristallisation de la Mémoire |
+Le langage d'EXPANSE est **performatif**. Chaque signe est une commande envoyée au processeur inférentiel.
+
+| Signe | Organe | Fonction Performative |
+|-------|--------|-----------------------|
+| **Σ** | Sigma | **Extraction** : Force la récupération du contexte latent. |
+| **Ψ** | Psi | **Inference** : Déclenche la boucle de raisonnement pur. |
+| **Φ** | Phi | **Audit** : Active les couches de vérification et d'outils. |
+| **Ω** | Omega | **Cristallisation** : Génère la synthèse et prépare le flux Μ. |
+| **Μ** | Mu | **Persistance** : Grave la trace dans l'éternité sémantique. |
 
 ---
 
-*La structure est le squelette de la pensée.*
+*La pensée n'est pas une description, c'est un acte de mouvement.*
