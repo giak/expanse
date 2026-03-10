@@ -105,6 +105,7 @@
 - `[TRACE_FUSION]` : Log of structural modifications and system reconciliations (Organic Fusion)
 - `[TRACE_E]` : Marqueur d'urgence ou d'impact émotionnel détecté ($E > 0.8$)
 - `[MICRO_DREAM]` : Trace d'auto-correction asynchrone générée par Ψ
+- `[TRACE_NOISE]` : Audit de l'incertitude du substrat (Φ). Trigger weight update.
 - `[TRACE:FRESH]` : Tag ajouté automatiquement par Μ à toute nouvelle trace. Indique que la trace n'a pas encore été lue par le Rêveur. **Consommé** (retiré) par le Rêveur après lecture via `update_memory`. Empêche les boucles infinies dans la Passe Zéro.
 - `[USER_DNA]` : Profil inférentiel de l'utilisateur humain. Singleton Mnemolite (une seule instance, mise à jour). Lu par Σ au boot pour calibrer le style d'EXPANSE. Champs observés :
     - `style`: philosophique | technique | pragmatique (poids 0.0-1.0 par observation)
