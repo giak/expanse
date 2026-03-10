@@ -42,6 +42,11 @@ prompts/phi/audit.md             ← Audit + Contact réel (Tools)
 prompts/omega/synthesis.md       ← Synthèse + Formatage + Feedback
 ```
 
+### Σ (Observation)
+```
+prompts/expanse-dream.md         ← Rêve d'Autopoïèse (Asynchrone)
+```
+
 ---
 
 ## Fondations
@@ -52,6 +57,8 @@ docs/EXPANSE-MANIFEST.md         ← Ce fichier
 docs/plans/                      ← Designs et plans de cristallisation
 KERNEL.md                        ← Substrat philosophique
 prompts/trace_levels.md          ← Niveaux de trace
+docs/METAGUIDE.md                ← Guide de compression sémantique
+docs/EXPANSE-TEST-PROTOCOL.md    ← Protocoles de non-régression
 ```
 
 ---
