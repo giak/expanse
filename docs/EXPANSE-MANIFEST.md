@@ -1,7 +1,7 @@
 # EXPANSE — Architecture Manifest (V3.0)
 > Source de vérité de la structure du système EXPANSE.
 
-**Version :** v3.0 [ORGANIC FUSION] — 2026-03-10
+**Version :** v4.1 [EMPATH/PULSAR] — 2026-03-10
 **Mis à jour par :** 09d47b8 (plus deep refactor)
 
 ---
