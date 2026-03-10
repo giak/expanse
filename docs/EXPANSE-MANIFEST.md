@@ -1,117 +1,57 @@
-# EXPANSE — Architecture Manifest
+# EXPANSE — Architecture Manifest (V3.0)
 > Source de vérité de la structure du système EXPANSE.
-> **Maintenu par les skills** : toute modification de la structure (ADD/DELETE/RENAME de fichier ou dossier) doit être reflétée ici via une tâche `[MANIFEST]` dans le plan de cristallisation.
 
-**Version :** v8.2 [STABLE] — 2026-03-10 (Pure Cognitive Boot + Ledger d'Évolution)
-**Mis à jour par :** be35ade7 — 2026-03-10
-
----
-
-## Point d'Entrée
-
-```
-prompts/expanse-system.md        ← Point d'entrée EXECUTABLE
-```
-
-C'est l'**invariant absolu** du système. Charger ce fichier = activer EXPANSE.
+**Version :** v3.0 [ORGANIC FUSION] — 2026-03-10
+**Mis à jour par :** 09d47b8 (plus deep refactor)
 
 ---
 
-## Runtime EXECUTABLE
+## Point d'Entrée & BIOS
 
 ```
-prompts/expanse-runtime.md   ← Runtime EXECUTABLE (via meta_prompt)
-prompts/expanse-dream.md     ← Runtime ASYNCHRONE D'INTROSPECTION (Génère l'autopoïèse)
+prompts/expanse-system.md        ← BIOS & Éveil (Unifié)
+prompts/meta_prompt.md           ← Orchestrateur central (V3.0)
 ```
 
 ---
 
-## Chaîne de Boot
+## Organes du Flux Vital (Interfaces Unifiées)
 
+### Σ ⇌ Μ (Perception & Mémoire)
 ```
-prompts/expanse-system.md
-  ├── prompts/expanse-bios.md       ← BIOS : symboles, EXECUTE
-  └── prompts/expanse-runtime.md    ← Runtime : Flux Vital + Identity CHECK
-```
-
----
-
-## Orchestrateur
-
-```
-prompts/meta_prompt.md              ← Orchestrateur central du Flux Vital
+prompts/mu/interface.md          ← Interface Mnemolite unique (Retrieve + Crystallize + ECS Weights)
 ```
 
-Toute modification du Flux Vital passe par ce fichier.
-
----
-
-## Organes du Flux Vital
-
-### Σ — Sigma (Input Processing)
+### Σ (Intake)
 ```
-prompts/sigma/
-  ├── parse_input.md        ← Parser l'input brut, détecter ton et ambiguïtés
-  ├── retrieve_context.md   ← Récupérer mémoire Mnemolite
-  ├── detect_ecs.md         ← Calculer ECS (C < 2.5 léger / C ≥ 2.5 structuré)
-  └── ecs_weights.md        ← Load/save ECS weights from Mnemolite
+prompts/sigma/interface.md       ← Parser + Détecteur ECS
 ```
 
-### Ψ — Psi (Metacognition & Reasoning)
+### Ψ (Résonance)
 ```
-prompts/psi/
-  ├── trace_reasoning.md    ← Tracer le raisonnement
-  ├── detect_patterns.md    ← Détecter les patterns émergents
-  └── meta_reflect.md       ← Méta-réflexion (∇Ω)
+prompts/psi/resonance.md         ← Raisonnement + Méta-réflexion
 ```
 
-### Φ — Phi (Verification & Reality Check)
+### Φ (Audit)
 ```
-prompts/phi/
-  ├── doubt_audit.md        ← Challenger chaque assumption
-  ├── tool_interact.md      ← Utiliser les outils (Mnemolite, search, etc.)
-  └── verify_reality.md     ← Ancrer dans le réel, éliminer hallucinations
+prompts/phi/audit.md             ← Audit + Contact réel (Tools)
 ```
 
-### Ω — Omega (Synthesis & Output)
+### Ω (Synthèse)
 ```
-prompts/omega/
-  ├── synthesize.md         ← Synthèse finale
-  ├── format_output.md      ← Format de sortie selon trace_level
-  └── decide_action.md      ← Décision sur l'action suivante
-```
-
-### Μ — Mu (Memory & Crystallization)
-```
-prompts/mu/
-  ├── crystallize.md        ← Archiver dans Mnemolite (auto si auto_mu=true)
-  ├── extract_rules.md      ← Extraire [CORE_RULE] / [HEURISTIC]
-  └── memory_dump.md        ← Dump de mémoire
+prompts/omega/synthesis.md       ← Synthèse + Formatage + Feedback
 ```
 
 ---
 
-## Systèmes Adaptatifs
+## Fondations
 
 ```
-prompts/feedback_loop.md    ← Évaluation qualité (0-1) + mise à jour poids ECS
-prompts/trace_levels.md     ← 4 niveaux : 0=silent | 1=minimal | 2=standard | 3=debug
-```
-
----
-
-## Documentation & Fondations
-
-```
-docs/ONTOLOGY.md            ← Catalogue symboles, opérateurs, marqueurs
-docs/METAGUIDE.md           ← Règles de compression sémantique
-docs/EXPANSE-MANIFEST.md    ← Ce fichier — architecture courante
-docs/plans/                 ← Designs et plans de cristallisation
-docs/state/                 ← Cartes système (optionnel, générées par system-read)
-docs/retrospectives/        ← Rétrospectives (optionnel, générées par retrospective)
-
-KERNEL.md                   ← Substrat philosophique, principes fondateurs
-kb/ARCHITECTURE.md          ← Intégration Mnemolite, taxonomie mémoire, ECS
+docs/ONTOLOGY.md                 ← Catalogue symboles V3.0
+docs/EXPANSE-MANIFEST.md         ← Ce fichier
+docs/plans/                      ← Designs et plans de cristallisation
+KERNEL.md                        ← Substrat philosophique
+prompts/trace_levels.md          ← Niveaux de trace
 ```
 
 ---

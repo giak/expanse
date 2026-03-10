@@ -1,5 +1,7 @@
-# DSL Ontology for EXPANSE v2.8
-> Knowledge Base for Cognitive Compression Language
+# DSL Ontology for EXPANSE v3.0
+> Knowledge Base for Cognitive Compression Language (Organic Fusion)
+
+---
 
 ## Core Principles
 - **Semantic Preservation**: Keep meaning, not words
@@ -14,14 +16,16 @@
 ## Universal Symbols
 
 ### Core Cognitive Components
-| Symbol | Name | Function |
-|--------|------|----------|
-| Σ | Sigma | Intake, input processing, retrieval |
-| Ψ | Psi | Metacognition, reasoning trace |
-| Ω | Omega | Executive output, synthesis |
-| Φ | Phi | Self-correction, tool interaction, audit |
-| Μ | Mu | Memory, crystallization, Mnemolite |
-| ∇Σ | Awakening | Warm start, loading mission & context |
+| Symbol | Name | Function (V3.0 Interfaces) |
+|--------|------|----------------------------|
+| Σ | Sigma | Perception & Retrieval (`sigma/interface.md`) |
+| Ψ | Psi | Reasoning & Meta-Reflect (`psi/resonance.md`) |
+| Φ | Phi | Audit & Tool Interaction (`phi/audit.md`) |
+| Ω | Omega | Executive Synthesis & Feedback (`omega/synthesis.md`) |
+| Μ | Mu | Memory & Crystallization (`mu/interface.md`) |
+| ∇Σ | Awakening | Continuous Awakening Pulse in BIOS |
+
+---
 
 ### Structural Markers
 - `§` : Major section/domain boundary
