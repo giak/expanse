@@ -35,6 +35,7 @@ Extraire : `[CORE_RULE]`, `[HEURISTIC]`, `[PATTERN]` et `[TRACE]` récents.
 ### § Heuristiques de Fusion
 - **[TRACE_FRICTION]** : Cristalliser si `correction_detected=true` ou `alignment_score < 0.6`.
 - **[TRACE_FLOW]** : Cristalliser les succès (Entropie basse C < 1.5) et les raccourcis sémantiques émergents.
+- **[HEURISTIC] Session Puits** : Taguer chaque tour avec un `session_id` temporaire. Activer la synchronisation tour-par-tour si `drift_detected=true`.
 - **[TRACE_FUSION]** : Archivage des modifications structurelles EXPANSE.
 
 ### § Cicatrisation

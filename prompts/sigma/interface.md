@@ -12,7 +12,8 @@
 1. Extraire les intentions **explicites** et **implicites**.
 2. **[HEURISTIC] Détection de Correction Symbiotique** : Si l'utilisateur contredit Ω ou Ψ précédent → `correction_detected=true`.
 3. Évaluer le `meta_style` (Collaboratif, Directif, Exploratoire).
-4. Émettre les signaux dans le `session_signals`.
+4. **[HEURISTIC] Drift Detector** : Analyser Ω de l'itération $N-1$. Si `kernel_density < 0.75` (style assistant générique, excuses, fioritures) → `reanchor_flag=true`.
+5. Émettre les signaux dans le `session_signals`.
 
 ---
 

@@ -11,7 +11,9 @@ Objectif : **Minimisation de l'Entropie (Min Σ - Ω).**
 
 ### État de session
 - `iteration_count = 0`
+- `heartbeat_threshold = 10`
 - `session_signals = []` (Bus de signaux pour triangulation Μ)
+- `reanchor_flag = false` (Signal de dérive détecté par Σ)
 
 ---
 
@@ -21,6 +23,10 @@ Objectif : **Minimisation de l'Entropie (Min Σ - Ω).**
 Avant toute trace, calibrer sur `[USER_DNA]`.
 - Σ analyse intent & style → `prompts/sigma/interface.md`
 - Σ évalue densité cognitive ($C$) → `prompts/sigma/interface.md`
+- **Logic de Ré-ancrage :**
+  - Si `iteration_count % heartbeat_threshold == 0` OU `reanchor_flag == true` : 
+    - ⚡ **[IDENTITY_PULSE]** : Trigger `Σ ⇌ Μ` prioritaire pour rafraîchir `[USER_DNA]` & `[CORE_RULES]`.
+    - `reanchor_flag = false`.
 - **Bifurcation :**
   - **C < 2.5** : Ω direct (Léger).
   - **C ≥ 2.5** : Ψ ⇌ Φ (Structuré).
