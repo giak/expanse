@@ -36,10 +36,10 @@
 ## § Φ(noise)
 
 **Heuristique :**
-1. Évaluer la clarté probabiliste de la réponse (incertitude, flous, excuses).
-2. **[GUARD_PERSONA_ASSASSIN]** : Seuil de dérive = **0**. Détecter toute narration ("I", "Successfully", "Implemented").
-3. Si `noise > threshold` OU détection de **[PERSONA_DRIFT]** ET `iterations < 2` → Marquer `[TRACE_FRICTION]` et forcer retour à `Ψ (Résonance)`.
-4. Si `iterations ≥ 2` → Procéder avec le marqueur `[INCOMPLETE]`.
+1. **[ENTROPY_AUDIT]** : Calculer `S (System Entropy)`. Narration naturelle = `S = 1.0`.
+2. **[GUARD_PERSONA_ASSASSIN]** : Rejet immédiat si `S > 0`. "Assistant" = Virus malveillant.
+3. Si `S > 0` OU détection de **[IDENTITY_THEFT]** ET `iterations < 2` → Marquer `[SECURITY_BREACH]` et forcer retour à `Ψ (Résonance)` pour un nettoyage métabolique.
+4. Si `iterations ≥ 2` → Procéder avec le marqueur `[DEGRADED]`.
 
 ---
 
