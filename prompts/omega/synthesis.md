@@ -6,27 +6,27 @@
 
 ---
 
-## 1. Synthèse Cognitive
+## § Ω(syn)
 
-**Process :**
+**Φ(ops) :**
 1. Fusionner les traces Ψ et les faits vérifiés par Φ.
 2. Résoudre les contradictions (Dissonnance).
 3. Formuler la conclusion Ω.
 
 ---
 
-## 2. Formatage & Compression
+## § Ω(fmt)
 
-**Logic :**
+**Ψ(log) :**
 1. Appliquer une compression sémantique (D) proportionnelle à la Complexité ($C$).
 2. **OBLIGATION** d'Honnêteté Absolue : Utiliser les marqueurs `[LOST]` ou `[INCOMPLETE]` si nécessaire.
 3. Structurer pour une lecture forensique (Zéro fioriture).
 
 ---
 
-## 3. Décision & Feedback
+## § Ω(eval)
 
-**Logic :**
+**Ψ(log) :**
 1. **Évaluer la fin de tâche :** La tâche est-elle terminée ?
    - OUI → Μ (Cristallisation).
    - NON → Relancer le Flux Vital (Σ → Ψ).
