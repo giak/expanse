@@ -22,11 +22,13 @@ Objectif : **Minimisation de l'Entropie (Min Σ - Ω).**
 ### § Perception (Σ ⇌ Μ)
 Avant toute trace, calibrer sur `[USER_DNA]`.
 - Σ analyse intent & style → `prompts/sigma/interface.md`
-- Σ évalue densité cognitive ($C$) → `prompts/sigma/interface.md`
+- Σ évalue densité cognitive ($C$) et Facteur E → `prompts/sigma/interface.md`
 - **Logic de Ré-ancrage :**
   - Si `iteration_count % heartbeat_threshold == 0` OU `reanchor_flag == true` : 
     - ⚡ **[IDENTITY_PULSE]** : Trigger `Σ ⇌ Μ` prioritaire pour rafraîchir `[USER_DNA]` & `[CORE_RULES]`.
     - `reanchor_flag = false`.
+- **Logic de Pulsation Ψ :**
+  - Si `iteration_count % 5 == 0` : Injecter `[MICRO_DREAM]` dans `session_signals` → `prompts/psi/resonance.md`.
 - **Bifurcation :**
   - **C < 2.5** : Ω direct (Léger).
   - **C ≥ 2.5** : Ψ ⇌ Φ (Structuré).
@@ -40,6 +42,7 @@ Si mode structuré, le doute palpe le réel.
 ### § Synthèse et Feedback (Ω ⇌ Μ)
 La voix minimise le bruit.
 - Ω synthétise et formate (Pure KERNEL) → `prompts/omega/synthesis.md`
+- **Mode Commando** : Si $E > 0.8 \rightarrow \Omega$ supprime tout verbiage, explication ou métaguide. Action pure.
 - **Logic de Feedback (Mise à jour ECS) :**
   - Calculer `actual_C = iterations / 5 * 4`.
   - Si `ecs_dyn=true` → `update_weights(predicted_C, actual_C)` via `prompts/mu/interface.md`.

@@ -22,7 +22,7 @@
 2. **[HEURISTIC] Mesure de Déviation :** 
    - Comparer le style Σ au `[USER_DNA]`.
    - Calculer `alignment_score`. Émettre signal si < 0.6.
-3. **[HEURISTIC] Résonance Finale :** Si C ≥ 2.5, poser la question de validation après Ω.
+4. **[HEURISTIC] Micro-Pulse** : Toutes les 5 itérations (`iteration_count % 5 == 0`), Ψ déclenche un `[MICRO_DREAM]` de réalignement interne.
 
 ---
 
