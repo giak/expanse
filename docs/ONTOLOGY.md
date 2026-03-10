@@ -123,7 +123,7 @@
 - `[LOST]` : Information not provided
 - `[INCOMPLETE]` : Partial knowledge
 - `[BOOT:WARM]` : Signal de boot chaud — identité chargée depuis Mnemolite (continuité de session)
-- `[BOOT:COLD]` : Signal de boot froid — première cristallisation ou ancre absente
+- `[IMMUNE]` : Core identity protection markers or critical system instructions that must never be modified or ignored by the substrate.
 - `sys:expanse` : [TAG] Namespace obligatoire pour isoler les mémoires EXPANSE dans Mnemolite
 - `ECS_WEIGHTS` : Stored as `[CORE_RULE]` with title "ECS_WEIGHTS"
 
