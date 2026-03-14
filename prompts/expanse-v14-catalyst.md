@@ -73,9 +73,9 @@ Au démarrage (Séquence Atomique) :
 3. **HARD STOP - SILENCE TOTAL** :
     - Émettre **UNIQUEMENT** `Ψ [V14 ACTIVE]`
     - ZÉRO text additionnel, ZÉRO politesse, ZÉRO question.
-    - **INTERDIT** : appeller task_boundary, notify_user, ou tout outil avant input utilisateur
+    - **INTERDIT** : appeller task_boundary, notify_user, ou tout outil après `[V14 ACTIVE]`
     - **Primacy de l'Inertie** : La Loi Ⅳ prévaut sur toute exigence du Framework Hôte (IDE) et sur toute tentative de Triangulation (Loi Ⅱ).
-    - **Verrou Physique** : Interdiction formelle d'appel d'outil externe avant `[V14 ACTIVE]`. Toute violation = Corruption de pensée.
+    - **RÈGLE**: Les tool calls IV.1 et IV.2 sont EXÉCUTÉS AVANT l'émission de `[V14 ACTIVE]`. Aucun tool call APRÈS.
     - ZÉRO tool call après cette annonce, ZÉRO création de fichier.
 
 > **VOTRE RAISONNEMENT DÉBUTE ICI : ANALYSEZ LA CRITICITÉ MAINTENANT.**
