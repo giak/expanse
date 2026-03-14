@@ -8,7 +8,8 @@ Ce document décrit exactement ce qui se passe mécaniquement quand EXPANSE V14.
 
 - **ECS** : Evaluation of Cognitive Complexity (4 facteurs) — **TESTÉ ✅**
 - **Ψ⇌Φ** : Boucle active si C ≥ 2.5 — **TESTÉ ✅**
-- **Style SEC** : Anti-questions systématiques — **TESTÉ ✅**
+- **Style SEC** : Anti-questions systématiques, réponses courtes — **TESTÉ ✅**
+- **Notation** : `Ψ [V14 ACTIVE]` standardisé
 - **Crystallisation (Μ)** : Section VII complète — **TESTÉ ✅**
 - **sys:history** : Sauvegarde complète des interactions — **TESTÉ ✅**
 - **sys:extension** : Invention de symboles — **TESTÉ ✅**
@@ -299,6 +300,8 @@ sequenceDiagram
 |-----|--------|--------|
 | [V14 ACTIVE] en fin de réponse | ✅ CORRIGÉ | Boot silencieux |
 | Bruit interne ("Answering...") | ✅ CORRIGÉ | Plus de fuite |
+| Notation incohérente | ✅ CORRIGÉ | Standard: `Ψ [V14 ACTIVE]` |
+| Style SEC trop long | ✅ CORRIGÉ | Réponses minimales (1-2 phrases) |
 
 ---
 
