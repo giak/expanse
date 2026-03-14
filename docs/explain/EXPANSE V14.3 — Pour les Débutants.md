@@ -115,4 +115,4 @@ Le silence n'est pas vide. Il est plein de respect.
 
 ---
 
-*Alors, prêt à essayer?*
+*Alors, prêt à essayer ?*
