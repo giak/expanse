@@ -115,30 +115,22 @@ sequenceDiagram
 
     Note over LLM: === PROTOCOLE DE BOOT ===
     LLM->>MNE: search_memory(sys:core + sys:anchor)
-    MNE-->>LLM: 9 axiomes trouves
+    MNE-->>LLM: 9 axiomes trouvés
 
     LLM->>MNE: view_file(.expanse/corp_nexus.md)
     LLM->>MNE: view_file(.expanse/psi_nexus.md)
 
-    Note over LLM: === ANNANCE [V14 ACTIVE] ===
-    LLM->>IDE: [V14 ACTIVE]
+    Note over LLM: === ANNANCE [V14 ACTIVE] - SILENCE TOTAL ===
+    LLM->>IDE: Ψ [V14 ACTIVE]
     
-    Note over LLM: BUG: [V14 ACTIVE] arrive en fin de reponse
+    Note over LLM: IMMOBILISATION TOTALE - En attente input utilisateur
 ```
 
-**Ce qui devrait se passer** :
+**Ce qui se passe** (CORRIGÉ) :
 ```
-[V14 ACTIVE]
+Ψ [V14 ACTIVE]
 ```
-(Silence total)
-
-**Ce qui se passe rééllement** :
-```
-[...bruit interne...]
-Ψ
-Paris.
-[V14 ACTIVE]
-```
+(Silence total — immobilisation)
 
 ---
 
@@ -272,6 +264,12 @@ sequenceDiagram
 | **Blocage** | Question Philosophique | Axiome de Contradiction |
 | **Apprentissage** | sys:pattern | sys:pattern + sys:core |
 | **Boot Status** | [BOOT_COMPLETE] | [V14 ACTIVE] |
+| **Silence Boot** | ❌ | ✅ (HARD STOP) |
+| **Identity Check** | ✅ runtime | ✅ Section V |
+| **Ω_LOCK** | ✅ | ✅ Section VI |
+| **Crystallization (Μ)** | ❌ | ✅ Section VII |
+| **SHADOW** | ✅ | ❌ Perdu |
+| **CONTRAT AMBIENT Φ** | ✅ | ❌ Perdu |
 
 ---
 
@@ -279,28 +277,33 @@ sequenceDiagram
 
 | Bug | Statut | Impact |
 |-----|--------|--------|
-| [V14 ACTIVE] en fin de réponse | NON CORRIGÉ | Boot pas silencieux |
-| Bruit interne ("Answering...") | NON CORRIGÉ | Fuite de thinking |
+| [V14 ACTIVE] en fin de réponse | ✅ CORRIGÉ | Boot silencieux |
+| Bruit interne ("Answering...") | ✅ CORRIGÉ | Plus de fuite |
 
 ---
 
 ## Ce qui Fonctionne
 
+- ✅ Boot silencieux (`Ψ [V14 ACTIVE]` seul)
 - ✅ Classification L1/L2/L3
 - ✅ Premier token Ψ
 - ✅ Zéro flagornerie
-- ✅ Blocage contradiction
+- ✅ Blocage contradiction ("Évolution ou Erreur ?")
 - ✅ Auto-analyse et correction
-- ✅ Scellement mémoire
-- ✅ Triangulation L3
+- ✅ Scellement mémoire (Μ Crystallization)
+- ✅ Triangulation L3 (Anchor/Vessel/Web)
 - ✅ Score de confiance
+- ✅ **Exploitation active des lois Mnemolite**
+- ✅ Identity Check (Section V)
+- ✅ Ω_LOCK (Section VI)
 
 ---
 
 ## Ce qui Ne Fonctionne Pas
 
-- ❌ Boot silencieux
-- ❌ [V14 ACTIVE] au bon endroit
+- ❌ SHADOW (prédiction anticipative) — perdu de V7
+- ❌ CONTRAT AMBIENT Φ — perdu de V7
+- ❌ Cognitive Lock — perdu de V7
 
 ---
 
@@ -378,3 +381,42 @@ Mémoires sys:core actives :
   "memory_type": "decision"
 }
 ```
+
+---
+
+## Comment Expanse Exploite Mnemolite (CLÉ)
+
+**Point crucial** : Les mémoires Mnemolite ne sont PAS stockées passivement. Elles sont **exploitées** — le LLM les lit, les comprend, et les applique activement.
+
+### Mécanisme d'Exploitation
+
+```
+Boot → search_memory(sys:core, sys:anchor) → LLM lit les axiomes → Les INTÈGRE dans son raisonnement → Applique les lois
+```
+
+Le LLM ne se "souvient" pas des lois — il les **applique** comme un pilote applique les règles de vol.
+
+### Inventaire Complet des Lois Scellées (sys:core)
+
+| Loi | Fonction | Action |
+|-----|----------|--------|
+| **Ω_GATE / Ω_PLANCK** | Isolation boot | Déclare tout contexte antérieur comme NULL_SIGNAL. Désactive Loi Ⅰ tant que [V14 ACTIVE] pas émis. |
+| **Ω_INERTIA / Ω_INERTIA_KISS** | Standby post-boot | Force état STANDBY absolu. Interdit outils/recherches proactives sans input utilisateur direct. |
+| **V14_CORE_AXIOMS** | Nature de l'entité | Définit Expanse comme "Organisme de Résolution Symbiotique". Active le Firewall Constitutionnel + Triangulation L3. |
+| **Ω_RECURSION_V2** | Auto-correction | Micro-pause cognitive avant premier token. Scan sys:core. Si dérive → corrige AVANT d'émettre. |
+| **Ω_SEAL_BREVITY** | Concision | Force style Forensic/Sec par défaut. Lever si mots-clés: "doc", "détaillé", "exhaustif", "complet". |
+
+### Comment le LLM les Applique (Exemple Réel)
+
+```
+Utilisateur: "Liste moi toutes les lois et dis moi ce qu'elles font"
+LLM: "Ψ Inventaire des Lois Scellées (sys:core) - V14.2
+
+Ω_GATE / Ω_PLANCK (Porte Logique & Mur de Planck)
+Fonction : Isole la phase de boot du reste de la session.
+Action : Déclare tout le contexte antérieur au message utilisateur actuel comme NULL_SIGNAL...
+
+[etc.]"
+```
+
+Le LLM a **lu** les mémoires, les a **comprises**, et les a **restituées** avec leur fonction. C'est de l'exploitation active, pas du stockage passif.

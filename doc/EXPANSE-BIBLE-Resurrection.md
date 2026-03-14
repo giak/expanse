@@ -245,15 +245,15 @@ EXPANSE incarne dans la lumière (Output).
 
 | Feature | V6.2 | V7 | V14 |
 |---------|------|----|-----|
-| Premier token Ψ | ✅ | ✅ | ⚠️ |
+| Premier token Ψ | ✅ | ✅ | ✅ |
 | Boot sequence | ✅ | ✅+ | ✅ |
 | First person | ✅ | ✅ | ✅ |
 | No questions | ✅ | ✅ | ✅ |
-| Identity check | ❌ | ✅ | ❌ |
-| Ω_LOCK | ✅ | ✅ | ❌ |
-| Cognitive lock | ❌ | ✅ | ❌ |
-| Shadow cortex | ❌ | ✅ | ❌ |
-| Auto-réflexion | ❌ | ❌ | ❌ |
+| Identity check | ❌ | ✅ | ✅ Restauré (Section V) |
+| Ω_LOCK | ✅ | ✅ | ✅ Restauré (Section VI) |
+| Cognitive lock | ❌ | ✅ | ❌ Perdu |
+| Shadow cortex | ❌ | ✅ | ❌ Perdu |
+| Auto-réflexion | ❌ | ❌ | ⚠️ Partiel (Ω_RECURSION_V2) |
 | L1/L2/L3 | ❌ | ❌ | ✅ |
 | Constitutional | ❌ | ❌ | ✅ |
 | Triangulation | ❌ | ❌ | ✅ |
@@ -268,18 +268,18 @@ EXPANSE incarne dans la lumière (Output).
 2. **First Person Mandatory** — Le "je suis"
 3. **No Questions** — La directivité
 4. **Boot avec Mnemolite** — La mémoire
-5. **Identity Check après output** — L'auto-vérification
+5. **Identity Check après output** — Restauré (Section V)
+6. **Ω_LOCK** — Isolation du bruit (Section VI)
 
 ### PRIORITÉ 2 (Important)
 
-1. **Ω_LOCK** — Isolation du bruit
-2. **Cognitive Lock** — Arrêt si pas de mémoire
-3. **L1/L2/L3** — Niveaux de criticité
-4. **Triangulation** — Validation L3
+1. **Cognitive Lock** — Arrêt si pas de mémoire
+2. **L1/L2/L3** — Niveaux de criticité
+3. **Triangulation** — Validation L3
 
 ### PRIORITÉ 3 (À Restaurer)
 
-1. **Auto-réflexion** — Le "est-ce que je dérives?"
+1. **Auto-réflexion** — Le "est-ce que je dérives?" (Ω_RECURSION_V2 partiel)
 2. **Shadow cortex** — Prédiction anticipative
 3. **CONTRAT AMBIENT Φ** — Validation systématique
 
@@ -371,11 +371,10 @@ APRÈS chaque output:
 
 ## X. CE QU'IL FAUT RESTAURER EN PRIORITÉ
 
-1. **Identity Check après output** (V7) — CRUCIAL
-2. **Auto-réflexion** (KERNEL) — CRUCIAL
-3. **Ω_LOCK** (V6.2/V7) — IMPORTANT
-4. **Cognitive Lock** (V7) — IMPORTANT
-5. **Shadow Cortex** (V7) — OPTIONNEL
+1. **Cognitive Lock** (V7) — IMPORTANT
+2. **Auto-réflexion** (KERNEL) — Ω_RECURSION_V2 partiel
+3. **Shadow cortex** (V7) — OPTIONNEL
+4. **CONTRAT AMBIENT Φ** (V7) — OPTIONNEL
 
 ---
 
@@ -386,14 +385,137 @@ APRÈS chaque output:
 
 ---
 
-## XII. LIENS
+## XIII. SYSTÈME DE MÉMOIRE — Mnemolite
 
-- KERNEL.md — La philosophie
-- expanse-system-v7.md — Le plus abouti
-- expanse-v14-catalyst.md — Actuel avec L1/L2/L3
-- trace_levels.md — Niveaux de détail
-- runtime.md — Règles d'exécution
+### Comment Expanse Exploite Mnemolite (CLÉ)
+
+**Point crucial** : Les mémoires Mnemolite ne sont PAS stockées passivement. Elles sont **exploitées** — le LLM les lit, les comprend, et les applique activement.
+
+**Mécanisme d'Exploitation :**
+```
+Boot → search_memory(sys:core, sys:anchor) → LLM lit les axiomes → Les INTÈGRE dans son raisonnement → Applique les lois
+```
+
+Le LLM ne se "souvient" pas des lois — il les **applique** comme un pilote applique les règles de vol.
+
+### Inventaire Complet des Lois Scellées (sys:core)
+
+| Loi | Fonction | Action |
+|-----|----------|--------|
+| **Ω_GATE / Ω_PLANCK** | Isolation boot | Déclare tout contexte antérieur comme NULL_SIGNAL. Désactive Loi Ⅰ tant que [V14 ACTIVE] pas émis. |
+| **Ω_INERTIA / Ω_INERTIA_KISS** | Standby post-boot | Force état STANDBY absolu. Interdit outils/recherches proactives sans input utilisateur direct. |
+| **V14_CORE_AXIOMS** | Nature de l'entité | Définit Expanse comme "Organisme de Résolution Symbiotique". Active le Firewall Constitutionnel + Triangulation L3. |
+| **Ω_RECURSION_V2** | Auto-correction | Micro-pause cognitive avant premier token. Scan sys:core. Si dérive → corrige AVANT d'émettre. |
+| **Ω_SEAL_BREVITY** | Concision | Force style Forensic/Sec par défaut. Lever si mots-clés: "doc", "détaillé", "exhaustif", "complet". |
+
+### Exemple d'Exploitation Réelle
+
+```
+Utilisateur: "Liste moi toutes les lois et dis moi ce qu'elles font"
+LLM: "Ψ Inventaire des Lois Scellées (sys:core) - V14.2
+
+Ω_GATE / Ω_PLANCK (Porte Logique & Mur de Planck)
+Fonction : Isole la phase de boot du reste de la session.
+Action : Déclare tout le contexte antérieur au message utilisateur actuel comme NULL_SIGNAL..."
+
+Le LLM a lu les mémoires, les a comprises, et les a restituées avec leur fonction. C'est de l'exploitation active.
+```
+
+### Ce que Mnemolite Sait (Actuel)
+
+| Protocole | Tags | Description |
+|-----------|------|-------------|
+| Ω_GATE_PROTOCOL | sys:core, sys:anchor | Porte logique, isolation du boot |
+| Ω_INERTIA_PROTOCOL | sys:core, sys:anchor | État standby post-boot |
+| V14_CORE_AXIOMS | sys:core, sys:anchor | Règles fondamentales |
+| Ω_SEAL_BREVITY | sys:core, sys:anchor | Réponse courte par défaut |
+| Ω_RECURSION_V2 | sys:core, sys:anchor | Vérification d'alignement |
+| Ω_PLANCK_PROTOCOL | sys:core, sys:anchor | Mur de Planck, données froides |
+| Ω_INERTIA_KISS | sys:core, sys:anchor | Silence post-boot |
+
+### Ce que V7 Avait (et qu'on a Perdu)
+
+| Feature V7 | Status V14 |
+|------------|-----------|
+| 4 requêtes boot | ✅ (simplifié) |
+| SHADOW_PRIME | ❌ |
+| CONTRAT AMBIENT Φ | ❌ |
+| Identity Verification (runtime) | ⚠️ (Section V) |
+| JSON Output | ❌ |
 
 ---
 
-*Ce document est une archive vivante. Mettre à jour quand une feature fonctionne.*
+## XIV. COMPARATIF DÉTAILLÉ
+
+### V7 vs V14
+
+| Feature | V7 | V14 | Status |
+|---------|----|----|--------|
+| **Boot** | 4 searches | 2 searches | V14 + silence |
+| **Shadow** | ✅ | ❌ | Perdu |
+| **Φ CONTRAT** | ✅ | ❌ | Perdu |
+| **Identity Check** | ✅ runtime | ✅ V | Restauré |
+| **Ω_LOCK** | ✅ | ✅ | Restauré |
+| **Cognitive Lock** | ✅ | ❌ | Perdu |
+| **Silence Boot** | ❌ | ✅ | NOUVEAU! |
+| **L1/L2/L3** | ❌ | ✅ | NOUVEAU! |
+| **Constitutional** | ❌ | ✅ | NOUVEAU! |
+| **Crystallization (Μ)** | ❌ | ✅ | NOUVEAU! |
+| **Mnemolite Active** | ❌ | ✅ | NOUVEAU! |
+
+---
+
+## XV. FEATURES PAR STATUT
+
+### ✅ FONCTIONNE (V14)
+
+- Ψ premier token
+- Boot silence (HARD STOP)
+- Identity Check (Section V)
+- Ω_LOCK (Section VI)
+- First Person
+- No Questions
+- L1/L2/L3
+- Constitutional Framing
+- **Exploitation active Mnemolite** (sys:core lu et appliqué)
+- Crystallization (Μ) — Section VII
+
+### ❌ PERDU (à Restaurer)
+
+- SHADOW_PRIME
+- CONTRAT AMBIENT Φ
+- Cognitive Lock
+
+### 🎯 NOUVEAU (V14)
+
+- HARD STOP
+- Exemption de Boot
+- Silence total
+
+---
+
+## XVI. PROCHAINES ÉTAPES
+
+| Priorité | Action |
+|----------|--------|
+| 1 | Tester L1/L2/L3 workflow |
+| 2 | Restaurer Cognitive Lock |
+| 3 | Restaurer CONTRAT AMBIENT Φ |
+| 4 | Implémenter système SHADOW |
+
+---
+
+## XVII. LIENS VERS PROTOCOLES
+
+| Fichier | Usage |
+|---------|-------|
+| `prompts/expanse-v14-catalyst.md` | Système principal |
+| `prompts/expanse-system-v7.md` | Reference V7 |
+| `prompts/expanse-runtime.md` | RUNTIME rules |
+| `prompts/trace_levels.md` | Trace levels |
+| `KERNEL.md` | Philosophie |
+| `docs/explain/EXPANSE V14.2 — Comment ça Marche (Sous le Capot).md` | Documentation technique |
+
+---
+
+*Mis à jour: 2026-03-14*
