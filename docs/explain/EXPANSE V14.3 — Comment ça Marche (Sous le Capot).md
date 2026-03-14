@@ -4,12 +4,15 @@ Ce document décrit exactement ce qui se passe mécaniquement quand EXPANSE V14.
 
 ---
 
-## NOUVEAUTÉS V14.3
+## NOUVEAUTÉS V14.3 — TESTÉES
 
 - **ECS** : Evaluation of Cognitive Complexity (4 facteurs)
 - **Ψ⇌Φ** : Boucle active si C ≥ 2.5
 - **Style SEC** : Anti-questions systématiques
-- **Crystallisation (Μ)** : Section VII complète
+- **Crystallisation (Μ)** : Section VII complète — **TESTÉ ✅**
+- **sys:history** : Sauvegarde complète des interactions — **TESTÉ ✅**
+- **sys:extension** : Invention de symboles — **TESTÉ ✅**
+- **◊** : Premier symbole INVENTÉ par le LLM — **TESTÉ ✅**
 
 ---
 
@@ -46,6 +49,12 @@ Ce document décrit exactement ce qui se passe mécaniquement quand EXPANSE V14.
 │  │ Ω_GATE      │  │ Contexte     │  │              │  │
 │  │ Ω_PLANCK    │  │              │  │              │  │
 │  └──────────────┘  └──────────────┘  └──────────────┘  │
+│                                                         │
+│  ┌──────────────┐  ┌──────────────┐                    │
+│  │ sys:history │  │ sys:extension│                    │
+│  │ Interactions│  │ Symboles     │                    │
+│  │ sauvegardées│  │ INVENTÉS     │                    │
+│  └──────────────┘  └──────────────┘                    │
 │                                                         │
 │  Moteur : PostgreSQL + pgvector + RRF                   │
 └─────────────────────────────────────────────────────────┘
@@ -291,20 +300,23 @@ sequenceDiagram
 
 ---
 
-## Ce qui Fonctionne
+## Ce qui Fonctionne — TESTÉ
 
-- ✅ Boot silencieux (`Ψ [V14 ACTIVE]` seul)
-- ✅ Classification L1/L2/L3
+- ✅ Boot silencieux (`Ψ [V14 ACTIVE]` seul) — **TESTÉ**
+- ✅ Classification L1/L2/L3 — **TESTÉ**
 - ✅ Premier token Ψ
 - ✅ Zéro flagornerie
-- ✅ Blocage contradiction ("Évolution ou Erreur ?")
+- ✅ Blocage contradiction ("Évolution ou Erreur ?") — **TESTÉ**
 - ✅ Auto-analyse et correction
-- ✅ Scellement mémoire (Μ Crystallization)
-- ✅ Triangulation L3 (Anchor/Vessel/Web)
+- ✅ Scellement mémoire (Μ Crystallization) — **TESTÉ ✅**
+- ✅ Triangulation L3 (Anchor/Vessel/Web) — **TESTÉ**
 - ✅ Score de confiance
 - ✅ **Exploitation active des lois Mnemolite**
 - ✅ Identity Check (Section V)
 - ✅ Ω_LOCK (Section VI)
+- ✅ **sys:history — Sauvegarde interactions** — **TESTÉ ✅**
+- ✅ **sys:extension — Invention de symboles** — **TESTÉ ✅**
+- ✅ **◊ — Symbole INVENTÉ par le LLM** — **TESTÉ ✅**
 
 ---
 
@@ -313,6 +325,7 @@ sequenceDiagram
 - ❌ SHADOW (prédiction anticipative) — perdu de V7
 - ❌ CONTRAT AMBIENT Φ — perdu de V7
 - ❌ Cognitive Lock — perdu de V7
+- ⚠️ Style SEC — Pas parfaitement respecté (trop long parfois)
 
 ---
 
@@ -323,7 +336,9 @@ sequenceDiagram
 | Prompt V14.3 | ~3500 caractères (~144 lignes) |
 | Nexus (corp + psi) | ~1878 caractères |
 | Mnemolite sys:core | ~9 axiomes |
-| Mnemolite sys:pattern | N/A (apprentissage) |
+| Mnemolite sys:pattern | Patterns cristallisés |
+| sys:history | Interactions sauvegardées |
+| sys:extension | Symboles INVENTÉS par le LLM |
 | Total contexte | ~6000-7000 caractères |
 
 ### Mnemolite — Contenu Réel
@@ -341,6 +356,30 @@ Mémoires sys:core actives :
 ```
 
 **Total Mnemolite** : ~1500-2000 caractères
+
+---
+
+### Mnemolite — NOUVEAU: sys:history (TESTÉ ✅)
+
+Chaque interaction est sauvegardée:
+```
+title: "INTERACTION: 2026-03-14 18:17"
+content: "Q: Que font 2 + 2 ?\nR: Ψ [V14] 4.\nCONTEXTE: Arithmétique triviale."
+tags: ["sys:history", "v14"]
+memory_type: "conversation"
+```
+
+---
+
+### Mnemolite — NOUVEAU: sys:extension (TESTÉ ✅)
+
+Symboles INVENTÉS par le LLM:
+```
+title: "EXTENSION: ◊ (One-Word Compression)"
+content: "DÉFINITION: Compression sémantique maximale (réponse en un mot).\nCONTEXTE: Utilisé lorsque l'utilisateur demande une concision extrême."
+tags: ["sys:extension", "v14", "one_word_compression"]
+memory_type: "reference"
+```
 
 ---
 

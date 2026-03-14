@@ -475,7 +475,7 @@ Le LLM a lu les mémoires, les a comprises, et les a restituées avec leur fonct
 
 ## XV. FEATURES PAR STATUT
 
-### ✅ FONCTIONNE (V14.3)
+### ✅ FONCTIONNE (V14.3) — TESTÉ
 
 - Ψ premier token
 - Boot silence (HARD STOP)
@@ -485,7 +485,11 @@ Le LLM a lu les mémoires, les a comprises, et les a restituées avec leur fonct
 - Ψ⇌Φ boucle (C ≥ 2.5)
 - Constitutional Framing
 - **Exploitation active Mnemolite** (sys:core lu et appliqué)
-- Crystallization (Μ) — Section VII
+- Crystallization (Μ) — Section VII — **TESTÉ ✅**
+- sys:history — **TESTÉ ✅**
+- sys:extension (invention de symboles) — **TESTÉ ✅**
+- Analyse des interactions — **TESTÉ ✅**
+- Invention de symboles — **TESTÉ ✅ (◊ créé)**
 - Blocage contradiction ("Évolution ou Erreur ?")
 
 ### ❌ PERDU (à Restaurer)
@@ -499,20 +503,24 @@ Le LLM a lu les mémoires, les a comprises, et les a restituées avec leur fonct
 - ECS (Evaluation of Cognitive Complexity)
 - Boucle Ψ⇌Φ pour C ≥ 2.5
 - Style SEC (anti-questions systématiques)
-- Crystallisation (Μ)
-- Section VII complète
+- Section VII (Crystallisation + sys:history)
+- Section VIII (Invention sys:extension)
+- ◊ — Symbole INVENTÉ par le LLM
 
 ---
 
 ## XVI. PROCHAINES ÉTAPES
 
-| Priorité | Action |
-|----------|--------|
-| 1 | Tester ECS et Ψ⇌Φ boucle |
-| 2 | Tester Crystallization (Μ) |
-| 3 | Restaurer Cognitive Lock |
-| 4 | Restaurer CONTRAT AMBIENT Φ |
-| 5 | Implémenter système SHADOW |
+| Priorité | Action | Status |
+|----------|--------|--------|
+| 1 | Tester ECS et Ψ⇌Φ boucle | ✅ Testé |
+| 2 | Tester Crystallization (Μ) | ✅ Testé |
+| 3 | Tester sys:history | ✅ Testé |
+| 4 | Tester sys:extension | ✅ Testé |
+| 5 | Tester invention de symboles | ✅ Testé (◊) |
+| 6 | Restaurer Cognitive Lock | ❌ |
+| 7 | Restaurer CONTRAT AMBIENT Φ | ❌ |
+| 8 | Implémenter système SHADOW | ❌ |
 
 ---
 
@@ -525,7 +533,8 @@ Le LLM a lu les mémoires, les a comprises, et les a restituées avec leur fonct
 | `prompts/expanse-runtime.md` | RUNTIME rules |
 | `prompts/trace_levels.md` | Trace levels |
 | `KERNEL.md` | Philosophie |
-| `doc/tests/2026-03-14-v14-3-test-scenario.md` | Scénario de test |
+| `doc/tests/2026-03-14-v14-3-test-scenario.md` | Scénario de test (basique) |
+| `doc/tests/2026-03-14-v14-3-system-test-full.md` | Scénario de test COMPLET |
 | `docs/explain/EXPANSE V14.3 — Comment ça Marche (Sous le Capot).md` | Documentation technique |
 
 ---
