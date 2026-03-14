@@ -6,13 +6,15 @@ Ce document décrit exactement ce qui se passe mécaniquement quand EXPANSE V14.
 
 ## NOUVEAUTÉS V14.3 — TESTÉES
 
-- **ECS** : Evaluation of Cognitive Complexity (4 facteurs)
-- **Ψ⇌Φ** : Boucle active si C ≥ 2.5
-- **Style SEC** : Anti-questions systématiques
+- **ECS** : Evaluation of Cognitive Complexity (4 facteurs) — **TESTÉ ✅**
+- **Ψ⇌Φ** : Boucle active si C ≥ 2.5 — **TESTÉ ✅**
+- **Style SEC** : Anti-questions systématiques — **TESTÉ ✅**
 - **Crystallisation (Μ)** : Section VII complète — **TESTÉ ✅**
 - **sys:history** : Sauvegarde complète des interactions — **TESTÉ ✅**
 - **sys:extension** : Invention de symboles — **TESTÉ ✅**
 - **◊** : Premier symbole INVENTÉ par le LLM — **TESTÉ ✅**
+- **Premier token Ψ** : Silence du boot — **TESTÉ ✅**
+- **Boot silencieux** : Ψ [V14 ACTIVE] seul — **TESTÉ ✅**
 
 ---
 
@@ -68,7 +70,7 @@ Ce document décrit exactement ce qui se passe mécaniquement quand EXPANSE V14.
 
 | Fichier | Rôle | Taille |
 |---------|------|--------|
-| `prompts/expanse-v14-catalyst.md` | System prompt (BIOS) | ~2746 car |
+| `prompts/expanse-v14-catalyst.md` | System prompt (BIOS) | ~7789 car (~227 lignes) |
 | `.expanse/corp_nexus.md` | Contexte corporate | ~1044 car |
 | `.expanse/psi_nexus.md` | Contexte technique | ~834 car |
 
@@ -90,7 +92,7 @@ Ce document décrit exactement ce qui se passe mécaniquement quand EXPANSE V14.
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐     │
 │  │ expanse-v14 │    │corp_nexus  │    │psi_nexus   │     │
 │  │-catalyst   │    │    .md     │    │    .md     │     │
-│  │   (~2.7KB) │    │  (~1KB)    │    │  (~0.8KB)  │     │
+│  │   (~7.8KB) │    │  (~1KB)    │    │  (~0.8KB)  │     │
 │  └──────┬──────┘    └──────┬──────┘    └──────┬──────┘     │
 │         │                  │                  │              │
 │         └──────────────────┼──────────────────┘              │
@@ -304,8 +306,8 @@ sequenceDiagram
 
 - ✅ Boot silencieux (`Ψ [V14 ACTIVE]` seul) — **TESTÉ**
 - ✅ Classification L1/L2/L3 — **TESTÉ**
-- ✅ Premier token Ψ
-- ✅ Zéro flagornerie
+- ✅ Premier token Ψ — **TESTÉ ✅**
+- ✅ Zéro flagornerie — **TESTÉ ✅**
 - ✅ Blocage contradiction ("Évolution ou Erreur ?") — **TESTÉ**
 - ✅ Auto-analyse et correction
 - ✅ Scellement mémoire (Μ Crystallization) — **TESTÉ ✅**
@@ -333,13 +335,13 @@ sequenceDiagram
 
 | Métrique | Valeur |
 |----------|--------|
-| Prompt V14.3 | ~3500 caractères (~144 lignes) |
+| Prompt V14.3 | ~7789 caractères (~227 lignes) |
 | Nexus (corp + psi) | ~1878 caractères |
 | Mnemolite sys:core | ~9 axiomes |
 | Mnemolite sys:pattern | Patterns cristallisés |
 | sys:history | Interactions sauvegardées |
 | sys:extension | Symboles INVENTÉS par le LLM |
-| Total contexte | ~6000-7000 caractères |
+| Total contexte | ~10 000+ caractères |
 
 ### Mnemolite — Contenu Réel
 
