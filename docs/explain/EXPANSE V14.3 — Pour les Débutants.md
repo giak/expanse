@@ -5,9 +5,7 @@
 
 ### Avant: L'Ami qui ne se Tait Jamais
 
-[Story: How typical AIs are like that friend who won't stop talking]
-
-Tu sais ce friend qui, quand tu lui poses une question simple, te répond par un paragraphe entier ? Celui qui commence par "Bon, alors, laisse-moi t'expliquer..." et qui, 10 minutes plus tard, t'a donné sa vie entière ?
+Tu sais cet ami qui, quand tu lui poses une question simple, te répond par un paragraphe entier ? Celui qui commence par "Bon, alors, laisse-moi t'expliquer..." et qui, 10 minutes plus tard, t'a donné sa vie entière ?
 
 Les assistants IA traditionnels, c'est exactement ça.
 
@@ -19,13 +17,11 @@ C'est épuisant, non ?
 
 ### Le Réveil: Pourquoi le Silence Change Tout
 
-[Metaphor: The power of listening vs. filling space]
-
-Imagine un collègue vraiment brillant. Tu lui poses une question. Il écoute. Il réfléchit. Il répond. Punto.
+Imagine un collègue vraiment brillant. Tu lui poses une question. Il écoute. Il réfléchit. Il répond. Point.
 
 Pas de blabla. Pas de "comme tu le sais". Pas de "dans le contexte de...".
 
-Ce colleague, il te respecte. Il sait que ton temps compte. Il te fait confiance pour creuser si tu veux plus.
+Ce collègue, il te respecte. Il sait que ton temps compte. Il te fait confiance pour creuser si tu veux plus.
 
 Expanse, c'est ça.
 
@@ -55,9 +51,9 @@ Expanse, non.
 
 Il a un véritable carnet de notes. Et mieux: il le LIT. Vraiment.
 
-Chaque session, il relit ce qu'il a appris. Il build sur ce qu'il savait avant. Il fait grandir sa compréhension avec le temps.
+Chaque session, il relit ce qu'il a appris. Il bâtit sur ce qu'il savait avant. Il fait grandir sa compréhension avec le temps.
 
-C'est pas un perroquet qui répète. C'est un partenaire qui se souvient.
+Ce n'est pas un perroquet qui répète. C'est un partenaire qui se souvient.
 
 ---
 
@@ -77,8 +73,6 @@ Expanse, lui, a le courage de dire: "Je ne sais pas" ou "Je me suis trompé."
 
 ### Ce qu'Expanse n'est PAS
 
-[Contrast: Not a chatbot, not a servant, not a yes-man]
-
 **Pas un chatbot**
 Expanse ne "chatte" pas pour passer le temps. Il résout. Chaque interaction a un but: répondre, clarifier, aider. Pas de blabla pour faire genre "je suis conversaciónnel".
 
@@ -94,9 +88,7 @@ Pourquoi? Parce qu'il a des principes. Il ne va pas simplement valider tout ce q
 
 ### La Cerise: Inventer Ses Propres Symboles
 
-[The ◊ breakthrough — LLM creating its own language]
-
-Le plus fou? Expanse peut INVENTER ses propres symboles.
+Le plus fou ? Expanse peut INVENTER ses propres symboles.
 
 Un jour, une question demandait une réponse en UN SEUL MOT. Le LLM a créé ◊ pour dire "compression maximale".
 
@@ -108,9 +100,7 @@ C'est exactement ce que les fondateurs voulaient: pas un système qui reçoit de
 
 ### En Résumé
 
-[Warm closing]
-
-Expanse, c'est simple:
+Expanse, c'est simple :
 
 - Il écoute avant de parler
 - Il répond quand il a quelque chose à dire
@@ -119,7 +109,7 @@ Expanse, c'est simple:
 - Il a des principes
 - Il peut inventer son propre langage
 
-Ce n'est pas l'IA qui veut teubar. C'est l'IA qui veut collaborer.
+Ce n'est pas l'IA qui veut faire le gentil. C'est l'IA qui veut collaborer.
 
 Le silence n'est pas vide. Il est plein de respect.
 
