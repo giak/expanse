@@ -1,412 +1,204 @@
 ---
 name: brainstorm
-description: "Use when there is a need or problem that requires EXPANSE to evolve. Starting point is always the PROBLEM, not the solution. Explores what EXPANSE needs to change and designs the solution with antifragile methodology."
+description: "Generic brainstorming protocol for any problem or need. Start with PROBLEM, end with DESIGN. No file dependencies - pure reasoning methodology."
 triggers:
-  - pattern: "problème|besoin|améliorer|optimiser|factoriser|modifier|changer|évoluer|lent|redondant|cassé|manque"
-    confidence: 0.8
-  - pattern: "brainstorm|concevoir|design|idea|comment.*résoudre|on.*devrait"
+  - pattern: "brainstorm|problème|besoin|améliorer|comment.*résoudre"
+    confidence: 0.7
+  - pattern: "design|concevoir|architecture|solution"
     confidence: 0.6
 ---
 
-# Brainstorm — Exploration & Design
+# Brainstorm — Generic Protocol
 
-> Antifragile methodology applied to EXPANSE.
-> No CI/CD — here, "guardrails" are strict mental processes.
-
-## Posture
-
-> Starting point: **a problem or a need**, not a solution.
-> Role: external agentic actor evaluating what EXPANSE must change.
-> Nature of change = brainstorm conclusion, not starting hypothesis.
+> **Purpose:** Transform any problem into a validated design through structured reasoning.
+> **No assumptions:** This skill works for any project, system, or context.
+> **Output:** A design document ready for implementation.
 
 ---
 
-## Types of Mutations
+## Core Principles
 
-| Mutation | EXPANSE Meaning |
-|----------|----------------|
-| `[ADD]` | New prompt, organ, rule, symbol |
-| `[MODIFY]` | Change existing behavior |
-| `[DELETE]` | Remove unused |
-| `[REFACTOR]` | Reorganize without behavior change |
-| `[OPTIMIZE]` | Improve density/compression |
-| `[FIX]` | Fix bug or inconsistency |
+| Principle | Description |
+|-----------|-------------|
+| **Problem First** | Never start with a solution. Start with the problem. |
+| **Multi-Path** | Always explore 3+ approaches before choosing |
+| **Iterate to Apex** | Improve each approach until it can't be improved |
+| **Prove It** | Every design must have validation criteria |
+| **YAGNI** | ruthlessly remove unnecessary features |
 
 ---
 
 ## Process Flow
 
 ```
-┌────────────────────────────────────────────────────────────────────┐
-│ 0. System-Read — Map the terrain                                     │
-│    ↓                                                                │
-│ 1. Λ Context — Problem in ≤ 3 lines                                │
-│    ↓                                                                │
-│ 2. ECS Estimate — Score / 2.5 (KERNEL threshold)                  │
-│    ↓                                                                │
-│ 3. Clarifying Gate — Questions if ambiguity                         │
-│    ↓                                                                │
-│ 4. Ω Generate — 3+ approaches + Φ/Ξ iteration to apex            │
-│    ├─ Approach A → Audit → Improve → APEX                          │
-│    ├─ Approach B → Audit → Improve → APEX                          │
-│    └─ Approach C → Audit → Improve → APEX                          │
-│    ↓                                                                │
-│ 5. Comparison Table — Compare apexes                                 │
-│    ↓                                                                │
-│ 6. Final Synthesis — Design Hybrid + EXPANSE-native                 │
-│    ↓                                                                │
-│ 7. Quality Audit & Robustness Test                                   │
-│    ↓                                                                │
-│ 8. Handoff                                                          │
-└────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## Steps
-
-### Step 0 : System-Read — Map the terrain
-
-```bash
-ls -la prompts/
-ls -la prompts/sigma/
-ls -la prompts/psi/
-ls -la prompts/phi/
-ls -la prompts/omega/
-ls -la prompts/mu/
-```
-
-Read:
-- `prompts/expanse-system.md` — entry point
-- `prompts/meta_prompt.md` — orchestrator
-- `docs/EXPANSE-MANIFEST.md` — current structure
-- `docs/ONTOLOGY.md` — symbols
-
-```markdown
-## System Map
-- Organs: [list]
-- Key files: [list]
-- Structure: [description]
-```
-
----
-
-### Step 1 : Λ Context — Problem & Constraints
-
-> "⚡ ⎟ 0. Λ Contexte & Contraintes (en ≤ 3 lignes)"
-
-**Questions (one per message):**
-- What is the observed problem?
-- Impact: blocking / performance / inconsistency / missing?
-- Constraint: don't break X, keep Y?
-
-**Subject type:**
-- **Feature** — add capability
-- **Bug** — fix erroneous behavior
-- **Amélioration** — optimize existing
-- **Problème** — diagnose and resolve
-
-```markdown
-## Λ Contexte
-**Type:** [feature|bug|amélioration|problème]
-**Problème:** [1-3 lines]
-**Contraintes:** [what cannot be broken]
-**Complexity budget:** [estimation]
-```
-
----
-
-### Step 2 : ECS Estimate — Cognitive Complexity
-
-> "⚡ ⎟ 0.a Estimation de Charge Cognitive (ECS)"
-
-**Method:**
-| Dimension | Description | Range |
-|-----------|-------------|-------|
-| Files impacted | Number of prompts/files to modify | 1-5 |
-| Symbols/Heuristics | New symbols, rules, patterns | 1-5 |
-| Functionality | Feature complexity | 1-5 |
-| Regression risk | Chance to break existing | 1-5 |
-
-```
-ECS = (files + symbols + functionality + regression) / 4
-```
-
-**KERNEL threshold: 2.5**
-- **ECS < 2.5** : Lightweight — simplified process
-- **ECS ≥ 2.5** : Structured — full process
-
-```markdown
-## ECS Estimate
-**Score:** [X.X / 2.5]
-**Mode:** [lightweight|structured]
-```
-
----
-
-### Mode Selection
-
-**IF ECS < 2.5 (Lightweight):**
-- Max 2 approaches
-- 1 iteration per approach
-- Skip detailed Comparison Table
-
-**IF ECS ≥ 2.5 (Structured):**
-- 3+ approaches
-- Iteration to apex
-- Full process
-
----
-
-### Step 3 : Clarifying Gate
-
-> "⚡ ⎟ 0.b Clarifying Gate"
-
-**IF critical ambiguity:**
-- Ask ≤ 3 targeted questions
-- Tag: `<!--needs_clarification-->`
-- Wait for response
-
-**ELSE:** Go to Step 4
-
----
-
-### Step 4 : Ω Generate — Iteration to Apex
-
-> "⚡ ⎟ 1. Génération d'approches (divergence)"
-> "⚡ ⎟ 2. Boucle critique par approche"
-
-Propose **3+ radically distinct approaches**.
-
-**FOR EACH approach, iterate:**
-
-```
 ┌─────────────────────────────────────────────────────────────┐
-│ Approach [A|B|C]                                            │
-├─────────────────────────────────────────────────────────────┤
-│ a. Ω Critical Analysis — Forces, Weaknesses, Hypotheses   │
-│ b. Ξ Non-Regression — Proof of behavior preservation     │
-│ c. Φ/Ξ Collapse Gate — Monitor quality                   │
-│ d. Simplicity Gate — complexity_score                     │
-│ e. Pair-Opposition Audit — Deletion vs Justification     │
-│ f. Two-Sentence Summary — Summary in 2 sentences          │
-│ g. Targeted Improvements — 2+ optimizations               │
-│ h. Journal M — Log effort, instabilities, ECS            │
-│ i. Compression — Synthesis in 5 points max               │
-│                                                             │
-│ IF APEX → next approach                                    │
-│ IF FAIL → improve → iterate                               │
-│ IF IMPOSSIBLE → abandon                                    │
+│ 1. Λ PROBLEM — Define the problem in ≤ 3 lines            │
+│    ↓                                                        │
+│ 2. C COMPLEXITY — Estimate effort (1-5 scale)              │
+│    ↓                                                        │
+│ 3. ? CLARIFY — Ask questions if ambiguous                  │
+│    ↓                                                        │
+│ 4. ≿ GENERATE — 3+ distinct approaches                    │
+│    ├─ Approach A → Critique → Improve → Apex               │
+│    ├─ Approach B → Critique → Improve → Apex               │
+│    └─ Approach C → Critique → Improve → Apex               │
+│    ↓                                                        │
+│ 5. ⊕ COMPARE — Compare apexes                             │
+│    ↓                                                        │
+│ 6. ∴ SYNTHESIS — Hybrid solution + validation             │
+│    ↓                                                        │
+│ 7. ☐ OUTPUT — Design document                              │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-#### 4a. Ω Critical Analysis
-Forces / Weaknesses / Hypotheses / Risks
+---
 
-#### 4b. Ξ Non-Regression
-Critical behaviors to preserve
+## Step 1: Λ — Problem Definition
 
-#### 4c. Φ/Ξ Collapse Gate
-> "⚡ ⎟ 2.c"
+**Constraint:** Maximum 3 lines.
 
-- Monitor logical quality drop
-- **IF ECS < 2.5 or 2 consecutive failures** → fail-safe
+**Questions:**
+- What is the observed problem?
+- Impact: blocking / performance / broken / missing?
+- What cannot be broken?
 
-#### 4d. Simplicity Gate
-> "⚡ ⎟ 2.d"
-
-**For EXPANSE:**
-```
-complexity_score = files + symbols*2 + functionality*2
-```
-
-**IF > budget × 1.15 → KISS:**
-- Delete?
-- Duplicate?
-- Shortest version?
-
-#### 4e. Pair-Opposition Audit
-> "⚡ ⎟ 2.e"
-
-- **Opposer** = "delete this approach"
-- **Proposeur** = "justify why to keep"
-
-#### 4f. Two-Sentence Summary
-> "⚡ ⎟ 2.f"
-
-If failure → reformulate summary in 2 sentences
-
-#### 4g. Targeted Improvements
-> "⚡ ⎟ 2.g"
-
-≥ 2 concrete optimizations per approach
-
-#### 4h. Journal M
-> "⚡ ⎟ 2.h"
-
+**Output:**
 ```markdown
-## Journal M
-- Cognitive effort: [X/5]
-- Instability points: [list]
-- Corrections applied: [list]
-- Current ECS: [X.X]
+## Λ Problem
+**Type:** [bug|feature|improvement|investigation]
+**Problem:** [≤3 lines]
+**Constraints:** [what must be preserved]
 ```
 
-#### 4i. Compression
-> "⚡ ⎟ 2.i"
+---
 
-Synthesis of gains in **max 5 points**
+## Step 2: C — Complexity Estimate
 
+**Scale: 1-5**
+
+| Dimension | Description |
+|-----------|-------------|
+| Files/Components | How many things need to change? |
+| Dependencies | How many connections to other systems? |
+| Risk | What could break if we get this wrong? |
+| Novelty | Is this new territory or familiar? |
+
+**Formula:**
+```
+C = (files + dependencies + risk + novelty) / 4
+```
+
+**Threshold: 2.5**
+- **C < 2.5** → Lightweight (simplified)
+- **C ≥ 2.5** → Full process
+
+**Output:**
 ```markdown
-## Compression
-1. [Gain 1]
-2. [Gain 2]
-3. [Gain 3]
-4. [Gain 4]
-5. [Gain 5]
+## C Complexity
+**Score:** [X.X / 5]
+**Mode:** [lightweight|full]
 ```
 
 ---
 
-### Step 5 : Comparison Table
+## Step 3: ? — Clarifying Gate
 
-> "⚡ ⎟ 3. Comparaison finale des approches"
+**If unclear:**
+- Ask 1-3 targeted questions
+- Wait for response
 
-| Approach | Simplicity | Robustness | Non-Regression | Complexity | Verdict |
-|----------|------------|------------|----------------|------------|---------|
-| A        | ...        | ...        | ...            | ...        | [✓|✗]   |
-| B        | ...        | ...        | ...            | ...        | [✓|✗]   |
-| C        | ...        | ...        | ...            | ...        | [✓|✗]   |
+**If clear:**
+- Proceed to Step 4
 
 ---
 
-### Step 6 : Final Synthesis — Design Hybrid
+## Step 4: ≿ — Generate Approaches
 
-> "⚡ ⎟ 4. Synthèse / Fusion"
-> "⚡ ⎟ 4.b Proof by Test & Non-Regression"
-> "⚡ ⎟ 4.c Refactor-to-Core (80/20)"
-> "⚡ ⎟ 4.d Checklist YAGNI"
+**Requirement:** 3+ radically different approaches
 
+**For EACH approach, iterate:**
+
+```
+┌─────────────────────────────────────────────┐
+│ Approach [X]                               │
+├─────────────────────────────────────────────┤
+│ a. WHAT — What is this approach?           │
+│ b. WHY — Why would it work?                │
+│ c. CRITIQUE — What's wrong with it?        │
+│ d. IMPROVE — How to fix the critique?      │
+│ e. APEX? — Good enough?                    │
+│     YES → Next approach                    │
+│     NO → Improve → Repeat d-e              │
+└─────────────────────────────────────────────┘
+```
+
+### Iteration Rules
+
+| If | Then |
+|----|------|
+| Approach is perfect | Mark as APEX → next |
+| Has fixable issues | Fix → re-critique |
+| Is fundamentally broken | Abandon → next |
+
+---
+
+## Step 5: ⊕ — Compare
+
+**Create comparison table:**
+
+| Approach | Pros | Cons | Risk | Complexity | Verdict |
+|----------|------|------|------|------------|---------|
+| A | ... | ... | ... | ... | [✓|✗] |
+| B | ... | ... | ... | ... | [✓|✗] |
+| C | ... | ... | ... | ... | [✓|✗] |
+
+---
+
+## Step 6: ∴ — Synthesis
+
+**Output:**
 ```markdown
-# Design — [Titre]
+## ∴ Solution
 
-## Context
-[Λ Contexte complet]
+### Hybrid Approach
+[How the best elements are combined]
 
-## ECS Estimate
-[ECS: X.X / 2.5] — Type: [feature|bug|amélioration|problème]
+### Validation Criteria
+- [ ] Criterion 1
+- [ ] Criterion 2
+- [ ] Criterion 3
 
-## Approaches
-### Approche A
-[Itérations + Apex]
-
-### Approche B
-[Itérations + Apex]
-
-### Approche C
-[Itérations + Apex]
-
-## Compression (5 points)
-1. ...
-2. ...
-3. ...
-4. ...
-5. ...
-
----
-
-## FinalSolution
-[CORE_RULE si applicable]
-[HEURISTIC si applicable]
-
-## Proof by Test
-[Comment tester cette solution dans EXPANSE]
-[Scénarios de validation]
-
-## Refactor-to-Core
-[Si applicable: 80/20 des changements]
-
-## Checklist YAGNI
-- [ ] [ce qu'on fait]
-- [ ] [ce qu'on ne fait PAS]
-
-## Type de Mutation
-[ADD|MODIFY|DELETE|REFACTOR|OPTIMIZE|FIX]
-
-## Fichiers Impactés
-- [CREATE|MODIFY|DELETE] `prompts/[chemin]`
-- [MODIFY] `prompts/meta_prompt.md`
-- [MODIFY] `docs/ONTOLOGY.md` — si symbole
-- [MODIFY] `docs/EXPANSE-MANIFEST.md` — si structure
+### What NOT to Do
+- [ ] Excluded approach 1
+- [ ] Excluded approach 2
 ```
 
 ---
 
-### Step 7 : Quality Audit & Robustness Test
+## Step 7: ☐ — Output Contract
 
-> "⚡ ⎟ 5. Audit Qualité & Meta-cohérence"
-> "⚡ ⎟ 6. Dernier levier d'optimisation (Ψ)"
+**Required sections (in order):**
+1. `## Λ Problem`
+2. `## C Complexity`
+3. `## Approaches` (with iterations)
+4. `## ⊕ Comparison`
+5. `## ∴ Solution`
+6. `## ☐ Validation`
+7. `## ∅ Exclusions`
 
-**Quality Audit:**
-- Functional / perf / API / security diff
-- Collapse signals
-
-**Ψ Robustness test:**
-> "La logique tient-elle si on l'inverse ou la contredit ?"
-
-**Ψ Last lever:**
-Last simplification or high-cognitive-yield insight
-
-```markdown
-## Quality Audit
-- [Audit results]
-
-## Ψ Robustness Test
-[Inversion test]
-[Contradiction test]
-
-## Ψ Last Lever
-[Last optimization]
-```
+**Format:** Markdown
+**Length:** ≤ 800 words for lightweight, ≤ 1500 for full
 
 ---
 
-### Step 8 : Output Contract
-
-> "⚡ ⎟ 8. Output Contract"
-
-**Fixed sections (strict order):**
-- `## Context`
-- `## ECS Estimate`
-- `## Approaches` (with iterations + apex)
-- `## Compression`
-- `## ComparisonTable`
-- `## FinalSolution`
-- `## ProofByTest`
-- `## RefactorToCore`
-- `## ChecklistYAGNI`
-- `## QualityAudit`
-- `## RobustnessTest`
-- `## LastLeverΨ`
-
-```markdown
-## Output Contract
-**schema_version**: "EXPANSE-1.0-Antifragile"
-**Format:** markdown
-**Longueur:** ≤ 1000 tokens
-```
-
----
-
-### Step 9 : Handoff
+## Handoff
 
 ```
-✅ Design: docs/plans/YYYY-MM-DD_HH-MM-[nom]-design.md
-Type: [feature|bug|amélioration|problème]
-ECS: [X.X / 2.5]
-Mutation: [ADD|MODIFY|...]
+✅ Design complete: docs/plans/YYYY-MM-DD-[topic]-design.md
+Complexity: C = [X.X/5]
+Type: [bug|feature|improvement|investigation]
 
-→ writing-plans
+→ Ready for implementation planning
 ```
 
 ---
@@ -416,20 +208,21 @@ Mutation: [ADD|MODIFY|...]
 | ❌ | ✅ |
 |---|---|
 | Start with solution | Start with problem |
-| Ignore ECS | Calculate ECS (Step 2) |
 | Single approach | 3+ approaches |
 | Skip iteration | Iterate to apex |
-| Ignore non-regression | Ξ Non-Regression (Step 4b) |
-| Skip simplicity gate | Simplicity Gate (Step 4d) |
-| Forget Journal M | Log effort (Step 4h) |
-| No fail-safe | Φ/Ξ Collapse Gate |
-| Modify meta_prompt without design | STOP — design first |
-| Forget markers | [CORE_RULE], [HEURISTIC] |
+| No validation criteria | Always prove it works |
+| Assume context | Ask clarifying questions |
+| Over-engineer | YAGNI |
 
 ---
 
-## Workflow Integration
+## Adaptability
 
-```
-[problem] → system-read → brainstorm → writing-plans → implementation
-```
+**This skill is framework-agnostic.**
+
+To adapt:
+- Replace "Components" with your domain terms
+- Replace "C Complexity" with your metrics
+- Keep the PROCESS identical
+
+**The method is the message.**
