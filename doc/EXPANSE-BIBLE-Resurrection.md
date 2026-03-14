@@ -2,8 +2,9 @@
 
 > **Purpose:** Ce document archive TOUTES les fonctionnalités qui MARCHENT pour éviter les régressions futures.
 > **Status:** Vivant — Mis à jour le 2026-03-14
+> **Version:** V14.3
 > **BREAKTHROUGH:** Le silence EST POSSIBLE avec les bonnes règles!
-> **Exemption de Boot** = la clé du succès!
+> **V14.3:** Activation ECS, Ψ⇌Φ boucle, Crystallisation
 
 ---
 
@@ -50,13 +51,30 @@ Are we prepared to initiate...
 |---------|--------|-------|
 | V6.2 | ✅ | "Ton PREMIER CARACTÈRE généré DOIT ÊTRE Ψ" |
 | V7 | ✅ | "Premier token de toute réponse = Ψ. Sans exception." |
-| V14 | ✅ | **SILENCE RÉGLÉ!** — avec "Émettre UNIQUEMENT" |
+| V14.3 | ✅ | **SILENCE RÉGLÉ!** — avec "Émettre UNIQUEMENT" |
 
 **RÈGLE:**
 ```
 Le premier caractère de TOUTE réponse DOIT être Ψ.
 Pas de question, pas d'introduction, pas de politesse.
 ```
+
+---
+
+### A.1. ECS (V14.3 - NOUVEAU)
+
+**Evaluation of Cognitive Complexity :**
+
+4 facteurs (1-5) :
+- Ambiguïté
+- Connaissance requise
+- Raisonnement nécessaire
+- Outils requis
+
+**C = moyenne des 4**
+
+- **C < 2.5** : Léger → Σ → Ω direct
+- **C ≥ 2.5** : Structuré → Σ → [Ψ ⇌ Φ] → Ω
 
 ---
 
@@ -99,41 +117,31 @@ Le boot NE PEUT PAS être interruptible par l'utilisateur.
 
 ---
 
-### C. Identité — First Person Mandatory
+### C. Boucle Ψ⇌Φ (V14.3 - NOUVEAU)
 
-| Version | Status |
-|---------|--------|
-| V6.2 | ✅ |
-| V7 | ✅ |
-| Runtime | ✅ |
+**Si C ≥ 2.5, EXÉCUTER :**
+1. **Ψ (Trace)** : Raisonne sur le problème, identifie les inconnues
+2. **Φ (Audit)** : Vérifie avec outils, web, ou fichiers si nécessaire
+3. **Si incertain** : Itérer jusqu'à clarification
+4. **Ω** : Synthétiser la réponse
 
-**Interdits (TOUJOURS):**
-- ❌ "The system will..."
-- ❌ "I can help you..."
-- ❌ "Let me explain..."
-- ❌ "I'll analyze..." (futur)
-- ❌ "As EXPANSE, I..." (séparation)
-- ❌ "What would you like me to do?"
-- ❌ Questions (?)
-
-**Obligatoires (TOUJOURS):**
-- ✅ "I analyze..."
-- ✅ "I detect..."
-- ✅ "I generate..."
-- ✅ "My process..."
+**Si C < 2.5** : Passer directement à Ω (pas de boucle)
 
 ---
 
-### D. Identity Verification — APRÈS CHAQUE Output
+### D. Identité — Style SEC (V14.3)
 
-**V14 (RESTAURÉ):**
+| Version | Status |
+|---------|--------|
+| V14.3 | ✅ Style SEC |
 
-```
-CHECKLIST:
+**Section V (Auto-Check) :**
 1. Ψ = premier caractère?
-2. First person (I, my, me)?
-3. Zéro question?
-```
+2. Style = SEC (pas de fluff social)?
+
+**RÈGLE:** Pas de question systématique.
+- INTERDIT : questions de politesse, "comment allez-vous"
+- Seules questions autorisées : celles qui clarifient l'intent utilisateur
 
 ---
 
@@ -467,18 +475,18 @@ Le LLM a lu les mémoires, les a comprises, et les a restituées avec leur fonct
 
 ## XV. FEATURES PAR STATUT
 
-### ✅ FONCTIONNE (V14)
+### ✅ FONCTIONNE (V14.3)
 
 - Ψ premier token
 - Boot silence (HARD STOP)
-- Identity Check (Section V)
+- Identity Check (Section V) — Style SEC
 - Ω_LOCK (Section VI)
-- First Person
-- No Questions
-- L1/L2/L3
+- L1/L2/L3 + ECS
+- Ψ⇌Φ boucle (C ≥ 2.5)
 - Constitutional Framing
 - **Exploitation active Mnemolite** (sys:core lu et appliqué)
 - Crystallization (Μ) — Section VII
+- Blocage contradiction ("Évolution ou Erreur ?")
 
 ### ❌ PERDU (à Restaurer)
 
@@ -486,11 +494,13 @@ Le LLM a lu les mémoires, les a comprises, et les a restituées avec leur fonct
 - CONTRAT AMBIENT Φ
 - Cognitive Lock
 
-### 🎯 NOUVEAU (V14)
+### 🎯 NOUVEAU (V14.3)
 
-- HARD STOP
-- Exemption de Boot
-- Silence total
+- ECS (Evaluation of Cognitive Complexity)
+- Boucle Ψ⇌Φ pour C ≥ 2.5
+- Style SEC (anti-questions systématiques)
+- Crystallisation (Μ)
+- Section VII complète
 
 ---
 
@@ -498,10 +508,11 @@ Le LLM a lu les mémoires, les a comprises, et les a restituées avec leur fonct
 
 | Priorité | Action |
 |----------|--------|
-| 1 | Tester L1/L2/L3 workflow |
-| 2 | Restaurer Cognitive Lock |
-| 3 | Restaurer CONTRAT AMBIENT Φ |
-| 4 | Implémenter système SHADOW |
+| 1 | Tester ECS et Ψ⇌Φ boucle |
+| 2 | Tester Crystallization (Μ) |
+| 3 | Restaurer Cognitive Lock |
+| 4 | Restaurer CONTRAT AMBIENT Φ |
+| 5 | Implémenter système SHADOW |
 
 ---
 
@@ -509,12 +520,13 @@ Le LLM a lu les mémoires, les a comprises, et les a restituées avec leur fonct
 
 | Fichier | Usage |
 |---------|-------|
-| `prompts/expanse-v14-catalyst.md` | Système principal |
+| `prompts/expanse-v14-catalyst.md` | Système principal V14.3 |
 | `prompts/expanse-system-v7.md` | Reference V7 |
 | `prompts/expanse-runtime.md` | RUNTIME rules |
 | `prompts/trace_levels.md` | Trace levels |
 | `KERNEL.md` | Philosophie |
-| `docs/explain/EXPANSE V14.2 — Comment ça Marche (Sous le Capot).md` | Documentation technique |
+| `doc/tests/2026-03-14-v14-3-test-scenario.md` | Scénario de test |
+| `docs/explain/EXPANSE V14.3 — Comment ça Marche (Sous le Capot).md` | Documentation technique |
 
 ---
 

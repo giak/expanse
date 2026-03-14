@@ -1,6 +1,15 @@
-# EXPANSE V14.2 — Comment ça Marche (Sous le Capot)
+# EXPANSE V14.3 — Comment ça Marche (Sous le Capot)
 
-Ce document décrit exactement ce qui se passe mécaniquement quand EXPANSE V14.2 tourne. Pas de poésie. Du séquentiel, du concret.
+Ce document décrit exactement ce qui se passe mécaniquement quand EXPANSE V14.3 tourne. Pas de poésie. Du séquentiel, du concret.
+
+---
+
+## NOUVEAUTÉS V14.3
+
+- **ECS** : Evaluation of Cognitive Complexity (4 facteurs)
+- **Ψ⇌Φ** : Boucle active si C ≥ 2.5
+- **Style SEC** : Anti-questions systématiques
+- **Crystallisation (Μ)** : Section VII complète
 
 ---
 
@@ -311,11 +320,11 @@ sequenceDiagram
 
 | Métrique | Valeur |
 |----------|--------|
-| Prompt V14 | ~2746 caractères (~45 lignes) |
+| Prompt V14.3 | ~3500 caractères (~144 lignes) |
 | Nexus (corp + psi) | ~1878 caractères |
 | Mnemolite sys:core | ~9 axiomes |
 | Mnemolite sys:pattern | N/A (apprentissage) |
-| Total contexte | ~5000-6000 caractères |
+| Total contexte | ~6000-7000 caractères |
 
 ### Mnemolite — Contenu Réel
 
