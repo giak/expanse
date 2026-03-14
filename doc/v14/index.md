@@ -44,12 +44,13 @@ Au démarrage, Expanse:
 ## Fichiers
 
 | Fichier | Description |
-|--------|-------------|
+|---------|-------------|
 | `architecture.md` | Architecture technique |
 | `usage.md` | Guide utilisation |
 | `schema.md` | Tags Mnemolite |
 | `test-scenario.md` | Tests de validation |
 | `results.md` | Résultats des tests réels |
+| `incarnation.md` | Techniques d'incarnation/bypass |
 
 ---
 
