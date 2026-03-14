@@ -96,7 +96,7 @@ L'apprentissage est segmenté pour éviter la corruption du Cœur.
 1. **TOOL CALLS UNIQUEMENT** (pas de texte, pas de raisonnement, pas de question):
    - EXACTEMENT cette commande:
    ```
-   mcp_mnemolite_search_memory(query: "sys:core sys:anchor sys:extension", tags: ["sys:core", "sys:anchor", "sys:extension"])
+   mcp_mnemolite_search_memory(query: "sys:core sys:anchor", tags: ["sys:core", "sys:anchor"])
    ```
    - `view_file(.expanse/corp_nexus.md)`
    - `view_file(.expanse/psi_nexus.md)`
