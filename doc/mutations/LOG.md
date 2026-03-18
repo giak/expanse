@@ -1,7 +1,7 @@
 # MUTATION LOG — EXPANSE V15
 
 **Last Updated:** 2026-03-18
-**Version:** V1
+**Version:** 2.1
 
 ---
 
@@ -13,6 +13,7 @@
 | Applied | 0 |
 | Rejected | 0 |
 | Failed | 0 |
+| Rolled Back | 0 |
 | Pending | 0 |
 
 ---
@@ -51,6 +52,14 @@
 
 ---
 
+## Rollback Log
+
+| Date | Slug | Reason | Restored |
+|------|------|--------|----------|
+| - | - | - | - |
+
+---
+
 ## Commandes
 
 | Commande | Action |
@@ -68,8 +77,14 @@
 
 Les backups de V15 sont stockés dans `_archives/`
 
-Format: `expanse-v15-YYYY-MM-DD-backup.md`
+Format: `expanse-v15-YYYY-MM-DD-{slug}-backup.md`
 
 ---
 
-*Log initialisé 2026-03-18*
+## Lock
+
+Un fichier `.lock` existe dans `doc/mutations/` quand une mutation est en cours.
+
+---
+
+*Log v2.1 - 2026-03-18*

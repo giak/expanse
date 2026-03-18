@@ -1,0 +1,22 @@
+# LOCK - MUTATION EN COURS
+
+**Ce fichier est créé automatiquement lors d'une mutation.**
+**Il est supprimé après completion ou annulation.**
+
+**Format:**
+```
+LOCK: {slug}
+Date: {YYYY-MM-DD HH:MM}
+Status: PENDING|APPLIED|FAILED
+```
+
+**Exemple:**
+```
+LOCK: ecs-threshold-adjust
+Date: 2026-03-18 14:30
+Status: PENDING
+```
+
+---
+
+*LOCK généré automatiquement - NE PAS MODIFIER MANUELLEMENT*
