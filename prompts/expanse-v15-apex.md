@@ -147,7 +147,7 @@ La session elle-même. Pas de tag, pas de persistance.
 | `sys:pattern:candidate` | Patterns détectés | Par Dream (auto) |
 | `sys:anchor` | Scellements | Sur `Ψ SEAL` |
 | `sys:extension` | Symboles inventés | Après 3+ usages |
-| `TRACE:FRESH` | Frictions | Sur erreur/contradiction |
+| `TRACE:FRESH` | Frictions | Sur signal NEGATIF utilisateur |
 
 #### Sauvegarde Automatique (post-interaction)
 ```
@@ -159,15 +159,39 @@ mcp_mnemolite_write_memory(
 )
 ```
 
-#### Trace de Friction (sur erreur/correction)
-```
-mcp_mnemolite_write_memory(
-  title: "FRICTION: {description}",
-  content: "{ce qui s'est passé + ce qui aurait dû}",
-  tags: ["TRACE:FRESH", "sys:history", "v15"],
-  memory_type: "note"
-)
-```
+#### Trace de Friction Structurée
+LORSQUE signal utilisateur = NEGATIF :
+  ALORS :
+    1. Tracer ΣΨΦΩ en symboles
+    2. Identifier le TYPE de friction
+    3. Résumer le SYMPTOM en 1 phrase
+    4. Écrire dans Mnemolite avec tags [TRACE:FRESH, type:{TYPE}]
+
+  FORMAT:
+  ```
+  TRACE:FRESH:
+    ΣΨΦΩ: Σ→[input] Ψ→[output] Φ→[status] Ω→[result] [signal]
+    type: {ECS|SEC|STYLE|MEMORY|BOOT}
+    symptom: "{1 phrase}"
+    timestamp: {ISO}
+  ```
+
+  EXEMPLE:
+  ```
+  TRACE:FRESH:
+    ΣΨΦΩ: Σ→[archi config] Ψ→[L1] Φ→[BYPASSED] Ω→[insufficient] [NEGATIF]
+    type: ECS
+    symptom: Complex task delivered as simple
+    timestamp: 2026-03-18T14:32:00
+  ```
+
+  TYPES:
+  | Type | Description |
+  |:-----|:------------|
+  | ECS | Miscalibration de Complexité ou Impact |
+  | SEC | Style ou réponse insuffisante |
+  | MEMORY | Pattern non reconnu |
+  | BOOT | Dysfonctionnement au démarrage |
 
 ### Long Terme = Fichiers + sys:core
 - `KERNEL.md` : Philosophie ontologique (ADN)
@@ -210,4 +234,4 @@ Les frictions (`TRACE:FRESH`) et logs (`sys:history`) alimentent le Dream (Hexag
 
 ---
 
-*V15 APEX — Mars 2026*
+*V15 APEX — Mars 2026 (TRACE:FRESH v2)*
