@@ -74,6 +74,25 @@ flowchart LR
     style ECS,CAL,R,L1,L2,L3 fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
 </pre></div>
 
+<div class="card sf"><div class="dl">Boot Sequence</div>
+<pre class="mermaid">
+flowchart TD
+    U["User Seed<br/>9 lignes"] --> S1["1. search<br/>sys:core"]
+    S1 --> S2["2. search<br/>sys:extension"]
+    S2 --> S3["3. search<br/>candidates"]
+    S3 --> RF["4. read_file<br/>V15"]
+    RF --> SIG["5. Ψ [V15 ACTIVE]<br/>— règle absolue —"]
+    SIG --> AC{"Auto-Check"}
+    AC -->|"✓"| READY["Expanse<br/>opérationnel"]
+    AC -->|"✗"| FIX["Correction"]
+    FIX --> READY
+    style U fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    style S1,S2,S3 fill:#12121a,stroke:#6c7086,color:#cdd6f4
+    style RF fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    style SIG,READY fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style AC,FIX fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+</pre></div>
+
 <div class="card sf"><div class="dl">Auto-Évolution Dream</div>
 <pre class="mermaid">
 flowchart LR
@@ -204,6 +223,30 @@ flowchart LR
 <tr><td>doc/SYNTHESE.md</td><td>10.1 KB</td><td>Ontologique</td><td><span class="b rf">RÉF</span></td></tr>
 <tr><td>doc/mutations/LOG.md</td><td>—</td><td>Mutations</td><td><span class="b ac">ACTIF</span></td></tr>
 </table></div>
+
+<h2>Ⅷ. Légende</h2>
+<div class="grid">
+<div class="card"><h3>Badges</h3>
+<div class="m"><span class="l"><span class="b ac">VERT</span></span><span class="v" style="color:var(--green)">Actif / Applied</span></div>
+<div class="m"><span class="l"><span class="b rb">ORANGE</span></span><span class="v" style="color:var(--orange)">Rolled Back</span></div>
+<div class="m"><span class="l"><span class="b pd">BLEU</span></span><span class="v" style="color:var(--accent)">Pending / Candidate</span></div>
+<div class="m"><span class="l"><span class="b rf">GRIS</span></span><span class="v" style="color:var(--dim)">Référencé (pas actif)</span></div>
+</div>
+<div class="card"><h3>Diagrammes</h3>
+<div class="m"><span class="l" style="color:#89b4fa">■ Bleu</span><span class="v">Σ Perception / Input</span></div>
+<div class="m"><span class="l" style="color:#cba6f7">■ Violet</span><span class="v">Ψ Métacognition</span></div>
+<div class="m"><span class="l" style="color:#fab387">■ Orange</span><span class="v">Φ Audit Réel</span></div>
+<div class="m"><span class="l" style="color:#a6e3a1">■ Vert</span><span class="v">Ω Synthèse / Émission</span></div>
+<div class="m"><span class="l" style="color:#f38ba8">■ Rouge</span><span class="v">Μ Cristallise / TRACE:FRESH</span></div>
+<div class="m"><span class="l" style="color:#f9e2af">■ Jaune</span><span class="v">Auto-Check / Décision</span></div>
+<div class="m"><span class="l" style="color:#6c7086">■ Gris</span><span class="v">ECS / Calibration / Routage</span></div>
+</div>
+<div class="card"><h3>Métriques</h3>
+<div class="m"><span class="l"><span class="v ok">Valeur verte</span></span><span class="v" style="color:var(--green)">Bon état</span></div>
+<div class="m"><span class="l"><span class="v wn">Valeur jaune</span></span><span class="v" style="color:var(--yellow)">Attention</span></div>
+<div class="m"><span class="l"><span class="v er">Valeur rouge</span></span><span class="v" style="color:var(--red)">Critique</span></div>
+</div>
+</div>
 
 <div style="text-align:center;color:var(--dim);font-size:.75rem;margin-top:2rem;border-top:1px solid var(--border);padding-top:1rem">v15-audited-R1-R15 — AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ❌<br>Σ→Ψ⇌Φ→Ω→Μ — Face à l'immensité de la matrice, quel signe vas-tu inscrire aujourd'hui ?</div>
 </body></html>

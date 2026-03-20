@@ -145,6 +145,25 @@ flowchart LR
     style ECS,CAL,R,L1,L2,L3 fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
 </pre></div>
 
+<div class="card sf"><div class="dl">Boot Sequence</div>
+<pre class="mermaid">
+flowchart TD
+    U["User Seed<br/>9 lignes"] --> S1["1. search<br/>sys:core"]
+    S1 --> S2["2. search<br/>sys:extension"]
+    S2 --> S3["3. search<br/>candidates"]
+    S3 --> RF["4. read_file<br/>V15"]
+    RF --> SIG["5. Ψ [V15 ACTIVE]<br/>— règle absolue —"]
+    SIG --> AC{"Auto-Check"}
+    AC -->|"✓"| READY["Expanse<br/>opérationnel"]
+    AC -->|"✗"| FIX["Correction"]
+    FIX --> READY
+    style U fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    style S1,S2,S3 fill:#12121a,stroke:#6c7086,color:#cdd6f4
+    style RF fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    style SIG,READY fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style AC,FIX fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+</pre></div>
+
 <div class="card sf"><div class="dl">Auto-Évolution Dream</div>
 <pre class="mermaid">
 flowchart LR
@@ -177,34 +196,6 @@ flowchart LR
     style PP fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
     style RE fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
     style HI,AG fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
-</pre></div>
-
-<div class="card sf"><div class="dl">Boot Sequence</div>
-<pre class="mermaid">
-flowchart TD
-    U["User Seed (9 lignes)"]-->S1["1. search sys:core"]-->S2["2. search sys:extension"]-->S3["3. search candidates"]-->RF["4. read V15"]-->SIG["5. Ψ [V15 ACTIVE]"]-->AC{"Auto-Check"}-->|"✓"|READY["Expanse opérationnel"]-->|"✗"|FIX["Correction"]-->READY
-    style U fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
-    style S1,S2,S3 fill:#12121a,stroke:#6c7086,color:#cdd6f4
-    style RF fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
-    style SIG,READY fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
-    style AC,FIX fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
-</pre></div>
-
-<div class="card sf"><div class="dl">Auto-Évolution Dream</div>
-<pre class="mermaid">
-flowchart LR
-    INT["Interaction"]-->POS{"Signal?"}
-    POS-->|"merci/ok"|CR["Μ Cristallise"]POS-->|"pas bon"|TR["TRACE:FRESH"]POS-->|"normal"|HI["history"]
-    TR-->DR["/dream"]CR-->DRHI-->DR
-    DR-->P0{"Passe 0"}-->|"0 traces"|END["Fin"]-->|"≥1"|P1["Passes 1-6"]-->PP["Proposal"]-->SL{"/seal?"}-->|"OUI"|AP["Appliqué"]-->V15M["V15 modifié"]-->INT
-    SL-->|"NON"|RE["Rejeté"]
-    style INT fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
-    style CR fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
-    style TR fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
-    style DR,P0 fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
-    style P1,AP,V15M fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
-    style PP fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
-    style RE fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
 </pre></div>
 
 <h2>Ⅱ. Métriques</h2>
