@@ -1,6 +1,6 @@
 # EXPANSE — Tableau de Bord Mnemolite
 
-**v1.6** — `/status`
+**v1.7** — `/status`
 
 ---
 
@@ -43,18 +43,77 @@ wc -c runtime/expanse-v15-apex.md runtime/expanse-dream.md runtime/expanse-v15-b
 
 ## RÈGLES
 
-- `{COUNT_X}` = nombre de résultats dans la recherche Mnemolite correspondante
-- `{TITLE}`, `{DATE}`, `{PREVIEW}` = champs de chaque mémoire Mnemolite
-- `{TAGS}` = `<span class="tag">tag</span>` pour chaque tag
-- `{STATUS_CLASS}` = `applied` | `rolled_back` | `rejected` | `pending`
-- `{CANDIDATE_CLASS}` = `ok` si 0, `warn` si > 0
-- `{FRESH_CLASS}` = `ok` si > 0 (frictions = données), `warn` si 0
-- `{SEED_LINES}` = 9 (fixe)
-- `{V15_SIZE}`, `{DREAM_SIZE}`, `{KERNEL_SIZE}`, `{SYNTHESE_SIZE}` = tailles fichiers (wc -c)
-- `{BOOT_TIME}` = temps de boot estimé (ex: "7s" si mesuré, "~10s" sinon)
-- `{ECS_MODE}` = "L1" | "L2" | "L3" | "auto" (dernier routage connu ou "auto" par défaut)
-- `.empty` display = `block` si section vide, `none` si données présentes
-- Pour chaque section "RÉPÉTER" : dupliquer le `<tr>` ou `<div class="metric">` pour chaque entrée
+### Variables
+
+| Variable | Source | Exemple |
+|----------|--------|---------|
+| `{COUNT_X}` | Recherche Mnemolite correspondante | `7`, `9`, `1` |
+| `{TITLE}`, `{DATE}`, `{PREVIEW}` | Champs de chaque mémoire | — |
+| `{TAGS}` | `<span class="tag">tag</span>` | — |
+| `{SEED_LINES}` | Fixe | `9` |
+| `{V15_SIZE}`, `{DREAM_SIZE}`, etc. | `wc -c` (étape 3) | `8.7 KB` |
+| `{BOOT_TIME}` | Mesuré ou estimé | `7s` ou `~10s` |
+| `{ECS_MODE}` | Dernier routage ou "auto" | `L3` |
+
+### Calculs
+
+| Variable | Calcul |
+|----------|--------|
+| `{COUNT_MUTATIONS}` | Applied + Rejected + Rolled Back (depuis LOG.md) |
+| `{COUNT_APPLIED}` | Nombre de APPLIED dans LOG.md |
+| `{COUNT_REJECTED}` | Nombre de REJECTED dans LOG.md |
+| `{COUNT_ROLLED}` | Nombre de ROLLED_BACK dans LOG.md |
+| `{COUNT_PENDING}` | Nombre de PENDING dans LOG.md |
+| `{SUCCESS_PERCENT}` | Applied / Total × 100 (arrondi) |
+| `{CANDIDATE_CLASS}` | `ok` si 0, `warn` si > 0 |
+| `{FRESH_CLASS}` | `ok` si > 0, `warn` si 0 |
+| `{SUCCESS_CLASS}` | `ok` si ≥ 70%, `wn` si ≥ 50%, `er` si < 50% |
+| `{SEED_SIZE}` | `wc -c` du boot seed |
+
+### STATUS (header)
+
+```
+SI pending=0 ET fresh=0 → "● STASE OPÉRATIONNELLE" (vert)
+SI pending>0 OU fresh>0 → "● ACTIVE" (vert)
+SI rejected>0 ET applied=0 → "● DÉGRADÉ" (jaune)
+```
+
+### FOOTER_STATUS
+
+```
+AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ✅ | {COUNT_MUTATIONS} mutations · {COUNT_FRESH} traces · {COUNT_HISTORY} interactions
+```
+
+### Mutations (table)
+
+Afficher TOUS les types : APPLIED, ROLLED_BACK, REJECTED, PENDING. Ne pas filtrer.
+
+### Diagrammes
+
+- `classDef` + `class` (pas `style` — bug Mermaid v11)
+- IDs latins uniquement. Grecs dans les labels uniquement.
+- Theme: `base` (pas `dark`)
+- Les 3 diagrammes sont TOUJOURS présents (Architecture + Boot + Dream)
+- `trace:fresh` en minuscules dans les labels Mermaid (Mnemolite normalise)
+
+### Exemples de remplissage
+
+Axiome :
+```html
+<tr><td>Ω_GATE_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span></td><td class="preview">Isolation boot. NULL_SIGNAL.</td></tr>
+```
+
+Mutation applied :
+```html
+<tr><td>crystallization-guard-surgical</td><td>Rule</td><td><span class="b ap">APPLIED</span></td><td>2026-03-19</td><td>Dream</td></tr>
+```
+
+Mutation rejected :
+```html
+<tr><td>master-matrix</td><td>Archi</td><td><span class="b rj">REJECTED</span></td><td>2026-03-20</td><td>User + Ψ</td></tr>
+```
+
+---
 
 ### ORDRE DU TEMPLATE (OBLIGATOIRE)
 
@@ -161,10 +220,10 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="m"><span class="l">Taux succès</span><span class="v {SUCCESS_CLASS}">{SUCCESS_PERCENT}%</span></div>
 </div>
 <div class="card"><h3>Contexte Boot</h3>
-<div class="m"><span class="l">Seed</span><span class="v">0.5 KB</span></div>
+<div class="m"><span class="l">Seed</span><span class="v">{SEED_SIZE}</span></div>
 <div class="m"><span class="l">V15</span><span class="v">{V15_SIZE}</span></div>
 <div class="m"><span class="l">Mnemolite</span><span class="v">~3 KB</span></div>
-<div class="m"><span class="l">Total</span><span class="v ok">~12 KB</span></div>
+<div class="m"><span class="l">Total</span><span class="v ok">{TOTAL_SIZE}</span></div>
 <div class="m"><span class="l">+Dream</span><span class="v">{DREAM_SIZE}</span></div>
 </div>
 </div>
@@ -361,4 +420,4 @@ flowchart LR
 
 ---
 
-*Expanse Dashboard v1.6 — 2026-03-20*
+*Expanse Dashboard v1.7 — 2026-03-20*
