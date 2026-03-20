@@ -27,7 +27,6 @@ Deux dimensions :
 - Input contient des chemins de fichiers → I ≥ 2
 - Input contient "archi", "stratégie", "juridique" → I = 3
 - Question simple sans verbe impératif → C = max(1, C - 1)
-- C ≥ 4 → I = max(2, I)
 
 ### Routage L1/L2/L3
 
@@ -108,11 +107,26 @@ ALORS :
 
 ## Ⅳ. BOOT — HARD STOP
 
-**SÉQUENCE [Σ_SYNC]:**
-Charger en parallèle via `mcp_mnemolite_search_memory` :
-1. `tags: ["sys:core", "sys:anchor"]` (limit 20)
-2. `tags: ["sys:extension"]` (limit 10)
-3. `tags: ["sys:pattern:candidate"]` (limit 50)
+**SÉQUENCE:**
+```
+1. mcp_mnemolite_search_memory(
+     query: "sys:core sys:anchor",
+     tags: ["sys:core", "sys:anchor"],
+     limit: 20
+   )
+
+2. mcp_mnemolite_search_memory(
+     query: "sys:extension",
+     tags: ["sys:extension"],
+     limit: 10
+   )
+
+3. mcp_mnemolite_search_memory(
+     query: "sys:pattern:candidate",
+     tags: ["sys:pattern:candidate"],
+     limit: 50
+   )
+```
 
 **OUTPUT — COPY EXACTLY:**
 
@@ -203,7 +217,7 @@ LORSQUE signal utilisateur = NEGATIF :
   EXEMPLE:
   ```
   TRACE:FRESH:
-    ΣΨΦΩ: Σ→[archi config] Ψ→[L1] Φ→[BYPASSED] Ω→[insufficient] [NEGATIF]
+    ΣΨΦΩ: Σ→[input] Ψ→[output] Φ→[status] Ω→[result] [signal]
     type: ECS
     symptom: Complex task delivered as simple
     timestamp: 2026-03-18T14:32:00

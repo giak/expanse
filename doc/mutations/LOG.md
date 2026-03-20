@@ -9,8 +9,8 @@
 
 | Métrique | Count |
 |----------|-------|
-| Total Proposals | 3 |
-| Applied | 2 |
+| Total Proposals | 5 |
+| Applied | 4 |
 | Rejected | 0 |
 | Failed | 0 |
 | Rolled Back | 1 |
@@ -25,6 +25,8 @@
 | 2026-03-19 | crystallization-guard | Rule | ROLLED_BACK | Dream |
 | 2026-03-19 | crystallization-guard-surgical | Rule | APPLIED | Dream |
 | 2026-03-19 | surgical-integrity-protocol | Rule | APPLIED | Dream |
+| 2026-03-20 | ecs-impact-calibration | ECS | APPLIED | Dream |
+| 2026-03-20 | boot-parallel-sync | BOOT | APPLIED | Dream |
 
 ---
 
@@ -33,6 +35,8 @@
 |------|------|------|--------|-----------|
 | 2026-03-19 | crystallization-guard-surgical | Rule | APPLIED | Dream |
 | 2026-03-19 | surgical-integrity-protocol | Rule | APPLIED | Dream |
+| 2026-03-20 | boot-parallel-sync | BOOT | APPLIED | Dream |
+| 2026-03-20 | ecs-impact-calibration | ECS | APPLIED | Dream |
 
 ---
 
@@ -50,9 +54,7 @@
 
 ## Pending Proposals
 
-| Slug | Type | Date | Author |
-|------|------|------|--------|
-| - | - | - | - |
+(Aucune proposition en attente)
 
 ---
 
@@ -60,7 +62,8 @@
 
 | Date | Slug | Reason | Restored |
 |------|------|--------|----------|
-| - | - | - | - |
+| 2026-03-19 | crystallization-guard | Non-surgical / Unnecessary | V15.0 |
+
 
 ---
 
