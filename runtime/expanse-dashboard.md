@@ -6,7 +6,7 @@
 
 ## PRÉAMBULE
 
-Mode **DIAGNOSTIC**. Sonder Mnemolite, lire les fichiers, générer `doc/dashboard/expanse-dashboard.html`.
+Mode **DIAGNOSTIC**. Sonder Mnemolite, lire les fichiers, générer `dashboard/expanse-dashboard.html`.
 
 ---
 
@@ -62,7 +62,7 @@ read_file(path="doc/mutations/LOG.md")
 
 ## SORTIE
 
-Après écriture : `Ψ [STATUS] Dashboard généré → doc/dashboard/expanse-dashboard.html`
+Après écriture : `Ψ [STATUS] Dashboard généré → dashboard/expanse-dashboard.html`
 
 ---
 
@@ -220,7 +220,7 @@ flowchart TD
 <tr><td>expanse-dream.md</td><td>17.2 KB</td><td>Auto-évolution</td><td><span class="b ap">ACTIF</span></td></tr>
 <tr><td>expanse-v15-boot-seed.md</td><td>0.5 KB</td><td>Boot</td><td><span class="b ap">ACTIF</span></td></tr>
 <tr><td>KERNEL.md</td><td>14.4 KB</td><td>ADN</td><td><span class="b rf">RÉF</span></td></tr>
-<tr><td>docs/SYNTHESE.md</td><td>9.8 KB</td><td>Ontologique</td><td><span class="b rf">RÉF</span></td></tr>
+<tr><td>doc/SYNTHESE.md</td><td>9.8 KB</td><td>Ontologique</td><td><span class="b rf">RÉF</span></td></tr>
 <tr><td>doc/mutations/LOG.md</td><td>—</td><td>Mutations</td><td><span class="b ap">ACTIF</span></td></tr>
 </table></div>
 
