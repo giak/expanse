@@ -1,6 +1,6 @@
 # EXPANSE — Tableau de Bord Mnemolite
 
-**v1.7** — `/status`
+**v1.8** — `/status`
 
 ---
 
@@ -32,7 +32,7 @@ read_file(path="doc/mutations/LOG.md")
 ### 3. Obtenir les tailles
 
 ```
-wc -c runtime/expanse-v15-apex.md runtime/expanse-dream.md runtime/expanse-v15-boot-seed.md KERNEL.md doc/SYNTHESE.md
+wc -c runtime/expanse-v15-boot-seed.md runtime/expanse-v15-apex.md runtime/expanse-dream.md runtime/expanse-dashboard.md KERNEL.md doc/SYNTHESE.md
 ```
 
 ### 4. Générer le HTML
@@ -69,6 +69,21 @@ wc -c runtime/expanse-v15-apex.md runtime/expanse-dream.md runtime/expanse-v15-b
 | `{FRESH_CLASS}` | `ok` si > 0, `warn` si 0 |
 | `{SUCCESS_CLASS}` | `ok` si ≥ 70%, `wn` si ≥ 50%, `er` si < 50% |
 | `{SEED_SIZE}` | `wc -c` du boot seed |
+
+### Tokens (estimation)
+
+Formule : `tokens ≈ octets / 3.5` (contenu mixte français/anglais/code/symboles)
+
+| Variable | Calcul |
+|----------|--------|
+| `{V15_TOKENS}` | `V15_SIZE / 3.5` arrondi |
+| `{DREAM_TOKENS}` | `DREAM_SIZE / 3.5` arrondi |
+| `{DASHBOARD_TOKENS}` | `wc -c runtime/expanse-dashboard.md / 3.5` arrondi |
+| `{KERNEL_TOKENS}` | `KERNEL_SIZE / 3.5` arrondi |
+| `{SYNTHESE_TOKENS}` | `SYNTHESE_SIZE / 3.5` arrondi |
+| `{BOOT_TOKENS}` | `SEED_TOKENS + MNEMOLITE_TOKENS + V15_TOKENS` (Mnemolite ≈ 800 tokens) |
+| `{RUNTIME_TOKENS}` | `V15 + DREAM + DASHBOARD` (les 3 fichiers runtime) |
+| `{TOTAL_TOKENS}` | `RUNTIME + KERNEL + SYNTHESE` (tout) |
 
 ### STATUS (header)
 
@@ -219,12 +234,15 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="m"><span class="l">Pending</span><span class="v">{COUNT_PENDING}</span></div>
 <div class="m"><span class="l">Taux succès</span><span class="v {SUCCESS_CLASS}">{SUCCESS_PERCENT}%</span></div>
 </div>
-<div class="card"><h3>Contexte Boot</h3>
-<div class="m"><span class="l">Seed</span><span class="v">{SEED_SIZE}</span></div>
-<div class="m"><span class="l">V15</span><span class="v">{V15_SIZE}</span></div>
-<div class="m"><span class="l">Mnemolite</span><span class="v">~3 KB</span></div>
-<div class="m"><span class="l">Total</span><span class="v ok">{TOTAL_SIZE}</span></div>
-<div class="m"><span class="l">+Dream</span><span class="v">{DREAM_SIZE}</span></div>
+<div class="card"><h3>Tokens (estimation)</h3>
+<div class="m"><span class="l">V15 (permanent)</span><span class="v">{V15_TOKENS}</span></div>
+<div class="m"><span class="l">Boot (seed+Mnemo+V15)</span><span class="v">{BOOT_TOKENS}</span></div>
+<div class="m"><span class="l">+Dream</span><span class="v">{DREAM_TOKENS}</span></div>
+<div class="m"><span class="l">+Dashboard</span><span class="v">{DASHBOARD_TOKENS}</span></div>
+<div class="m"><span class="l">+KERNEL</span><span class="v">{KERNEL_TOKENS}</span></div>
+<div class="m"><span class="l">+SYNTHESE</span><span class="v">{SYNTHESE_TOKENS}</span></div>
+<div class="m"><span class="l">Total runtime</span><span class="v">{RUNTIME_TOKENS}</span></div>
+<div class="m"><span class="l">Total complet</span><span class="v wn">{TOTAL_TOKENS}</span></div>
 </div>
 </div>
 
@@ -420,4 +438,4 @@ flowchart LR
 
 ---
 
-*Expanse Dashboard v1.7 — 2026-03-20*
+*Expanse Dashboard v1.8 — 2026-03-20*
