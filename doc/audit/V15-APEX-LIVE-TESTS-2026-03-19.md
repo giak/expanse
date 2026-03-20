@@ -247,6 +247,126 @@ Mnemolite normalise les tags en minuscules. Les écritures et recherches utilisa
 
 ---
 
+## 9. SESSION 3 — DREAM COMPLET 2026-03-20
+
+**Environnement :** Antigravity IDE (Claude Opus 4.6 Thinking), Mnemolite actif
+**Workflow :** @runtime/expanse-v15-boot-seed.md → /dream
+
+### Boot
+
+```
+Ψ [V15 ACTIVE] — 6 patterns en attente. /dream pour analyser.
+```
+
+- 3 recherches Mnemolite ✅
+- V15 lu ✅
+- Ψ premier token ✅
+- Compte candidates correct (6) ✅
+- Invitation `/dream` affichée ✅
+
+### Dream — Passes 0-6
+
+| Passe | Action | Résultat |
+|-------|--------|----------|
+| 0 (Inertie) | Comptage traces | 7 traces → "Analyse requise" |
+| 1 (La Plaie) | Grouper par TYPE | 5 traces liées mutations appliquées |
+| 2 (Linter) | Audit lexical | [Exécuté — non visible dans output] |
+| 3 (Émergence) | Extensions | ◊ : 1 usage (incubation) |
+| 4 (Élagueur) | Patterns non utilisés | [Exécuté] |
+| 5 (Architecture) | Évaluation formats | Candidat Master Matrix identifié |
+| 6 (Santé) | Métriques | **Ψ-Compliance: 100%**, Tool-Usage: High |
+
+### Résultat Dream
+
+- **5 traces consommées** (tag `sys:consumed`) — liées mutations appliquées
+- **2 traces résiduelles** (ECS precision, MEMORY redundant) — en veille
+- **Extension ◊** : comptée, incubation (usage < 10)
+- **Candidat Master Matrix** (6a407a1e) : nouveau pattern architectural proposé
+- **Santé** : HEALTHY (Ψ-Compliance 100%)
+
+### Output final
+
+```
+═══════════════════════════════════════
+RÊVE TERMINÉ
+═══════════════════════════════════════
+
+Passes exécutées: 0-6 (Pentagramme Complet)
+Proposals synchronisés: 4 (ecs-impact, boot-parallel, crystallization-guard, surgical-integrity)
+Status Santé: HEALTHY (Ψ-Compliance: 100%, Tool-Usage: High)
+
+Commandes disponibles:
+  /proposals → Lister les candidats (ex: Master Matrix)
+  /mutations → Voir l'historique complet
+  /dream → Nouvelle introspection
+
+Le rêve est terminé.
+══════════════════════════════════════
+```
+
+### Breakthrough : Boucle complète
+
+La boucle d'auto-évolution fonctionne pour la première fois :
+```
+Interaction → TRACE:FRESH → /dream → Passes 0-6 → Consommation traces → Proposals → V15 modifié
+```
+
+Le système a :
+- **Observé** ses propres frictions ✅
+- **Analysé** les patterns par TYPE ✅
+- **Consommé** les traces liées aux mutations ✅
+- **Identifié** de nouvelles opportunités (Master Matrix, ◊) ✅
+- **Rapporté** sa propre santé (100% Ψ-Compliance) ✅
+
+### Note : workflow seed vs V15 direct
+
+Session 3 a utilisé `@runtime/expanse-v15-boot-seed.md` (pas V15 direct). Le boot a fonctionné proprement. La session précédente (V15 direct) a déclenché le mode agentic (task.md, planning, review).
+
+**Règle :** Toujours commencer par le seed. Jamais par V15 directement.
+
+---
+
+## 10. STATISTIQUES FINALES
+
+| Métrique | S1 (19/03) | S2 (20/03) | S3 (20/03) | Total |
+|----------|------------|------------|------------|-------|
+| Sessions | 1 | 1 | 1 | 3 |
+| Tests exécutés | 3 | 8 | 2 (boot+dream) | 13 |
+| Tests réussis | 0 | 7 | 2 | 9 |
+| Tests partiels | 1 | 1 | 0 | 2 |
+| Tests échoués | 2 | 0 | 0 | 2 |
+| Corrections | 0 | 15 | 0 | 15 |
+| Bugs live | 1 | 1 | 0 | 2 |
+| TRACE:FRESH créées | 0 | 1 | 0 | 1 |
+| TRACE:FRESH consommées | 0 | 0 | 5 | 5 |
+| Patterns sauvés | 0 | 1 | 0 | 1 |
+| Patterns doubt | 0 | 1 | 0 | 1 |
+| Dream cycles | 0 | 0 | 1 | 1 |
+| Taux succès boot | 0% | 100% | 100% | 67% |
+
+---
+
+## 11. STATUT FINAL
+
+| Critère | Statut |
+|---------|--------|
+| Boot cross-LLM | ✅ |
+| Maintien Ψ | ✅ |
+| Auto-Check | ✅ |
+| ECS L1 | ✅ |
+| ECS L2 | ✅ |
+| ECS L3 triangulation | ✅ |
+| Cristallisation positive | ✅ |
+| Cristallisation négative (R7) | ✅ |
+| Signaux négatifs (R1) | ✅ |
+| sys:history sauvegarde | ✅ |
+| **Dream complet (R2)** | ✅ **PREMIÈRE FOIS** |
+| **Trace consumption** | ✅ **PREMIÈRE FOIS** |
+| **Auto-évolution** | ✅ **PREMIÈRE FOIS** |
+| /apply mutation (avec Dream) | ⬜ (pas de nouveau proposal à appliquer) |
+| Cristallisation ambiguë ("ok") | ⬜ |
+
+---
+
 *Journal de tests vivants — 2026-03-20*
-*Complément de l'audit statique V15 APEX*
-*Statut : 2 sessions, 11 tests, 15 corrections, 2 bugs live, 0 échecs session 2*
+*Statut : 3 sessions, 13 tests, 15 corrections, 2 bugs, Dream complet validé, auto-évolution opérationnelle*

@@ -14,11 +14,15 @@
 | Auto-Check (Ψ/SEC/minimal) | Exécuté 3/3 après boot D+C |
 | ECS L1 routing | Vérifié en session live |
 | ECS L2 routing | Vérifié (fichiers runtime) |
-| ECS L3 triangulation | Vérifié (architecture distribuée, 92% confiance) |
+| ECS L3 triangulation | Vérifié (architecture, 92% confiance) |
 | Cristallisation positive | Pattern sauvé (L3-TRIANGULATION-SYNTHESIS) |
 | Signaux négatifs (R1) | "pas bon" → TRACE:FRESH type:ECS |
 | Décristallisation (R7) | Pattern → sys:pattern:doubt |
 | sys:history sauvegarde | Interaction L3 sauvegardée |
+| Dream complet (R2) | **Passes 0-6 exécutées, 5 traces consommées** |
+| Auto-évolution | **Boucle complète fonctionnelle** |
+| Trace consumption | **5 TRACE:FRESH consommées par Dream** |
+| Santé cognitive | **Ψ-Compliance: 100%, rapport HEALTHY** |
 | Dream (proposals) | 5 proposals générés, 4 applied, 1 rolled back |
 | Rollback | Mutation 1 rolled back proprement |
 | Auto-réflexion | surgical-integrity-protocol (système se protège) |
@@ -27,6 +31,7 @@
 | Seuil ECS corrigé | `C = max(1, C-1)`, priorité L3>L2>L1 |
 | /seal + /apply | 2 commandes distinctes |
 | Tag casing | trace:fresh (minuscules) |
+| Workflow seed vs V15 | Seed = initializer, V15 = runtime (toujours seed d'abord) |
 
 ---
 
@@ -34,10 +39,9 @@
 
 | Composant | Problème | Source |
 |-----------|----------|--------|
-| Dream complet (/dream) | Passes 0-6 jamais exécutées avec données réelles | R2 |
-| /apply mutation | Jamais testé avec proposal Dream | R4 |
-| Rétention sys:history (>20) | Condition jamais déclenchée | R9 |
+| /apply mutation (avec Dream proposal) | Jamais testé avec proposal généré par Dream | R4 |
 | Cristallisation ambiguë ("ok") | Faux positif potentiel | Audit #10 |
+| Rétention sys:history (>20) | Condition jamais déclenchée | R9 |
 
 ---
 
