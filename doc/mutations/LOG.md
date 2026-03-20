@@ -54,7 +54,10 @@
 
 ## Pending Proposals
 
-(Aucune proposition en attente)
+| Date | Slug | Type | Status | Author |
+|------|------|------|--------|--------|
+| 2026-03-20 | master-matrix | Archi | REJECTED | Dream |
+| 2026-03-20 | ecs-heuristics-expansion | ECS | REJECTED | Dream |
 
 ---
 

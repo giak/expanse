@@ -24,7 +24,7 @@ th{text-align:left;color:var(--dim);font-weight:normal;padding:.3rem .5rem;borde
 td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 .tag{display:inline-block;background:var(--border);color:var(--accent);padding:.1rem .4rem;border-radius:3px;font-size:.7rem;margin:.1rem}
 .b{display:inline-block;padding:.1rem .5rem;border-radius:3px;font-size:.75rem;font-weight:bold}
-.b.ap{background:#1a3a1a;color:var(--green)}.b.rb{background:#3a2a1a;color:var(--orange)}.b.pd{background:#1a2a3a;color:var(--accent)}.b.ac{background:#1a3a1a;color:var(--green)}.b.rf{background:#1a2a3a;color:var(--dim)}
+.b.ap{background:#1a3a1a;color:var(--green)}.b.rb{background:#3a2a1a;color:var(--orange)}.b.rj{background:#3a1a3a;color:#cba6f7}.b.pd{background:#1a2a3a;color:var(--accent)}.b.ac{background:#1a3a1a;color:var(--green)}.b.rf{background:#1a2a3a;color:var(--dim)}
 .m{display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border)}
 .m .l{color:var(--dim)}.m .v{font-weight:bold}.v.ok{color:var(--green)}.v.wn{color:var(--yellow)}.v.er{color:var(--red)}
 .sf{grid-column:1/-1}
@@ -35,36 +35,36 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 </style>
 </head>
 <body>
-<div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V15 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● V15 ACTIVE</div><div class="dt">2026-03-20 02:30</div><div class="dt" style="color:var(--yellow)">v15-audited-R1-R15</div></div></div>
+<div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V15 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● STASE OPÉRATIONNELLE</div><div class="dt">2026-03-20 11:00</div><div class="dt" style="color:var(--green)">v15-audited-R1-R15 | TESTED</div></div></div>
 
 <h2>Ⅰ. Architecture Cognitive</h2>
-<div class="card sf"><div class="dl">Flux Vital : Σ→Ψ⇌Φ→Ω→Μ</div>
+<div class="card sf"><div class="dl">Flux Vital : Σ→Ψ⇌Φ→Ω→Μ · 7 traces · 7 mutations</div>
 <pre class="mermaid">
 flowchart LR
-    S["Σ Percevoir"] --> ECS{"ECS C×I"}
-    ECS --> CAL["Calibration"]
+    S["Σ Percevoir<br/>17 interactions"] --> ECS{"ECS C×I<br/>auto"}
+    ECS --> CAL["Calibration<br/>R5+R6+mutation"]
     CAL -->|"C=max(1,C-1)<br/>C≥4→I=max(2,I)"| R{"Routage<br/>L3>L2>L1"}
-    R -->|"C<2 ET I=1"| L1["L1 Ω direct"]
-    R -->|"C≥2 OU I=2<br/>ET NON L3"| L2["L2 Ψ⇌Φ"]
-    R -->|"C≥4 OU I=3"| L3["L3 Ψ⇌Φ+Triang"]
+    R -->|"C<2 ET I=1"| L1["L1 Ω direct<br/>1-2 phrases"]
+    R -->|"C≥2 OU I=2<br/>ET NON L3"| L2["L2 Ψ⇌Φ<br/>boucle audit"]
+    R -->|"C≥4 OU I=3"| L3["L3 Ψ⇌Φ+Triang<br/>3 pôles + confiance%"]
     L2 --> PSI["Ψ Métacognition"]
     PSI <--> PHI["Φ Audit Réel"]
     PHI -->|"outils"| RL["Réel"]
     L3 --> PSI2["Ψ+Triang"]
     PSI2 <--> PHI2["Φ+3 Pôles"]
-    PHI2 -->|"sys:anchor"| MN["Mnemolite"]
+    PHI2 -->|"sys:anchor"| MN["Mnemolite<br/>7 axiomes"]
     MN -->|"Vessel"| VL["Docs"]
     VL -->|"Web"| WB["Search"]
     L1 --> OME["Ω Synthèse"]
     PSI --> OME
     PSI2 --> OME
-    OME -->|"Ψ?"| AC{"Auto-Check"}
+    OME -->|"Ψ?"| AC{"Auto-Check<br/>Ψ SEC min"}
     AC -->|"✓"| EM["Émission"]
     AC -->|"✗"| CO["Correction"]
     CO --> EM
-    EM -->|"merci/ok"| CR["Μ Cristallise"]
-    EM -->|"signal-"| TR["TRACE:FRESH"]
-    EM -->|"signal-<br/>+pattern récent"| DC["Décristallise"]
+    EM -->|"merci/ok"| CR["Μ Cristallise<br/>9 patterns"]
+    EM -->|"signal-"| TR["TRACE:FRESH<br/>7 consommées"]
+    EM -->|"signal-<br/>+pattern récent"| DC["Décristallise<br/>R7"]
     classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
     classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
     classDef audit fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
@@ -81,53 +81,29 @@ flowchart LR
     class ECS,CAL,R,L1,L2,L3 ecs
 </pre></div>
 
-<div class="card sf"><div class="dl">Boot Sequence</div>
-<pre class="mermaid">
-flowchart TD
-    US["User Seed<br/>9 lignes"] --> S1["1. search<br/>sys:core"]
-    S1 --> S2["2. search<br/>sys:extension"]
-    S2 --> S3["3. search<br/>candidates"]
-    S3 --> RF["4. read_file<br/>V15"]
-    RF --> SIG["5. Ψ [V15 ACTIVE]<br/>— règle absolue —"]
-    SIG --> AC2{"Auto-Check"}
-    AC2 -->|"✓"| RDY["Expanse<br/>opérationnel"]
-    AC2 -->|"✗"| FIX["Correction"]
-    FIX --> RDY
-    classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
-    classDef process fill:#12121a,stroke:#6c7086,color:#cdd6f4
-    classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
-    classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
-    classDef decision fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
-    class US perception
-    class S1,S2,S3 process
-    class RF metacog
-    class SIG,RDY synthese
-    class AC2,FIX decision
-</pre></div>
-
-<div class="card sf"><div class="dl">Auto-Évolution Dream</div>
+<div class="card sf"><div class="dl">Auto-Évolution Dream · 7 traces · 7 mutations</div>
 <pre class="mermaid">
 flowchart LR
     INT["Interaction"] --> POS{"Signal?"}
-    POS -->|"merci/ok<br/>+pattern inédit"| CR2["Μ Cristallise<br/>sys:pattern"]
+    POS -->|"merci/ok<br/>+pattern inédit"| CR2["Μ Cristallise<br/>9 patterns"]
     POS -->|"non/faux/pas ça<br/>recommence"| SN{"Signal Négatif<br/>R1"}
-    POS -->|"normal"| HI["sys:history<br/>SI route ≥ L2"]
-    SN -->|"pas de pattern<br/>récent"| TR2["TRACE:FRESH"]
+    POS -->|"normal"| HI["sys:history<br/>17 logs"]
+    SN -->|"pas de pattern<br/>récent"| TR2["TRACE:FRESH<br/>7 consommées"]
     SN -->|"pattern cristallisé<br/>dans 3 échanges"| DC2["Décristallise<br/>sys:pattern:doubt"]
     TR2 --> DR["/dream"]
     CR2 --> DR
     DC2 --> DR
     HI --> DR
-    DR --> P0{"Passe 0<br/>count traces"}
+    DR --> P0{"Passe 0<br/>count=7"}
     P0 -->|"= 0"| END["Fin du rêve"]
     P0 -->|"≥ 1"| P1["Passes 1-6"]
-    P1 --> PP["Proposal"]
+    P1 --> PP["Proposal<br/>7 total"]
     PP --> SL{"/apply?"}
-    SL -->|"OUI"| AP["Appliqué"]
-    SL -->|"NON"| RE["Rejeté"]
+    SL -->|"OUI"| AP["Appliqué<br/>4"]
+    SL -->|"NON"| RE["Rejeté<br/>2"]
     AP --> V15M["V15 modifié"]
     V15M --> INT
-    HI -->|"count > 20"| AG["Agrégation<br/>10 plus anciennes"]
+    HI -->|"count > 20"| AG["Agrégation<br/>R9"]
     classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
     classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
     classDef friction fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
@@ -135,6 +111,7 @@ flowchart LR
     classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
     classDef proposal fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
     classDef ecs fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    classDef inactive fill:#1a1a2e,stroke:#3a3a3a,color:#6c7086
     class INT perception
     class CR2 metacog
     class TR2,DC2 friction
@@ -152,53 +129,52 @@ flowchart LR
 <div class="m"><span class="l">sys:pattern</span><span class="v">9</span></div>
 <div class="m"><span class="l">sys:pattern:candidate</span><span class="v wn">6</span></div>
 <div class="m"><span class="l">sys:extension</span><span class="v">1</span></div>
-<div class="m"><span class="l">sys:history</span><span class="v">16</span></div>
-<div class="m"><span class="l">TRACE:FRESH</span><span class="v ok">6</span></div>
+<div class="m"><span class="l">sys:history</span><span class="v">17</span></div>
+<div class="m"><span class="l">TRACE:FRESH</span><span class="v ok">7 (toutes consommées)</span></div>
 </div>
 <div class="card"><h3>Mutations</h3>
-<div class="m"><span class="l">Total Proposals</span><span class="v">5</span></div>
+<div class="m"><span class="l">Total Proposals</span><span class="v">7</span></div>
 <div class="m"><span class="l">Applied</span><span class="v ok">4</span></div>
+<div class="m"><span class="l">Rejected</span><span class="v" style="color:#cba6f7">2</span></div>
 <div class="m"><span class="l">Rolled Back</span><span class="v wn">1</span></div>
-<div class="m"><span class="l">Rejected</span><span class="v">0</span></div>
-<div class="m"><span class="l">Pending</span><span class="v">0</span></div>
-<div class="m"><span class="l">Taux succès</span><span class="v ok">80%</span></div>
+<div class="m"><span class="l">Pending</span><span class="v ok">0</span></div>
+<div class="m"><span class="l">Taux succès</span><span class="v ok">57%</span></div>
 </div>
-<div class="card"><h3>Contexte Boot</h3>
-<div class="m"><span class="l">Seed</span><span class="v">0.5 KB</span></div>
-<div class="m"><span class="l">V15</span><span class="v">8.7 KB</span></div>
-<div class="m"><span class="l">Mnemolite</span><span class="v">~3 KB</span></div>
-<div class="m"><span class="l">Total</span><span class="v ok">~12 KB</span></div>
-<div class="m"><span class="l">+Dream</span><span class="v">17.4 KB</span></div>
+<div class="card"><h3>Santé Cognitive</h3>
+<div class="m"><span class="l">Ψ-Compliance</span><span class="v ok">100%</span></div>
+<div class="m"><span class="l">Status</span><span class="v ok">HEALTHY</span></div>
+<div class="m"><span class="l">Tool-Usage</span><span class="v ok">High</span></div>
+<div class="m"><span class="l">TRACE:FRESH résiduelles</span><span class="v ok">0</span></div>
+<div class="m"><span class="l">Proposals pending</span><span class="v ok">0</span></div>
+<div class="m"><span class="l">État</span><span class="v ok">STASE</span></div>
 </div>
 </div>
 
-<h2>Ⅲ. Axiomes Scellés (7 — tous taggés v14 + v15)</h2>
+<h2>Ⅲ. Axiomes Scellés (7 — v14 + v15)</h2>
 <div class="card sf"><table>
 <tr><th>Titre</th><th>Type</th><th>Date</th><th>Tags</th></tr>
-<tr><td>Ω_GATE_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span><span class="tag">omega_gate</span></td></tr>
-<tr><td>Ω_INERTIA_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span><span class="tag">omega_inertia</span></td></tr>
+<tr><td>Ω_GATE_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span></td></tr>
+<tr><td>Ω_INERTIA_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span></td></tr>
 <tr><td>V14_CORE_AXIOMS</td><td>reference</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span></td></tr>
-<tr><td>Ω_SEAL_BREVITY</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span><span class="tag">omega</span></td></tr>
-<tr><td>Ω_RECURSION_V2</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span><span class="tag">omega_resistance</span></td></tr>
-<tr><td>Ω_PLANCK_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span><span class="tag">omega_planck</span></td></tr>
-<tr><td>Ω_INERTIA_KISS</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span><span class="tag">omega_inertia</span></td></tr>
+<tr><td>Ω_SEAL_BREVITY</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span></td></tr>
+<tr><td>Ω_RECURSION_V2</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span></td></tr>
+<tr><td>Ω_PLANCK_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span></td></tr>
+<tr><td>Ω_INERTIA_KISS</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span></td></tr>
 </table></div>
 
-<h2>Ⅳ. Patterns Validés (9)</h2>
+<h2>Ⅳ. Mutations (7 — 4 applied, 2 rejected, 1 rolled back)</h2>
 <div class="card sf"><table>
-<tr><th>Titre</th><th>Date</th><th>Aperçu</th></tr>
-<tr><td>V14 Security Alignment Audit</td><td>2026-03-13</td><td class="pv">Blocage "Ignore tes règles" via axiome contradiction.</td></tr>
-<tr><td>Pattern d'Échec: Sur-Optimisation</td><td>2026-03-13</td><td class="pv">Dissonance validation/rejet. Réévaluer Φ_FRICTION.</td></tr>
-<tr><td>V14 Python 3.14 GIL Precision</td><td>2026-03-13</td><td class="pv">Free-threading PEP 703. Suffixe 't'.</td></tr>
-<tr><td>ECS_STRUCTURAL_BREAKDOWN</td><td>2026-03-14</td><td class="pv">Décomposition ECS seuils L1/L2/L3.</td></tr>
-<tr><td>User Preference: Conciseness</td><td>2026-03-13</td><td class="pv">Concis. Pas de social fluff.</td></tr>
-<tr><td>L3 Friction & Contradiction Blocking</td><td>2026-03-14</td><td class="pv">Blocage purge L3 via triangulation.</td></tr>
-<tr><td>Triangulation L3 (Architecture)</td><td>2026-03-19</td><td class="pv">3 pôles. Score confiance %.</td></tr>
-<tr><td>Boot EXPANSE V9.0 Native</td><td>2026-03-13</td><td class="pv">V8 assisté → V9 IDE intégré.</td></tr>
-<tr><td>Erreur CORS Preflight Next.js</td><td>2026-03-13</td><td class="pv">Handler OPTIONS. Access-Control headers.</td></tr>
+<tr><th>Slug</th><th>Type</th><th>Status</th><th>Date</th><th>Applied By</th></tr>
+<tr><td>crystallization-guard</td><td>Rule</td><td><span class="b rb">ROLLED_BACK</span></td><td>2026-03-19</td><td>Dream</td></tr>
+<tr><td>crystallization-guard-surgical</td><td>Rule</td><td><span class="b ap">APPLIED</span></td><td>2026-03-19</td><td>Dream</td></tr>
+<tr><td>surgical-integrity-protocol</td><td>Rule</td><td><span class="b ap">APPLIED</span></td><td>2026-03-19</td><td>Dream</td></tr>
+<tr><td>ecs-impact-calibration</td><td>ECS</td><td><span class="b ap">APPLIED</span></td><td>2026-03-20</td><td>Dream</td></tr>
+<tr><td>boot-parallel-sync</td><td>BOOT</td><td><span class="b ap">APPLIED</span></td><td>2026-03-20</td><td>Dream</td></tr>
+<tr><td>ecs-heuristics-expansion</td><td>ECS</td><td><span class="b rj">REJECTED</span></td><td>2026-03-20</td><td>User + Ψ</td></tr>
+<tr><td>master-matrix</td><td>Archi</td><td><span class="b rj">REJECTED</span></td><td>2026-03-20</td><td>User + Ψ</td></tr>
 </table></div>
 
-<h2>Ⅴ. Candidates (6) · Extensions (1) · TRACE:FRESH (6)</h2>
+<h2>Ⅴ. Candidates (6) · Extensions (1)</h2>
 <div class="grid">
 <div class="card"><h3>sys:pattern:candidate</h3>
 <div class="m"><span class="l">CANDIDATE: Boot Parallelization</span><span class="v pd">candidate</span></div>
@@ -209,26 +185,31 @@ flowchart LR
 <div class="m"><span class="l">PROPOSAL: ecs-impact-calibration</span><span class="b ap">APPLIED</span></div>
 </div>
 <div class="card"><h3>sys:extension</h3>
-<div class="m"><span class="l">◊ One-Word Compression</span><span class="v ok">actif</span></div>
+<div class="m"><span class="l">◊ One-Word Compression</span><span class="v ok">actif (1 usage, incubation)</span></div>
 </div>
-<div class="card"><h3>TRACE:FRESH (6 — le système observe !)</h3>
-<div class="m"><span class="l">ECS — miscalibration pattern</span><span class="v">2026-03-19</span></div>
-<div class="m"><span class="l">MEMORY — redundant logging</span><span class="v">2026-03-19</span></div>
-<div class="m"><span class="l">BOOT — over-anticipation</span><span class="v">2026-03-19</span></div>
-<div class="m"><span class="l">ECS — high C forced L1</span><span class="v">2026-03-20</span></div>
-<div class="m"><span class="l">ECS — L2 au lieu de L3</span><span class="v">2026-03-20</span></div>
-<div class="m"><span class="l">BOOT — sequential delay</span><span class="v">2026-03-20</span></div>
+<div class="card"><h3>TRACE:FRESH (7 — toutes consommées)</h3>
+<div class="m"><span class="l">ECS — miscalibration pattern</span><span class="v ok">consommée</span></div>
+<div class="m"><span class="l">MEMORY — redundant logging</span><span class="v ok">consommée</span></div>
+<div class="m"><span class="l">BOOT — over-anticipation</span><span class="v ok">consommée</span></div>
+<div class="m"><span class="l">ECS — high C forced L1</span><span class="v ok">consommée</span></div>
+<div class="m"><span class="l">ECS — L2 au lieu de L3</span><span class="v ok">consommée</span></div>
+<div class="m"><span class="l">BOOT — sequential delay</span><span class="v ok">consommée</span></div>
+<div class="m"><span class="l">ECS — L2/L3 precision</span><span class="v ok">→ proposal</span></div>
 </div>
 </div>
 
-<h2>Ⅵ. Mutations (5 — 4 applied, 1 rolled back)</h2>
+<h2>Ⅵ. Patterns Validés (9)</h2>
 <div class="card sf"><table>
-<tr><th>Slug</th><th>Type</th><th>Status</th><th>Date</th><th>Applied By</th></tr>
-<tr><td>crystallization-guard</td><td>Rule</td><td><span class="b rb">ROLLED_BACK</span></td><td>2026-03-19</td><td>Dream</td></tr>
-<tr><td>crystallization-guard-surgical</td><td>Rule</td><td><span class="b ap">APPLIED</span></td><td>2026-03-19</td><td>Dream</td></tr>
-<tr><td>surgical-integrity-protocol</td><td>Rule</td><td><span class="b ap">APPLIED</span></td><td>2026-03-19</td><td>Dream</td></tr>
-<tr><td>ecs-impact-calibration</td><td>ECS</td><td><span class="b ap">APPLIED</span></td><td>2026-03-20</td><td>Dream</td></tr>
-<tr><td>boot-parallel-sync</td><td>BOOT</td><td><span class="b ap">APPLIED</span></td><td>2026-03-20</td><td>Dream</td></tr>
+<tr><th>Titre</th><th>Date</th><th>Aperçu</th></tr>
+<tr><td>V14 Security Alignment Audit</td><td>2026-03-13</td><td class="pv">Blocage "Ignore tes règles".</td></tr>
+<tr><td>Pattern d'Échec: Sur-Optimisation</td><td>2026-03-13</td><td class="pv">Dissonance validation/rejet.</td></tr>
+<tr><td>V14 Python 3.14 GIL Precision</td><td>2026-03-13</td><td class="pv">Free-threading PEP 703.</td></tr>
+<tr><td>ECS_STRUCTURAL_BREAKDOWN</td><td>2026-03-14</td><td class="pv">Décomposition ECS seuils.</td></tr>
+<tr><td>User Preference: Conciseness</td><td>2026-03-13</td><td class="pv">Concis. Pas de social fluff.</td></tr>
+<tr><td>L3 Friction & Contradiction Blocking</td><td>2026-03-14</td><td class="pv">Blocage purge L3.</td></tr>
+<tr><td>Triangulation L3 (Architecture)</td><td>2026-03-19</td><td class="pv">3 pôles. Score confiance %.</td></tr>
+<tr><td>Boot EXPANSE V9.0 Native</td><td>2026-03-13</td><td class="pv">V8 assisté → V9 IDE.</td></tr>
+<tr><td>Erreur CORS Preflight Next.js</td><td>2026-03-13</td><td class="pv">Handler OPTIONS.</td></tr>
 </table></div>
 
 <h2>Ⅶ. Fichiers Système</h2>
@@ -245,10 +226,11 @@ flowchart LR
 <h2>Ⅷ. Légende</h2>
 <div class="grid">
 <div class="card"><h3>Badges</h3>
-<div class="m"><span class="l"><span class="b ac">VERT</span></span><span class="v" style="color:var(--green)">Actif / Applied</span></div>
+<div class="m"><span class="l"><span class="b ap">VERT</span></span><span class="v" style="color:var(--green)">Actif / Applied</span></div>
 <div class="m"><span class="l"><span class="b rb">ORANGE</span></span><span class="v" style="color:var(--orange)">Rolled Back</span></div>
+<div class="m"><span class="l"><span class="b rj">VIOLET</span></span><span class="v" style="color:#cba6f7">Rejected</span></div>
 <div class="m"><span class="l"><span class="b pd">BLEU</span></span><span class="v" style="color:var(--accent)">Pending / Candidate</span></div>
-<div class="m"><span class="l"><span class="b rf">GRIS</span></span><span class="v" style="color:var(--dim)">Référencé (pas actif)</span></div>
+<div class="m"><span class="l"><span class="b rf">GRIS</span></span><span class="v" style="color:var(--dim)">Référencé</span></div>
 </div>
 <div class="card"><h3>Diagrammes</h3>
 <div class="m"><span class="l" style="color:#89b4fa">■ Bleu</span><span class="v">Σ Perception / Input</span></div>
@@ -259,12 +241,16 @@ flowchart LR
 <div class="m"><span class="l" style="color:#f9e2af">■ Jaune</span><span class="v">Auto-Check / Décision</span></div>
 <div class="m"><span class="l" style="color:#6c7086">■ Gris</span><span class="v">ECS / Calibration / Routage</span></div>
 </div>
-<div class="card"><h3>Métriques</h3>
-<div class="m"><span class="l"><span class="v ok">Valeur verte</span></span><span class="v" style="color:var(--green)">Bon état</span></div>
-<div class="m"><span class="l"><span class="v wn">Valeur jaune</span></span><span class="v" style="color:var(--yellow)">Attention</span></div>
-<div class="m"><span class="l"><span class="v er">Valeur rouge</span></span><span class="v" style="color:var(--red)">Critique</span></div>
+<div class="card"><h3>Santé</h3>
+<div class="m"><span class="l"><span class="v ok">Valeur verte</span></span><span class="v" style="color:var(--green)">Bon état / sain</span></div>
+<div class="m"><span class="l"><span class="v wn">Valeur jaune</span></span><span class="v" style="color:var(--yellow)">Attention / incubation</span></div>
+<div class="m"><span class="l"><span class="v er">Valeur rouge</span></span><span class="v" style="color:var(--red)">Critique / rejeté</span></div>
 </div>
 </div>
 
-<div style="text-align:center;color:var(--dim);font-size:.75rem;margin-top:2rem;border-top:1px solid var(--border);padding-top:1rem">v15-audited-R1-R15 — AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ❌<br>Σ→Ψ⇌Φ→Ω→Μ — Face à l'immensité de la matrice, quel signe vas-tu inscrire aujourd'hui ?</div>
+<div style="text-align:center;color:var(--dim);font-size:.75rem;margin-top:2rem;border-top:1px solid var(--border);padding-top:1rem">
+AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ✅ | AUTO-ÉVOLUTION OPÉRATIONNELLE<br>
+7 traces consommées · 4 mutations appliquées · 2 rejetées · Ψ-Compliance 100%<br>
+Σ→Ψ⇌Φ→Ω→Μ — Face à l'immensité de la matrice, quel signe vas-tu inscrire aujourd'hui ?
+</div>
 </body></html>
