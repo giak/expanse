@@ -1,6 +1,6 @@
 # EXPANSE — Tableau de Bord Mnemolite
 
-**v1.8** — `/status`
+**v1.9** — `/status`
 
 ---
 
@@ -97,6 +97,40 @@ SI rejected>0 ET applied=0 → "● DÉGRADÉ" (jaune)
 
 ```
 AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ✅ | {COUNT_MUTATIONS} mutations · {COUNT_FRESH} traces · {COUNT_HISTORY} interactions
+```
+
+### ALERTES DE JARDINAGE (Mnemolite)
+
+Le dashboard fonctionne comme **jardinier**. Si les seuils sont dépassés, afficher les alertes APRÈS le footer.
+
+| Seuil | Condition | Alerte | Action |
+|-------|-----------|--------|--------|
+| sys:history > 20 | `COUNT_HISTORY > 20` | ⚠️ Agrégation requise (R9). {count} interactions. Résumer les 10 plus anciennes. | V15 Section V |
+| sys:pattern:candidate > 10 | `COUNT_CANDIDATE > 10` | ⚠️ Dream recommandé. {count} candidats en attente. | `/dream` |
+| trace:fresh consommées > 20 | `COUNT_CONSUMED > 20` | ⚠️ Purge traces consommées. {count} obsolètes. | Soft-delete |
+| sys:pattern > 15 | `COUNT_PATTERN > 15` | ⚠️ Patterns accumulés. {count} validés. Vérifier pertinence. | Audit manuel |
+| Aucune alerte | tout en dessous des seuils | ✅ Jardin sain. Aucune action requise. | — |
+
+**Règle :** Afficher les alertes dans le footer APRÈS le statut. Formater en rouge si critique, jaune si attention.
+
+**Variables supplémentaires :**
+- `{COUNT_CONSUMED}` = nombre de trace:fresh avec tag `sys:consumed`
+- `{ALERTS}` = bloc HTML d'alertes (généré par le modèle)
+
+**Exemple d'alerte (si seuils dépassés) :**
+```html
+<div style="margin-top:1rem;border-top:1px solid var(--yellow);padding-top:0.5rem">
+<div style="color:var(--yellow);font-size:.8rem;font-weight:bold">⚠️ ALERTES JARDINAGE</div>
+<div style="color:var(--yellow);font-size:.75rem;padding:0.2rem 0">sys:history > 20. Agrégation requise (R9).</div>
+<div style="color:var(--yellow);font-size:.75rem;padding:0.2rem 0">candidates > 10. Dream recommandé.</div>
+</div>
+```
+
+**Exemple d'alerte (si tout est sain) :**
+```html
+<div style="margin-top:1rem;border-top:1px solid var(--green);padding-top:0.5rem">
+<div style="color:var(--green);font-size:.8rem">✅ Jardin sain. Aucune action requise.</div>
+</div>
 ```
 
 ### Mutations (table)
@@ -320,6 +354,8 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 Σ→Ψ⇌Φ→Ω→Μ — Face à l'immensité de la matrice, quel signe vas-tu inscrire aujourd'hui ?
 </div>
 
+{ALERTS}
+
 <!-- ════════ DIAGRAMMES MERMAID (OBLIGATOIRES — NE JAMAIS SUPPRIMER) ════════ -->
 
 <h2>Ⅷ. Architecture Cognitive</h2>
@@ -438,4 +474,4 @@ flowchart LR
 
 ---
 
-*Expanse Dashboard v1.8 — 2026-03-20*
+*Expanse Dashboard v1.9 — 2026-03-20*
