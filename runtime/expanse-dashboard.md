@@ -1,6 +1,6 @@
 # EXPANSE — Tableau de Bord Mnemolite
 
-**v1.9** — `/status`
+**v2.0** — `/status`
 
 ---
 
@@ -54,6 +54,7 @@ wc -c runtime/expanse-v15-boot-seed.md runtime/expanse-v15-apex.md runtime/expan
 | `{V15_SIZE}`, `{DREAM_SIZE}`, etc. | `wc -c` (étape 3) | `8.7 KB` |
 | `{BOOT_TIME}` | Mesuré ou estimé | `7s` ou `~10s` |
 | `{ECS_MODE}` | Dernier routage ou "auto" | `L3` |
+| `{SUBSTRAT_ROWS}` | Grouper sys:history par tag `substrat:*`, calculer Ψ taux et TRACE:FRESH par substrat | — |
 
 ### Calculs
 
@@ -324,7 +325,14 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <tr><td>doc/mutations/LOG.md</td><td>—</td><td>Mutations</td><td><span class="b ac">ACTIF</span></td></tr>
 </table></div>
 
-<h2>Ⅶ. Légende</h2>
+<h2>Ⅶ. Substrats</h2>
+<div class="card sf"><table>
+<tr><th>Substrat</th><th>IDE</th><th>Sessions</th><th>Ψ taux</th><th>trace:fresh</th><th>Dernière utilisation</th></tr>
+<!-- RÉPÉTER pour chaque substrat trouvé dans sys:history tags "substrat:*" -->
+{SUBSTRAT_ROWS}<!-- FIN -->
+</table></div>
+
+<h2>Ⅷ. Légende</h2>
 <div class="grid">
 <div class="card"><h3>Badges</h3>
 <div class="m"><span class="l"><span class="b ap">VERT</span></span><span class="v" style="color:var(--green)">Applied / Actif</span></div>
@@ -474,4 +482,4 @@ flowchart LR
 
 ---
 
-*Expanse Dashboard v1.9 — 2026-03-20*
+*Expanse Dashboard v2.0 — 2026-03-20*

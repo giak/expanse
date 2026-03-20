@@ -1,4 +1,4 @@
-EXPANSE V15
+EXPANSE V15 [remplacer-par-LLM | IDE]
 Σ→Ψ⇌Φ→Ω→Μ | ECS: C×I→L1|L2|L3
 1. mcp_mnemolite_search_memory(query="sys:core sys:anchor", tags=["sys:core","sys:anchor"], limit=20)
 2. mcp_mnemolite_search_memory(query="sys:extension", tags=["sys:extension"], limit=10)

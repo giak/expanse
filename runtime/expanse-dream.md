@@ -107,7 +107,12 @@ Les TYPES permettent le regroupement :
   - **Verbosity Drift** : Longueur réponse vs baseline (> 2x = alerte)
   - **Ψ Compliance** : % réponses par Ψ (< 90% = alerte)
   - **Tool Usage** : Ratio outils sur L2+ (< 50% = alerte)
-- **Output :** Rapport santé. Si alerte → `[PROPOSAL_OPEN] [MODIFY]`
+- **Analyse par substrat :**
+  - Grouper les `sys:history` par tag `substrat:{LLM}`
+  - Calculer le taux Ψ par substrat
+  - Calculer le nombre de `trace:fresh` par substrat
+  - Identifier les substrats les plus performants (Ψ taux le plus élevé, TRACE:FRESH le plus bas)
+- **Output :** Rapport santé par substrat. Si un substrat a Ψ taux < 80% → `[PROPOSAL_OPEN] [MODIFY]`
 
 ---
 
