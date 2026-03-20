@@ -1,6 +1,6 @@
 # EXPANSE — Tableau de Bord Mnemolite
 
-**v1.2** — `/status`
+**v1.3** — `/status`
 
 ---
 
@@ -112,22 +112,71 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="card sf"><div class="dl">Flux Vital : Σ→Ψ⇌Φ→Ω→Μ</div>
 <pre class="mermaid">
 flowchart LR
-    Σ["Σ Percevoir"]-->ECS{"ECS C×I"}
-    ECS-->|"C<2,I=1"|L1["L1 Ω direct"]
-    ECS-->|"C≥2 ou I=2"|L2["L2 Ψ⇌Φ"]
-    ECS-->|"C≥4 ou I=3"|L3["L3 Ψ⇌Φ+Triang"]
-    L2-->Ψ["Ψ Métacognition"]<-->|"⇌"|Φ["Φ Audit Réel"]-->|"outils"|R["Réel"]
-    L3-->Ψ2["Ψ+Triang"]<-->Φ2["Φ+3 Pôles"]-->|"sys:anchor"|A["Mnemolite"]-->|"Vessel"|V["Docs"]-->|"Web"|W["Search"]
-    L1-->Ω["Ω Synthèse"]Ψ-->ΩΨ2-->Ω
-    Ω-->|"Ψ?"|AC{"Auto-Check"}-->|"✓"|EM["Émission"]-->|"merci/ok"|CR["Μ Cristallise"]-->|"signal-"|TR["TRACE:FRESH"]
-    AC-->|"✗"|CO["Correction"]-->EM
+    Σ["Σ Percevoir"] --> ECS{"ECS C×I"}
+    ECS --> CAL["Calibration"]
+    CAL -->|"C=max(1,C-1)<br/>C≥4→I=max(2,I)"| R{"Routage<br/>L3>L2>L1"}
+    R -->|"C<2 ET I=1"| L1["L1 Ω direct"]
+    R -->|"C≥2 OU I=2<br/>ET NON L3"| L2["L2 Ψ⇌Φ"]
+    R -->|"C≥4 OU I=3"| L3["L3 Ψ⇌Φ+Triang"]
+    L2 --> Ψ["Ψ Métacognition"]
+    Ψ <--> Φ["Φ Audit Réel"]
+    Φ -->|"outils"| RL["Réel"]
+    L3 --> Ψ2["Ψ+Triang"]
+    Ψ2 <--> Φ2["Φ+3 Pôles"]
+    Φ2 -->|"sys:anchor"| A["Mnemolite"]
+    A -->|"Vessel"| V["Docs"]
+    V -->|"Web"| W["Search"]
+    L1 --> Ω["Ω Synthèse"]
+    Ψ --> Ω
+    Ψ2 --> Ω
+    Ω -->|"Ψ?"| AC{"Auto-Check"}
+    AC -->|"✓"| EM["Émission"]
+    AC -->|"✗"| CO["Correction"]
+    CO --> EM
+    EM -->|"merci/ok"| CR["Μ Cristallise"]
+    EM -->|"signal-"| TR["TRACE:FRESH"]
+    EM -->|"signal-<br/>+pattern récent"| DC["Décristallise"]
     style Σ fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
     style Ψ,Ψ2 fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
     style Φ,Φ2 fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
     style Ω,EM fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
-    style CR,TR fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    style CR,TR,DC fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
     style AC,CO fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
-    style ECS,L1,L2,L3 fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    style ECS,CAL,R,L1,L2,L3 fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+</pre></div>
+
+<div class="card sf"><div class="dl">Auto-Évolution Dream</div>
+<pre class="mermaid">
+flowchart LR
+    INT["Interaction"] --> POS{"Signal?"}
+    POS -->|"merci/ok<br/>+pattern inédit"| CR["Μ Cristallise<br/>sys:pattern"]
+    POS -->|"non/faux/pas ça<br/>recommence"| SN{"Signal Négatif<br/>R1"}
+    POS -->|"normal"| HI["sys:history<br/>SI route ≥ L2"]
+    SN -->|"pas de pattern<br/>récent"| TR["TRACE:FRESH"]
+    SN -->|"pattern cristallisé<br/>dans 3 échanges"| DC["Décristallise<br/>sys:pattern:doubt"]
+    TR --> DR["/dream"]
+    CR --> DR
+    DC --> DR
+    HI --> DR
+    DR --> P0{"Passe 0<br/>count traces"}
+    P0 -->|"= 0"| END["Fin du rêve"]
+    P0 -->|"≥ 1"| P1["Passes 1-6"]
+    P1 --> PP["Proposal"]
+    PP --> SL{"/apply?"}
+    SL -->|"OUI"| AP["Appliqué"]
+    SL -->|"NON"| RE["Rejeté"]
+    AP --> V15M["V15 modifié"]
+    V15M --> INT
+    HI -->|"count > 20"| AG["Agrégation<br/>10 plus anciennes"]
+    style INT fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    style CR fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    style TR,DC fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    style SN fill:#3a2a1a,stroke:#f9e2af,color:#cdd6f4
+    style DR,P0 fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    style P1,AP,V15M fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style PP fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+    style RE fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    style HI,AG fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
 </pre></div>
 
 <div class="card sf"><div class="dl">Boot Sequence</div>
@@ -156,19 +205,6 @@ flowchart LR
     style P1,AP,V15M fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
     style PP fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
     style RE fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
-</pre></div>
-
-<div class="card sf"><div class="dl">ECS 2D</div>
-<pre class="mermaid">
-flowchart TD
-    IN["Input"]-->C["C (1-5)"]-->R{"Routage"}I["I (1-3)"]-->R
-    R-->|"C<2,I=1"|L1["L1 Σ→Ω"]R-->|"C≥2,I=2"|L2["L2 Ψ⇌Φ"]R-->|"C≥4,I=3"|L3["L3 Triang+Conf%"]
-    style IN fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
-    style C,I fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
-    style R fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
-    style L1 fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
-    style L2 fill:#1a2a3a,stroke:#89b4fa,color:#cdd6f4
-    style L3 fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
 </pre></div>
 
 <h2>Ⅱ. Métriques</h2>
@@ -230,4 +266,4 @@ flowchart TD
 
 ---
 
-*Expanse Dashboard v1.2 — 2026-03-19*
+*Expanse Dashboard v1.3 — 2026-03-20*
