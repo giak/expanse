@@ -65,13 +65,20 @@ flowchart LR
     EM -->|"merci/ok"| CR["Μ Cristallise"]
     EM -->|"signal-"| TR["TRACE:FRESH"]
     EM -->|"signal-<br/>+pattern récent"| DC["Décristallise"]
-    style S fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
-    style PSI,PSI2 fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
-    style PHI,PHI2 fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
-    style OME,EM fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
-    style CR,TR,DC fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
-    style AC,CO fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
-    style ECS,CAL,R,L1,L2,L3 fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    classDef audit fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+    classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    classDef friction fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    classDef decision fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    classDef ecs fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    class S perception
+    class PSI,PSI2 metacog
+    class PHI,PHI2 audit
+    class OME,EM synthese
+    class CR,TR,DC friction
+    class AC,CO decision
+    class ECS,CAL,R,L1,L2,L3 ecs
 </pre></div>
 
 <div class="card sf"><div class="dl">Boot Sequence</div>
@@ -86,11 +93,16 @@ flowchart TD
     AC2 -->|"✓"| RDY["Expanse<br/>opérationnel"]
     AC2 -->|"✗"| FIX["Correction"]
     FIX --> RDY
-    style US fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
-    style S1,S2,S3 fill:#12121a,stroke:#6c7086,color:#cdd6f4
-    style RF fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
-    style SIG,RDY fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
-    style AC2,FIX fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    classDef process fill:#12121a,stroke:#6c7086,color:#cdd6f4
+    classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    classDef decision fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    class US perception
+    class S1,S2,S3 process
+    class RF metacog
+    class SIG,RDY synthese
+    class AC2,FIX decision
 </pre></div>
 
 <div class="card sf"><div class="dl">Auto-Évolution Dream</div>
@@ -116,15 +128,21 @@ flowchart LR
     AP --> V15M["V15 modifié"]
     V15M --> INT
     HI -->|"count > 20"| AG["Agrégation<br/>10 plus anciennes"]
-    style INT fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
-    style CR2 fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
-    style TR2,DC2 fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
-    style SN fill:#3a2a1a,stroke:#f9e2af,color:#cdd6f4
-    style DR,P0 fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
-    style P1,AP,V15M fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
-    style PP fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
-    style RE fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
-    style HI,AG fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    classDef friction fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    classDef decision fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    classDef proposal fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+    classDef ecs fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    class INT perception
+    class CR2 metacog
+    class TR2,DC2 friction
+    class SN,DR,P0 decision
+    class P1,AP,V15M synthese
+    class PP proposal
+    class RE friction
+    class HI,AG ecs
 </pre></div>
 
 <h2>Ⅱ. Métriques</h2>
