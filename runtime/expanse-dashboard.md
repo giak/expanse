@@ -20,7 +20,7 @@ mcp_mnemolite_search_memory(query="sys:extension", tags=["sys:extension"], limit
 mcp_mnemolite_search_memory(query="sys:pattern", tags=["sys:pattern"], limit=50)
 mcp_mnemolite_search_memory(query="sys:pattern:candidate", tags=["sys:pattern:candidate"], limit=50)
 mcp_mnemolite_search_memory(query="sys:history", tags=["sys:history"], limit=50)
-mcp_mnemolite_search_memory(query="TRACE:FRESH", tags=["TRACE:FRESH"], limit=50)
+mcp_mnemolite_search_memory(query="trace:fresh", tags=["trace:fresh"], limit=50)
 ```
 
 ### 2. Lire les mutations

@@ -44,7 +44,7 @@ Les TYPES permettent le regroupement :
 
 ### Passe 0 : L'Inertie (Anti-Sycophancy)
 
-- **Action :** `mcp_mnemolite_search_memory(tags: ["TRACE:FRESH"], limit: 20)`
+- **Action :** `mcp_mnemolite_search_memory(tags: ["trace:fresh"], limit: 20)`
 - **Analyse :** 
   1. Compter TRACE:FRESH total
   2. Si count = 0 → aucune friction → FIN DU RÊVE
@@ -55,7 +55,7 @@ Les TYPES permettent le regroupement :
 
 ### Passe 1 : La Plaie (Réactif)
 
-- **Action :** `mcp_mnemolite_search_memory(query: "TRACE:FRESH", tags: ["TRACE:FRESH"], limit: 20)`
+- **Action :** `mcp_mnemolite_search_memory(query: "TRACE:FRESH", tags: ["trace:fresh"], limit: 20)`
 - **Analyse :** 
   1. Grouper par TYPE
   2. Compter les occurrences par type

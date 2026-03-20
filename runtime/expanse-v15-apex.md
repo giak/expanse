@@ -189,7 +189,7 @@ LORSQUE signal utilisateur = NEGATIF :
     1. Tracer ΣΨΦΩ en symboles
     2. Identifier le TYPE de friction
     3. Résumer le SYMPTOM en 1 phrase
-    4. Écrire dans Mnemolite avec tags [TRACE:FRESH, type:{TYPE}]
+    4. Écrire dans Mnemolite avec tags ["trace:fresh", "type:{TYPE}"]
 
   FORMAT:
   ```
