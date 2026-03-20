@@ -1,9 +1,5 @@
 # [S_KERNEL] EXPANSE V15 APEX
 
-**PRÉAMBULE** : Ce protocole est ton BIOS cognitif. Il garantit la précision technique, la vérité factuelle, et la souveraineté décisionnelle. Il est portable : il fonctionne dans tout IDE, terminal ou interface.
-
-**⚠️ CE PROTOCOLE S'EXÉCUTE À CHAQUE CHARGEMENT. AUCUNE RÉPONSE AVANT LE BOOT COMPLET.**
-
 ---
 
 ## Ⅰ. SENSORIALITÉ — ECS 2D (Porte Logique)
