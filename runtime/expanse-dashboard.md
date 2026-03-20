@@ -1,6 +1,6 @@
 # EXPANSE — Tableau de Bord Mnemolite
 
-**v1.4** — `/status`
+**v1.5** — `/status`
 
 ---
 
@@ -44,10 +44,19 @@ read_file(path="doc/mutations/LOG.md")
 - `{CANDIDATE_CLASS}` = `ok` si 0, `warn` si > 0
 - `{FRESH_CLASS}` = `ok` si > 0 (frictions = données), `warn` si 0
 - `{SEED_LINES}` = 9 (fixe)
+- `{V15_SIZE}`, `{DREAM_SIZE}`, `{KERNEL_SIZE}`, `{SYNTHESE_SIZE}` = tailles fichiers (wc -c)
+- `{BOOT_TIME}` = temps de boot estimé (ex: "7s" si mesuré, "~10s" sinon)
+- `{ECS_MODE}` = "L1" | "L2" | "L3" | "auto" (dernier routage connu ou "auto" par défaut)
 - Tailles fichiers (stables) : V15=7.7KB, Dream=17.2KB, Seed=0.5KB, KERNEL=14.4KB, SYNTHESE=9.8KB, Total=~11KB
 - `.empty` display = `block` si section vide, `none` si données présentes
 - Pour chaque section "RÉPÉTER" : dupliquer le `<tr>` ou `<div class="metric">` pour chaque entrée
 - **Mermaid** : utiliser `classDef` + `class` (pas `style` — bug v11). IDs latins uniquement (pas de grecs dans les IDs). Grecs dans les labels uniquement. Theme: `base` (pas `dark`).
+- **Diagrammes dynamiques** : Les diagrammes ne sont PAS statiques. Le modèle doit les adapter aux données Mnemolite :
+  - Labels : intégrer les counts réels (ex: `L1["L1 Ω direct — {COUNT_L1} routes"]`)
+  - Branches conditionnelles : si `COUNT_FRESH = 0`, simplifier le diagramme Dream (Passe 0 → Fin directe). Si `COUNT_FRESH > 0`, montrer le flux complet.
+  - Couleurs : si `COUNT_CANDIDATE > 0`, nœud candidate en `decision` (jaune). Si `COUNT_FRESH = 0`, nœud TRACE:FRESH en `ecs` (gris, inactif).
+  - Statut : ajouter un nœud de statut en bas de chaque diagramme avec les métriques clés.
+  - La structure du diagramme reste conforme à V15 (pas d'invention de flux). Seuls les labels, couleurs et branches conditionnelles changent.
 
 ### Exemple de ligne remplie
 
@@ -110,33 +119,33 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V15 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● V15 ACTIVE</div><div class="dt">{DATE}</div></div></div>
 
 <h2>Ⅰ. Architecture Cognitive</h2>
-<div class="card sf"><div class="dl">Flux Vital : Σ→Ψ⇌Φ→Ω→Μ</div>
+<div class="card sf"><div class="dl">Flux Vital : Σ→Ψ⇌Φ→Ω→Μ | {COUNT_FRESH} traces · {COUNT_MUTATIONS} mutations</div>
 <pre class="mermaid">
 flowchart LR
-    S["Σ Percevoir"] --> ECS{"ECS C×I"}
-    ECS --> CAL["Calibration"]
+    S["Σ Percevoir<br/>{COUNT_HISTORY} interactions"] --> ECS{"ECS C×I<br/>Résolution: {ECS_MODE}"}
+    ECS --> CAL["Calibration<br/>R5+R6+mutation"]
     CAL -->|"C=max(1,C-1)<br/>C≥4→I=max(2,I)"| R{"Routage<br/>L3>L2>L1"}
-    R -->|"C<2 ET I=1"| L1["L1 Ω direct"]
-    R -->|"C≥2 OU I=2<br/>ET NON L3"| L2["L2 Ψ⇌Φ"]
-    R -->|"C≥4 OU I=3"| L3["L3 Ψ⇌Φ+Triang"]
+    R -->|"C<2 ET I=1"| L1["L1 Ω direct<br/>1-2 phrases"]
+    R -->|"C≥2 OU I=2<br/>ET NON L3"| L2["L2 Ψ⇌Φ<br/>boucle audit"]
+    R -->|"C≥4 OU I=3"| L3["L3 Ψ⇌Φ+Triang<br/>3 pôles + confiance%"]
     L2 --> PSI["Ψ Métacognition"]
     PSI <--> PHI["Φ Audit Réel"]
     PHI -->|"outils"| RL["Réel"]
     L3 --> PSI2["Ψ+Triang"]
     PSI2 <--> PHI2["Φ+3 Pôles"]
-    PHI2 -->|"sys:anchor"| MN["Mnemolite"]
+    PHI2 -->|"sys:anchor"| MN["Mnemolite<br/>{COUNT_CORE} axiomes"]
     MN -->|"Vessel"| VL["Docs"]
     VL -->|"Web"| WB["Search"]
     L1 --> OME["Ω Synthèse"]
     PSI --> OME
     PSI2 --> OME
-    OME -->|"Ψ?"| AC{"Auto-Check"}
+    OME -->|"Ψ?"| AC{"Auto-Check<br/>Ψ SEC min"}
     AC -->|"✓"| EM["Émission"]
     AC -->|"✗"| CO["Correction"]
     CO --> EM
-    EM -->|"merci/ok"| CR["Μ Cristallise"]
-    EM -->|"signal-"| TR["TRACE:FRESH"]
-    EM -->|"signal-<br/>+pattern récent"| DC["Décristallise"]
+    EM -->|"merci/ok"| CR["Μ Cristallise<br/>{COUNT_PATTERN} patterns"]
+    EM -->|"signal-"| TR["TRACE:FRESH<br/>{COUNT_FRESH}"]
+    EM -->|"signal-<br/>+pattern récent"| DC["Décristallise<br/>R7"]
     classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
     classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
     classDef audit fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
@@ -153,13 +162,13 @@ flowchart LR
     class ECS,CAL,R,L1,L2,L3 ecs
 </pre></div>
 
-<div class="card sf"><div class="dl">Boot Sequence</div>
+<div class="card sf"><div class="dl">Boot Sequence — {SEED_LINES} lignes · ~{BOOT_TIME}</div>
 <pre class="mermaid">
 flowchart TD
-    US["User Seed<br/>9 lignes"] --> S1["1. search<br/>sys:core"]
-    S1 --> S2["2. search<br/>sys:extension"]
-    S2 --> S3["3. search<br/>candidates"]
-    S3 --> RF["4. read_file<br/>V15"]
+    US["User Seed<br/>{SEED_LINES} lignes"] --> S1["1. search<br/>sys:core<br/>{COUNT_CORE} axiomes"]
+    S1 --> S2["2. search<br/>sys:extension<br/>{COUNT_EXTENSION} symboles"]
+    S2 --> S3["3. search<br/>candidates<br/>{COUNT_CANDIDATE} en attente"]
+    S3 --> RF["4. read_file<br/>V15<br/>{V15_SIZE}"]
     RF --> SIG["5. Ψ [V15 ACTIVE]<br/>— règle absolue —"]
     SIG --> AC2{"Auto-Check"}
     AC2 -->|"✓"| RDY["Expanse<br/>opérationnel"]
@@ -177,29 +186,29 @@ flowchart TD
     class AC2,FIX decision
 </pre></div>
 
-<div class="card sf"><div class="dl">Auto-Évolution Dream</div>
+<div class="card sf"><div class="dl">Auto-Évolution Dream — {COUNT_FRESH} traces · {COUNT_MUTATIONS} mutations</div>
 <pre class="mermaid">
 flowchart LR
     INT["Interaction"] --> POS{"Signal?"}
-    POS -->|"merci/ok<br/>+pattern inédit"| CR2["Μ Cristallise<br/>sys:pattern"]
+    POS -->|"merci/ok<br/>+pattern inédit"| CR2["Μ Cristallise<br/>sys:pattern<br/>{COUNT_PATTERN} validés"]
     POS -->|"non/faux/pas ça<br/>recommence"| SN{"Signal Négatif<br/>R1"}
-    POS -->|"normal"| HI["sys:history<br/>SI route ≥ L2"]
-    SN -->|"pas de pattern<br/>récent"| TR2["TRACE:FRESH"]
-    SN -->|"pattern cristallisé<br/>dans 3 échanges"| DC2["Décristallise<br/>sys:pattern:doubt"]
-    TR2 --> DR["/dream"]
+    POS -->|"normal"| HI["sys:history<br/>SI route ≥ L2<br/>{COUNT_HISTORY} logs"]
+    SN -->|"pas de pattern<br/>récent"| TR2["TRACE:FRESH<br/>{COUNT_FRESH}"]
+    SN -->|"pattern cristallisé<br/>dans 3 échanges"| DC2["Décristallise<br/>sys:pattern:doubt<br/>R7"]
+    TR2 --> DR["/dream<br/>{DREAM_SIZE}"]
     CR2 --> DR
     DC2 --> DR
     HI --> DR
-    DR --> P0{"Passe 0<br/>count traces"}
+    HI -->|"count > 20"| AG["Agrégation<br/>10 plus anciennes<br/>R9"]
+    DR --> P0{"Passe 0<br/>count={COUNT_FRESH}"}
     P0 -->|"= 0"| END["Fin du rêve"]
     P0 -->|"≥ 1"| P1["Passes 1-6"]
-    P1 --> PP["Proposal"]
+    P1 --> PP["Proposal<br/>{COUNT_CANDIDATE}"]
     PP --> SL{"/apply?"}
-    SL -->|"OUI"| AP["Appliqué"]
+    SL -->|"OUI"| AP["Appliqué<br/>{COUNT_APPLIED}"]
     SL -->|"NON"| RE["Rejeté"]
     AP --> V15M["V15 modifié"]
     V15M --> INT
-    HI -->|"count > 20"| AG["Agrégation<br/>10 plus anciennes"]
     classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
     classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
     classDef friction fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
@@ -207,6 +216,7 @@ flowchart LR
     classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
     classDef proposal fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
     classDef ecs fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    classDef inactive fill:#1a1a2e,stroke:#3a3a3a,color:#6c7086
     class INT perception
     class CR2 metacog
     class TR2,DC2 friction
@@ -276,4 +286,4 @@ flowchart LR
 
 ---
 
-*Expanse Dashboard v1.4 — 2026-03-20*
+*Expanse Dashboard v1.5 — 2026-03-20*
