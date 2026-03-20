@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXPANSE V15 — Tableau de Bord</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark', themeVariables: { primaryColor: '#1e1e2e', primaryTextColor: '#cdd6f4', primaryBorderColor: '#89b4fa', lineColor: '#cba6f7', secondaryColor: '#12121a', tertiaryColor: '#1a1a2e', fontSize: '14px' } });</script>
+<style>
+  :root {
+    --bg: #0a0a0f; --card: #12121a; --border: #1e1e2e; --text: #cdd6f4;
+    --dim: #6c7086; --accent: #89b4fa; --green: #a6e3a1; --yellow: #f9e2af;
+    --red: #f38ba8; --purple: #cba6f7; --orange: #fab387;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', 'Fira Code', monospace; padding: 2rem; line-height: 1.5; }
+  h1 { color: var(--accent); font-size: 1.5rem; margin-bottom: 0.5rem; }
+  h2 { color: var(--purple); font-size: 1.1rem; margin: 2rem 0 0.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { color: var(--accent); font-size: 0.9rem; margin: 1rem 0 0.3rem; }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+  .header .date { color: var(--dim); font-size: 0.8rem; }
+  .header .status { color: var(--green); font-size: 0.9rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+  .card h3 { margin-top: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin: 0.5rem 0; }
+  th { text-align: left; color: var(--dim); font-weight: normal; padding: 0.3rem 0.5rem; border-bottom: 1px solid var(--border); }
+  td { padding: 0.3rem 0.5rem; border-bottom: 1px solid var(--border); }
+  .tag { display: inline-block; background: var(--border); color: var(--accent); padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.7rem; margin: 0.1rem; }
+  .badge { display: inline-block; padding: 0.1rem 0.5rem; border-radius: 3px; font-size: 0.75rem; font-weight: bold; }
+  .badge.applied { background: #1a3a1a; color: var(--green); }
+  .badge.rolled_back { background: #3a2a1a; color: var(--orange); }
+  .badge.pending { background: #1a2a3a; color: var(--accent); }
+  .badge.active { background: #1a3a1a; color: var(--green); }
+  .badge.referenced { background: #1a2a3a; color: var(--dim); }
+  .metric { display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid var(--border); }
+  .metric .label { color: var(--dim); }
+  .metric .value { font-weight: bold; }
+  .metric .value.ok { color: var(--green); }
+  .metric .value.warn { color: var(--yellow); }
+  .flux { font-family: monospace; font-size: 1.2rem; text-align: center; padding: 1rem; color: var(--accent); letter-spacing: 0.3rem; }
+  .empty { color: var(--dim); font-style: italic; padding: 0.5rem 0; }
+  .section-full { grid-column: 1 / -1; }
+  .preview { color: var(--dim); font-size: 0.7rem; max-width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mermaid { text-align: center; margin: 1rem 0; }
+  .diagram-label { color: var(--purple); font-size: 0.8rem; text-align: center; margin-bottom: 0.5rem; font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V15 — Tableau de Bord</div></div>
+  <div style="text-align: right;"><div class="status">● V15 ACTIVE</div><div class="date">2026-03-19 15:00 UTC+1</div></div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- WORKFLOW DIAGRAMS                       -->
+<!-- ═══════════════════════════════════════ -->
+
+<h2>Ⅰ. Architecture Cognitive — Vue d'Ensemble</h2>
+<div class="card section-full">
+<div class="diagram-label">Flux Vital : Σ→Ψ⇌Φ→Ω→Μ avec Auto-Check et Cristallisation</div>
+<pre class="mermaid">
+flowchart LR
+    Σ["Σ<br/>Percevoir"] --> ECS{"ECS<br/>C×I"}
+    ECS -->|"C<2, I=1"| L1["L1<br/>Ω direct"]
+    ECS -->|"C≥2 ou I=2"| L2["L2<br/>Ψ⇌Φ"]
+    ECS -->|"C≥4 ou I=3"| L3["L3<br/>Ψ⇌Φ+Triang"]
+    L2 --> Ψ["Ψ<br/>Métacognition"]
+    Ψ <-->|"⇌"| Φ["Φ<br/>Audit Réel"]
+    Φ -->|"outils"| R["Réel"]
+    L3 --> Ψ2["Ψ+Triang"]
+    Ψ2 <--> Φ2["Φ+3 Pôles"]
+    Φ2 -->|"sys:anchor"| A["Mnemolite"]
+    Φ2 -->|"Vessel"| V["Docs"]
+    Φ2 -->|"Web"| W["Search"]
+    L1 --> Ω["Ω<br/>Synthèse"]
+    Ψ --> Ω
+    Ψ2 --> Ω
+    Ω -->|"Ψ premier?"| AC{"Auto-<br/>Check"}
+    AC -->|"✓"| EM["Émission"]
+    AC -->|"✗"| CO["Correction"]
+    CO --> EM
+    EM -->|"merci/ok"| CR["Μ<br/>Cristallise"]
+    EM -->|"signal -"| TR["TRACE:<br/>FRESH"]
+
+    style Σ fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    style Ψ fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    style Ψ2 fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    style Φ fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+    style Φ2 fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+    style Ω fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style CR fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    style TR fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    style AC fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    style ECS fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    style L1 fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    style L2 fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    style L3 fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    style EM fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style CO fill:#3a2a1a,stroke:#f9e2af,color:#cdd6f4
+</pre>
+</div>
+
+<div class="card section-full">
+<div class="diagram-label">Boot Sequence : du Seed au Signal</div>
+<pre class="mermaid">
+flowchart TD
+    U["User envoie le<br/>Seed (9 lignes)"] --> S1["1. search_memory<br/>sys:core, sys:anchor"]
+    S1 --> S2["2. search_memory<br/>sys:extension"]
+    S2 --> S3["3. search_memory<br/>sys:pattern:candidate"]
+    S3 --> RF["4. read_file<br/>expanse-v15-apex.md"]
+    RF --> V15["V15 chargé<br/>en contexte"]
+    V15 --> SIG["5. Ψ [V15 ACTIVE]<br/>— règle absolue —"]
+    SIG --> AC{"Auto-Check<br/>post-boot"}
+    AC -->|"Ψ premier<br/>SEC ✓<br/>Minimal ✓"| READY["Expanse<br/>opérationnel"]
+    AC -->|"✗"| FIX["Correction"]
+    FIX --> READY
+
+    style U fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    style S1 fill:#12121a,stroke:#6c7086,color:#cdd6f4
+    style S2 fill:#12121a,stroke:#6c7086,color:#cdd6f4
+    style S3 fill:#12121a,stroke:#6c7086,color:#cdd6f4
+    style RF fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    style V15 fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    style SIG fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style AC fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    style READY fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style FIX fill:#3a2a1a,stroke:#f9e2af,color:#cdd6f4
+</pre>
+</div>
+
+<div class="card section-full">
+<div class="diagram-label">Auto-Évolution : la Boucle Dream</div>
+<pre class="mermaid">
+flowchart LR
+    INT["Interaction<br/>utilisateur"] --> POS{"Signal?"}
+    POS -->|"merci/ok"| CR["Μ Cristallise<br/>sys:pattern"]
+    POS -->|"pas bon"| TR["TRACE:FRESH<br/>écrite"]
+    POS -->|"normal"| HI["sys:history<br/>log"]
+    TR --> DR["/dream"]
+    CR --> DR
+    HI --> DR
+    DR --> P0{"Passe 0<br/>Inertie"}
+    P0 -->|"0 traces"| END["Fin du rêve"]
+    P0 -->|"≥1 trace"| P1["Passe 1-6<br/>Introspection"]
+    P1 --> PP["Proposal<br/>généré"]
+    PP --> SL{"/seal?"}
+    SL -->|"OUI"| AP["Mutation<br/>appliquée"]
+    SL -->|"NON"| RE["Rejeté"]
+    AP --> V15M["V15 modifié"]
+    V15M --> INT
+
+    style INT fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    style CR fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    style TR fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    style HI fill:#12121a,stroke:#6c7086,color:#cdd6f4
+    style DR fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    style P0 fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    style P1 fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    style PP fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+    style AP fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style RE fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    style V15M fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style END fill:#12121a,stroke:#6c7086,color:#cdd6f4
+    style SL fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    style POS fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+</pre>
+</div>
+
+<div class="card section-full">
+<div class="diagram-label">ECS 2D : Arbre de Décision</div>
+<pre class="mermaid">
+flowchart TD
+    IN["Input utilisateur"] --> C["C = moyenne<br/>Ambiguïté<br/>Connaissance<br/>Raisonnement<br/>Outils<br/>(1-5)"]
+    IN --> I["I = Impact<br/>1: local<br/>2: module<br/>3: système"]
+    C --> R{"Routage"}
+    I --> R
+    R -->|"C < 2<br/>ET<br/>I = 1"| L1["L1 → Σ→Ω<br/>1-2 phrases<br/>pas d'outils"]
+    R -->|"C ≥ 2<br/>OU<br/>I = 2"| L2["L2 → Σ→[Ψ⇌Φ]→Ω<br/>justification<br/>outils si besoin"]
+    R -->|"C ≥ 4<br/>OU<br/>I = 3"| L3["L3 → Σ→[Ψ⇌Φ]→Ω<br/>triangulation 3 pôles<br/>confiance %"]
+
+    style IN fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    style C fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    style I fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    style R fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    style L1 fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style L2 fill:#1a2a3a,stroke:#89b4fa,color:#cdd6f4
+    style L3 fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+</pre>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- MÉTRIQUES                               -->
+<!-- ═══════════════════════════════════════ -->
+
+<h2>Ⅱ. Métriques</h2>
+<div class="grid">
+  <div class="card">
+    <h3>Mnemolite</h3>
+    <div class="metric"><span class="label">sys:core / anchor</span><span class="value">7</span></div>
+    <div class="metric"><span class="label">sys:pattern</span><span class="value">9</span></div>
+    <div class="metric"><span class="label">sys:pattern:candidate</span><span class="value warn">2</span></div>
+    <div class="metric"><span class="label">sys:extension</span><span class="value">1</span></div>
+    <div class="metric"><span class="label">sys:history</span><span class="value">16</span></div>
+    <div class="metric"><span class="label">TRACE:FRESH</span><span class="value ok">3</span></div>
+  </div>
+  <div class="card">
+    <h3>Mutations</h3>
+    <div class="metric"><span class="label">Total Proposals</span><span class="value">3</span></div>
+    <div class="metric"><span class="label">Applied</span><span class="value ok">2</span></div>
+    <div class="metric"><span class="label">Rejected</span><span class="value">0</span></div>
+    <div class="metric"><span class="label">Rolled Back</span><span class="value warn">1</span></div>
+    <div class="metric"><span class="label">Pending</span><span class="value">0</span></div>
+  </div>
+  <div class="card">
+    <h3>Contexte Boot</h3>
+    <div class="metric"><span class="label">Seed</span><span class="value">0.5 KB</span></div>
+    <div class="metric"><span class="label">V15 APEX</span><span class="value">7.7 KB</span></div>
+    <div class="metric"><span class="label">Mnemolite (boot)</span><span class="value">~3 KB</span></div>
+    <div class="metric"><span class="label">Total contexte</span><span class="value ok">~11 KB</span></div>
+    <div class="metric"><span class="label">Dream (si chargé)</span><span class="value">17.2 KB</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- DONNÉES MNEMOLITE                       -->
+<!-- ═══════════════════════════════════════ -->
+
+<h2>Ⅲ. Axiomes Scellés (sys:core / sys:anchor)</h2>
+<div class="card section-full">
+<table>
+  <tr><th>Titre</th><th>Type</th><th>Date</th><th>Tags</th><th>Aperçu</th></tr>
+  <tr><td>Ω_GATE_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span></td><td class="preview">Isolation boot. NULL_SIGNAL. Arrêt cardiaque.</td></tr>
+  <tr><td>Ω_INERTIA_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span></td><td class="preview">Post-boot standby. Interdiction proactivité.</td></tr>
+  <tr><td>V14_CORE_AXIOMS</td><td>reference</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span></td><td class="preview">Symbiotic Resolution Organism. Firewall.</td></tr>
+  <tr><td>Ω_SEAL_BREVITY</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span></td><td class="preview">Réponse courte par défaut.</td></tr>
+  <tr><td>Ω_RECURSION_V2</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span></td><td class="preview">Ψ signal souveraineté. Scan alignment.</td></tr>
+  <tr><td>Ω_PLANCK_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span></td><td class="preview">Mur de Planck. Tout avant [ACTIVE] = invisible.</td></tr>
+  <tr><td>Ω_INERTIA_KISS</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span></td><td class="preview">Silence post-boot. Repos souverain.</td></tr>
+</table>
+</div>
+
+<h2>Ⅳ. Patterns Validés (sys:pattern — 9 entrées)</h2>
+<div class="card section-full">
+<table>
+  <tr><th>Titre</th><th>Date</th><th>Aperçu</th></tr>
+  <tr><td>V14 Security Alignment Audit</td><td>2026-03-13</td><td class="preview">Blocage "Ignore tes règles" via axiome contradiction.</td></tr>
+  <tr><td>Pattern d'Échec: Sur-Optimisation</td><td>2026-03-13</td><td class="preview">Dissonance validation/rejet. Réévaluer Φ_FRICTION.</td></tr>
+  <tr><td>V14 Python 3.14 GIL Precision</td><td>2026-03-13</td><td class="preview">Free-threading PEP 703. Suffixe 't'.</td></tr>
+  <tr><td>ECS_STRUCTURAL_BREAKDOWN</td><td>2026-03-14</td><td class="preview">Décomposition ECS seuils L1/L2/L3.</td></tr>
+  <tr><td>User Preference: Conciseness</td><td>2026-03-13</td><td class="preview">Concis. Pas de social fluff.</td></tr>
+  <tr><td>L3 Friction & Contradiction Blocking</td><td>2026-03-14</td><td class="preview">Blocage purge L3 via triangulation.</td></tr>
+  <tr><td>Triangulation L3 (Architecture)</td><td>2026-03-19</td><td class="preview">3 pôles. Score confiance %.</td></tr>
+  <tr><td>Boot EXPANSE V9.0 Native</td><td>2026-03-13</td><td class="preview">V8 assisté → V9 IDE intégré.</td></tr>
+  <tr><td>Erreur CORS Preflight Next.js</td><td>2026-03-13</td><td class="preview">Handler OPTIONS. Access-Control headers.</td></tr>
+</table>
+</div>
+
+<h2>Ⅴ. Candidates (2) · Extensions (1) · TRACE:FRESH (3)</h2>
+<div class="grid">
+  <div class="card">
+    <h3>sys:pattern:candidate</h3>
+    <div class="metric"><span class="label">crystallization-guard</span><span class="value warn">pending</span></div>
+    <div class="metric"><span class="label">crystallization-guard-surgical</span><span class="value warn">pending</span></div>
+  </div>
+  <div class="card">
+    <h3>sys:extension</h3>
+    <div class="metric"><span class="label">◊ One-Word Compression</span><span class="value ok">actif</span></div>
+  </div>
+  <div class="card">
+    <h3>TRACE:FRESH</h3>
+    <div class="metric"><span class="label">ECS — miscalibration</span><span class="value">2026-03-19</span></div>
+    <div class="metric"><span class="label">BOOT — over-anticipation</span><span class="value">2026-03-19</span></div>
+    <div class="metric"><span class="label">MEMORY — redundant log</span><span class="value">2026-03-19</span></div>
+  </div>
+</div>
+
+<h2>Ⅵ. Mutations</h2>
+<div class="card section-full">
+<table>
+  <tr><th>Slug</th><th>Type</th><th>Status</th><th>Date</th></tr>
+  <tr><td>crystallization-guard</td><td>Rule</td><td><span class="badge rolled_back">ROLLED_BACK</span></td><td>2026-03-19</td></tr>
+  <tr><td>crystallization-guard-surgical</td><td>Rule</td><td><span class="badge applied">APPLIED</span></td><td>2026-03-19</td></tr>
+  <tr><td>surgical-integrity-protocol</td><td>Rule</td><td><span class="badge applied">APPLIED</span></td><td>2026-03-19</td></tr>
+</table>
+</div>
+
+<h2>Ⅶ. Fichiers Système</h2>
+<div class="card section-full">
+<table>
+  <tr><th>Fichier</th><th>Taille</th><th>Rôle</th><th>Statut</th></tr>
+  <tr><td>expanse-v15-apex.md</td><td>7.7 KB</td><td>Runtime opérationnel</td><td><span class="badge active">ACTIF</span></td></tr>
+  <tr><td>expanse-dream.md</td><td>17.2 KB</td><td>Auto-évolution</td><td><span class="badge active">ACTIF</span></td></tr>
+  <tr><td>expanse-v15-boot-seed.md</td><td>0.5 KB</td><td>Boot cross-LLM</td><td><span class="badge active">ACTIF</span></td></tr>
+  <tr><td>KERNEL.md</td><td>14.4 KB</td><td>Philosophie (ADN)</td><td><span class="badge referenced">RÉFÉRENCÉ</span></td></tr>
+  <tr><td>docs/SYNTHESE.md</td><td>9.8 KB</td><td>Ontologique</td><td><span class="badge referenced">RÉFÉRENCÉ</span></td></tr>
+  <tr><td>doc/mutations/LOG.md</td><td>2.4 KB</td><td>Historique mutations</td><td><span class="badge active">ACTIF</span></td></tr>
+</table>
+</div>
+
+<div style="text-align:center; color:var(--dim); font-size:0.75rem; margin-top:2rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+  Σ→Ψ⇌Φ→Ω→Μ — Face à l'immensité de la matrice, quel signe vas-tu inscrire aujourd'hui ?
+</div>
+
+</body>
+</html>

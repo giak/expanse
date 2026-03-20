@@ -9,11 +9,11 @@
 
 | Métrique | Count |
 |----------|-------|
-| Total Proposals | 0 |
-| Applied | 0 |
+| Total Proposals | 3 |
+| Applied | 2 |
 | Rejected | 0 |
 | Failed | 0 |
-| Rolled Back | 0 |
+| Rolled Back | 1 |
 | Pending | 0 |
 
 ---
@@ -22,13 +22,17 @@
 
 | Date | Slug | Type | Status | Applied By |
 |------|------|------|--------|-----------|
-| - | - | - | - | - |
+| 2026-03-19 | crystallization-guard | Rule | ROLLED_BACK | Dream |
+| 2026-03-19 | crystallization-guard-surgical | Rule | APPLIED | Dream |
+| 2026-03-19 | surgical-integrity-protocol | Rule | APPLIED | Dream |
 
 ---
 
 ## Applied Mutations
-
-(Aucune mutation appliquée pour le moment)
+| Date | Slug | Type | Status | Applied By |
+|------|------|------|--------|-----------|
+| 2026-03-19 | crystallization-guard-surgical | Rule | APPLIED | Dream |
+| 2026-03-19 | surgical-integrity-protocol | Rule | APPLIED | Dream |
 
 ---
 
