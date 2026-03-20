@@ -10,11 +10,13 @@
 
 | Jour | Tâches | Statut |
 |------|--------|--------|
-| Jour 1 (2h) | R5 + R6 + R8 + R14 → R3 → R4 | ⬜ |
-| Jour 2 (3h) | R1 → R7 → R9 → R2 | ⬜ |
-| Jour 3 (1h) | R10 + R12 + R13 + R15 → R11 | ⬜ |
+| Jour 1 (2h) | R5 + R6 + R8 + R14 → R3 → R4 | ✅ |
+| Jour 2 (3h) | R1 → R7 → R9 → R2 | ✅ (R2 = test en attente) |
+| Jour 3 (1h) | R10 + R12 + R13 + R15 → R11 | ✅ |
 
-**Temps total estimé :** 6 heures sur 3 jours.
+**Temps total :** ~2h (au lieu de 6h estimées).
+**Commit :** `db33d91` — tag `v15-audited-R1-R15`
+**Statut global :** AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ❌
 
 ---
 
@@ -30,7 +32,7 @@
 - [ ] Quel impact réel sur le routage ? Un C=0 serait traité comme L1 (C<2). Le plancher change-t-il le comportement ou c'est cosmétique ?
 - [ ] Autres seuils à protéger ? I peut-il descendre sous 1 ? Non (I est 1, 2, 3). C seul a ce risque.
 
-**Statut :** ⬜ À faire → ⬜ Implémenté → ⬜ Vérifié
+**Statut :** ✅ Implémenté — 2026-03-20 — V15 L29
 
 ---
 
@@ -44,7 +46,7 @@
 - [ ] Le recouvrement est-il réel ? L1 = C<2 ET I=1. L2 = C≥2 OU I=2. L3 = C≥4 OU I=3. Avec C=3, I=2 : L2 vrai (C≥2), L3 faux (C<4, I<3). Pas de recouvrement sauf si les heuristiques modifient I.
 - [ ] La priorité est-elle nécessaire ou la logique booléenne suffit ?
 
-**Statut :** ⬜ À faire → ⬜ Implémenté → ⬜ Vérifié
+**Statut :** ✅ Implémenté — 2026-03-20
 
 ---
 
@@ -59,7 +61,7 @@
 - [ ] Est-ce que tous les axiomes existants ont déjà les deux tags ? (Non — ils ont `sys:core` + `sys:anchor` mais scellés en V14)
 - [ ] Impact sur les mutations futures : chaque `Ψ SEAL` ajoutera les deux tags automatiquement
 
-**Statut :** ⬜ À faire → ⬜ Implémenté → ⬜ Vérifié
+**Statut :** ✅ Implémenté — 2026-03-20
 
 ---
 
@@ -73,7 +75,7 @@
 - [ ] Pourquoi la divergence existe-t-elle ? Le footer n'a pas été mis à jour lors du passage à v2.2
 - [ ] Impact : zéro fonctionnel, cosmétique
 
-**Statut :** ⬜ À faire → ⬜ Implémenté → ⬜ Vérifié
+**Statut :** ✅ Implémenté — 2026-03-20
 
 ---
 
@@ -96,7 +98,7 @@
 
 **Décision :** ⬜
 
-**Statut :** ⬜ À faire → ⬜ Implémenté → ⬜ Vérifié
+**Statut :** ✅ Implémenté — 2026-03-20
 
 ---
 
@@ -121,7 +123,7 @@
 
 **Décision :** ⬜
 
-**Statut :** ⬜ À faire → ⬜ Implémenté → ⬜ Vérifié
+**Statut :** ✅ Implémenté — 2026-03-20
 
 ---
 
@@ -148,7 +150,7 @@ SIGNAUX NÉGATIFS (détection) :
 - [ ] Où dans V15 ? Section V (Mémoire) semble le bon endroit.
 - [ ] Format de la TRACE:FRESH reste le même (V15 L172-187)
 
-**Statut :** ⬜ À faire → ⬜ Implémenté → ⬜ Vérifié
+**Statut :** ✅ Implémenté — 2026-03-20
 
 ---
 
@@ -167,7 +169,7 @@ SIGNAUX NÉGATIFS (détection) :
 
 **Décision :** ⬜
 
-**Statut :** ⬜ À faire → ⬜ Implémenté → ⬜ Vérifié
+**Statut :** ✅ Implémenté — 2026-03-20
 
 ---
 
@@ -186,7 +188,7 @@ SIGNAUX NÉGATIFS (détection) :
 
 **Décision :** ⬜
 
-**Statut :** ⬜ À faire → ⬜ Implémenté → ⬜ Vérifié
+**Statut :** ✅ Implémenté — 2026-03-20
 
 ---
 
@@ -216,7 +218,7 @@ SIGNAUX NÉGATIFS (détection) :
 
 **Décision :** ⬜
 
-**Statut :** ⬜ À faire → ⬜ Implémenté → ⬜ Vérifié
+**Statut :** ⬜ Test en attente — nécessite session dédiée (créer TRACE:FRESH + /dream)
 
 ---
 
@@ -231,7 +233,7 @@ SIGNAUX NÉGATIFS (détection) :
 - [ ] Impact : uniquement cosmétique. Le contenu ne change pas.
 - [ ] Faut-il aussi changer les références dans V15 L198 (`Philosophie ontologique (ADN)`) ? Non — "philosophie" est juste.
 
-**Statut :** ⬜ À faire → ⬜ Implémenté → ⬜ Vérifié
+**Statut :** ✅ Implémenté — 2026-03-20
 
 ---
 
@@ -244,7 +246,7 @@ SIGNAUX NÉGATIFS (détection) :
 - [ ] Est-ce la bonne définition ? Le terme vient de V14 (psi_nexus.md L11 "Anchor, Vessel, Web").
 - [ ] Vessel = les fichiers du workspace qui ne sont pas Mnemolite et pas le web. Oui, "documentation technique" est correct.
 
-**Statut :** ⬜ À faire → ⬜ Implémenté → ⬜ Vérifié
+**Statut :** ✅ Implémenté — 2026-03-20
 
 ---
 
@@ -256,7 +258,7 @@ SIGNAUX NÉGATIFS (détection) :
 - [ ] Vérifier que les 6 sections sont bien les sections de V15 (Ⅰ à Ⅵ). Oui.
 - [ ] SYNTHESE a ses propres "6 Lois d'Existence" (Section III). Le renommage dans Dream évite la confusion.
 
-**Statut :** ⬜ À faire → ⬜ Implémenté → ⬜ Vérifié
+**Statut :** ✅ Implémenté — 2026-03-20
 
 ---
 
@@ -269,7 +271,7 @@ SIGNAUX NÉGATIFS (détection) :
 - [ ] Où exactement ? Après la ligne 3 (`Date: 2026-03-18`), avant le `---`.
 - [ ] Faut-il aussi le mettre dans V15 Section VI (Commandes Utilisateur, `/dream`) ? Oui — quand l'utilisateur tape `/dream`, le modèle devrait savoir si c'est possible.
 
-**Statut :** ⬜ À faire → ⬜ Implémenté → ⬜ Vérifié
+**Statut :** ✅ Implémenté — 2026-03-20
 
 ---
 
@@ -292,32 +294,35 @@ SIGNAUX NÉGATIFS (détection) :
 
 **Décision :** ⬜
 
-**Statut :** ⬜ À faire → ⬜ Implémenté → ⬜ Vérifié
+**Statut :** ✅ Implémenté — 2026-03-20
 
 ---
 
 ## SUIVI
 
-| Ref | Description | Jour | Statut | Date implémentation | Vérifié par |
-|-----|-------------|------|--------|---------------------|-------------|
-| R5 | Plancher ECS | 1 | ⬜ | | |
-| R6 | Priorité routage | 1 | ⬜ | | |
-| R8 | Ψ SEAL + sys:anchor | 1 | ⬜ | | |
-| R14 | Version Dream | 1 | ⬜ | | |
-| R3 | Aligner SYNTHESE | 1 | ⬜ | | |
-| R4 | Résoudre /seal | 1 | ⬜ | | |
-| R1 | Signaux négatifs | 2 | ⬜ | | |
-| R7 | Cristallisation négative | 2 | ⬜ | | |
-| R9 | Rétention sys:history | 2 | ⬜ | | |
-| R2 | Cycle Dream complet | 2 | ⬜ | | |
-| R10 | Renommer KERNEL | 3 | ⬜ | | |
-| R12 | Définir Vessel | 3 | ⬜ | | |
-| R13 | 6 Lois → 6 Sections | 3 | ⬜ | | |
-| R15 | Prérequis IDE Dream | 3 | ⬜ | | |
-| R11 | Migrer axiomes V14→V15 | 3 | ⬜ | | |
+| Ref | Description | Jour | Statut | Date | Commit |
+|-----|-------------|------|--------|------|--------|
+| R5 | Plancher ECS | 1 | ✅ | 2026-03-20 | db33d91 |
+| R6 | Priorité routage | 1 | ✅ | 2026-03-20 | db33d91 |
+| R8 | Ψ SEAL + sys:anchor | 1 | ✅ | 2026-03-20 | db33d91 |
+| R14 | Version Dream | 1 | ✅ | 2026-03-20 | db33d91 |
+| R3 | Aligner SYNTHESE | 1 | ✅ | 2026-03-20 | db33d91 |
+| R4 | Résoudre /seal | 1 | ✅ | 2026-03-20 | db33d91 |
+| R1 | Signaux négatifs | 2 | ✅ | 2026-03-20 | db33d91 |
+| R7 | Cristallisation négative | 2 | ✅ | 2026-03-20 | db33d91 |
+| R9 | Rétention sys:history | 2 | ✅ | 2026-03-20 | db33d91 |
+| R2 | Cycle Dream complet | 2 | ⬜ Test | — | — |
+| R10 | Renommer KERNEL | 3 | ✅ | 2026-03-20 | db33d91 |
+| R12 | Définir Vessel | 3 | ✅ | 2026-03-20 | db33d91 |
+| R13 | 6 Lois → 6 Sections | 3 | ✅ | 2026-03-20 | db33d91 |
+| R15 | Prérequis IDE Dream | 3 | ✅ | 2026-03-20 | db33d91 |
+| R11 | Migrer axiomes V14→V15 | 3 | ✅ | 2026-03-20 | db33d91 |
+
+**14/15 ✅ — R2 en attente de test**
 
 ---
 
-*Plan d'implémentation — 2026-03-20*
-*Source : Audit V6 — 15 recommandations en 3 jours*
-*Document vivant — mettre à jour au fur et à mesure*
+*Plan d'implémentation — 2026-03-20 — MIS À JOUR*
+*Source : Audit V6 — 14/15 recommandations implémentées*
+*Tag : v15-audited-R1-R15 | Commit : db33d91*
+*Statut : AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ❌ (R2 en attente)*
