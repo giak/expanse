@@ -4,7 +4,7 @@
 **Time:** 14:25
 **Author:** Dream (Expanse Sleep)
 **Type:** Rule
-**Status:** PENDING
+**Status:** APPLIED
 
 ---
 
@@ -51,5 +51,5 @@ Friction BOOT (id: f3148847-c90e-4246-b599-4de92cb170c5) : "Over-anticipation an
 ---
 
 ## Validation
-- [ ] /seal crystallization-guard-surgical
+- [x] /seal crystallization-guard-surgical
 - [ ] /reject crystallization-guard-surgical

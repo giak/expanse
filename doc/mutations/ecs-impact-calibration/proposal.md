@@ -4,7 +4,7 @@
 **Time:** 02:20
 **Author:** Dream (Expanse Sleep)
 **Type:** ECS
-**Status:** PENDING
+**Status:** APPLIED
 
 ---
 
@@ -57,5 +57,5 @@ Des tâches à haute complexité cognitive (C ≥ 4) sont routées en L1 (Omega 
 ---
 
 ## Validation
-- [ ] /apply ecs-impact-calibration
+- [x] /apply ecs-impact-calibration
 - [ ] /reject ecs-impact-calibration

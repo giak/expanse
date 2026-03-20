@@ -4,7 +4,7 @@
 **Time:** 02:22
 **Author:** Dream (Expanse Sleep)
 **Type:** BOOT
-**Status:** PENDING
+**Status:** APPLIED
 
 ---
 
@@ -94,5 +94,5 @@ La séquence de boot (Section Ⅳ) est exécutée de manière séquentielle, ent
 ---
 
 ## Validation
-- [ ] /apply boot-parallel-sync
+- [x] /apply boot-parallel-sync
 - [ ] /reject boot-parallel-sync
