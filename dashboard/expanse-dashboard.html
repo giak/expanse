@@ -35,7 +35,7 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 </style>
 </head>
 <body>
-<div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V15 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● ACTIVE</div><div class="dt">2026-03-20 14:45</div><div class="dt" style="color:var(--yellow)">V15.1 Phase 1 ✅</div></div></div>
+<div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V15 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● ACTIVE</div><div class="dt">2026-03-20 17:50</div><div class="dt" style="color:var(--yellow)">V15.1 P1 ✅ P2 ✅ P3 ❌</div></div></div>
 
 <h2>Ⅰ. Métriques</h2>
 <div class="grid">
@@ -56,14 +56,14 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="m"><span class="l">Taux succès</span><span class="v wn">57%</span></div>
 </div>
 <div class="card"><h3>Tokens (estimation)</h3>
-<div class="m"><span class="l">V15 (permanent)</span><span class="v ok">~2 145</span></div>
-<div class="m"><span class="l">Boot (seed+Mnemo+V15)</span><span class="v">~3 101</span></div>
+<div class="m"><span class="l">V15 (permanent)</span><span class="v ok">~2 054</span></div>
+<div class="m"><span class="l">Boot (seed+Mnemo+V15)</span><span class="v">~2 982</span></div>
 <div class="m"><span class="l">+Dream</span><span class="v">~4 982</span></div>
 <div class="m"><span class="l">+Dashboard</span><span class="v">~6 395</span></div>
 <div class="m"><span class="l">+KERNEL</span><span class="v">~4 107</span></div>
 <div class="m"><span class="l">+SYNTHESE</span><span class="v">~2 883</span></div>
-<div class="m"><span class="l">Total runtime</span><span class="v">~13 522</span></div>
-<div class="m"><span class="l">Total complet</span><span class="v wn">~20 512</span></div>
+<div class="m"><span class="l">Total runtime</span><span class="v">~13 431</span></div>
+<div class="m"><span class="l">Total complet</span><span class="v wn">~20 314</span></div>
 </div>
 </div>
 
@@ -127,7 +127,7 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <h2>Ⅵ. Fichiers Système</h2>
 <div class="card sf"><table>
 <tr><th>Fichier</th><th>Taille</th><th>Tokens</th><th>Rôle</th><th>Statut</th></tr>
-<tr><td>expanse-v15-apex.md</td><td>7.5 KB</td><td>~2 145</td><td>Runtime (Phase 1)</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-v15-apex.md</td><td>7.2 KB</td><td>~2 054</td><td>Runtime (P1+P2)</td><td><span class="b ac">ACTIF</span></td></tr>
 <tr><td>expanse-dream.md</td><td>17.4 KB</td><td>~4 982</td><td>Auto-évolution</td><td><span class="b ac">ACTIF</span></td></tr>
 <tr><td>expanse-v15-boot-seed.md</td><td>0.5 KB</td><td>~156</td><td>Boot</td><td><span class="b ac">ACTIF</span></td></tr>
 <tr><td>KERNEL.md</td><td>14.4 KB</td><td>~4 107</td><td>ADN</td><td><span class="b rf">RÉF</span></td></tr>
@@ -161,7 +161,7 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 </div>
 
 <div style="text-align:center;color:var(--dim);font-size:.75rem;margin-top:2rem;border-top:1px solid var(--border);padding-top:1rem">
-AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ✅ | V15.1 Phase 1 ✅ | 7 mutations · 8 traces · 18 interactions<br>
+AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ✅ | V15.1 P1 ✅ P2 ✅ P3 ❌ | 7 mutations · 8 traces · 18 interactions<br>
 Σ→Ψ⇌Φ→Ω→Μ — Face à l'immensité de la matrice, quel signe vas-tu inscrire aujourd'hui ?
 </div>
 
@@ -222,7 +222,7 @@ flowchart TD
     US["User Seed<br/>9 lignes"] --> S1["1. search<br/>sys:core<br/>7 axiomes"]
     S1 --> S2["2. search<br/>sys:extension<br/>1 symbole"]
     S2 --> S3["3. search<br/>candidates<br/>6 en attente"]
-    S3 --> RF["4. read_file<br/>V15<br/>7.5 KB"]
+    S3 --> RF["4. read_file<br/>V15<br/>7.2 KB"]
     RF --> SIG["5. Ψ [V15 ACTIVE]<br/>— règle absolue —"]
     SIG --> AC2{"Auto-Check"}
     AC2 -->|"✓"| RDY["Expanse<br/>opérationnel"]
