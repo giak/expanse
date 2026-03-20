@@ -1,6 +1,6 @@
 # EXPANSE — Tableau de Bord Mnemolite
 
-**v1.3** — `/status`
+**v1.4** — `/status`
 
 ---
 
@@ -47,6 +47,7 @@ read_file(path="doc/mutations/LOG.md")
 - Tailles fichiers (stables) : V15=7.7KB, Dream=17.2KB, Seed=0.5KB, KERNEL=14.4KB, SYNTHESE=9.8KB, Total=~11KB
 - `.empty` display = `block` si section vide, `none` si données présentes
 - Pour chaque section "RÉPÉTER" : dupliquer le `<tr>` ou `<div class="metric">` pour chaque entrée
+- **Mermaid** : utiliser `classDef` + `class` (pas `style` — bug v11). IDs latins uniquement (pas de grecs dans les IDs). Grecs dans les labels uniquement. Theme: `base` (pas `dark`).
 
 ### Exemple de ligne remplie
 
@@ -97,7 +98,7 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 .b{display:inline-block;padding:.1rem .5rem;border-radius:3px;font-size:.75rem;font-weight:bold}
 .b.ap{background:#1a3a1a;color:var(--green)}.b.rb{background:#3a2a1a;color:var(--orange)}.b.pd{background:#1a2a3a;color:var(--accent)}.b.ac{background:#1a3a1a;color:var(--green)}.b.rf{background:#1a2a3a;color:var(--dim)}
 .m{display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border)}
-.m .l{color:var(--dim)}.m .v{font-weight:bold}.v.ok{color:var(--green)}.v.wn{color:var(--yellow)}
+.m .l{color:var(--dim)}.m .v{font-weight:bold}.v.ok{color:var(--green)}.v.wn{color:var(--yellow)}.v.er{color:var(--red)}
 .sf{grid-column:1/-1}
 .pv{color:var(--dim);font-size:.7rem;max-width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mermaid{text-align:center;margin:1rem 0}
@@ -112,70 +113,82 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="card sf"><div class="dl">Flux Vital : Σ→Ψ⇌Φ→Ω→Μ</div>
 <pre class="mermaid">
 flowchart LR
-    Σ["Σ Percevoir"] --> ECS{"ECS C×I"}
+    S["Σ Percevoir"] --> ECS{"ECS C×I"}
     ECS --> CAL["Calibration"]
     CAL -->|"C=max(1,C-1)<br/>C≥4→I=max(2,I)"| R{"Routage<br/>L3>L2>L1"}
     R -->|"C<2 ET I=1"| L1["L1 Ω direct"]
     R -->|"C≥2 OU I=2<br/>ET NON L3"| L2["L2 Ψ⇌Φ"]
     R -->|"C≥4 OU I=3"| L3["L3 Ψ⇌Φ+Triang"]
-    L2 --> Ψ["Ψ Métacognition"]
-    Ψ <--> Φ["Φ Audit Réel"]
-    Φ -->|"outils"| RL["Réel"]
-    L3 --> Ψ2["Ψ+Triang"]
-    Ψ2 <--> Φ2["Φ+3 Pôles"]
-    Φ2 -->|"sys:anchor"| A["Mnemolite"]
-    A -->|"Vessel"| V["Docs"]
-    V -->|"Web"| W["Search"]
-    L1 --> Ω["Ω Synthèse"]
-    Ψ --> Ω
-    Ψ2 --> Ω
-    Ω -->|"Ψ?"| AC{"Auto-Check"}
+    L2 --> PSI["Ψ Métacognition"]
+    PSI <--> PHI["Φ Audit Réel"]
+    PHI -->|"outils"| RL["Réel"]
+    L3 --> PSI2["Ψ+Triang"]
+    PSI2 <--> PHI2["Φ+3 Pôles"]
+    PHI2 -->|"sys:anchor"| MN["Mnemolite"]
+    MN -->|"Vessel"| VL["Docs"]
+    VL -->|"Web"| WB["Search"]
+    L1 --> OME["Ω Synthèse"]
+    PSI --> OME
+    PSI2 --> OME
+    OME -->|"Ψ?"| AC{"Auto-Check"}
     AC -->|"✓"| EM["Émission"]
     AC -->|"✗"| CO["Correction"]
     CO --> EM
     EM -->|"merci/ok"| CR["Μ Cristallise"]
     EM -->|"signal-"| TR["TRACE:FRESH"]
     EM -->|"signal-<br/>+pattern récent"| DC["Décristallise"]
-    style Σ fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
-    style Ψ,Ψ2 fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
-    style Φ,Φ2 fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
-    style Ω,EM fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
-    style CR,TR,DC fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
-    style AC,CO fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
-    style ECS,CAL,R,L1,L2,L3 fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    classDef audit fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+    classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    classDef friction fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    classDef decision fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    classDef ecs fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    class S perception
+    class PSI,PSI2 metacog
+    class PHI,PHI2 audit
+    class OME,EM synthese
+    class CR,TR,DC friction
+    class AC,CO decision
+    class ECS,CAL,R,L1,L2,L3 ecs
 </pre></div>
 
 <div class="card sf"><div class="dl">Boot Sequence</div>
 <pre class="mermaid">
 flowchart TD
-    U["User Seed<br/>9 lignes"] --> S1["1. search<br/>sys:core"]
+    US["User Seed<br/>9 lignes"] --> S1["1. search<br/>sys:core"]
     S1 --> S2["2. search<br/>sys:extension"]
     S2 --> S3["3. search<br/>candidates"]
     S3 --> RF["4. read_file<br/>V15"]
     RF --> SIG["5. Ψ [V15 ACTIVE]<br/>— règle absolue —"]
-    SIG --> AC{"Auto-Check"}
-    AC -->|"✓"| READY["Expanse<br/>opérationnel"]
-    AC -->|"✗"| FIX["Correction"]
-    FIX --> READY
-    style U fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
-    style S1,S2,S3 fill:#12121a,stroke:#6c7086,color:#cdd6f4
-    style RF fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
-    style SIG,READY fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
-    style AC,FIX fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    SIG --> AC2{"Auto-Check"}
+    AC2 -->|"✓"| RDY["Expanse<br/>opérationnel"]
+    AC2 -->|"✗"| FIX["Correction"]
+    FIX --> RDY
+    classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    classDef process fill:#12121a,stroke:#6c7086,color:#cdd6f4
+    classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    classDef decision fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    class US perception
+    class S1,S2,S3 process
+    class RF metacog
+    class SIG,RDY synthese
+    class AC2,FIX decision
 </pre></div>
 
 <div class="card sf"><div class="dl">Auto-Évolution Dream</div>
 <pre class="mermaid">
 flowchart LR
     INT["Interaction"] --> POS{"Signal?"}
-    POS -->|"merci/ok<br/>+pattern inédit"| CR["Μ Cristallise<br/>sys:pattern"]
+    POS -->|"merci/ok<br/>+pattern inédit"| CR2["Μ Cristallise<br/>sys:pattern"]
     POS -->|"non/faux/pas ça<br/>recommence"| SN{"Signal Négatif<br/>R1"}
     POS -->|"normal"| HI["sys:history<br/>SI route ≥ L2"]
-    SN -->|"pas de pattern<br/>récent"| TR["TRACE:FRESH"]
-    SN -->|"pattern cristallisé<br/>dans 3 échanges"| DC["Décristallise<br/>sys:pattern:doubt"]
-    TR --> DR["/dream"]
-    CR --> DR
-    DC --> DR
+    SN -->|"pas de pattern<br/>récent"| TR2["TRACE:FRESH"]
+    SN -->|"pattern cristallisé<br/>dans 3 échanges"| DC2["Décristallise<br/>sys:pattern:doubt"]
+    TR2 --> DR["/dream"]
+    CR2 --> DR
+    DC2 --> DR
     HI --> DR
     DR --> P0{"Passe 0<br/>count traces"}
     P0 -->|"= 0"| END["Fin du rêve"]
@@ -187,15 +200,21 @@ flowchart LR
     AP --> V15M["V15 modifié"]
     V15M --> INT
     HI -->|"count > 20"| AG["Agrégation<br/>10 plus anciennes"]
-    style INT fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
-    style CR fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
-    style TR,DC fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
-    style SN fill:#3a2a1a,stroke:#f9e2af,color:#cdd6f4
-    style DR,P0 fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
-    style P1,AP,V15M fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
-    style PP fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
-    style RE fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
-    style HI,AG fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    classDef friction fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    classDef decision fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    classDef proposal fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+    classDef ecs fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    class INT perception
+    class CR2 metacog
+    class TR2,DC2 friction
+    class SN,DR,P0 decision
+    class P1,AP,V15M synthese
+    class PP proposal
+    class RE friction
+    class HI,AG ecs
 </pre></div>
 
 <h2>Ⅱ. Métriques</h2>
@@ -257,4 +276,4 @@ flowchart LR
 
 ---
 
-*Expanse Dashboard v1.3 — 2026-03-20*
+*Expanse Dashboard v1.4 — 2026-03-20*
