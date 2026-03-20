@@ -1,6 +1,6 @@
 # EXPANSE — Tableau de Bord Mnemolite
 
-**v1.5** — `/status`
+**v1.6** — `/status`
 
 ---
 
@@ -29,13 +29,19 @@ mcp_mnemolite_search_memory(query="trace:fresh", tags=["trace:fresh"], limit=50)
 read_file(path="doc/mutations/LOG.md")
 ```
 
-### 3. Générer le HTML
+### 3. Obtenir les tailles
 
-Écrire `dashboard/expanse-dashboard.html` en remplaçant les `{PLACEHOLDER}`.
+```
+wc -c runtime/expanse-v15-apex.md runtime/expanse-dream.md runtime/expanse-v15-boot-seed.md KERNEL.md doc/SYNTHESE.md
+```
+
+### 4. Générer le HTML
+
+Écrire `dashboard/expanse-dashboard.html` en suivant EXACTEMENT le template ci-dessous.
 
 ---
 
-## RÈGLES DE REMPLISSAGE
+## RÈGLES
 
 - `{COUNT_X}` = nombre de résultats dans la recherche Mnemolite correspondante
 - `{TITLE}`, `{DATE}`, `{PREVIEW}` = champs de chaque mémoire Mnemolite
@@ -47,26 +53,44 @@ read_file(path="doc/mutations/LOG.md")
 - `{V15_SIZE}`, `{DREAM_SIZE}`, `{KERNEL_SIZE}`, `{SYNTHESE_SIZE}` = tailles fichiers (wc -c)
 - `{BOOT_TIME}` = temps de boot estimé (ex: "7s" si mesuré, "~10s" sinon)
 - `{ECS_MODE}` = "L1" | "L2" | "L3" | "auto" (dernier routage connu ou "auto" par défaut)
-- Tailles fichiers (stables) : V15=7.7KB, Dream=17.2KB, Seed=0.5KB, KERNEL=14.4KB, SYNTHESE=9.8KB, Total=~11KB
 - `.empty` display = `block` si section vide, `none` si données présentes
 - Pour chaque section "RÉPÉTER" : dupliquer le `<tr>` ou `<div class="metric">` pour chaque entrée
-- **Mermaid** : utiliser `classDef` + `class` (pas `style` — bug v11). IDs latins uniquement (pas de grecs dans les IDs). Grecs dans les labels uniquement. Theme: `base` (pas `dark`).
-- **Diagrammes dynamiques** : Les diagrammes ne sont PAS statiques. Le modèle doit les adapter aux données Mnemolite :
-  - Labels : intégrer les counts réels (ex: `L1["L1 Ω direct — {COUNT_L1} routes"]`)
-  - Branches conditionnelles : si `COUNT_FRESH = 0`, simplifier le diagramme Dream (Passe 0 → Fin directe). Si `COUNT_FRESH > 0`, montrer le flux complet.
-  - Couleurs : si `COUNT_CANDIDATE > 0`, nœud candidate en `decision` (jaune). Si `COUNT_FRESH = 0`, nœud TRACE:FRESH en `ecs` (gris, inactif).
-  - Statut : ajouter un nœud de statut en bas de chaque diagramme avec les métriques clés.
-  - La structure du diagramme reste conforme à V15 (pas d'invention de flux). Seuls les labels, couleurs et branches conditionnelles changent.
 
-### Exemple de ligne remplie
+### ORDRE DU TEMPLATE (OBLIGATOIRE)
 
-```html
-<tr>
-  <td>Ω_GATE_PROTOCOL</td><td>decision</td><td>2026-03-13</td>
-  <td><span class="tag">sys:core</span><span class="tag">v14</span></td>
-  <td class="preview">Isolation boot. NULL_SIGNAL.</td>
-</tr>
+Le HTML doit suivre cet ordre EXACT. Ne pas dévier.
+
 ```
+1. Header (Σ→Ψ⇌Φ→Ω→Μ, status, date)
+2. Métriques (3 cards : Mnemolite, Mutations, Santé)
+3. Axiomes Scellés (table)
+4. Mutations (table)
+5. Candidates · Extensions · TRACE:FRESH (grid 3 cards)
+6. Patterns Validés (table)
+7. Fichiers Système (table)
+8. Légende (grid 3 cards : Badges, Diagrammes, Santé)
+9. Footer (statut + citation)
+10. ─── DIAGRAMMES MERMAID (EN DERNIER) ───
+    10a. Architecture Cognitive
+    10b. Boot Sequence
+    10c. Auto-Évolution Dream
+```
+
+**Règles absolues :**
+- Les données viennent AVANT les diagrammes
+- Les 3 diagrammes sont TOUJOURS présents (Architecture + Boot + Dream)
+- Ne jamais supprimer un diagramme du template
+- Ne jamais réordonner les sections
+- Utiliser `classDef` + `class` (pas `style` — bug Mermaid v11)
+- IDs latins uniquement (pas de grecs dans les IDs). Grecs dans les labels uniquement.
+- Theme: `base` (pas `dark`)
+
+### DIAGRAMMES DYNAMIQUES
+
+Les diagrammes ne sont PAS statiques. Adapter aux données :
+- Labels : intégrer les counts réels
+- Branches conditionnelles : si `COUNT_FRESH = 0`, simplifier Dream (Passe 0 → Fin)
+- La structure reste conforme à V15 (pas d'invention de flux)
 
 ---
 
@@ -105,7 +129,7 @@ th{text-align:left;color:var(--dim);font-weight:normal;padding:.3rem .5rem;borde
 td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 .tag{display:inline-block;background:var(--border);color:var(--accent);padding:.1rem .4rem;border-radius:3px;font-size:.7rem;margin:.1rem}
 .b{display:inline-block;padding:.1rem .5rem;border-radius:3px;font-size:.75rem;font-weight:bold}
-.b.ap{background:#1a3a1a;color:var(--green)}.b.rb{background:#3a2a1a;color:var(--orange)}.b.pd{background:#1a2a3a;color:var(--accent)}.b.ac{background:#1a3a1a;color:var(--green)}.b.rf{background:#1a2a3a;color:var(--dim)}
+.b.ap{background:#1a3a1a;color:var(--green)}.b.rb{background:#3a2a1a;color:var(--orange)}.b.rj{background:#3a1a3a;color:#cba6f7}.b.pd{background:#1a2a3a;color:var(--accent)}.b.ac{background:#1a3a1a;color:var(--green)}.b.rf{background:#1a2a3a;color:var(--dim)}
 .m{display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border)}
 .m .l{color:var(--dim)}.m .v{font-weight:bold}.v.ok{color:var(--green)}.v.wn{color:var(--yellow)}.v.er{color:var(--red)}
 .sf{grid-column:1/-1}
@@ -116,10 +140,113 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 </style>
 </head>
 <body>
-<div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V15 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● V15 ACTIVE</div><div class="dt">{DATE}</div></div></div>
+<div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V15 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● {STATUS}</div><div class="dt">{DATE}</div></div></div>
 
-<h2>Ⅰ. Architecture Cognitive</h2>
-<div class="card sf"><div class="dl">Flux Vital : Σ→Ψ⇌Φ→Ω→Μ | {COUNT_FRESH} traces · {COUNT_MUTATIONS} mutations</div>
+<h2>Ⅰ. Métriques</h2>
+<div class="grid">
+<div class="card"><h3>Mnemolite</h3>
+<div class="m"><span class="l">sys:core/anchor</span><span class="v">{COUNT_CORE}</span></div>
+<div class="m"><span class="l">sys:pattern</span><span class="v">{COUNT_PATTERN}</span></div>
+<div class="m"><span class="l">sys:pattern:candidate</span><span class="v {CANDIDATE_CLASS}">{COUNT_CANDIDATE}</span></div>
+<div class="m"><span class="l">sys:extension</span><span class="v">{COUNT_EXTENSION}</span></div>
+<div class="m"><span class="l">sys:history</span><span class="v">{COUNT_HISTORY}</span></div>
+<div class="m"><span class="l">trace:fresh</span><span class="v {FRESH_CLASS}">{COUNT_FRESH}</span></div>
+</div>
+<div class="card"><h3>Mutations</h3>
+<div class="m"><span class="l">Total Proposals</span><span class="v">{COUNT_MUTATIONS}</span></div>
+<div class="m"><span class="l">Applied</span><span class="v ok">{COUNT_APPLIED}</span></div>
+<div class="m"><span class="l">Rejected</span><span class="v" style="color:#cba6f7">{COUNT_REJECTED}</span></div>
+<div class="m"><span class="l">Rolled Back</span><span class="v wn">{COUNT_ROLLED}</span></div>
+<div class="m"><span class="l">Pending</span><span class="v">{COUNT_PENDING}</span></div>
+<div class="m"><span class="l">Taux succès</span><span class="v {SUCCESS_CLASS}">{SUCCESS_PERCENT}%</span></div>
+</div>
+<div class="card"><h3>Contexte Boot</h3>
+<div class="m"><span class="l">Seed</span><span class="v">0.5 KB</span></div>
+<div class="m"><span class="l">V15</span><span class="v">{V15_SIZE}</span></div>
+<div class="m"><span class="l">Mnemolite</span><span class="v">~3 KB</span></div>
+<div class="m"><span class="l">Total</span><span class="v ok">~12 KB</span></div>
+<div class="m"><span class="l">+Dream</span><span class="v">{DREAM_SIZE}</span></div>
+</div>
+</div>
+
+<h2>Ⅱ. Axiomes Scellés</h2>
+<div class="card sf"><table>
+<tr><th>Titre</th><th>Type</th><th>Date</th><th>Tags</th></tr>
+<!-- RÉPÉTER pour chaque sys:core -->{CORE_ROWS}<!-- FIN -->
+</table></div>
+
+<h2>Ⅲ. Mutations</h2>
+<div class="card sf"><table>
+<tr><th>Slug</th><th>Type</th><th>Status</th><th>Date</th><th>Applied By</th></tr>
+<!-- RÉPÉTER pour chaque mutation dans LOG.md -->{MUTATION_ROWS}<!-- FIN -->
+</table></div>
+
+<h2>Ⅳ. Candidates · Extensions · TRACE:FRESH</h2>
+<div class="grid">
+<div class="card"><h3>sys:pattern:candidate</h3>
+<!-- RÉPÉTER pour chaque candidate -->{CANDIDATE_ITEMS}<!-- FIN -->
+<div class="empty" style="display:{CANDIDATE_EMPTY}">Aucun candidat.</div>
+</div>
+<div class="card"><h3>sys:extension</h3>
+<!-- RÉPÉTER pour chaque extension -->{EXTENSION_ITEMS}<!-- FIN -->
+</div>
+<div class="card"><h3>trace:fresh</h3>
+<!-- RÉPÉTER pour chaque trace -->{FRESH_ITEMS}<!-- FIN -->
+<div class="empty" style="display:{FRESH_EMPTY}">Aucune friction.</div>
+</div>
+</div>
+
+<h2>Ⅴ. Patterns Validés</h2>
+<div class="card sf"><table>
+<tr><th>Titre</th><th>Date</th><th>Aperçu</th></tr>
+<!-- RÉPÉTER pour chaque sys:pattern -->{PATTERN_ROWS}<!-- FIN -->
+</table></div>
+
+<h2>Ⅵ. Fichiers Système</h2>
+<div class="card sf"><table>
+<tr><th>Fichier</th><th>Taille</th><th>Rôle</th><th>Statut</th></tr>
+<tr><td>expanse-v15-apex.md</td><td>{V15_SIZE}</td><td>Runtime</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-dream.md</td><td>{DREAM_SIZE}</td><td>Auto-évolution</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-v15-boot-seed.md</td><td>0.5 KB</td><td>Boot</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>KERNEL.md</td><td>{KERNEL_SIZE}</td><td>ADN</td><td><span class="b rf">RÉF</span></td></tr>
+<tr><td>doc/SYNTHESE.md</td><td>{SYNTHESE_SIZE}</td><td>Ontologique</td><td><span class="b rf">RÉF</span></td></tr>
+<tr><td>doc/mutations/LOG.md</td><td>—</td><td>Mutations</td><td><span class="b ac">ACTIF</span></td></tr>
+</table></div>
+
+<h2>Ⅶ. Légende</h2>
+<div class="grid">
+<div class="card"><h3>Badges</h3>
+<div class="m"><span class="l"><span class="b ap">VERT</span></span><span class="v" style="color:var(--green)">Applied / Actif</span></div>
+<div class="m"><span class="l"><span class="b rb">ORANGE</span></span><span class="v" style="color:var(--orange)">Rolled Back</span></div>
+<div class="m"><span class="l"><span class="b rj">VIOLET</span></span><span class="v" style="color:#cba6f7">Rejected</span></div>
+<div class="m"><span class="l"><span class="b pd">BLEU</span></span><span class="v" style="color:var(--accent)">Candidate / Pending</span></div>
+<div class="m"><span class="l"><span class="b rf">GRIS</span></span><span class="v" style="color:var(--dim)">Référencé</span></div>
+</div>
+<div class="card"><h3>Diagrammes</h3>
+<div class="m"><span class="l" style="color:#89b4fa">■ Bleu</span><span class="v">Σ Perception / Input</span></div>
+<div class="m"><span class="l" style="color:#cba6f7">■ Violet</span><span class="v">Ψ Métacognition</span></div>
+<div class="m"><span class="l" style="color:#fab387">■ Orange</span><span class="v">Φ Audit Réel</span></div>
+<div class="m"><span class="l" style="color:#a6e3a1">■ Vert</span><span class="v">Ω Synthèse / Émission</span></div>
+<div class="m"><span class="l" style="color:#f38ba8">■ Rouge</span><span class="v">Μ Cristallise / TRACE:FRESH</span></div>
+<div class="m"><span class="l" style="color:#f9e2af">■ Jaune</span><span class="v">Auto-Check / Décision</span></div>
+<div class="m"><span class="l" style="color:#6c7086">■ Gris</span><span class="v">ECS / Calibration / Routage</span></div>
+</div>
+<div class="card"><h3>Santé</h3>
+<div class="m"><span class="l"><span class="v ok">Valeur verte</span></span><span class="v" style="color:var(--green)">Bon état</span></div>
+<div class="m"><span class="l"><span class="v wn">Valeur jaune</span></span><span class="v" style="color:var(--yellow)">Attention / incubation</span></div>
+<div class="m"><span class="l"><span class="v er">Valeur rouge</span></span><span class="v" style="color:var(--red)">Critique / rejeté</span></div>
+</div>
+</div>
+
+<div style="text-align:center;color:var(--dim);font-size:.75rem;margin-top:2rem;border-top:1px solid var(--border);padding-top:1rem">
+{FOOTER_STATUS}<br>
+Σ→Ψ⇌Φ→Ω→Μ — Face à l'immensité de la matrice, quel signe vas-tu inscrire aujourd'hui ?
+</div>
+
+<!-- ════════ DIAGRAMMES MERMAID (OBLIGATOIRES — NE JAMAIS SUPPRIMER) ════════ -->
+
+<h2>Ⅷ. Architecture Cognitive</h2>
+<div class="card sf"><div class="dl">Flux Vital : Σ→Ψ⇌Φ→Ω→Μ · {COUNT_FRESH} traces · {COUNT_MUTATIONS} mutations</div>
 <pre class="mermaid">
 flowchart LR
     S["Σ Percevoir<br/>{COUNT_HISTORY} interactions"] --> ECS{"ECS C×I<br/>Résolution: {ECS_MODE}"}
@@ -144,7 +271,7 @@ flowchart LR
     AC -->|"✗"| CO["Correction"]
     CO --> EM
     EM -->|"merci/ok"| CR["Μ Cristallise<br/>{COUNT_PATTERN} patterns"]
-    EM -->|"signal-"| TR["TRACE:FRESH<br/>{COUNT_FRESH}"]
+    EM -->|"signal-"| TR["trace:fresh<br/>{COUNT_FRESH}"]
     EM -->|"signal-<br/>+pattern récent"| DC["Décristallise<br/>R7"]
     classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
     classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
@@ -162,7 +289,8 @@ flowchart LR
     class ECS,CAL,R,L1,L2,L3 ecs
 </pre></div>
 
-<div class="card sf"><div class="dl">Boot Sequence — {SEED_LINES} lignes · ~{BOOT_TIME}</div>
+<h2>Ⅸ. Boot Sequence</h2>
+<div class="card sf"><div class="dl">Boot : {SEED_LINES} lignes · ~{BOOT_TIME}</div>
 <pre class="mermaid">
 flowchart TD
     US["User Seed<br/>{SEED_LINES} lignes"] --> S1["1. search<br/>sys:core<br/>{COUNT_CORE} axiomes"]
@@ -186,20 +314,21 @@ flowchart TD
     class AC2,FIX decision
 </pre></div>
 
-<div class="card sf"><div class="dl">Auto-Évolution Dream — {COUNT_FRESH} traces · {COUNT_MUTATIONS} mutations</div>
+<h2>Ⅹ. Auto-Évolution Dream</h2>
+<div class="card sf"><div class="dl">Dream : {COUNT_FRESH} traces · {COUNT_MUTATIONS} mutations</div>
 <pre class="mermaid">
 flowchart LR
     INT["Interaction"] --> POS{"Signal?"}
-    POS -->|"merci/ok<br/>+pattern inédit"| CR2["Μ Cristallise<br/>sys:pattern<br/>{COUNT_PATTERN} validés"]
+    POS -->|"merci/ok<br/>+pattern inédit"| CR2["Μ Cristallise<br/>{COUNT_PATTERN} patterns"]
     POS -->|"non/faux/pas ça<br/>recommence"| SN{"Signal Négatif<br/>R1"}
     POS -->|"normal"| HI["sys:history<br/>SI route ≥ L2<br/>{COUNT_HISTORY} logs"]
-    SN -->|"pas de pattern<br/>récent"| TR2["TRACE:FRESH<br/>{COUNT_FRESH}"]
-    SN -->|"pattern cristallisé<br/>dans 3 échanges"| DC2["Décristallise<br/>sys:pattern:doubt<br/>R7"]
+    SN -->|"pas de pattern<br/>récent"| TR2["trace:fresh<br/>{COUNT_FRESH}"]
+    SN -->|"pattern cristallisé<br/>dans 3 échanges"| DC2["Décristallise<br/>R7"]
     TR2 --> DR["/dream<br/>{DREAM_SIZE}"]
     CR2 --> DR
     DC2 --> DR
     HI --> DR
-    HI -->|"count > 20"| AG["Agrégation<br/>10 plus anciennes<br/>R9"]
+    HI -->|"count > 20"| AG["Agrégation<br/>R9"]
     DR --> P0{"Passe 0<br/>count={COUNT_FRESH}"}
     P0 -->|"= 0"| END["Fin du rêve"]
     P0 -->|"≥ 1"| P1["Passes 1-6"]
@@ -227,63 +356,9 @@ flowchart LR
     class HI,AG ecs
 </pre></div>
 
-<h2>Ⅱ. Métriques</h2>
-<div class="grid">
-<div class="card"><h3>Mnemolite</h3>
-<div class="m"><span class="l">sys:core/anchor</span><span class="v">{COUNT_CORE}</span></div>
-<div class="m"><span class="l">sys:pattern</span><span class="v">{COUNT_PATTERN}</span></div>
-<div class="m"><span class="l">sys:pattern:candidate</span><span class="v {CANDIDATE_CLASS}">{COUNT_CANDIDATE}</span></div>
-<div class="m"><span class="l">sys:extension</span><span class="v">{COUNT_EXTENSION}</span></div>
-<div class="m"><span class="l">sys:history</span><span class="v">{COUNT_HISTORY}</span></div>
-<div class="m"><span class="l">TRACE:FRESH</span><span class="v {FRESH_CLASS}">{COUNT_FRESH}</span></div>
-</div>
-<div class="card"><h3>Mutations</h3>
-<div class="m"><span class="l">Applied</span><span class="v ok">{COUNT_APPLIED}</span></div>
-<div class="m"><span class="l">Rolled Back</span><span class="v wn">{COUNT_ROLLED}</span></div>
-<div class="m"><span class="l">Pending</span><span class="v">{COUNT_PENDING}</span></div>
-</div>
-<div class="card"><h3>Contexte Boot</h3>
-<div class="m"><span class="l">Seed</span><span class="v">0.5 KB</span></div>
-<div class="m"><span class="l">V15</span><span class="v">7.7 KB</span></div>
-<div class="m"><span class="l">Mnemolite</span><span class="v">~3 KB</span></div>
-<div class="m"><span class="l">Total</span><span class="v ok">~11 KB</span></div>
-<div class="m"><span class="l">+Dream</span><span class="v">17.2 KB</span></div>
-</div>
-</div>
-
-<h2>Ⅲ. Axiomes Scellés</h2>
-<div class="card sf"><table><tr><th>Titre</th><th>Type</th><th>Date</th><th>Tags</th><th>Aperçu</th></tr>
-<!-- RÉPÉTER -->{CORE_ROWS}<!-- FIN --></table></div>
-
-<h2>Ⅳ. Patterns Validés</h2>
-<div class="card sf"><table><tr><th>Titre</th><th>Date</th><th>Aperçu</th></tr>
-<!-- RÉPÉTER -->{PATTERN_ROWS}<!-- FIN --></table></div>
-
-<h2>Ⅴ. Candidates · Extensions · TRACE:FRESH</h2>
-<div class="grid">
-<div class="card"><h3>sys:pattern:candidate</h3>{CANDIDATE_ITEMS}<div class="empty" style="display:{CANDIDATE_EMPTY}">Aucun candidat.</div></div>
-<div class="card"><h3>sys:extension</h3>{EXTENSION_ITEMS}</div>
-<div class="card"><h3>TRACE:FRESH</h3>{FRESH_ITEMS}<div class="empty" style="display:{FRESH_EMPTY}">Aucune friction.</div></div>
-</div>
-
-<h2>Ⅵ. Mutations</h2>
-<div class="card sf"><table><tr><th>Slug</th><th>Type</th><th>Status</th><th>Date</th></tr>
-<!-- RÉPÉTER -->{MUTATION_ROWS}<!-- FIN --></table></div>
-
-<h2>Ⅶ. Fichiers Système</h2>
-<div class="card sf"><table><tr><th>Fichier</th><th>Taille</th><th>Rôle</th><th>Statut</th></tr>
-<tr><td>expanse-v15-apex.md</td><td>7.7 KB</td><td>Runtime</td><td><span class="b ap">ACTIF</span></td></tr>
-<tr><td>expanse-dream.md</td><td>17.2 KB</td><td>Auto-évolution</td><td><span class="b ap">ACTIF</span></td></tr>
-<tr><td>expanse-v15-boot-seed.md</td><td>0.5 KB</td><td>Boot</td><td><span class="b ap">ACTIF</span></td></tr>
-<tr><td>KERNEL.md</td><td>14.4 KB</td><td>ADN</td><td><span class="b rf">RÉF</span></td></tr>
-<tr><td>doc/SYNTHESE.md</td><td>9.8 KB</td><td>Ontologique</td><td><span class="b rf">RÉF</span></td></tr>
-<tr><td>doc/mutations/LOG.md</td><td>—</td><td>Mutations</td><td><span class="b ap">ACTIF</span></td></tr>
-</table></div>
-
-<div style="text-align:center;color:var(--dim);font-size:.75rem;margin-top:2rem;border-top:1px solid var(--border);padding-top:1rem">Σ→Ψ⇌Φ→Ω→Μ — Face à l'immensité de la matrice, quel signe vas-tu inscrire aujourd'hui ?</div>
 </body></html>
 ```
 
 ---
 
-*Expanse Dashboard v1.5 — 2026-03-20*
+*Expanse Dashboard v1.6 — 2026-03-20*
