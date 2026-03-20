@@ -12,27 +12,32 @@
 | Boot cross-LLM (3/3) | Seed MCP validé OpenCode, Gemini, Big Pickle |
 | Maintien Ψ post-boot | D+C (boot-as-lesson + règle absolue) |
 | Auto-Check (Ψ/SEC/minimal) | Exécuté 3/3 après boot D+C |
-| Cristallisation | Mutation crystallization-guard-surgical appliquée |
-| Dream (proposals) | 3 proposals générés, 2 applied, 1 rolled back |
+| ECS L1 routing | Vérifié en session live |
+| ECS L2 routing | Vérifié (fichiers runtime) |
+| ECS L3 triangulation | Vérifié (architecture distribuée, 92% confiance) |
+| Cristallisation positive | Pattern sauvé (L3-TRIANGULATION-SYNTHESIS) |
+| Signaux négatifs (R1) | "pas bon" → TRACE:FRESH type:ECS |
+| Décristallisation (R7) | Pattern → sys:pattern:doubt |
+| sys:history sauvegarde | Interaction L3 sauvegardée |
+| Dream (proposals) | 5 proposals générés, 4 applied, 1 rolled back |
 | Rollback | Mutation 1 rolled back proprement |
 | Auto-réflexion | surgical-integrity-protocol (système se protège) |
-| ECS L1 routing | Vérifié en session live |
+| Axiomes Mnemolite v15 | 7 axiomes taggés v15 |
+| Vessel défini | Triangulation utilise "documentation technique workspace" |
+| Seuil ECS corrigé | `C = max(1, C-1)`, priorité L3>L2>L1 |
+| /seal + /apply | 2 commandes distinctes |
+| Tag casing | trace:fresh (minuscules) |
 
 ---
 
-## ❌ CE QUI NE FONCTIONNE PAS (ou pas encore testé)
+## ❌ CE QUI RESTE À TESTER
 
 | Composant | Problème | Source |
 |-----------|----------|--------|
-| Axiomes Mnemolite = V14 | Aucun axiome V15 scellé | Audit #1 |
-| Seuil ECS incohérent (2.5 vs 4) | KERNEL/SYNTHESE ≠ V15 | Audit #2 |
-| Vessel non défini | Triangulation L3 dégradée | Audit #3 |
-| `/seal` collision (V15 vs Dream) | Même commande, 2 comportements | Audit B |
-| Cristallisation négative absente | Positifs scellent, négatifs déscellent pas | Audit H |
-| Ψ non visible (certains LLMs) | OpenCode sans D+C = pas de Ψ | Live test |
-| L2/L3 routing | Jamais testé en conditions réelles | Non testé |
-| Dream complet (Passes 0-6) | Jamais exécuté avec données réelles | Non testé |
-| sys:history explosion | Aucune politique de rétention | Audit #12 |
+| Dream complet (/dream) | Passes 0-6 jamais exécutées avec données réelles | R2 |
+| /apply mutation | Jamais testé avec proposal Dream | R4 |
+| Rétention sys:history (>20) | Condition jamais déclenchée | R9 |
+| Cristallisation ambiguë ("ok") | Faux positif potentiel | Audit #10 |
 
 ---
 
