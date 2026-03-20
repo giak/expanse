@@ -455,7 +455,7 @@ V15 ECS active: Σ→Ψ⇌Φ→Ω→Μ routing L1/L2/L3 with crystallization gua
 | Bugs live trouvés | 3 (tag casing, seed vs V15, V14 pollution) |
 | V15.1 Phase 1 | ✅ Réussie (-25%) |
 | V15.1 Phase 2 | ✅ Réussie (3/3 LLMs) |
-| V15.1 Phase 3 | ⬜ En attente |
+| V15.1 Phase 3 | ❌ Échoué (rollback) |
 | Dream complet | ✅ Réussi |
 | Auto-évolution | ✅ Opérationnelle |
 
