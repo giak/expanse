@@ -9,8 +9,8 @@
 
 | Métrique | Count |
 |----------|-------|
-| Total Proposals | 6 |
-| Applied | 5 |
+| Total Proposals | 10 |
+| Applied | 7 |
 | Rejected | 0 |
 | Failed | 0 |
 | Rolled Back | 1 |
@@ -28,6 +28,8 @@
 | 2026-03-20 | ecs-impact-calibration | ECS | APPLIED | Dream |
 | 2026-03-20 | boot-parallel-sync | BOOT | APPLIED | Dream |
 | 2026-03-21 | external-systems-sovereignty | Rule | APPLIED | Dream |
+| 2026-03-21 | psi-symbiosis-core | Rule | APPLIED | Antigravity |
+| 2026-03-21 | absolute-portability-b | BOOT | APPLIED | Antigravity |
 
 ---
 
@@ -59,7 +61,8 @@
 
 ## Pending Proposals
 
-(Aucun proposal en attente)
+- **boot-vision-c** : Refactorisation Section Ⅳ (Manifest) + Seed (Pointer).
+- **rhetorical-question-guard** : Règle anti-anticipation sur question rhétorique.
 
 ---
 
