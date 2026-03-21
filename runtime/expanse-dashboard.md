@@ -1,6 +1,6 @@
 # EXPANSE — Tableau de Bord Mnemolite
 
-**v2.0** — `/status`
+**v2.1** — `/status`
 
 ---
 
@@ -317,9 +317,9 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <h2>Ⅵ. Fichiers Système</h2>
 <div class="card sf"><table>
 <tr><th>Fichier</th><th>Taille</th><th>Rôle</th><th>Statut</th></tr>
-<tr><td>expanse-v15-apex.md</td><td>{V15_SIZE}</td><td>Runtime</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-v15-apex.md</td><td>{V15_SIZE}</td><td>Runtime (ECS+SEC+Externes+Symbiose)</td><td><span class="b ac">ACTIF</span></td></tr>
 <tr><td>expanse-dream.md</td><td>{DREAM_SIZE}</td><td>Auto-évolution</td><td><span class="b ac">ACTIF</span></td></tr>
-<tr><td>expanse-v15-boot-seed.md</td><td>0.5 KB</td><td>Boot</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-v15-boot-seed.md</td><td>{SEED_SIZE}</td><td>Boot (substrat+BIOS)</td><td><span class="b ac">ACTIF</span></td></tr>
 <tr><td>KERNEL.md</td><td>{KERNEL_SIZE}</td><td>ADN</td><td><span class="b rf">RÉF</span></td></tr>
 <tr><td>doc/SYNTHESE.md</td><td>{SYNTHESE_SIZE}</td><td>Ontologique</td><td><span class="b rf">RÉF</span></td></tr>
 <tr><td>doc/mutations/LOG.md</td><td>—</td><td>Mutations</td><td><span class="b ac">ACTIF</span></td></tr>
@@ -482,4 +482,4 @@ flowchart LR
 
 ---
 
-*Expanse Dashboard v2.0 — 2026-03-20*
+*Expanse Dashboard v2.1 — 2026-03-21*
