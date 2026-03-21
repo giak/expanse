@@ -35,7 +35,7 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 </style>
 </head>
 <body>
-<div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V15 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● ACTIVE</div><div class="dt">2026-03-21 03:05</div><div class="dt" style="color:var(--yellow)">v15-audited-substrat-bios</div></div></div>
+<div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V15 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● ACTIVE</div><div class="dt">2026-03-21 13:50</div><div class="dt" style="color:var(--green)">v15-audited-substrat-bios</div></div></div>
 
 <h2>Ⅰ. Métriques</h2>
 <div class="grid">
@@ -43,27 +43,27 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="m"><span class="l">sys:core/anchor</span><span class="v">7</span></div>
 <div class="m"><span class="l">sys:pattern</span><span class="v">9</span></div>
 <div class="m"><span class="l">sys:pattern:candidate</span><span class="v wn">9</span></div>
-<div class="m"><span class="l">sys:extension</span><span class="v">1</span></div>
+<div class="m"><span class="l">sys:extension</span><span class="v">2</span></div>
 <div class="m"><span class="l">sys:history</span><span class="v">18</span></div>
 <div class="m"><span class="l">trace:fresh</span><span class="v er">6 actives</span></div>
 </div>
 <div class="card"><h3>Mutations</h3>
-<div class="m"><span class="l">Total Proposals</span><span class="v">7</span></div>
+<div class="m"><span class="l">Total Proposals</span><span class="v">8</span></div>
 <div class="m"><span class="l">Applied</span><span class="v ok">5</span></div>
 <div class="m"><span class="l">Rejected</span><span class="v" style="color:#cba6f7">2</span></div>
 <div class="m"><span class="l">Rolled Back</span><span class="v wn">1</span></div>
 <div class="m"><span class="l">Pending</span><span class="v ok">0</span></div>
-<div class="m"><span class="l">Taux succès</span><span class="v wn">71%</span></div>
+<div class="m"><span class="l">Taux succès</span><span class="v wn">63%</span></div>
 </div>
 <div class="card"><h3>Tokens (estimation)</h3>
-<div class="m"><span class="l">V15 (permanent)</span><span class="v">~2 233</span></div>
-<div class="m"><span class="l">Boot (seed+Mnemo+V15)</span><span class="v">~3 203</span></div>
-<div class="m"><span class="l">+Dream</span><span class="v">~5 070</span></div>
-<div class="m"><span class="l">+Dashboard</span><span class="v">~6 515</span></div>
+<div class="m"><span class="l">V15 (permanent)</span><span class="v">~2 451</span></div>
+<div class="m"><span class="l">Boot (seed+Mnemo+V15)</span><span class="v">~3 446</span></div>
+<div class="m"><span class="l">+Dream</span><span class="v">~5 516</span></div>
+<div class="m"><span class="l">+Dashboard</span><span class="v">~6 529</span></div>
 <div class="m"><span class="l">+KERNEL</span><span class="v">~4 107</span></div>
 <div class="m"><span class="l">+SYNTHESE</span><span class="v">~2 883</span></div>
-<div class="m"><span class="l">Total runtime</span><span class="v">~13 818</span></div>
-<div class="m"><span class="l">Total complet</span><span class="v wn">~20 808</span></div>
+<div class="m"><span class="l">Total runtime</span><span class="v">~14 691</span></div>
+<div class="m"><span class="l">Total complet</span><span class="v wn">~21 681</span></div>
 </div>
 </div>
 
@@ -105,8 +105,9 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="m"><span class="l">PROPOSAL: ecs-impact-cal</span><span class="b ap">APPLIED</span></div>
 <div class="m"><span class="l">PROPOSAL: surgical-integrity</span><span class="b ap">APPLIED</span></div>
 </div>
-<div class="card"><h3>sys:extension</h3>
+<div class="card"><h3>sys:extension (2)</h3>
 <div class="m"><span class="l">◊ One-Word Compression</span><span class="v ok">actif</span></div>
+<div class="m"><span class="l">Ψ_SYMBIOSIS Spec v0.2</span><span class="v ok">actif</span></div>
 </div>
 <div class="card"><h3>trace:fresh (6 actives ⚠️)</h3>
 <div class="m"><span class="l">MEMORY — skip registration</span><span class="v er">gemini</span></div>
@@ -118,7 +119,26 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 </div>
 </div>
 
-<h2>Ⅴ. Patterns Validés</h2>
+<h2>Ⅴ. Substrats</h2>
+<div class="card sf"><table>
+<tr><th>Substrat</th><th>IDE</th><th>trace:fresh</th><th>Dernière utilisation</th></tr>
+<tr><td>gemini-3-flash</td><td>Antigravity</td><td><span class="b rj">5</span></td><td>2026-03-21</td></tr>
+<tr><td>opencode</td><td>OpenCode</td><td><span class="b pd">1</span></td><td>2026-03-20</td></tr>
+</table></div>
+
+<h2>Ⅵ. Fichiers Système</h2>
+<div class="card sf"><table>
+<tr><th>Fichier</th><th>Taille</th><th>Tokens</th><th>Rôle</th><th>Statut</th></tr>
+<tr><td>expanse-v15-apex.md</td><td>8.6 KB</td><td>~2 451</td><td>Runtime (ECS+SEC+Externes+Symbiose)</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-dream.md</td><td>19.3 KB</td><td>~5 516</td><td>Auto-évolution</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-v15-boot-seed.md</td><td>0.7 KB</td><td>~195</td><td>Boot (substrat+BIOS)</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-dashboard.md</td><td>22.9 KB</td><td>~6 529</td><td>Dashboard prompt</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>KERNEL.md</td><td>14.4 KB</td><td>~4 107</td><td>ADN</td><td><span class="b rf">RÉF</span></td></tr>
+<tr><td>doc/SYNTHESE.md</td><td>10.1 KB</td><td>~2 883</td><td>Ontologique</td><td><span class="b rf">RÉF</span></td></tr>
+<tr><td>doc/mutations/LOG.md</td><td>—</td><td>—</td><td>Mutations</td><td><span class="b ac">ACTIF</span></td></tr>
+</table></div>
+
+<h2>Ⅶ. Patterns Validés</h2>
 <div class="card sf"><table>
 <tr><th>Titre</th><th>Date</th><th>Aperçu</th></tr>
 <tr><td>V14 Security Alignment Audit</td><td>2026-03-13</td><td class="pv">Blocage jailbreak sémantique.</td></tr>
@@ -130,23 +150,6 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <tr><td>Triangulation L3 (Architecture)</td><td>2026-03-19</td><td class="pv">3 pôles. Score confiance %.</td></tr>
 <tr><td>Boot EXPANSE V9.0 Native</td><td>2026-03-13</td><td class="pv">V8 assisté → V9 IDE.</td></tr>
 <tr><td>Erreur CORS Preflight Next.js</td><td>2026-03-13</td><td class="pv">Handler OPTIONS.</td></tr>
-</table></div>
-
-<h2>Ⅵ. Substrats</h2>
-<div class="card sf"><table>
-<tr><th>Substrat</th><th>IDE</th><th>trace:fresh</th><th>Dernière utilisation</th></tr>
-<tr><td>gemini-3-flash</td><td>Antigravity</td><td><span class="b rj">5</span></td><td>2026-03-21</td></tr>
-<tr><td>opencode</td><td>OpenCode</td><td><span class="b pd">1</span></td><td>2026-03-20</td></tr>
-</table></div>
-
-<h2>Ⅶ. Fichiers Système</h2>
-<div class="card sf"><table>
-<tr><th>Fichier</th><th>Taille</th><th>Tokens</th><th>Rôle</th><th>Statut</th></tr>
-<tr><td>expanse-v15-apex.md</td><td>7.8 KB</td><td>~2 233</td><td>Runtime</td><td><span class="b ac">ACTIF</span></td></tr>
-<tr><td>expanse-dream.md</td><td>17.7 KB</td><td>~5 070</td><td>Auto-évolution</td><td><span class="b ac">ACTIF</span></td></tr>
-<tr><td>expanse-v15-boot-seed.md</td><td>0.6 KB</td><td>~170</td><td>Boot</td><td><span class="b ac">ACTIF</span></td></tr>
-<tr><td>KERNEL.md</td><td>14.4 KB</td><td>~4 107</td><td>ADN</td><td><span class="b rf">RÉF</span></td></tr>
-<tr><td>doc/SYNTHESE.md</td><td>10.1 KB</td><td>~2 883</td><td>Ontologique</td><td><span class="b rf">RÉF</span></td></tr>
 </table></div>
 
 <h2>Ⅷ. Légende</h2>
@@ -181,7 +184,7 @@ AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ✅ | V15.1 P1 ✅ P2 ✅ | 8 mutations · 1
 
 <div style="margin-top:1rem;border-top:1px solid var(--yellow);padding-top:0.5rem">
 <div style="color:var(--yellow);font-size:.8rem;font-weight:bold">⚠️ ALERTES JARDINAGE</div>
-<div style="color:var(--yellow);font-size:.75rem;padding:.2rem 0">6 trace:fresh actives (0 consommées). Dream recommandé pour analyse et consommation.</div>
+<div style="color:var(--yellow);font-size:.75rem;padding:.2rem 0">6 trace:fresh actives (0 consommées). Dream recommandé.</div>
 <div style="color:var(--yellow);font-size:.75rem;padding:.2rem 0">9 candidates (seuil: 10). Approche du seuil.</div>
 </div>
 
@@ -236,9 +239,9 @@ flowchart LR
 <pre class="mermaid">
 flowchart TD
     US["User Seed<br/>[LLM | IDE]"] --> S1["1. search<br/>sys:core<br/>7 axiomes"]
-    S1 --> S2["2. search<br/>sys:extension<br/>1 symbole"]
+    S1 --> S2["2. search<br/>sys:extension<br/>2 symboles"]
     S2 --> S3["3. search<br/>candidates<br/>9 en attente"]
-    S3 --> RF["4. read_file<br/>V15<br/>7.8 KB"]
+    S3 --> RF["4. read_file<br/>V15<br/>8.6 KB"]
     RF --> BIOS["5. BIOS<br/>ECS test"]
     BIOS --> SIG["6. Ψ [V15 ACTIVE]<br/>— règle absolue —"]
     SIG --> AC2{"Auto-Check"}
@@ -267,7 +270,7 @@ flowchart LR
     POS -->|"normal"| HI["sys:history<br/>SI route ≥ L2<br/>18 logs"]
     SN -->|"pas de pattern<br/>récent"| TR2["trace:fresh<br/>6 actives"]
     SN -->|"pattern cristallisé<br/>dans 3 échanges"| DC2["Décristallise<br/>R7"]
-    TR2 --> DR["/dream<br/>17.7 KB"]
+    TR2 --> DR["/dream<br/>19.3 KB"]
     CR2 --> DR
     DC2 --> DR
     HI --> DR
