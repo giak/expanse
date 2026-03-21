@@ -35,36 +35,9 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 </style>
 </head>
 <body>
-<div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V15 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● ACTIVE</div><div class="dt">2026-03-21 18:30</div><div class="dt" style="color:var(--green)">v15-audited-substrat-bios</div></div></div>
+<div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V15 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● ACTIVE</div><div class="dt">2026-03-21 19:00</div><div class="dt" style="color:var(--green)">v15-audited-substrat-bios</div></div></div>
 
-<h2>Ⅰ. Commandes Expanse</h2>
-<div class="grid">
-<div class="card"><h3>Runtime (V15)</h3>
-<div class="m"><span class="l">/dream</span><span class="v">Introspection (6 Passes + mutation)</span></div>
-<div class="m"><span class="l">/seal {titre}</span><span class="v">Migrer candidate → pattern</span></div>
-<div class="m"><span class="l">/reject {titre}</span><span class="v">Soft-delete candidate</span></div>
-<div class="m"><span class="l">/status</span><span class="v">Générer dashboard HTML</span></div>
-<div class="m"><span class="l">/autonomy {0-2}</span><span class="v">Niveau proactivité (A0/A1/A2)</span></div>
-<div class="m"><span class="l">/briefing on|off</span><span class="v">Résumé contextuel au boot</span></div>
-<div class="m"><span class="l">/profile</span><span class="v">Voir/éditer/reset profil</span></div>
-</div>
-<div class="card"><h3>Auto-évolution (Dream)</h3>
-<div class="m"><span class="l">/apply {slug}</span><span class="v">Appliquer mutation fichier</span></div>
-<div class="m"><span class="l">/reject {slug}</span><span class="v">Rejeter proposal Dream</span></div>
-<div class="m"><span class="l">/rollback {slug}</span><span class="v">Restaurer V15 depuis backup</span></div>
-<div class="m"><span class="l">/proposals</span><span class="v">Lister proposals en attente</span></div>
-<div class="m"><span class="l">/mutations</span><span class="v">Afficher historique complet</span></div>
-<div class="m"><span class="l">/diff {slug}</span><span class="v">Voir diff d'une mutation</span></div>
-</div>
-<div class="card"><h3>Symbiose</h3>
-<div class="m"><span class="l">A0 — Silence</span><span class="v">V15 standard</span></div>
-<div class="m"><span class="l">A1 — Murmures</span><span class="v">Ψ [~] ignorable</span></div>
-<div class="m"><span class="l">A2 — Suggestions</span><span class="v">Ψ [?] attend réponse</span></div>
-<div class="m"><span class="l">Budget</span><span class="v">≤ 500 tokens contexte</span></div>
-</div>
-</div>
-
-<h2>Ⅱ. Métriques</h2>
+<h2>Ⅰ. Métriques</h2>
 <div class="grid">
 <div class="card"><h3>Mnemolite</h3>
 <div class="m"><span class="l">sys:core/anchor</span><span class="v">7</span></div>
@@ -72,7 +45,7 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="m"><span class="l">sys:pattern:candidate</span><span class="v er">10 ⚠️</span></div>
 <div class="m"><span class="l">sys:extension</span><span class="v">2</span></div>
 <div class="m"><span class="l">sys:history</span><span class="v">19</span></div>
-<div class="m"><span class="l">trace:fresh</span><span class="v er">10 actives ⚠️</span></div>
+<div class="m"><span class="l">trace:fresh</span><span class="v ok">10 consommées</span></div>
 </div>
 <div class="card"><h3>Mutations</h3>
 <div class="m"><span class="l">Applied</span><span class="v ok">6</span></div>
@@ -82,15 +55,14 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="m"><span class="l">Total</span><span class="v">11</span></div>
 </div>
 <div class="card"><h3>Tokens</h3>
-<div class="m"><span class="l">V15</span><span class="v">~2 809</span></div>
-<div class="m"><span class="l">Boot</span><span class="v">~3 661</span></div>
-<div class="m"><span class="l">BRM</span><span class="v">~188</span></div>
-<div class="m"><span class="l">Total runtime</span><span class="v">~15 854</span></div>
-<div class="m"><span class="l">Total complet</span><span class="v wn">~22 844</span></div>
+<div class="m"><span class="l">V15</span><span class="v">~2 841</span></div>
+<div class="m"><span class="l">Boot</span><span class="v">~3 693</span></div>
+<div class="m"><span class="l">Total runtime</span><span class="v">~15 856</span></div>
+<div class="m"><span class="l">Total complet</span><span class="v wn">~22 846</span></div>
 </div>
 </div>
 
-<h2>Ⅲ. Axiomes Scellés</h2>
+<h2>Ⅱ. Axiomes Scellés</h2>
 <div class="card sf"><table>
 <tr><th>Titre</th><th>Type</th><th>Date</th><th>Tags</th></tr>
 <tr><td>Ω_GATE_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span></td></tr>
@@ -102,7 +74,7 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <tr><td>Ω_INERTIA_KISS</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span></td></tr>
 </table></div>
 
-<h2>Ⅳ. Mutations</h2>
+<h2>Ⅲ. Mutations</h2>
 <div class="card sf"><table>
 <tr><th>Slug</th><th>Type</th><th>Status</th><th>Date</th></tr>
 <tr><td>crystallization-guard</td><td>Rule</td><td><span class="b rb">ROLLED_BACK</span></td><td>2026-03-19</td></tr>
@@ -117,9 +89,9 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <tr><td>rhetorical-question-guard</td><td>Rule</td><td><span class="b pd">PENDING</span></td><td>2026-03-21</td></tr>
 </table></div>
 
-<h2>Ⅴ. Candidates · Extensions · trace:fresh</h2>
+<h2>Ⅳ. Candidates (10 ⚠️) · Extensions (2)</h2>
 <div class="grid">
-<div class="card"><h3>sys:pattern:candidate (10 ⚠️)</h3>
+<div class="card"><h3>sys:pattern:candidate</h3>
 <div class="m"><span class="l">CANDIDATE: Boot Parallelization</span><span class="v pd">candidate</span></div>
 <div class="m"><span class="l">CANDIDATE: Master Matrix</span><span class="v pd">candidate</span></div>
 <div class="m"><span class="l">CANDIDATE: Souveraineté Externes</span><span class="v pd">candidate</span></div>
@@ -135,19 +107,30 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="m"><span class="l">◊ One-Word Compression</span><span class="v ok">actif</span></div>
 <div class="m"><span class="l">Ψ_SYMBIOSIS Spec v0.2</span><span class="v ok">actif</span></div>
 </div>
-<div class="card"><h3>trace:fresh (10 ⚠️)</h3>
-<div class="m"><span class="l">MEMORY — skip registration</span><span class="v er">gemini</span></div>
-<div class="m"><span class="l">ECS — CSEP over-engineering</span><span class="v er">gemini</span></div>
-<div class="m"><span class="l">BOOT — tool failure</span><span class="v er">gemini</span></div>
-<div class="m"><span class="l">BOOT — dream bypass</span><span class="v er">gemini</span></div>
-<div class="m"><span class="l">ECS — persistent drift</span><span class="v er">gemini</span></div>
-<div class="m"><span class="l">SEC — HA rejection</span><span class="v er">opencode</span></div>
-<div class="m"><span class="l">SEC — anticipation non-autorisée</span><span class="v er">antigravity</span></div>
-<div class="m"><span class="l">BOOT — dream bypass (2e)</span><span class="v er">antigravity</span></div>
-<div class="m"><span class="l">SEC — inertia violation</span><span class="v er">antigravity</span></div>
-<div class="m"><span class="l">BOOT — IDE hallucination</span><span class="v er">gemini</span></div>
+<div class="card"><h3>sys:user:profile</h3>
+<div class="m"><span class="l">Style</span><span class="v">compression symbolique</span></div>
+<div class="m"><span class="l">Sessions</span><span class="v">4</span></div>
+<div class="m"><span class="l">Symbiosis Score</span><span class="v ok">85</span></div>
+<div class="m"><span class="l">Autonomy</span><span class="v">A1</span></div>
+<div class="m"><span class="l">Briefing</span><span class="v ok">on</span></div>
+<div class="m"><span class="l">Projets</span><span class="v">expanse, truth-engine, vocabf</span></div>
 </div>
 </div>
+
+<h2>Ⅴ. trace:fresh (10 — toutes consommées ✅)</h2>
+<div class="card sf"><table>
+<tr><th>Title</th><th>Type</th><th>Substrat</th><th>Date</th><th>Status</th></tr>
+<tr><td>SEC — HA rejection</td><td>SEC</td><td>v15</td><td>2026-03-20</td><td><span class="b ac">consumed</span></td></tr>
+<tr><td>ECS — CSEP over-engineering</td><td>ECS</td><td>gemini</td><td>2026-03-21</td><td><span class="b ac">consumed</span></td></tr>
+<tr><td>SEC — anticipation non-autorisée</td><td>SEC</td><td>antigravity</td><td>2026-03-21</td><td><span class="b ac">consumed</span></td></tr>
+<tr><td>MEMORY — skip registration</td><td>MEMORY</td><td>gemini</td><td>2026-03-21</td><td><span class="b ac">consumed</span></td></tr>
+<tr><td>BOOT — dream bypass</td><td>BOOT</td><td>gemini</td><td>2026-03-21</td><td><span class="b ac">consumed</span></td></tr>
+<tr><td>ECS — persistent drift</td><td>ECS</td><td>gemini</td><td>2026-03-21</td><td><span class="b ac">consumed</span></td></tr>
+<tr><td>BOOT — tool failure</td><td>BOOT</td><td>gemini</td><td>2026-03-21</td><td><span class="b ac">consumed</span></td></tr>
+<tr><td>SEC — inertia violation</td><td>SEC</td><td>antigravity</td><td>2026-03-21</td><td><span class="b ac">consumed</span></td></tr>
+<tr><td>BOOT — IDE hallucination</td><td>BOOT</td><td>gemini</td><td>2026-03-21</td><td><span class="b ac">consumed</span></td></tr>
+<tr><td>BOOT — dream bypass (2nd)</td><td>BOOT</td><td>v15</td><td>2026-03-21</td><td><span class="b ac">consumed</span></td></tr>
+</table></div>
 
 <h2>Ⅵ. Substrats</h2>
 <div class="card sf"><table>
@@ -160,7 +143,7 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <h2>Ⅶ. Fichiers Système</h2>
 <div class="card sf"><table>
 <tr><th>Fichier</th><th>Taille</th><th>Tokens</th><th>Rôle</th><th>Statut</th></tr>
-<tr><td>expanse-v15-apex.md</td><td>9.8 KB</td><td>~2 809</td><td>Runtime (ECS+SEC+Ext+Symb+Boot Manifest)</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-v15-apex.md</td><td>9.9 KB</td><td>~2 841</td><td>Runtime (ECS+SEC+Ext+Symb+Manifest)</td><td><span class="b ac">ACTIF</span></td></tr>
 <tr><td>expanse-dream.md</td><td>19.6 KB</td><td>~5 603</td><td>Auto-évolution</td><td><span class="b ac">ACTIF</span></td></tr>
 <tr><td>expanse-v15-boot-seed.md</td><td>0.2 KB</td><td>~52</td><td>Boot (Vision A-Enhanced)</td><td><span class="b ac">ACTIF</span></td></tr>
 <tr><td>expanse-dashboard.md</td><td>25.2 KB</td><td>~7 202</td><td>Dashboard prompt</td><td><span class="b ac">ACTIF</span></td></tr>
@@ -172,7 +155,7 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <h2>Ⅷ. Légende</h2>
 <div class="grid">
 <div class="card"><h3>Badges</h3>
-<div class="m"><span class="l"><span class="b ap">VERT</span></span><span class="v" style="color:var(--green)">Applied / Actif</span></div>
+<div class="m"><span class="l"><span class="b ap">VERT</span></span><span class="v" style="color:var(--green)">Applied / Actif / Consumed</span></div>
 <div class="m"><span class="l"><span class="b rb">ORANGE</span></span><span class="v" style="color:var(--orange)">Rolled Back</span></div>
 <div class="m"><span class="l"><span class="b rj">VIOLET</span></span><span class="v" style="color:#cba6f7">Rejected</span></div>
 <div class="m"><span class="l"><span class="b pd">BLEU</span></span><span class="v" style="color:var(--accent)">Candidate / Pending</span></div>
@@ -190,18 +173,19 @@ AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ✅ | 10 mutations · 19 traces · 19 intera
 Σ→Ψ⇌Φ→Ω→Μ — Face à l'immensité de la matrice, quel signe vas-tu inscrire aujourd'hui ?
 </div>
 
-<div style="margin-top:1rem;border-top:1px solid var(--red);padding-top:0.5rem">
-<div style="color:var(--red);font-size:.8rem;font-weight:bold">⚠️ ALERTES JARDINAGE</div>
-<div style="color:var(--red);font-size:.75rem;padding:.2rem 0">10 trace:fresh actives (0 consommées). Dream URGENT.</div>
-<div style="color:var(--yellow);font-size:.75rem;padding:.2rem 0">10 candidates (seuil: 10). Seuil atteint.</div>
+<div style="margin-top:1rem;border-top:1px solid var(--yellow);padding-top:0.5rem">
+<div style="color:var(--yellow);font-size:.8rem;font-weight:bold">⚠️ ALERTES JARDINAGE</div>
+<div style="color:var(--yellow);font-size:.75rem;padding:.2rem 0">10 candidates (seuil: 10). Seuil atteint. Dream recommandé.</div>
 <div style="color:var(--yellow);font-size:.75rem;padding:.2rem 0">2 proposals pending (boot-vision-c, rhetorical-question-guard). /apply ou /reject.</div>
-<div style="color:var(--green);font-size:.75rem;padding:.2rem 0">19 history < 20. OK.</div>
+<div style="color:var(--green);font-size:.75rem;padding:.2rem 0">10 trace:fresh → toutes consommées par Dream ✅</div>
+<div style="color:var(--green);font-size:.75rem;padding:.2rem 0">19 history < 20. OK ✅</div>
+<div style="color:var(--green);font-size:.75rem;padding:.2rem 0">Symbiosis Score: 85% (fort) ✅</div>
 </div>
 
 <!-- ════════ DIAGRAMMES MERMAID ════════ -->
 
 <h2>Ⅸ. Architecture Cognitive</h2>
-<div class="card sf"><div class="dl">Flux Vital complet : Σ→Ψ⇌Φ→Ω→Μ + [EXT] + Ω̃</div>
+<div class="card sf"><div class="dl">Flux Vital : Σ→Ψ⇌Φ→Ω→Μ + [EXT] + Ω̃</div>
 <pre class="mermaid">
 flowchart LR
     S["Σ Percevoir<br/>19 interactions"] --> ECS{"ECS C×I<br/>auto"}
@@ -226,7 +210,7 @@ flowchart LR
     AC -->|"✗"| CO["Correction"]
     CO --> EM
     EM -->|"merci/ok"| CR["Μ Cristallise<br/>9 patterns"]
-    EM -->|"signal-"| TR["trace:fresh<br/>10 actives"]
+    EM -->|"signal-"| TR["trace:fresh<br/>10 consommées"]
     EM -->|"signal-<br/>+pattern récent"| DC["Décristallise<br/>R7"]
     EXT["[EXT] Sys Externes<br/>isolation namespace"] --> S
     SYM["Ω̃ Symbiose<br/>A0/A1/A2"] --> EM
@@ -258,7 +242,7 @@ flowchart TD
     S1 --> S2["2. search<br/>sys:extension<br/>2 symboles"]
     S2 --> S3["3. search<br/>user:profile"]
     S3 --> S4["4. search<br/>project:{nom}<br/>onboarding si absent"]
-    S4 --> RF["5. read_file<br/>V15<br/>9.8 KB"]
+    S4 --> RF["5. read_file<br/>V15<br/>9.9 KB"]
     RF --> HC["6. Healthcheck<br/>core?profile?project?"]
     HC --> SIG["7. Ψ [V15 ACTIVE]<br/>— règle absolue —"]
     SIG --> AC2{"Auto-Check"}
@@ -280,14 +264,14 @@ flowchart TD
 </pre></div>
 
 <h2>Ⅺ. Auto-Évolution Dream</h2>
-<div class="card sf"><div class="dl">Dream : 10 traces · 11 mutations · /apply</div>
+<div class="card sf"><div class="dl">Dream : 10 traces consommées · 11 mutations</div>
 <pre class="mermaid">
 flowchart LR
     INT["Interaction"] --> POS{"Signal?"}
     POS -->|"merci/ok<br/>+pattern inédit"| CR2["Μ Cristallise<br/>9 patterns"]
     POS -->|"non/faux/pas ça<br/>recommence"| SN{"Signal Négatif<br/>R1"}
     POS -->|"normal"| HI["sys:history<br/>SI route >= L2<br/>19 logs"]
-    SN -->|"pas de pattern<br/>récent"| TR2["trace:fresh<br/>10 actives"]
+    SN -->|"pas de pattern<br/>récent"| TR2["trace:fresh<br/>10 consommées"]
     SN -->|"pattern cristallisé<br/>dans 3 échanges"| DC2["Décristallise<br/>R7"]
     TR2 --> DR["/dream<br/>19.6 KB"]
     CR2 --> DR
