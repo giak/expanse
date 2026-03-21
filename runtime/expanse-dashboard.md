@@ -1,6 +1,6 @@
 # EXPANSE — Tableau de Bord Mnemolite
 
-**v2.1** — `/status`
+**v3.0** — `/status`
 
 ---
 
@@ -171,18 +171,23 @@ Le HTML doit suivre cet ordre EXACT. Ne pas dévier.
 
 ```
 1. Header (Σ→Ψ⇌Φ→Ω→Μ, status, date)
-2. Métriques (3 cards : Mnemolite, Mutations, Santé)
-3. Axiomes Scellés (table)
-4. Mutations (table)
-5. Candidates · Extensions · TRACE:FRESH (grid 3 cards)
-6. Patterns Validés (table)
-7. Fichiers Système (table)
-8. Légende (grid 3 cards : Badges, Diagrammes, Santé)
-9. Footer (statut + citation)
-10. ─── DIAGRAMMES MERMAID (EN DERNIER) ───
-    10a. Architecture Cognitive
-    10b. Boot Sequence
-    10c. Auto-Évolution Dream
+2. Commandes Expanse (3 cards : Runtime, Dream, Autonomie)
+3. Métriques (3 cards : Mnemolite, Mutations, Tokens)
+4. Axiomes Scellés (table)
+5. Mutations (table)
+6. Substrats (table)
+7. Candidates · Extensions · trace:fresh (grid 3 cards)
+8. Patterns Validés (table)
+9. Fichiers Système (table)
+10. Légende (grid : Badges, Santé)
+11. Footer (statut + alertes jardinage)
+12. ─── DIAGRAMMES MERMAID (EN DERNIER) ───
+    12a. Architecture Cognitive (avec [EXT] + Ω̃)
+    12b. Boot Sequence (avec [LLM|IDE] + BIOS)
+    12c. Auto-Évolution Dream (avec /apply)
+    12d. Commandes Expanse (toutes les commandes)
+    12e. Symbiose (A0/A1/A2 + budget)
+    12f. Cycle Adoption Externes (3 phases)
 ```
 
 **Règles absolues :**
@@ -251,7 +256,34 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <body>
 <div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V15 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● {STATUS}</div><div class="dt">{DATE}</div></div></div>
 
-<h2>Ⅰ. Métriques</h2>
+<h2>Ⅰ. Commandes Expanse</h2>
+<div class="grid">
+<div class="card"><h3>Runtime (V15)</h3>
+<div class="m"><span class="l">/dream</span><span class="v">Introspection (6 Passes + mutation)</span></div>
+<div class="m"><span class="l">/seal {titre}</span><span class="v">Migrer candidate → pattern</span></div>
+<div class="m"><span class="l">/reject {titre}</span><span class="v">Soft-delete candidate</span></div>
+<div class="m"><span class="l">/status</span><span class="v">Générer dashboard HTML</span></div>
+<div class="m"><span class="l">/autonomy {0-2}</span><span class="v">Niveau proactivité (A0/A1/A2)</span></div>
+<div class="m"><span class="l">/briefing on|off</span><span class="v">Résumé contextuel au boot</span></div>
+<div class="m"><span class="l">/profile</span><span class="l">Voir/éditer/reset profil</span></div>
+</div>
+<div class="card"><h3>Auto-évolution (Dream)</h3>
+<div class="m"><span class="l">/apply {slug}</span><span class="v">Appliquer mutation fichier</span></div>
+<div class="m"><span class="l">/reject {slug}</span><span class="v">Rejeter proposal Dream</span></div>
+<div class="m"><span class="l">/rollback {slug}</span><span class="v">Restaurer V15 depuis backup</span></div>
+<div class="m"><span class="l">/proposals</span><span class="v">Lister proposals en attente</span></div>
+<div class="m"><span class="l">/mutations</span><span class="v">Afficher historique complet</span></div>
+<div class="m"><span class="l">/diff {slug}</span><span class="v">Voir diff d'une mutation</span></div>
+</div>
+<div class="card"><h3>Autonomie (Symbiose)</h3>
+<div class="m"><span class="l">A0 — Silence</span><span class="v">V15 standard, aucune proactivité</span></div>
+<div class="m"><span class="l">A1 — Murmures</span><span class="v">Ψ [~] ignorable (>=70% confiance)</span></div>
+<div class="m"><span class="l">A2 — Suggestions</span><span class="v">Ψ [?] attend réponse Oui/Non</span></div>
+<div class="m"><span class="l">Budget</span><span class="v">≤ 500 tokens contexte interne</span></div>
+</div>
+</div>
+
+<h2>Ⅱ. Métriques</h2>
 <div class="grid">
 <div class="card"><h3>Mnemolite</h3>
 <div class="m"><span class="l">sys:core/anchor</span><span class="v">{COUNT_CORE}</span></div>
@@ -281,7 +313,7 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 </div>
 </div>
 
-<h2>Ⅱ. Axiomes Scellés</h2>
+<h2>Ⅲ. Axiomes Scellés</h2>
 <div class="card sf"><table>
 <tr><th>Titre</th><th>Type</th><th>Date</th><th>Tags</th></tr>
 <!-- RÉPÉTER pour chaque sys:core -->{CORE_ROWS}<!-- FIN -->
@@ -366,7 +398,7 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 
 <!-- ════════ DIAGRAMMES MERMAID (OBLIGATOIRES — NE JAMAIS SUPPRIMER) ════════ -->
 
-<h2>Ⅷ. Architecture Cognitive</h2>
+<h2>Ⅹ. Architecture Cognitive (avec symbiose et systèmes externes)</h2>
 <div class="card sf"><div class="dl">Flux Vital : Σ→Ψ⇌Φ→Ω→Μ · {COUNT_FRESH} traces · {COUNT_MUTATIONS} mutations</div>
 <pre class="mermaid">
 flowchart LR
@@ -410,7 +442,7 @@ flowchart LR
     class ECS,CAL,R,L1,L2,L3 ecs
 </pre></div>
 
-<h2>Ⅸ. Boot Sequence</h2>
+<h2>Ⅺ. Boot Sequence</h2>
 <div class="card sf"><div class="dl">Boot : {SEED_LINES} lignes · ~{BOOT_TIME}</div>
 <pre class="mermaid">
 flowchart TD
@@ -435,7 +467,7 @@ flowchart TD
     class AC2,FIX decision
 </pre></div>
 
-<h2>Ⅹ. Auto-Évolution Dream</h2>
+<h2>Ⅻ. Auto-Évolution Dream</h2>
 <div class="card sf"><div class="dl">Dream : {COUNT_FRESH} traces · {COUNT_MUTATIONS} mutations</div>
 <pre class="mermaid">
 flowchart LR
@@ -482,4 +514,4 @@ flowchart LR
 
 ---
 
-*Expanse Dashboard v2.1 — 2026-03-21*
+*Expanse Dashboard v3.0 — 2026-03-21*
