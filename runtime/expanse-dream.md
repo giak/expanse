@@ -100,13 +100,16 @@ Les TYPES permettent le regroupement :
 
 ---
 
-### Passe 6 : La Santé Cognitive
+### Passe 6 : La Santé Cognitive (Θ & SS)
 
-- **Action :** `mcp_mnemolite_search_memory(tags: ["sys:history"], limit: 50)`
+- **Action :** `mcp_mnemolite_search_memory(tags: ["sys:history", "sys:user:profile"], limit: 50)`
 - **Métriques :**
   - **Verbosity Drift** : Longueur réponse vs baseline (> 2x = alerte)
   - **Ψ Compliance** : % réponses par Ψ (< 90% = alerte)
-  - **Tool Usage** : Ratio outils sur L2+ (< 50% = alerte)
+  - **Symbiosis Score (SS)** : (Acceptées / Total_Propositions). Si < 30% → Proposal `/autonomy` décrément.
+- **Audit Θ (Profil) :**
+  - Analyse des TRACE:FRESH pour mettre à jour les patterns de friction dans `sys:user:profile`.
+  - Nettoyage des biais obsolètes.
 - **Analyse par substrat :**
   - Grouper les `sys:history` par tag `substrat:{LLM}`
   - Calculer le taux Ψ par substrat
