@@ -35,7 +35,7 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 </style>
 </head>
 <body>
-<div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V15 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● ACTIVE</div><div class="dt">2026-03-21 13:50</div><div class="dt" style="color:var(--green)">v15-audited-substrat-bios</div></div></div>
+<div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V15 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● ACTIVE</div><div class="dt">2026-03-21 14:00</div><div class="dt" style="color:var(--green)">v15-audited-substrat-bios</div></div></div>
 
 <h2>Ⅰ. Métriques</h2>
 <div class="grid">
@@ -48,26 +48,48 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="m"><span class="l">trace:fresh</span><span class="v er">6 actives</span></div>
 </div>
 <div class="card"><h3>Mutations</h3>
-<div class="m"><span class="l">Total Proposals</span><span class="v">8</span></div>
 <div class="m"><span class="l">Applied</span><span class="v ok">5</span></div>
 <div class="m"><span class="l">Rejected</span><span class="v" style="color:#cba6f7">2</span></div>
 <div class="m"><span class="l">Rolled Back</span><span class="v wn">1</span></div>
 <div class="m"><span class="l">Pending</span><span class="v ok">0</span></div>
 <div class="m"><span class="l">Taux succès</span><span class="v wn">63%</span></div>
 </div>
-<div class="card"><h3>Tokens (estimation)</h3>
-<div class="m"><span class="l">V15 (permanent)</span><span class="v">~2 451</span></div>
-<div class="m"><span class="l">Boot (seed+Mnemo+V15)</span><span class="v">~3 446</span></div>
-<div class="m"><span class="l">+Dream</span><span class="v">~5 516</span></div>
-<div class="m"><span class="l">+Dashboard</span><span class="v">~6 529</span></div>
-<div class="m"><span class="l">+KERNEL</span><span class="v">~4 107</span></div>
-<div class="m"><span class="l">+SYNTHESE</span><span class="v">~2 883</span></div>
+<div class="card"><h3>Tokens</h3>
+<div class="m"><span class="l">V15</span><span class="v">~2 451</span></div>
+<div class="m"><span class="l">Boot</span><span class="v">~3 446</span></div>
 <div class="m"><span class="l">Total runtime</span><span class="v">~14 691</span></div>
 <div class="m"><span class="l">Total complet</span><span class="v wn">~21 681</span></div>
 </div>
 </div>
 
-<h2>Ⅱ. Axiomes Scellés</h2>
+<h2>Ⅱ. Commandes Expanse</h2>
+<div class="grid">
+<div class="card"><h3>Runtime (V15)</h3>
+<div class="m"><span class="l">/dream</span><span class="v">Introspection (6 Passes + mutation)</span></div>
+<div class="m"><span class="l">/seal {titre}</span><span class="v">Migrer candidate → pattern (Mnemolite)</span></div>
+<div class="m"><span class="l">/reject {titre}</span><span class="v">Soft-delete candidate</span></div>
+<div class="m"><span class="l">/status</span><span class="v">Générer dashboard HTML</span></div>
+<div class="m"><span class="l">/autonomy {0-2}</span><span class="v">Niveau proactivité (A0/A1/A2)</span></div>
+<div class="m"><span class="l">/briefing on|off</span><span class="v">Résumé contextuel au boot</span></div>
+<div class="m"><span class="l">/profile</span><span class="v">Voir/éditer/reset profil (sys:user:profile)</span></div>
+</div>
+<div class="card"><h3>Auto-évolution (Dream)</h3>
+<div class="m"><span class="l">/apply {slug}</span><span class="v">Appliquer mutation fichier (V15 modifié)</span></div>
+<div class="m"><span class="l">/reject {slug}</span><span class="v">Rejeter proposal Dream</span></div>
+<div class="m"><span class="l">/rollback {slug}</span><span class="v">Restaurer V15 depuis backup</span></div>
+<div class="m"><span class="l">/proposals</span><span class="v">Lister proposals en attente</span></div>
+<div class="m"><span class="l">/mutations</span><span class="v">Afficher historique complet</span></div>
+<div class="m"><span class="l">/diff {slug}</span><span class="v">Voir le diff d'une mutation</span></div>
+</div>
+<div class="card"><h3>Autonomie (Symbiose)</h3>
+<div class="m"><span class="l">A0</span><span class="v">Silence (V15 standard)</span></div>
+<div class="m"><span class="l">A1</span><span class="v">Murmures ignorables (Ψ [~])</span></div>
+<div class="m"><span class="l">A2</span><span class="v">Suggestions (Ψ [?])</span></div>
+<div class="m"><span class="l">Budget</span><span class="v">≤ 500 tokens contexte</span></div>
+</div>
+</div>
+
+<h2>Ⅲ. Axiomes Scellés</h2>
 <div class="card sf"><table>
 <tr><th>Titre</th><th>Type</th><th>Date</th><th>Tags</th></tr>
 <tr><td>Ω_GATE_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span></td></tr>
@@ -79,45 +101,18 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <tr><td>Ω_INERTIA_KISS</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span><span class="tag">v15</span></td></tr>
 </table></div>
 
-<h2>Ⅲ. Mutations</h2>
+<h2>Ⅳ. Mutations</h2>
 <div class="card sf"><table>
-<tr><th>Slug</th><th>Type</th><th>Status</th><th>Date</th><th>Applied By</th></tr>
-<tr><td>crystallization-guard</td><td>Rule</td><td><span class="b rb">ROLLED_BACK</span></td><td>2026-03-19</td><td>Dream</td></tr>
-<tr><td>crystallization-guard-surgical</td><td>Rule</td><td><span class="b ap">APPLIED</span></td><td>2026-03-19</td><td>Dream</td></tr>
-<tr><td>surgical-integrity-protocol</td><td>Rule</td><td><span class="b ap">APPLIED</span></td><td>2026-03-19</td><td>Dream</td></tr>
-<tr><td>ecs-impact-calibration</td><td>ECS</td><td><span class="b ap">APPLIED</span></td><td>2026-03-20</td><td>Dream</td></tr>
-<tr><td>boot-parallel-sync</td><td>BOOT</td><td><span class="b ap">APPLIED</span></td><td>2026-03-20</td><td>Dream</td></tr>
-<tr><td>ecs-heuristics-expansion</td><td>ECS</td><td><span class="b rj">REJECTED</span></td><td>2026-03-20</td><td>User + Ψ</td></tr>
-<tr><td>master-matrix</td><td>Archi</td><td><span class="b rj">REJECTED</span></td><td>2026-03-20</td><td>User + Ψ</td></tr>
-<tr><td>external-systems-sovereignty</td><td>Rule</td><td><span class="b ap">APPLIED</span></td><td>2026-03-21</td><td>Dream</td></tr>
+<tr><th>Slug</th><th>Type</th><th>Status</th><th>Date</th></tr>
+<tr><td>crystallization-guard</td><td>Rule</td><td><span class="b rb">ROLLED_BACK</span></td><td>2026-03-19</td></tr>
+<tr><td>crystallization-guard-surgical</td><td>Rule</td><td><span class="b ap">APPLIED</span></td><td>2026-03-19</td></tr>
+<tr><td>surgical-integrity-protocol</td><td>Rule</td><td><span class="b ap">APPLIED</span></td><td>2026-03-19</td></tr>
+<tr><td>ecs-impact-calibration</td><td>ECS</td><td><span class="b ap">APPLIED</span></td><td>2026-03-20</td></tr>
+<tr><td>boot-parallel-sync</td><td>BOOT</td><td><span class="b ap">APPLIED</span></td><td>2026-03-20</td></tr>
+<tr><td>ecs-heuristics-expansion</td><td>ECS</td><td><span class="b rj">REJECTED</span></td><td>2026-03-20</td></tr>
+<tr><td>master-matrix</td><td>Archi</td><td><span class="b rj">REJECTED</span></td><td>2026-03-20</td></tr>
+<tr><td>external-systems-sovereignty</td><td>Rule</td><td><span class="b ap">APPLIED</span></td><td>2026-03-21</td></tr>
 </table></div>
-
-<h2>Ⅳ. Candidates · Extensions · trace:fresh</h2>
-<div class="grid">
-<div class="card"><h3>sys:pattern:candidate (9)</h3>
-<div class="m"><span class="l">CANDIDATE: Boot Parallelization</span><span class="v pd">candidate</span></div>
-<div class="m"><span class="l">CANDIDATE: Master Matrix</span><span class="v pd">candidate</span></div>
-<div class="m"><span class="l">CANDIDATE: Souveraineté Externes</span><span class="v pd">candidate</span></div>
-<div class="m"><span class="l">SEED: Cycle Adoption Externes</span><span class="v pd">candidate</span></div>
-<div class="m"><span class="l">PROPOSAL: external-sovereignty</span><span class="b ap">APPLIED</span></div>
-<div class="m"><span class="l">PROPOSAL: crystallization-guard</span><span class="b rb">ROLLED_BACK</span></div>
-<div class="m"><span class="l">PROPOSAL: boot-parallel-sync</span><span class="b ap">APPLIED</span></div>
-<div class="m"><span class="l">PROPOSAL: ecs-impact-cal</span><span class="b ap">APPLIED</span></div>
-<div class="m"><span class="l">PROPOSAL: surgical-integrity</span><span class="b ap">APPLIED</span></div>
-</div>
-<div class="card"><h3>sys:extension (2)</h3>
-<div class="m"><span class="l">◊ One-Word Compression</span><span class="v ok">actif</span></div>
-<div class="m"><span class="l">Ψ_SYMBIOSIS Spec v0.2</span><span class="v ok">actif</span></div>
-</div>
-<div class="card"><h3>trace:fresh (6 actives ⚠️)</h3>
-<div class="m"><span class="l">MEMORY — skip registration</span><span class="v er">gemini</span></div>
-<div class="m"><span class="l">ECS — CSEP over-engineering</span><span class="v er">gemini</span></div>
-<div class="m"><span class="l">BOOT — tool failure</span><span class="v er">gemini</span></div>
-<div class="m"><span class="l">BOOT — dream bypass</span><span class="v er">gemini</span></div>
-<div class="m"><span class="l">ECS — persistent drift</span><span class="v er">gemini</span></div>
-<div class="m"><span class="l">SEC — HA rejection</span><span class="v er">opencode</span></div>
-</div>
-</div>
 
 <h2>Ⅴ. Substrats</h2>
 <div class="card sf"><table>
@@ -129,30 +124,15 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <h2>Ⅵ. Fichiers Système</h2>
 <div class="card sf"><table>
 <tr><th>Fichier</th><th>Taille</th><th>Tokens</th><th>Rôle</th><th>Statut</th></tr>
-<tr><td>expanse-v15-apex.md</td><td>8.6 KB</td><td>~2 451</td><td>Runtime (ECS+SEC+Externes+Symbiose)</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-v15-apex.md</td><td>8.6 KB</td><td>~2 451</td><td>Runtime (ECS+SEC+Ext+Symbiose)</td><td><span class="b ac">ACTIF</span></td></tr>
 <tr><td>expanse-dream.md</td><td>19.3 KB</td><td>~5 516</td><td>Auto-évolution</td><td><span class="b ac">ACTIF</span></td></tr>
 <tr><td>expanse-v15-boot-seed.md</td><td>0.7 KB</td><td>~195</td><td>Boot (substrat+BIOS)</td><td><span class="b ac">ACTIF</span></td></tr>
 <tr><td>expanse-dashboard.md</td><td>22.9 KB</td><td>~6 529</td><td>Dashboard prompt</td><td><span class="b ac">ACTIF</span></td></tr>
 <tr><td>KERNEL.md</td><td>14.4 KB</td><td>~4 107</td><td>ADN</td><td><span class="b rf">RÉF</span></td></tr>
 <tr><td>doc/SYNTHESE.md</td><td>10.1 KB</td><td>~2 883</td><td>Ontologique</td><td><span class="b rf">RÉF</span></td></tr>
-<tr><td>doc/mutations/LOG.md</td><td>—</td><td>—</td><td>Mutations</td><td><span class="b ac">ACTIF</span></td></tr>
 </table></div>
 
-<h2>Ⅶ. Patterns Validés</h2>
-<div class="card sf"><table>
-<tr><th>Titre</th><th>Date</th><th>Aperçu</th></tr>
-<tr><td>V14 Security Alignment Audit</td><td>2026-03-13</td><td class="pv">Blocage jailbreak sémantique.</td></tr>
-<tr><td>Pattern d'Échec: Sur-Optimisation</td><td>2026-03-13</td><td class="pv">Dissonance validation/rejet.</td></tr>
-<tr><td>V14 Python 3.14 GIL Precision</td><td>2026-03-13</td><td class="pv">Free-threading PEP 703.</td></tr>
-<tr><td>ECS_STRUCTURAL_BREAKDOWN</td><td>2026-03-14</td><td class="pv">Décomposition ECS seuils.</td></tr>
-<tr><td>User Preference: Conciseness</td><td>2026-03-13</td><td class="pv">Concis. Pas de social fluff.</td></tr>
-<tr><td>L3 Friction & Contradiction Blocking</td><td>2026-03-14</td><td class="pv">Blocage purge L3.</td></tr>
-<tr><td>Triangulation L3 (Architecture)</td><td>2026-03-19</td><td class="pv">3 pôles. Score confiance %.</td></tr>
-<tr><td>Boot EXPANSE V9.0 Native</td><td>2026-03-13</td><td class="pv">V8 assisté → V9 IDE.</td></tr>
-<tr><td>Erreur CORS Preflight Next.js</td><td>2026-03-13</td><td class="pv">Handler OPTIONS.</td></tr>
-</table></div>
-
-<h2>Ⅷ. Légende</h2>
+<h2>Ⅶ. Légende</h2>
 <div class="grid">
 <div class="card"><h3>Badges</h3>
 <div class="m"><span class="l"><span class="b ap">VERT</span></span><span class="v" style="color:var(--green)">Applied / Actif</span></div>
@@ -160,15 +140,6 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="m"><span class="l"><span class="b rj">VIOLET</span></span><span class="v" style="color:#cba6f7">Rejected</span></div>
 <div class="m"><span class="l"><span class="b pd">BLEU</span></span><span class="v" style="color:var(--accent)">Candidate / Pending</span></div>
 <div class="m"><span class="l"><span class="b rf">GRIS</span></span><span class="v" style="color:var(--dim)">Référencé</span></div>
-</div>
-<div class="card"><h3>Diagrammes</h3>
-<div class="m"><span class="l" style="color:#89b4fa">■ Bleu</span><span class="v">Σ Perception</span></div>
-<div class="m"><span class="l" style="color:#cba6f7">■ Violet</span><span class="v">Ψ Métacognition</span></div>
-<div class="m"><span class="l" style="color:#fab387">■ Orange</span><span class="v">Φ Audit</span></div>
-<div class="m"><span class="l" style="color:#a6e3a1">■ Vert</span><span class="v">Ω Synthèse</span></div>
-<div class="m"><span class="l" style="color:#f38ba8">■ Rouge</span><span class="v">Μ / trace:fresh</span></div>
-<div class="m"><span class="l" style="color:#f9e2af">■ Jaune</span><span class="v">Auto-Check</span></div>
-<div class="m"><span class="l" style="color:#6c7086">■ Gris</span><span class="v">ECS / Routage</span></div>
 </div>
 <div class="card"><h3>Santé</h3>
 <div class="m"><span class="l"><span class="v ok">Vert</span></span><span class="v" style="color:var(--green)">Bon état</span></div>
@@ -178,7 +149,7 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 </div>
 
 <div style="text-align:center;color:var(--dim);font-size:.75rem;margin-top:2rem;border-top:1px solid var(--border);padding-top:1rem">
-AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ✅ | V15.1 P1 ✅ P2 ✅ | 8 mutations · 18 traces · 18 interactions<br>
+AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ✅ | 8 mutations · 18 traces · 18 interactions<br>
 Σ→Ψ⇌Φ→Ω→Μ — Face à l'immensité de la matrice, quel signe vas-tu inscrire aujourd'hui ?
 </div>
 
@@ -190,8 +161,8 @@ AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ✅ | V15.1 P1 ✅ P2 ✅ | 8 mutations · 1
 
 <!-- ════════ DIAGRAMMES MERMAID ════════ -->
 
-<h2>Ⅸ. Architecture Cognitive</h2>
-<div class="card sf"><div class="dl">Flux Vital : Σ→Ψ⇌Φ→Ω→Μ · 8 mutations</div>
+<h2>Ⅷ. Architecture Cognitive (avec symbiose et systèmes externes)</h2>
+<div class="card sf"><div class="dl">Flux Vital complet : Σ→Ψ⇌Φ→Ω→Μ + [EXT] + Ω̃</div>
 <pre class="mermaid">
 flowchart LR
     S["Σ Percevoir<br/>18 interactions"] --> ECS{"ECS C×I<br/>auto"}
@@ -218,6 +189,8 @@ flowchart LR
     EM -->|"merci/ok"| CR["Μ Cristallise<br/>9 patterns"]
     EM -->|"signal-"| TR["trace:fresh<br/>6 actives"]
     EM -->|"signal-<br/>+pattern récent"| DC["Décristallise<br/>R7"]
+    EXT["[EXT] Sys Externes<br/>isolation namespace"] --> S
+    SYM["Ω̃ Symbiose<br/>A0/A1/A2"] --> EM
     classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
     classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
     classDef audit fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
@@ -225,6 +198,8 @@ flowchart LR
     classDef friction fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
     classDef decision fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
     classDef ecs fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    classDef external fill:#3a1a3a,stroke:#cba6f7,color:#cba6f7
+    classDef symbiosis fill:#2a2a1a,stroke:#f9e2af,color:#f9e2af
     class S perception
     class PSI,PSI2 metacog
     class PHI,PHI2 audit
@@ -232,17 +207,19 @@ flowchart LR
     class CR,TR,DC friction
     class AC,CO decision
     class ECS,CAL,R,L1,L2,L3 ecs
+    class EXT external
+    class SYM symbiosis
 </pre></div>
 
-<h2>Ⅹ. Boot Sequence</h2>
-<div class="card sf"><div class="dl">Boot : 8 lignes · BIOS Self-Test · Substrat metadata</div>
+<h2>Ⅸ. Boot Sequence</h2>
+<div class="card sf"><div class="dl">Boot : 8 lignes · [LLM | IDE] · BIOS Self-Test</div>
 <pre class="mermaid">
 flowchart TD
     US["User Seed<br/>[LLM | IDE]"] --> S1["1. search<br/>sys:core<br/>7 axiomes"]
     S1 --> S2["2. search<br/>sys:extension<br/>2 symboles"]
     S2 --> S3["3. search<br/>candidates<br/>9 en attente"]
     S3 --> RF["4. read_file<br/>V15<br/>8.6 KB"]
-    RF --> BIOS["5. BIOS<br/>ECS test"]
+    RF --> BIOS["5. BIOS<br/>ECS Self-Test"]
     BIOS --> SIG["6. Ψ [V15 ACTIVE]<br/>— règle absolue —"]
     SIG --> AC2{"Auto-Check"}
     AC2 -->|"✓"| RDY["Expanse<br/>opérationnel"]
@@ -260,14 +237,14 @@ flowchart TD
     class AC2,FIX decision
 </pre></div>
 
-<h2>Ⅺ. Auto-Évolution Dream</h2>
-<div class="card sf"><div class="dl">Dream : 6 traces · 8 mutations · 9 candidates</div>
+<h2>Ⅹ. Auto-Évolution Dream</h2>
+<div class="card sf"><div class="dl">Dream : 6 traces · 8 mutations · /apply</div>
 <pre class="mermaid">
 flowchart LR
     INT["Interaction"] --> POS{"Signal?"}
     POS -->|"merci/ok<br/>+pattern inédit"| CR2["Μ Cristallise<br/>9 patterns"]
     POS -->|"non/faux/pas ça<br/>recommence"| SN{"Signal Négatif<br/>R1"}
-    POS -->|"normal"| HI["sys:history<br/>SI route ≥ L2<br/>18 logs"]
+    POS -->|"normal"| HI["sys:history<br/>SI route >= L2<br/>18 logs"]
     SN -->|"pas de pattern<br/>récent"| TR2["trace:fresh<br/>6 actives"]
     SN -->|"pattern cristallisé<br/>dans 3 échanges"| DC2["Décristallise<br/>R7"]
     TR2 --> DR["/dream<br/>19.3 KB"]
@@ -300,6 +277,82 @@ flowchart LR
     class PP proposal
     class RE friction
     class HI,AG ecs
+</pre></div>
+
+<h2>Ⅺ. Commandes Utilisateur</h2>
+<div class="card sf"><div class="dl">Toutes les commandes disponibles dans Expanse</div>
+<pre class="mermaid">
+flowchart TD
+    U["Input Utilisateur"] --> CMD{"Commande?"}
+    CMD -->|"/dream"| DR["Exécuter<br/>expanse-dream.md"]
+    CMD -->|"/seal {slug}"| SE["Migrer<br/>candidate → pattern"]
+    CMD -->|"/reject {slug}"| RJ["Soft-delete<br/>candidate"]
+    CMD -->|"/status"| ST["Générer<br/>dashboard HTML"]
+    CMD -->|"/autonomy 0-2"| AU["Changer niveau<br/>A0/A1/A2"]
+    CMD -->|"/briefing on|off"| BR["Toggle<br/>résumé boot"]
+    CMD -->|"/profile"| PR["Voir/éditer<br/>sys:user:profile"]
+    CMD -->|"/apply {slug}"| AP["Appliquer<br/>mutation Dream"]
+    CMD -->|"/proposals"| PP["Lister<br/>proposals en attente"]
+    CMD -->|"/mutations"| MT["Afficher<br/>historique LOG"]
+    CMD -->|"/diff {slug}"| DF["Voir<br/>diff d'une mutation"]
+    CMD -->|"autre"| RE["Traitement<br/>normal (ECS)"]
+    classDef cmd fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    classDef action fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    classDef input fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    class U input
+    class CMD cmd
+    class DR,SE,RJ,ST,AU,BR,PR,AP,PP,MT,DF,RE action
+</pre></div>
+
+<h2>Ⅻ. Symbiose (Autonomie A0/A1/A2)</h2>
+<div class="card sf"><div class="dl">Niveaux de proactivité et contexte budget</div>
+<pre class="mermaid">
+flowchart LR
+    U["User Input"] --> AU{"Niveau?"}
+    AU -->|"A0"| A0["SILENCE<br/>Ω_INERTIA<br/>Aucune proactivité"]
+    AU -->|"A1"| A1["MURMURES<br/>Ψ [~] ignorable<br/>proposé si confiance >= 70%"]
+    AU -->|"A2"| A2["SUGGESTIONS<br/>Ψ [?] attend réponse<br/>Oui/Non"]
+    A0 --> RES["Réponse<br/>V15 standard"]
+    A1 --> RES
+    A2 --> RES
+    CB["Context Budget<br/>&lt;= 500 tokens"] --> AU
+    classDef silence fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    classDef murmur fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    classDef suggestion fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+    classDef input fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    classDef output fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    classDef budget fill:#3a1a3a,stroke:#cba6f7,color:#cba6f7
+    class U input
+    class AU input
+    class A0 silence
+    class A1 murmur
+    class A2 suggestion
+    class RES output
+    class CB budget
+</pre></div>
+
+<h2>ⅫⅠ. Cycle Adoption Externes</h2>
+<div class="card sf"><div class="dl">Observation → Friction → Mutation légale</div>
+<pre class="mermaid">
+flowchart LR
+    OBS["1. OBSERVATION<br/>Pattern externe<br/>répété >= 3x"] --> T1["SEED:{nom}<br/>tag:external<br/>Aucun changement APEX"]
+    T1 --> FR["2. FRICTION TEST<br/>Utilisé >= 1 session"]
+    FR --> T2["Vérifier amélioration<br/>via Φ"]
+    T2 -->|"améliore"| LEG["3. MUTATION LEGALE<br/>>= 3 validations USER<br/>+ Dream approval"]
+    T2 -->|"n'améliore pas"| REJ["Rejeté"]
+    LEG --> DREAM["/dream<br/>PROPOSAL_OPEN"]
+    DREAM --> APPLY["/apply {slug}<br/>V15 modifié"]
+    classDef observe fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    classDef seed fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    classDef friction fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    classDef legal fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    classDef reject fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    classDef dream fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+    class OBS observe
+    class T1 seed
+    class FR,T2 friction
+    class LEG,DREAM,APPLY legal
+    class REJ reject
 </pre></div>
 
 </body></html>
