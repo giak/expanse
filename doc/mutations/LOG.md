@@ -1,6 +1,6 @@
 # MUTATION LOG — EXPANSE V15
 
-**Last Updated:** 2026-03-18
+**Last Updated:** 2026-03-21
 **Version:** 2.1
 
 ---
@@ -9,8 +9,8 @@
 
 | Métrique | Count |
 |----------|-------|
-| Total Proposals | 5 |
-| Applied | 4 |
+| Total Proposals | 6 |
+| Applied | 5 |
 | Rejected | 0 |
 | Failed | 0 |
 | Rolled Back | 1 |
@@ -27,6 +27,7 @@
 | 2026-03-19 | surgical-integrity-protocol | Rule | APPLIED | Dream |
 | 2026-03-20 | ecs-impact-calibration | ECS | APPLIED | Dream |
 | 2026-03-20 | boot-parallel-sync | BOOT | APPLIED | Dream |
+| 2026-03-21 | external-systems-sovereignty | Rule | APPLIED | Dream |
 
 ---
 
@@ -37,12 +38,16 @@
 | 2026-03-19 | surgical-integrity-protocol | Rule | APPLIED | Dream |
 | 2026-03-20 | boot-parallel-sync | BOOT | APPLIED | Dream |
 | 2026-03-20 | ecs-impact-calibration | ECS | APPLIED | Dream |
+| 2026-03-21 | external-systems-sovereignty | Rule | APPLIED | Dream |
 
 ---
 
 ## Rejected Mutations
 
-(Aucune mutation rejetée pour le moment)
+| Date | Slug | Type | Status | Author |
+|------|------|------|--------|--------|
+| 2026-03-20 | master-matrix | Archi | REJECTED | Dream |
+| 2026-03-20 | ecs-heuristics-expansion | ECS | REJECTED | Dream |
 
 ---
 
@@ -54,10 +59,7 @@
 
 ## Pending Proposals
 
-| Date | Slug | Type | Status | Author |
-|------|------|------|--------|--------|
-| 2026-03-20 | master-matrix | Archi | REJECTED | Dream |
-| 2026-03-20 | ecs-heuristics-expansion | ECS | REJECTED | Dream |
+(Aucun proposal en attente)
 
 ---
 
@@ -85,7 +87,7 @@
 
 ## Archives
 
-Les backups de V15 sont stockés dans `_archives/`
+Les backups de V15 sont stockés dans `archive/backups/`
 
 Format: `expanse-v15-YYYY-MM-DD-{slug}-backup.md`
 
@@ -97,4 +99,4 @@ Un fichier `.lock` existe dans `doc/mutations/` quand une mutation est en cours.
 
 ---
 
-*Log v2.1 - 2026-03-18*
+*Log v2.1 - 2026-03-21*
