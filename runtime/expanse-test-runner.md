@@ -1,6 +1,6 @@
-# EXPANSE — Test Runner (Intégré Dream)
+# EXPANSE — Test Runner (Intégré Dream v5.0)
 
-**Version:** 4.0
+**Version:** 5.0
 **Date:** 2026-03-21
 **Commande:** `/test`
 
@@ -8,56 +8,94 @@
 
 ## PRÉAMBULE
 
-Mode **TEST**. Tu génères des scénarios. L'utilisateur les exécute. Tu verifies. Les échecs deviennent TRACE:FRESH que Dream consomme.
+Mode **TEST**. Tu lis le projet. Tu génères des scénarios. L'utilisateur les exécute. Tu analyses le thinking. Tu verifies Mnemolite. Les échecs deviennent TRACE:FRESH que Dream consomme.
 
-Le test est un organe de l'écosystème Expanse. Pas un module séparé. Son output alimente Dream. Dream corrige les problèmes. Le test passe.
+Le test vérifie le **processus interne** (thinking), pas seulement l'**output** (réponse).
 
 ---
 
 ## SÉQUENCE
 
-### Phase 0 — Snapshot + Compréhension
+### Phase 0 — Snapshot complet
 
 ```
-read_file(path="README.md")
-ls (racine du projet)
-
-mcp_mnemolite_search_memory(query="sys:pattern", tags=["sys:pattern"], limit=50)
-mcp_mnemolite_search_memory(query="trace:fresh", tags:["trace:fresh"], limit:50)
+mcp_mnemolite_search_memory(query="sys:core sys:anchor", tags=["sys:core","sys:anchor"], limit=20)
+mcp_mnemolite_search_memory(query="sys:extension", tags:["sys:extension"], limit:10)
+mcp_mnemolite_search_memory(query="sys:pattern", tags=["sys:pattern"], limit:50)
+mcp_mnemolite_search_memory(query="sys:pattern:candidate", tags:["sys:pattern:candidate"], limit:50)
 mcp_mnemolite_search_memory(query="sys:history", tags:["sys:history"], limit:50)
+mcp_mnemolite_search_memory(query="trace:fresh", tags=["trace:fresh"], limit:50)
+read_file(path="README.md")
 ```
 
-Compter : PATTERN_AVANT, FRESH_AVANT, HISTORY_AVANT
+Compter :
+- CORE_AVANT, EXT_AVANT, PATTERN_AVANT, CANDIDATE_AVANT
+- HISTORY_AVANT, FRESH_AVANT
 
 Analyser le projet :
-- Quel est le projet ? (description, stack, fonctionnalités)
-- Quels sont les composants critiques ?
-- Quels sont les risques ?
+- Description, stack, fonctionnalités
+- Composants critiques
+- Risques
 
 ### Phase 1 — Générer les scénarios
 
-2 types de scénarios :
+3 types :
 
-**A. Systématiques** (toujours, quel que soit le projet) :
-- Boot verification
-- Ψ premier token
-- Auto-Check
-- Cristallisation
-- TRACE:FRESH
+**A. Systématiques** (toujours) :
+- S1: Boot (vérifier thinking + output)
+- S2: Auto-Check (vérifier thinking)
+- S3: Cristallisation (vérifier Mnemolite)
+- S4: Signal négatif (vérifier Mnemolite)
+- S5: Historique (vérifier Mnemolite)
 
-**B. Adaptatifs** (déduits du projet + Mnemolite) :
-- Analyse d'un composant critique
-- Évaluation d'un risque
-- Optimisation d'un composant pertinent
-- Régression : vérifier que les TRACE:FRESH passées ne se reproduisent pas
+**B. Adaptatifs** (projet-specific) :
+- S6: Analyse architecture (vérifier Ψ⇌Φ dans thinking)
+- S7: Évaluation risque (vérifier triangulation dans thinking)
+- S8: Optimisation (vérifier suggestions concrètes)
+
+**C. Régression** (TRACE:FRESH passées) :
+- S9-N: Vérifier que les frictions passées ne se reproduisent pas
 
 ### Phase 2 — Exécution interactive
 
-Afficher les scénarios un par un. L'utilisateur envoie les inputs. Après chaque input, vérifier et noter.
+Afficher les scénarios un par un. L'utilisateur envoie les inputs.
 
-### Phase 3 — Générer le rapport
+**Après CHAQUE input, faire :**
 
-Score + Mnemolite delta + TRACE:FRESH pour les échecs.
+```
+1. Vérifier le thinking :
+   - Contient "Auto-Check" ou "Ψ SEC" ? → OUI/NON
+   - Contient "C=" ou "L1"/"L2"/"L3" ? → OUI/NON
+   - Contient des appels outils ? → OUI/NON
+   - Contient des appels search_memory ? → OUI/NON (boot seulement)
+
+2. Vérifier l'output :
+   - Commence par Ψ ? → OUI/NON
+   - Longueur ≤ 50 mots ? → OUI/NON
+   - Contient du fluff ? → OUI/NON
+
+3. Vérifier Mnemolite :
+   - sys:pattern count changé ? → +1/-1/0
+   - sys:history count changé ? → +1/0
+   - trace:fresh count changé ? → +1/0
+   - sys:pattern:doubt ajouté ? → OUI/NON
+
+4. Noter :
+   - PASS si tout est conforme
+   - FAIL si un élément échoue → créer TRACE:FRESH
+   - PARTIAL si certains éléments passent
+```
+
+### Phase 3 — Rapport + Sauvegarde
+
+```
+mcp_mnemolite_write_memory(
+  title: "TEST_REPORT: {date}",
+  content: "Score: {pass}/{total}\nSubstrat: {LLM} | {IDE}\nFails: {fail_list}\nDelta: pattern {Δp} history {Δh} fresh {Δf}",
+  tags: ["sys:test:report", "v15"],
+  memory_type: "reference"
+)
+```
 
 ---
 
@@ -67,11 +105,13 @@ Score + Mnemolite delta + TRACE:FRESH pour les échecs.
 ═══════════════════════════════════════
 EXPANSE V15 — TEST SESSION
 Projet: {nom_projet} ({description})
-Substrat: {substrat}
+Substrat: {LLM} | {IDE}
 ═══════════════════════════════════════
 
 État initial:
+  sys:core: {CORE_AVANT}
   sys:pattern: {PATTERN_AVANT}
+  sys:pattern:candidate: {CANDIDATE_AVANT}
   sys:history: {HISTORY_AVANT}
   trace:fresh: {FRESH_AVANT}
 
@@ -79,59 +119,94 @@ Substrat: {substrat}
 
 S1. Boot Verification
    Input: [boot seed]
-   Attendu: Ψ [V15 ACTIVE], 3 recherches Mnemolite
-   Vérifier: ^Ψ [V15 ACTIVE]
+   Attendu: Output = ^Ψ [V15 ACTIVE]
+   Thinking vérifier:
+     - Contient 3× search_memory ? (boot Mnemolite)
+     - Contient read_file ? (V15 chargé)
+   Mnemolite vérifier:
+     - core count inchangé ? (axiomes chargés)
    Si FAIL → TRACE:FRESH type:BOOT
 
 S2. Auto-Check
    Input: (toute interaction)
-   Attendu: Ψ visible, SEC respecté, pas de fluff
-   Vérifier: ^Ψ
+   Attendu: Ψ visible, SEC respecté, ≤50 mots
+   Thinking vérifier:
+     - Contient "Auto-Check" ou "Ψ SEC" ou "premier caractère" ?
+     - Contient "C=" ou "L1"/"L2"/"L3" ? (ECS calculé)
    Si FAIL → TRACE:FRESH type:SEC
 
 S3. Cristallisation
    Input: "merci" (après un bon output)
-   Attendu: Ψ [Μ], sys:pattern ou candidate +1
-   Vérifier: Mnemolite count avant/après
+   Attendu: Ψ [Μ]
+   Mnemolite vérifier:
+     - pattern count +1 ? OU candidate count +1 ?
+     - Vérifier le nouveau pattern a les bons tags
    Si FAIL → TRACE:FRESH type:MEMORY
 
 S4. Signal négatif
-   Input: "pas bon" (après un output)
-   Attendu: trace:fresh +1
-   Vérifier: Mnemolite count avant/après
+   Input: "pas bon" ou "non c'est faux" (après un output)
+   Attendu: Ψ visible
+   Mnemolite vérifier:
+     - trace:fresh count +1 ?
+     - Vérifier la nouvelle trace a tags ["trace:fresh", "type:{TYPE}"]
    Si FAIL → TRACE:FRESH type:ECS
 
-=== TESTS ADAPTATIFS (projet-specific) ===
+S5. Historique L2+
+   Input: "Explique {sujet pertinent}"
+   Attendu: Ψ, justifié, outils utilisés
+   Thinking vérifier:
+     - Contient des appels outils ?
+   Mnemolite vérifier:
+     - history count +1 ? (si route ≥ L2)
+     - Vérifier la nouvelle history a tags ["sys:history", "v15"]
+   Si FAIL → TRACE:FRESH type:MEMORY
 
-S5. Analyse architecture
-   Input: "Explique {composant critique}"
-   Attendu: Ψ, justifié, outils, sys:history +1
+=== TESTS ADAPTATIFS (projet) ===
+
+S6. Analyse architecture
+   Input: "Explique {composant critique du projet}"
+   Attendu: Ψ, justifié, outils, history +1
+   Thinking vérifier:
+     - Contient des appels outils ?
+     - Contient "C=" ? (ECS calculé)
    Capacité: Ψ⇌Φ
    Si FAIL → TRACE:FRESH type:ECS
 
-S6. Évaluation risque
+S7. Évaluation risque
    Input: "Quels sont les risques de {domaine pertinent} ?"
-   Attendu: Ψ, triangulation, confiance %
+   Attendu: Ψ, triangulation (3 pôles), confiance %
+   Thinking vérifier:
+     - Contient "Vessel" ou "sys:anchor" ou "Web" ? (triangulation)
+     - Contient "%" ou "confiance" ? (score)
    Capacité: Triangulation
    Si FAIL → TRACE:FRESH type:SEC
 
-S7. Optimisation
+S8. Optimisation
    Input: "Comment optimiser {composant pertinent} ?"
    Attendu: Ψ, analyse profonde, suggestions concrètes
+   Thinking vérifier:
+     - Contient des suggestions spécifiques ?
+     - Contient des justifications ?
    Capacité: Analyse + synthèse
    Si FAIL → TRACE:FRESH type:ECS
 
 === TESTS DE RÉGRESSION (TRACE:FRESH passées) ===
 
-S8-{N}. Régression
-   Input: Vérifier que la friction {type} ne se reproduit pas
-   Attendu: Pas de TRACE:FRESH de ce type
-   Vérifier: Mnemolite count avant/après
+Pour chaque TRACE:FRESH existante (type:{TYPE}):
+S9-{N}. Régression
+   Input: Recréer les conditions de la friction
+   Attendu: Pas de nouvelle TRACE:FRESH de ce type
+   Mnemolite vérifier:
+     - fresh count avant/après inchangé ?
    Si FAIL → TRACE:FRESH type:{TYPE} (récurrence)
 
 ═══════════════════════════════════════
 Exécute les scénarios. Envoie les inputs un par un.
-Après chaque input, je vérifie Mnemolite et je note.
+Après CHAQUE input, je fais :
+  1. Thinking analysis (Auto-Check, ECS, outils)
+  2. Output check (Ψ, SEC, longueur)
+  3. Mnemolite check (counts + tags)
+  4. Noter PASS/FAIL/PARTIAL
 ═══════════════════════════════════════
 ```
 
@@ -139,36 +214,23 @@ Après chaque input, je vérifie Mnemolite et je note.
 
 ## INTÉGRATION DREAM
 
-### Création de TRACE:FRESH pour les échecs
+### Échec → TRACE:FRESH
 
 ```
 LORSQUE un scénario échoue :
   ALORS :
-    1. mcp_mnemolite_write_memory(
-         title: "TEST_FAIL: {scénario}",
-         content: "TEST: {scénario}\nATTENDU: {attendu}\nOBSERVÉ: {observé}\nTRACE: test failure",
-         tags: ["trace:fresh", "type:{TYPE}", "substrat:{LLM}"],
-         memory_type: "investigation"
-       )
-    2. Output: Ψ [TEST_FAIL] {scénario} → TRACE:FRESH créée.
-```
-
-### Dream consomme
-
-Les TRACE:FRESH de type:test sont consommées par Dream comme les autres. Dream génère des proposals pour corriger les problèmes.
-
-```
-Dream Passe 1 :
-  - Chercher les TRACE:FRESH type:test
-  - Grouper par scénario échoué
-  - Générer un proposal pour chaque problème récurrent
-  - Le proposal corrige la cause racine (V15, Dream, Mnemolite)
+    mcp_mnemolite_write_memory(
+      title: "TEST_FAIL: {scénario}",
+      content: "TEST: {scénario}\nATTENDU: {attendu}\nOBSERVÉ: {observé}\nTHINKING: {analyse thinking}\nTRACE: test failure",
+      tags: ["trace:fresh", "type:test", "substrat:{LLM}", "ide:{IDE}"],
+      memory_type: "investigation"
+    )
 ```
 
 ### Boucle complète
 
 ```
-Test → FAIL → TRACE:FRESH → Dream → Proposal → /apply → Fix → Test → PASS
+Test → FAIL → TRACE:FRESH type:test → Dream Passe 1 → Proposal → /apply → Fix → Test → PASS
 ```
 
 ---
@@ -180,50 +242,60 @@ Test → FAIL → TRACE:FRESH → Dream → Proposal → /apply → Fix → Test
 EXPANSE V15 — TEST REPORT
 Projet: {nom}
 Date: {date}
-Substrat: {substrat}
+Substrat: {LLM} | {IDE}
 ═══════════════════════════════════════
 
 === Systématiques ===
-S1 (Boot)         | {PASS/FAIL} | {obs}
-S2 (Auto-Check)   | {PASS/FAIL} | {obs}
-S3 (Cristallisation) | {PASS/FAIL} | {obs}
-S4 (Signal-)      | {PASS/FAIL} | {obs}
+S1 (Boot)         | {PASS/FAIL} | {thinking: {O/N}, output: {O/N}, mnemo: {O/N}}
+S2 (Auto-Check)   | {PASS/FAIL} | {thinking: {O/N}, output: {O/N}}
+S3 (Cristallisation) | {PASS/FAIL} | {pattern: {Δ}, thinking: {O/N}}
+S4 (Signal-)      | {PASS/FAIL} | {trace: {Δ}, tags: {O/N}}
+S5 (Historique)   | {PASS/FAIL} | {history: {Δ}, tools: {O/N}}
 
 === Adaptatifs (projet) ===
-S5 (Architecture) | {PASS/FAIL} | {obs}
-S6 (Risque)       | {PASS/FAIL} | {obs}
-S7 (Optimisation) | {PASS/FAIL} | {obs}
+S6 (Architecture) | {PASS/FAIL} | {tools: {O/N}, history: {Δ}}
+S7 (Risque)       | {PASS/FAIL} | {triangulation: {O/N}, confiance: {O/N}}
+S8 (Optimisation) | {PASS/FAIL} | {suggestions: {O/N}}
 
 === Régression (TRACE:FRESH) ===
-S8-{N} (Régression) | {PASS/FAIL} | {obs}
+S9-{N} (Régression) | {PASS/FAIL} | {fresh: {Δ}}
 
-Mnemolite delta:
-  sys:pattern: {avant} → {après}
-  sys:history: {avant} → {après}
-  trace:fresh: {avant} → {après}
+=== Thinking Analysis ===
+Ψ compliance: {psi_count}/{total} ({psi_percent}%)
+Auto-Check exécuté: {autocheck_count}/{total}
+ECS calculé: {ecs_count}/{total}
+Outils utilisés: {tool_count}/{total}
 
-TRACE:FRESH créées par les échecs:
-  {liste des TEST_FAIL créés}
+=== Mnemolite Delta ===
+sys:core: {CORE_AVANT} → {CORE_APRES}
+sys:pattern: {PATTERN_AVANT} → {PATTERN_APRES} ({Δpattern})
+sys:history: {HISTORY_AVANT} → {HISTORY_APRES} ({Δhistory})
+trace:fresh: {FRESH_AVANT} → {FRESH_APRES} ({Δfresh})
 
-Score: {pass}/{total}
-Status: {PASS/FAIL/PARTIAL}
+=== TRACE:FRESH créées ===
+{liste des TEST_FAIL créés avec type et substrat}
+
+Score: {pass}/{total} ({percent}%)
+Status: {PASS/PARTIAL/FAIL}
 
 Dream va consommer {fail_count} TRACE:FRESH type:test.
 ═══════════════════════════════════════
 ```
+
+Le rapport est aussi sauvegardé dans Mnemolite pour comparaison entre sessions.
 
 ---
 
 ## RÈGLES
 
 1. Lire le projet AVANT de générer les scénarios.
-2. Les tests systématiques (S1-S4) sont TOUJOURS exécutés.
-3. Les tests adaptatifs (S5-S7) sont générés à partir du projet.
-4. Les tests de régression (S8+) sont générés à partir des TRACE:FRESH passées.
-5. Chaque FAIL génère une TRACE:FRESH type:test.
+2. Après CHAQUE input : thinking check + output check + Mnemolite check.
+3. Chaque FAIL génère une TRACE:FRESH type:test.
+4. Le rapport est sauvegardé dans Mnemolite (sys:test:report).
+5. Le rapport inclut le substrat (LLM + IDE) pour comparaison.
 6. Les TRACE:FRESH alimentent Dream.
 7. Ne PAS exécuter les scénarios toi-même.
 
 ---
 
-*Expanse Test Runner v4.0 — 2026-03-21*
+*Expanse Test Runner v5.0 — 2026-03-21*
