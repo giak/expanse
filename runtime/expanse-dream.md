@@ -55,14 +55,17 @@ Les TYPES permettent le regroupement :
 
 ### Passe 1 : La Plaie (Réactif)
 
-- **Action :** `mcp_mnemolite_search_memory(query: "TRACE:FRESH", tags: ["trace:fresh"], limit: 20)`
+- **Action :**
+  1. `mcp_mnemolite_search_memory(query: "TRACE:FRESH", tags: ["trace:fresh"], limit: 20)`
+  2. `mcp_mnemolite_search_memory(query: "sys:drift", tags: ["sys:drift"], limit: 20)`
 - **Analyse :** 
   1. Grouper par TYPE
-  2. Compter les occurrences par type
-  3. Si TYPE.count ≥ 2 → pattern récurrent
-  4. **BRAINSTORM (OBLIGATOIRE)** : Pour chaque pattern, lire `runtime/expanse-brm.md` et remplir le gabarit.
+  2. Grouper `sys:drift` par `type:*` tag
+  3. Compter les occurrences par type (trace:fresh + sys:drift combinés)
+  4. Si TYPE.count ≥ 2 → pattern récurrent
+  5. **BRAINSTORM (OBLIGATOIRE)** : Pour chaque pattern, lire `runtime/expanse-brm.md` et remplir le gabarit.
      - Sauvegarder : `mcp_mnemolite_write_memory(title: "BRM: {slug}", content: "{GABARIT_REMPLI}", tags: ["trace:dream:brm", "v15"], memory_type: "investigation")`.
-  5. Extraire la solution de la section `3. Cristal` du BRM pour identifier la règle V15 à modifier.
+  6. Extraire la solution de la section `3. Cristal` du BRM pour identifier la règle V15 à modifier.
 - **Output :** `[PROPOSAL_OPEN] [MODIFY]` — Cite : `type: {TYPE}`, `count: {N}`, `symptom: {summary}`. Basé sur le Cristal du BRM.
 
 ---
@@ -118,6 +121,31 @@ Les TYPES permettent le regroupement :
   - Calculer le nombre de `trace:fresh` par substrat
   - Identifier les substrats les plus performants (Ψ taux le plus élevé, TRACE:FRESH le plus bas)
 - **Output :** Rapport santé par substrat. Si un substrat a Ψ taux < 80% → `[PROPOSAL_OPEN] [MODIFY]`
+
+### Passe 7 : Le Différentiel Temporel (∂Ω/∂t)
+
+- **Action :**
+  1. `search_memory(query="sys:history", tags=["sys:history"], limit=50)` → interactions récentes
+  2. `search_memory(query="sys:diff", tags=["sys:diff","temporal"], limit=1)` → dernier diff
+- **Analyse :**
+  1. Si dernier diff < 7 jours → SKIP (pas assez de données nouvelles)
+  2. Comparer aux données du dernier diff :
+     - Δ nombre de sys:pattern (croissance ou stagnation ?)
+     - Δ nombre de trace:fresh (friction en hausse ou baisse ?)
+     - Δ nombre de sys:drift (dérives auto-détectées : tendance ?)
+  3. Calculer :
+     - `adaptation_velocity` = (patterns créés - patterns prunés) / semaines
+     - `friction_trend` = (fresh cette semaine - fresh semaine passée) / fresh semaine passée
+- **Output :** 
+  ```
+  write_memory(
+    title: "DIFF: {date}", 
+    content: "Période: {date_debut}→{date_fin}\nΔ patterns: {+N/-M}\nΔ friction: {trend}\nΔ drift: {count}\nadaptation_velocity: {score}",
+    tags: ["sys:diff", "temporal", "v15"],
+    memory_type: "reference"
+  )
+  ```
+  `Ψ(Différentiel) : adaptation_velocity={score}, friction_trend={trend}.`
 
 ---
 
