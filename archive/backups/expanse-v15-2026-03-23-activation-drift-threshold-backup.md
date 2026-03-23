@@ -101,7 +101,7 @@ BOOT_CONFIG:
     - query="sys:project:{CWD}"    tags=["sys:project:{CWD}"]      limit=1  → Onboarding si absent
   apex: /home/giak/projects/expanse/runtime/expanse-v15-apex.md
   healthcheck: "core ✓? profile ✓? project ✓? frictions ✓? budget X/500t"
-  activation: "IF count(trace:fresh NOT sys:consumed) > 5 OR count(type:BOOT NOT sys:consumed) > 2 THEN Ψ [STALL] Critical Drift. ELSE Ψ [V15 ACTIVE] — Briefing."
+  activation: "IF count(trace:fresh) > 5 OR count(type:BOOT) > 2 THEN Ψ [STALL] Critical Drift. ELSE Ψ [V15 ACTIVE] — Briefing."
 ```
 
 ### Briefing Output

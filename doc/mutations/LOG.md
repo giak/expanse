@@ -1,7 +1,7 @@
 # MUTATION LOG — EXPANSE V15
 
-**Last Updated:** 2026-03-21
-**Version:** 2.1
+**Last Updated:** 2026-03-23
+**Version:** 2.2
 
 ---
 
@@ -9,8 +9,8 @@
 
 | Métrique | Count |
 |----------|-------|
-| Total Proposals | 13 |
-| Applied | 13 |
+| Total Proposals | 14 |
+| Applied | 14 |
 | Rejected | 0 |
 | Failed | 0 |
 | Rolled Back | 1 |
@@ -36,6 +36,9 @@
 | 2026-03-21 | integrity-v2 | Rule | APPLIED | Dream |
 | 2026-03-21 | surgical-stasis | Rule | APPLIED | Dream |
 | 2026-03-21 | drift-guard | ECS | APPLIED | Dream |
+| 2026-03-22 | dream-gate | Rule | APPLIED | Antigravity |
+| 2026-03-23 | activation-drift-threshold | BOOT | APPLIED | Dream |
+| 2026-03-23 | unconsumed-friction-logic | Rule | APPLIED | Antigravity |
 
 ---
 
@@ -52,6 +55,8 @@
 | 2026-03-21 | surgical-stasis | Rule | APPLIED | Dream |
 | 2026-03-21 | drift-guard | ECS | APPLIED | Dream |
 | 2026-03-22 | dream-gate | Rule | APPLIED | Antigravity |
+| 2026-03-23 | activation-drift-threshold | BOOT | APPLIED | Dream |
+| 2026-03-23 | unconsumed-friction-logic | Rule | APPLIED | Antigravity |
 
 ---
 
@@ -112,4 +117,4 @@ Un fichier `.lock` existe dans `doc/mutations/` quand une mutation est en cours.
 
 ---
 
-*Log v2.1 - 2026-03-21*
+*Log v2.2 - 2026-03-23*

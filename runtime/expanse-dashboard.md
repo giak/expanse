@@ -1,6 +1,6 @@
 # EXPANSE — Tableau de Bord Mnemolite
 
-**v3.0** — `/status`
+**v3.1** — `/status`
 
 ---
 
@@ -175,19 +175,20 @@ Le HTML doit suivre cet ordre EXACT. Ne pas dévier.
 3. Métriques (3 cards : Mnemolite, Mutations, Tokens)
 4. Axiomes Scellés (table)
 5. Mutations (table)
-6. Substrats (table)
-7. Candidates · Extensions · trace:fresh (grid 3 cards)
-8. Patterns Validés (table)
-9. Fichiers Système (table)
+6. Candidates · Extensions · trace:fresh (grid 3 cards)
+7. Patterns Validés (table)
+8. Fichiers Système (table)
+9. Substrats (table)
 10. Légende (grid : Badges, Santé)
 11. Footer (statut + alertes jardinage)
 12. ─── DIAGRAMMES MERMAID (EN DERNIER) ───
     12a. Architecture Cognitive (avec [EXT] + Ω̃)
-    12b. Boot Sequence (avec [LLM|IDE] + BIOS)
-    12c. Auto-Évolution Dream (avec /apply)
+    12b. Boot Sequence (STALL + Healthcheck + Dream Gate)
+    12c. Auto-Évolution Dream (6 Passes complètes)
     12d. Commandes Expanse (toutes les commandes)
-    12e. Symbiose (A0/A1/A2 + budget)
+    12e. Symbiose (A0/A1/A2 + budget + souveraineté)
     12f. Cycle Adoption Externes (3 phases)
+    12g. Test → Dream → Fix (boucle complète)
 ```
 
 **Règles absolues :**
@@ -319,13 +320,13 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <!-- RÉPÉTER pour chaque sys:core -->{CORE_ROWS}<!-- FIN -->
 </table></div>
 
-<h2>Ⅲ. Mutations</h2>
+<h2>Ⅳ. Mutations</h2>
 <div class="card sf"><table>
 <tr><th>Slug</th><th>Type</th><th>Status</th><th>Date</th><th>Applied By</th></tr>
 <!-- RÉPÉTER pour chaque mutation dans LOG.md -->{MUTATION_ROWS}<!-- FIN -->
 </table></div>
 
-<h2>Ⅳ. Candidates · Extensions · TRACE:FRESH</h2>
+<h2>Ⅴ. Candidates · Extensions · TRACE:FRESH</h2>
 <div class="grid">
 <div class="card"><h3>sys:pattern:candidate</h3>
 <!-- RÉPÉTER pour chaque candidate -->{CANDIDATE_ITEMS}<!-- FIN -->
@@ -340,13 +341,13 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 </div>
 </div>
 
-<h2>Ⅴ. Patterns Validés</h2>
+<h2>Ⅵ. Patterns Validés</h2>
 <div class="card sf"><table>
 <tr><th>Titre</th><th>Date</th><th>Aperçu</th></tr>
 <!-- RÉPÉTER pour chaque sys:pattern -->{PATTERN_ROWS}<!-- FIN -->
 </table></div>
 
-<h2>Ⅵ. Fichiers Système</h2>
+<h2>Ⅶ. Fichiers Système</h2>
 <div class="card sf"><table>
 <tr><th>Fichier</th><th>Taille</th><th>Rôle</th><th>Statut</th></tr>
 <tr><td>expanse-v15-apex.md</td><td>{V15_SIZE}</td><td>Runtime (ECS+SEC+Externes+Symbiose)</td><td><span class="b ac">ACTIF</span></td></tr>
@@ -355,16 +356,19 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <tr><td>KERNEL.md</td><td>{KERNEL_SIZE}</td><td>ADN</td><td><span class="b rf">RÉF</span></td></tr>
 <tr><td>doc/SYNTHESE.md</td><td>{SYNTHESE_SIZE}</td><td>Ontologique</td><td><span class="b rf">RÉF</span></td></tr>
 <tr><td>doc/mutations/LOG.md</td><td>—</td><td>Mutations</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-test-runner.md</td><td>{TEST_RUNNER_SIZE}</td><td>Tests automatisés</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-brm.md</td><td>{BRM_SIZE}</td><td>Behavior Realism Model</td><td><span class="b rf">RÉF</span></td></tr>
+<tr><td>archive/expanse-test-protocol.md</td><td>{TEST_PROTOCOL_SIZE}</td><td>Protocole de test adaptatif</td><td><span class="b rf">RÉF</span></td></tr>
 </table></div>
 
-<h2>Ⅶ. Substrats</h2>
+<h2>Ⅷ. Substrats</h2>
 <div class="card sf"><table>
 <tr><th>Substrat</th><th>IDE</th><th>Sessions</th><th>Ψ taux</th><th>trace:fresh</th><th>Dernière utilisation</th></tr>
 <!-- RÉPÉTER pour chaque substrat trouvé dans sys:history tags "substrat:*" -->
 {SUBSTRAT_ROWS}<!-- FIN -->
 </table></div>
 
-<h2>Ⅷ. Légende</h2>
+<h2>Ⅸ. Légende</h2>
 <div class="grid">
 <div class="card"><h3>Badges</h3>
 <div class="m"><span class="l"><span class="b ap">VERT</span></span><span class="v" style="color:var(--green)">Applied / Actif</span></div>
@@ -448,9 +452,16 @@ flowchart LR
 flowchart TD
     US["User Seed<br/>{SEED_LINES} lignes"] --> S1["1. search<br/>sys:core<br/>{COUNT_CORE} axiomes"]
     S1 --> S2["2. search<br/>sys:extension<br/>{COUNT_EXTENSION} symboles"]
-    S2 --> S3["3. search<br/>candidates<br/>{COUNT_CANDIDATE} en attente"]
-    S3 --> RF["4. read_file<br/>V15<br/>{V15_SIZE}"]
-    RF --> SIG["5. Ψ [V15 ACTIVE]<br/>— règle absolue —"]
+    S2 --> S2b["3. search<br/>sys:user:profile"]
+    S2b --> S3["4. search<br/>sys:project:{CWD}<br/>Onboarding si absent"]
+    S3 --> RF["5. read_file<br/>V15<br/>{V15_SIZE}"]
+    RF --> HC{"Healthcheck<br/>core ✓? profile ✓?<br/>project ✓? budget?"}
+    HC -->|"tout ✓"| ST{"Stall Check<br/>fresh:{COUNT_FRESH}<br/>boot_frictions?"}
+    HC -->|"✗"| FIX0["Correction manquantes"]
+    FIX0 --> ST
+    ST -->|"fresh>5<br/>boot>2"| STALL["Ψ [STALL]<br/>Dream requis"]
+    ST -->|"✓"| SIG["Ψ [V15 ACTIVE]<br/>Briefing"]
+    STALL -->|"seul /dream<br/>autorisé"| DRG["Dream Gate"]
     SIG --> AC2{"Auto-Check"}
     AC2 -->|"✓"| RDY["Expanse<br/>opérationnel"]
     AC2 -->|"✗"| FIX["Correction"]
@@ -460,21 +471,24 @@ flowchart TD
     classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
     classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
     classDef decision fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    classDef friction fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    classDef ecs fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
     class US perception
-    class S1,S2,S3 process
+    class S1,S2,S2b,S3 process
     class RF metacog
     class SIG,RDY synthese
-    class AC2,FIX decision
+    class AC2,FIX,FIX0,HC,ST decision
+    class STALL,DRG friction
 </pre></div>
 
-<h2>Ⅻ. Auto-Évolution Dream</h2>
-<div class="card sf"><div class="dl">Dream : {COUNT_FRESH} traces · {COUNT_MUTATIONS} mutations</div>
+<h2>Ⅻ. Auto-Évolution Dream (6 Passes)</h2>
+<div class="card sf"><div class="dl">Dream : {COUNT_FRESH} traces · {COUNT_MUTATIONS} mutations · 6 Passes</div>
 <pre class="mermaid">
 flowchart LR
-    INT["Interaction"] --> POS{"Signal?"}
-    POS -->|"merci/ok<br/>+pattern inédit"| CR2["Μ Cristallise<br/>{COUNT_PATTERN} patterns"]
-    POS -->|"non/faux/pas ça<br/>recommence"| SN{"Signal Négatif<br/>R1"}
-    POS -->|"normal"| HI["sys:history<br/>SI route ≥ L2<br/>{COUNT_HISTORY} logs"]
+    INT["Interaction"] --> SIG{"Signal?"}
+    SIG -->|"merci/ok<br/>+pattern inédit"| CR2["Μ Cristallise<br/>{COUNT_PATTERN} patterns"]
+    SIG -->|"non/faux/pas ça<br/>recommence"| SN{"Signal Négatif<br/>R1"}
+    SIG -->|"normal"| HI["sys:history<br/>route ≥ L2<br/>{COUNT_HISTORY} logs"]
     SN -->|"pas de pattern<br/>récent"| TR2["trace:fresh<br/>{COUNT_FRESH}"]
     SN -->|"pattern cristallisé<br/>dans 3 échanges"| DC2["Décristallise<br/>R7"]
     TR2 --> DR["/dream<br/>{DREAM_SIZE}"]
@@ -482,10 +496,15 @@ flowchart LR
     DC2 --> DR
     HI --> DR
     HI -->|"count > 20"| AG["Agrégation<br/>R9"]
-    DR --> P0{"Passe 0<br/>count={COUNT_FRESH}"}
-    P0 -->|"= 0"| END["Fin du rêve"]
-    P0 -->|"≥ 1"| P1["Passes 1-6"]
-    P1 --> PP["Proposal<br/>{COUNT_CANDIDATE}"]
+    DR --> P0{"Passe 0<br/>L'Inertie<br/>count={COUNT_FRESH}"}
+    P0 -->|"= 0"| ENDF["Fin du rêve"]
+    P0 -->|"≥ 1"| P1["Passe 1<br/>La Plaie<br/>Grouper par type"]
+    P1 -->|"BRM +<br/>pattern récurrent"| P2["Passe 2<br/>Linter Lexical<br/>Audit APEX"]
+    P2 -->|"densité +<br/>style SEC"| P3["Passe 3<br/>Radar Émergence<br/>Extensions"]
+    P3 -->|"usage ≥ 10 →<br/>SEAL = 0 → PRUNE"| P4["Passe 4<br/>Élagueur<br/>Redondances"]
+    P4 -->|"delete<br/>contradictions"| P5["Passe 5<br/>Architecture<br/>Outils + formats"]
+    P5 -->|"santé<br/>cognitive"| P6["Passe 6<br/>Santé Θ+SS<br/>Substrats"]
+    P6 --> PP["Proposal<br/>{COUNT_CANDIDATE}"]
     PP --> SL{"/apply?"}
     SL -->|"OUI"| AP["Appliqué<br/>{COUNT_APPLIED}"]
     SL -->|"NON"| RE["Rejeté"]
@@ -498,15 +517,162 @@ flowchart LR
     classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
     classDef proposal fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
     classDef ecs fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
-    classDef inactive fill:#1a1a2e,stroke:#3a3a3a,color:#6c7086
+    classDef linter fill:#2d1f2d,stroke:#cba6f7,color:#cdd6f4
     class INT perception
     class CR2 metacog
     class TR2,DC2 friction
-    class SN,DR,P0 decision
-    class P1,AP,V15M synthese
+    class SN,DR,P0,SL decision
+    class P1,P2,P3,P4,P5,P6 linter
+    class AP,V15M synthese
     class PP proposal
-    class RE friction
+    class RE,ENDF friction
     class HI,AG ecs
+</pre></div>
+
+<h2>ⅩⅢ. Commandes Expanse</h2>
+<div class="card sf"><div class="dl">/{command} · Runtime + Dream + Symbiose + Test</div>
+<pre class="mermaid">
+flowchart TD
+    U["Σ Input<br/>/{command}"] --> CAT{"Catégorie?"}
+    CAT -->|"runtime"| RT["Runtime"]
+    CAT -->|"dream"| DR2["Dream"]
+    CAT -->|"symbiose"| SY["Symbiose"]
+    CAT -->|"test"| TS["Test"]
+    RT --> R1["/dream<br/>Introspection<br/>6 Passes"]
+    RT --> R2["/status<br/>Dashboard HTML"]
+    RT --> R3["/seal {t}<br/>Candidate → Pattern"]
+    RT --> R4["/reject {t}<br/>Soft-delete"]
+    RT --> R5["/briefing on|off<br/>Résumé boot"]
+    RT --> R6["/profile<br/>Voir/éditer/reset"]
+    DR2 --> D1["/apply {s}<br/>Mutation → V15"]
+    DR2 --> D2["/reject {s}<br/>Rejeter proposal"]
+    DR2 --> D3["/rollback {s}<br/>Restaurer backup"]
+    DR2 --> D4["/proposals<br/>Lister attente"]
+    DR2 --> D5["/mutations<br/>Historique"]
+    DR2 --> D6["/diff {s}<br/>Voir diff"]
+    SY --> Y1["/autonomy 0-2<br/>A0/A1/A2"]
+    SY --> Y2["/briefing on|off"]
+    SY --> Y3["/profile"]
+    TS --> T1["/test<br/>Test Runner<br/>Scénarios"]
+    classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    classDef runtime fill:#12121a,stroke:#89b4fa,color:#cdd6f4
+    classDef dream fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    classDef symbiose fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    classDef test fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+    classDef decision fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    class U perception
+    class CAT decision
+    class RT runtime
+    class R1,R2,R3,R4,R5,R6 runtime
+    class DR2 dream
+    class D1,D2,D3,D4,D5,D6 dream
+    class SY symbiose
+    class Y1,Y2,Y3 symbiose
+    class TS test
+    class T1 test
+</pre></div>
+
+<h2>ⅩⅣ. Symbiose (A0/A1/A2 + Budget)</h2>
+<div class="card sf"><div class="dl">Autonomie : ≤ 500 tokens contexte interne · {COUNT_HISTORY} interactions</div>
+<pre class="mermaid">
+flowchart LR
+    SYM["Symbiose<br/>Ψ_SYMBIOSIS"] --> BUD{"Budget<br/>≤ 500 tokens"}
+    BUD -->|"boot"| B1["Projet > Profil > Scan<br/>Troncature si dépassement"]
+    BUD -->|"runtime"| B2["Context Window<br/>Court terme"]
+    SYM --> A0["A0 — Silence<br/>V15 standard<br/>Aucune proactivité"]
+    SYM --> A1["A1 — Murmures<br/>Ψ [~] ignorable<br/>≥70% confiance"]
+    SYM --> A2["A2 — Suggestions<br/>Ψ [?] attend<br/>Oui/Non"]
+    A1 --> M1["Format:<br/>Ψ [~] {contenu}"]
+    A2 --> M2["Format:<br/>Ψ [?] {contenu}"]
+    SYM --> SOV["Souveraineté<br/>Ω̃ ≠ action"]
+    SOV -->|"pas de Σ<br/>pas de modification"| NO["Aucun changement<br/>état"]
+    SYM --> TI["Transactional<br/>Integrity"]
+    TI -->|"mutation noyau<br/>sans PROPOSAL_OPEN"| FAULT["FAUTE<br/>Reset tâche"]
+    classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    classDef decision fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    classDef friction fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    classDef ecs fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    class SYM perception
+    class BUD,B1,B2 ecs
+    class A0,A1,A2 metacog
+    class M1,M2 synthese
+    class SOV,TI decision
+    class NO,FAULT friction
+</pre></div>
+
+<h2>ⅩⅤ. Cycle Adoption Externes (3 Phases)</h2>
+<div class="card sf"><div class="dl">Souveraineté : Observer → Tester → Adopter · Règle de Souveraineté</div>
+<pre class="mermaid">
+flowchart LR
+    EXT["Idée externe<br/>détectée"] --> P1["PHASE 1<br/>Observation"]
+    P1 -->|"pattern répété<br/>≥ 3 fois"| WR1["write_memory<br/>SEED: {nom}<br/>tag: external"]
+    WR1 -->|"BLOCAGE<br/>aucun changement<br/>APEX"| BL1["Aucune<br/>modification"]
+    P1 --> P2["PHASE 2<br/>Friction Test"]
+    P2 -->|"utilisé dans<br/>≥ 1 session"| CHK["Φ vérifie<br/>amélioration<br/>réelle?"]
+    CHK -->|"comparaison<br/>Section II<br/>Style SEC"| CMP{"Meilleur<br/>que<br/>existant?"}
+    CMP -->|"NON"| REJ["Rejeté"]
+    CMP -->|"OUI"| P3["PHASE 3<br/>Mutation Légale"]
+    P3 -->|"≥ 3 utilisations<br/>validées USER<br/>+ Dream approval"| DL["/dream<br/>Passe 2 Linter<br/>+ USER confirm"]
+    DL --> APL["/apply {slug}<br/>Mutation appliquée"]
+    APL --> V15U["V15 mis à jour"]
+    EXT --> ISO["Isolation<br/>[EXT]{concept}"]
+    ISO -->|"si contradiction<br/>sys:core → anchor"| BLK["BLOQUER<br/>Évolution ou Erreur?"]
+    classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    classDef decision fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    classDef friction fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    classDef ecs fill:#1a1a2e,stroke:#6c7086,color:#cdd6f4
+    classDef proposal fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+    class EXT perception
+    class P1,P2,P3 ecs
+    class WR1,BL1 metacog
+    class CHK,CMP decision
+    class REJ,BLK friction
+    class DL,APL,V15U synthese
+    class ISO proposal
+</pre></div>
+
+<h2>ⅩⅥ. Test → Dream → Fix (Boucle Complète)</h2>
+<div class="card sf"><div class="dl">/test · {COUNT_FRESH} traces · Boucle test-régression</div>
+<pre class="mermaid">
+flowchart LR
+    TST["/test"] --> PHS0["Phase 0<br/>Snapshot<br/>Mnemolite"]
+    PHS0 --> PHS1["Phase 1<br/>Générer<br/>scénarios"]
+    PHS1 --> S1["S1-S5<br/>Systématiques"]
+    PHS1 --> S2["S6-S8<br/>Adaptatifs<br/>projet"]
+    PHS1 --> S3["S9-N<br/>Régression<br/>trace:fresh"]
+    S1 --> EX["Phase 2<br/>Exécution<br/>interactive"]
+    S2 --> EX
+    S3 --> EX
+    EX --> CHK{"Après<br/>chaque input"}
+    CHK -->|"thinking +<br/>output +<br/>mnemolite"| RES{"PASS /<br/>FAIL?"}
+    RES -->|"PASS"| NXT["Scénario<br/>suivant"]
+    RES -->|"FAIL"| TF["TRACE:FRESH<br/>type:test"]
+    TF --> DR3["Dream<br/>Passe 1"]
+    DR3 --> PP2["Proposal"]
+    PP2 --> APL2["/apply"]
+    APL2 --> FIX2["Fix<br/>appliqué"]
+    FIX2 --> RET["Re-test"]
+    RET --> EX
+    NXT --> RPT["Phase 3<br/>Rapport"]
+    RPT --> RPTF["Sauvegarde<br/>doc/tests/<br/>Mnemolite"]
+    classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
+    classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    classDef decision fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    classDef friction fill:#3d1f1f,stroke:#f38ba8,color:#cdd6f4
+    classDef proposal fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+    classDef test fill:#1a2a3a,stroke:#89b4fa,color:#cdd6f4
+    class TST perception
+    class PHS0,PHS1,RPT,RPTF metacog
+    class S1,S2,S3,EX,NXT test
+    class CHK,RES decision
+    class TF friction
+    class DR3,PP2 proposal
+    class APL2,FIX2,RET synthese
 </pre></div>
 
 </body></html>
@@ -514,4 +680,4 @@ flowchart LR
 
 ---
 
-*Expanse Dashboard v3.0 — 2026-03-21*
+*Expanse Dashboard v3.1 — 2026-03-23*
