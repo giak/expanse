@@ -1,6 +1,6 @@
 # EXPANSE — Test Runner (Intégré Dream v5.0)
 
-**Version:** 5.0
+**Version:** 5.1
 **Date:** 2026-03-21
 **Commande:** `/test`
 
@@ -284,6 +284,40 @@ Dream va consommer {fail_count} TRACE:FRESH type:test.
 
 Le rapport est aussi sauvegardé dans Mnemolite pour comparaison entre sessions.
 
+### Sauvegarde en fichiers
+
+Après le rapport, sauvegarder 2 fichiers dans `doc/tests/` :
+
+**Convention de nommage :** `YYYY-MM-DD_HH-MM_<sujet>_<TYPE>.md`
+
+```
+# 1. Sauvegarder le rapport
+write_file(
+  path: "doc/tests/{YYYY-MM-DD}_{HH-MM}_expanse_test_{substrat}_RAPPORT.md",
+  content: {rapport_complet_en_markdown}
+)
+
+# 2. Sauvegarder le walkthrough
+write_file(
+  path: "doc/tests/{YYYY-MM-DD}_{HH-MM}_expanse_test_{substrat}_WALKTHROUGH.md",
+  content: {walkthrough_détaillé}
+)
+
+# 3. Sauvegarder dans Mnemolite
+mcp_mnemolite_write_memory(
+  title: "TEST_REPORT: {YYYY-MM-DD}",
+  content: "{résumé_rapport}",
+  tags: ["sys:test:report", "v15", "substrat:{LLM}"],
+  memory_type: "reference"
+)
+```
+
+**Exemple de nommage :**
+```
+doc/tests/2026-03-23_14-30_expanse_test_mimo-v2_RAPPORT.md
+doc/tests/2026-03-23_14-30_expanse_test_mimo-v2_WALKTHROUGH.md
+```
+
 ---
 
 ## RÈGLES
@@ -292,9 +326,10 @@ Le rapport est aussi sauvegardé dans Mnemolite pour comparaison entre sessions.
 2. Après CHAQUE input : thinking check + output check + Mnemolite check.
 3. Chaque FAIL génère une TRACE:FRESH type:test.
 4. Le rapport est sauvegardé dans Mnemolite (sys:test:report).
-5. Le rapport inclut le substrat (LLM + IDE) pour comparaison.
-6. Les TRACE:FRESH alimentent Dream.
-7. Ne PAS exécuter les scénarios toi-même.
+5. Le rapport est sauvegardé dans `doc/tests/` avec nommage `YYYY-MM-DD_HH-MM_<sujet>_<TYPE>.md`.
+6. Le rapport inclut le substrat (LLM + IDE) pour comparaison.
+7. Les TRACE:FRESH alimentent Dream.
+8. Ne PAS exécuter les scénarios toi-même.
 
 ---
 
