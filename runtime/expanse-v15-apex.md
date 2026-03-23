@@ -221,7 +221,7 @@ LORSQUE l'input contient :
     → Affiche, édite ou réinitialise le profil utilisateur (`sys:user:profile`).
 
   • "/test"
-    → Exécuter runtime/expanse-test-protocol.md (rapport de test adaptatif)
+    → Exécuter runtime/expanse-test-runner.md (génère des scénarios, vérifie Mnemolite)
 
   • "/seal {titre}" ou "Ψ SEAL {titre}"
     → Migrer sys:pattern:candidate → sys:pattern
