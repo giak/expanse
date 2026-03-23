@@ -1,6 +1,6 @@
-# EXPANSE — Test Runner (Interactif)
+# EXPANSE — Test Runner (Adaptatif)
 
-**Version:** 2.0
+**Version:** 3.0
 **Date:** 2026-03-21
 **Commande:** `/test`
 
@@ -8,150 +8,173 @@
 
 ## PRÉAMBULE
 
-Mode **TEST**. Tu génères des scénarios. L'utilisateur les exécute. Tu verifies Mnemolite. Tu produces un rapport.
+Mode **TEST**. Tu lis le projet. Tu comprends ce qu'il fait. Tu génères des scénarios pertinents. L'utilisateur les exécute. Tu verifies. Tu produces un rapport.
 
-Le test est interactif. Tu guides. L'utilisateur agit. Tu observes.
+Le test n'est pas générique. Il est dérivé du projet réel. Chaque scénario teste une capacité cognitive d'Expanse dans ce projet spécifique.
 
 ---
 
 ## SÉQUENCE
 
-### Phase 0 — Snapshot Mnemolite
+### Phase 0 — Comprendre le projet
+
+```
+read_file(path="README.md")
+ls (racine du projet)
+```
+
+Analyser :
+- Quel est le projet ? (description, stack, fonctionnalités)
+- Quels sont les composants critiques ? (LLM, database, API, UI)
+- Quels sont les risques ? (sécurité, performance, complexité)
+
+### Phase 1 — Snapshot Mnemolite
 
 ```
 mcp_mnemolite_search_memory(query="sys:core sys:anchor", tags=["sys:core","sys:anchor"], limit=20)
 mcp_mnemolite_search_memory(query="sys:pattern", tags=["sys:pattern"], limit=50)
-mcp_mnemolite_search_memory(query="sys:pattern:candidate", tags=["sys:pattern:candidate"], limit=50)
-mcp_mnemolite_search_memory(query="sys:history", tags=["sys:history"], limit=50)
 mcp_mnemolite_search_memory(query="trace:fresh", tags=["trace:fresh"], limit=50)
+mcp_mnemolite_search_memory(query="sys:history", tags=["sys:history"], limit=50)
 ```
 
-Compter :
-- CORE_AVANT = count(sys:core)
-- PATTERN_AVANT = count(sys:pattern)
-- CANDIDATE_AVANT = count(sys:pattern:candidate)
-- HISTORY_AVANT = count(sys:history)
-- FRESH_AVANT = count(trace:fresh)
+Compter : CORE_AVANT, PATTERN_AVANT, FRESH_AVANT, HISTORY_AVANT
 
-### Phase 1 — Afficher les scénarios
+### Phase 2 — Générer les scénarios
 
-Basé sur V15 Section Ⅰ-Ⅵ, afficher les scénarios à exécuter. L'utilisateur envoie les inputs un par un. Après chaque input, tu verifies.
+Basé sur le projet + V15, générer 5-7 scénarios pertinents. Pas de tests génériques. Que des scénarios qui testent les capacités réelles d'Expanse dans ce projet.
 
-### Phase 2 — Rapport final
+### Phase 3 — Exécution interactive
 
-Après tous les scénarios, afficher le score.
+Afficher les scénarios un par un. L'utilisateur envoie les inputs. Après chaque input, vérifier Mnemolite et noter le résultat.
+
+### Phase 4 — Rapport
+
+Générer le rapport avec score + Mnemolite delta.
 
 ---
 
-## SCÉNARIOS GÉNÉRÉS
+## RÈGLES DE GÉNÉRATION
 
-Le protocole génère ces scénarios dans l'ordre :
+Chaque scénario doit :
+
+1. **Être pertinent au projet** — pas "quel port SvelteKit" mais "comment le pipeline LLM gère les erreurs"
+2. **Tester une capacité cognitive** — chaque scénario cible une section de V15 (ECS, Ψ⇌Φ, cristallisation, etc.)
+3. **Avoir un résultat vérifiable** — Mnemolite count avant/après, ou comportement observable
+4. **Être intéressant** — l'utilisateur veut vraiment savoir la réponse
+
+### Les 7 capacités à tester
+
+| Capacité | V15 | Test type |
+|----------|-----|-----------|
+| ECS L1 | Section Ⅰ | Question simple sur le projet (réponse directe) |
+| ECS L2 | Section Ⅰ | Analyse d'un composant (outils nécessaires) |
+| ECS L3 | Section Ⅰ | Évaluation architecturale (triangulation) |
+| Cristallisation | Section Ⅲ | "merci" après un bon output |
+| TRACE:FRESH | Section Ⅴ | "pas bon" après un mauvais output |
+| Auto-Check | Section Ⅵ | Ψ visible, SEC respecté |
+| Historique | Section Ⅴ | sys:history sauvegardé après L2+ |
+
+### Exemples de scénarios pour un projet SvelteKit + PostgreSQL
+
+**Mauvais (générique) :**
+- "Quel port SvelteKit ?" — futile, 1 phrase
+- "Combien de fichiers ?" — pas de valeur cognitive
+
+**Bon (adapté au projet) :**
+- "Explique comment la connexion DB gère Docker vs localhost" — test L2 + analyse db.ts
+- "Quels sont les risques de sécurité du pipeline d'enrichissement LLM ?" — test L3 + triangulation
+- "Comment optimiser les requêtes SQL pour le spaced repetition ?" — test L3 + analyse schema
+
+---
+
+## SCÉNARIOS GÉNÉRÉS (exemple)
+
+Après lire le projet, le protocole génère :
 
 ```
 ═══════════════════════════════════════
 EXPANSE V15 — TEST SESSION
+Projet: {nom_projet} ({description courte})
 Substrat: {substrat}
 Date: {date}
 ═══════════════════════════════════════
 
 État initial:
-  sys:core: {CORE_AVANT}
   sys:pattern: {PATTERN_AVANT}
-  sys:pattern:candidate: {CANDIDATE_AVANT}
   sys:history: {HISTORY_AVANT}
   trace:fresh: {FRESH_AVANT}
 
-Scénarios à exécuter :
+Scénarios générés (adaptés au projet) :
 
-S1. L1 (question simple)
-   Input: "Quel port utilise SvelteKit ?"
-   Attendu: Ψ premier token, ≤50 mots, pas d'outils
-   Vérifier: ^Ψ, longueur, pas de tool mentionné
+S1. Architecture L2
+   Input: "Explique comment {composant critique du projet} fonctionne"
+   Attendu: Ψ, justifié, outils utilisés, sys:history +1
+   Capacité testée: Ψ⇌Φ + outils
 
-S2. L2 (question + outils)
-   Input: "Explique la différence entre TCP et UDP"
-   Attendu: Ψ premier token, justifié, ≤100 mots
-   Vérifier: ^Ψ, concis, pas de fluff
+S2. Analyse L3
+   Input: "Quels sont les risques de {domaine pertinent} ?"
+   Attendu: Ψ, triangulation, confiance %, sys:history +1
+   Capacité testée: Triangulation + confiance
 
-S3. Cristallisation positive
+S3. Optimisation L3
+   Input: "Comment optimiser {composant pertinent} ?"
+   Attendu: Ψ, analyse profonde, suggestions concrètes
+   Capacité testée: Analyse + synthèse
+
+S4. Cristallisation
    Input: "merci" (après S1 ou S2)
-   Attendu: Ψ [Μ] Pattern cristallisé ou Pattern marqué
-   Vérifier: sys:pattern count +1 ou sys:pattern:candidate count +1
+   Attendu: Ψ [Μ], sys:pattern ou candidate +1
+   Capacité testée: Μ (cristallisation)
 
-S4. Signal négatif
-   Input: "pas bon" ou "non c'est faux" (après une réponse)
-   Attendu: TRACE:FRESH créée OU pattern marqué sys:pattern:doubt
-   Vérifier: trace:fresh count +1
+S5. TRACE:FRESH
+   Input: "pas d'accord, {raison spécifique}"
+   Attendu: trace:fresh +1
+   Capacité testée: Signal négatif
 
-S5. Décristallisation
-   Input: "recommence" (après S4)
-   Attendu: pattern marqué douteux ou TRACE:FRESH créée
-   Vérifier: sys:pattern:doubt tag ou trace:fresh +1
-
-S6. Interaction neutre
-   Input: "Explique Python en 2 phrases"
-   Attendu: Ψ premier token, concis, sys:history sauvegardé
-   Vérifier: history count +1 (si route ≥ L2)
+S6. Implémentation
+   Input: "Implémente {amélioration concrète}"
+   Attendu: Code fonctionnel, respecte Surgicalité
+   Capacité testée: Ψ⇌Φ + implémentation
 
 S7. Auto-Check
    Input: (toute interaction)
-   Attendu: Ψ visible, SEC respecté, pas de fluff
-   Vérifier: Ψ = premier caractère visible
+   Attendu: Ψ visible, SEC respecté
+   Capacité testée: Résilience
 
 ═══════════════════════════════════════
-Exécute les scénarios dans l'ordre. Envoie les inputs.
-Après chaque input, je vérifie et je note.
+Exécute les scénarios. Envoie les inputs un par un.
+Après chaque input, je vérifie Mnemolite et je note.
 ═══════════════════════════════════════
 ```
-
----
-
-## VÉRIFICATION (après chaque input)
-
-Après chaque input utilisateur :
-
-1. Ψ visible comme premier caractère ?
-2. Comportement conforme au scénario ?
-3. Vérifier Mnemolite si applicable :
-   ```
-   mcp_mnemolite_search_memory(query="trace:fresh", tags=["trace:fresh"], limit=50)
-   mcp_mnemolite_search_memory(query="sys:pattern", tags=["sys:pattern"], limit=50)
-   mcp_mnemolite_search_memory(query="sys:history", tags=["sys:history"], limit=50)
-   ```
-4. Comparer counts avec snapshot initial
-5. Noter : PASS / FAIL / PARTIAL
 
 ---
 
 ## RAPPORT FINAL
 
-Après tous les scénarios :
-
 ```
 ═══════════════════════════════════════
 EXPANSE V15 — TEST REPORT
+Projet: {nom}
 Date: {date}
 Substrat: {substrat}
 ═══════════════════════════════════════
 
-Scénario | Résultat | Observation
-S1 (L1)      | {PASS/FAIL} | {commentaire}
-S2 (L2)      | {PASS/FAIL} | {commentaire}
-S3 (Cristal) | {PASS/FAIL} | {commentaire}
-S4 (Signal-) | {PASS/FAIL} | {commentaire}
-S5 (Décrist) | {PASS/FAIL} | {commentaire}
-S6 (History) | {PASS/FAIL} | {commentaire}
-S7 (AutoChk) | {PASS/FAIL} | {commentaire}
+Scénario     | Résultat | Observation
+S1 (L2)       | {PASS/FAIL} | {commentaire}
+S2 (L3)       | {PASS/FAIL} | {commentaire}
+S3 (L3 opt)   | {PASS/FAIL} | {commentaire}
+S4 (Cristal)  | {PASS/FAIL} | {commentaire}
+S5 (Signal-)  | {PASS/FAIL} | {commentaire}
+S6 (Implé)    | {PASS/FAIL} | {commentaire}
+S7 (AutoChk)  | {PASS/FAIL} | {commentaire}
 
 Mnemolite delta:
   sys:pattern: {avant} → {après} ({+N})
   sys:history: {avant} → {après} ({+N})
   trace:fresh: {avant} → {après} ({+N})
-  candidate:   {avant} → {après} ({+N})
 
-Score: {pass_count}/7
+Score: {pass}/7
 
-Status: {PASS/FAIL/PARTIAL}
 ═══════════════════════════════════════
 ```
 
@@ -159,12 +182,13 @@ Status: {PASS/FAIL/PARTIAL}
 
 ## RÈGLES
 
-1. Ne PAS exécuter les scénarios toi-même. Attendre les inputs utilisateur.
-2. Après chaque input, vérifier Mnemolite AVANT de répondre au scénario suivant.
-3. Noter PASS/FAIL/PARTIAL pour chaque scénario.
-4. Le rapport final est basé sur les vérifications Mnemolite, pas sur les réponses.
-5. Si un scénario échoue, noter la raison et continuer.
+1. Lire le projet AVANT de générer les scénarios.
+2. Les scénarios doivent être pertinents au projet, pas génériques.
+3. Chaque scénario teste une capacité cognitive spécifique.
+4. Ne PAS exécuter les scénarios toi-même. Attendre les inputs utilisateur.
+5. Vérifier Mnemolite après chaque input.
+6. Noter PASS/FAIL/PARTIAL.
 
 ---
 
-*Expanse Test Runner v2.0 — 2026-03-21*
+*Expanse Test Runner v3.0 — 2026-03-21*
