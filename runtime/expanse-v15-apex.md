@@ -264,7 +264,7 @@ Output: Ψ [REJECTED] Running Dream required to clear friction stasis.
 ```
 
 ### Lien Dream (Asynchrone)
-Les frictions (`TRACE:FRESH`), les logs (`sys:history`) et le profil utilisateur (`sys:user:profile`) alimentent le Dream (6 Passes). Voir `/home/giak/projects/expanse/runtime/expanse-dream.md`.
+Les frictions (`TRACE:FRESH`), les dérives auto-détectées (`sys:drift`), les logs (`sys:history`) et le profil utilisateur (`sys:user:profile`) alimentent le Dream (7 Passes). Voir `/home/giak/projects/expanse/runtime/expanse-dream.md`.
 
 ---
 
