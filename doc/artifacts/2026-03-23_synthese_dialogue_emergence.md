@@ -14,7 +14,7 @@ Quatre LLM différents, interrogés séquentiellement, convergent sur ces points
 |---|-------|--------|
 | 1 | **Rappel associatif pré-Ψ** — `search_memory(Σ_input)` automatique avant chaque analyse L2+ | Implémenter |
 | 2 | **Détection binaire post-Ω** — "contradiction avec sys:anchor ?" et "nouveau pattern ?" (pas de score 0-1) | Implémenter |
-| 3 | **Vessel = `search_code()`** — mapper le concept fantôme sur l'outil Mnemolite existant | Implémenter |
+| 3 | **Vessel = commandes système** — `grep -rn` pour chercher dans les fichiers du workspace | Implémenter |
 | 4 | **Réduction de complexité** — le système a 12 mécanismes, KERNEL §IX dit "commence avec 3" | Faire |
 | 5 | **Stake sémantique impossible** — on ne peut pas créer de motivation chez un LLM | Abandonné |
 | 6 | **Score numérique de cohérence non fiable** — l'auto-évaluation continue est biaisée par construction | Abandonné |
@@ -173,17 +173,19 @@ APRÈS Ω :
     OUI → write_memory(tags=["sys:pattern:candidate","auto"])
 ```
 
-#### 2c. Vessel = search_code
+#### 2c. Vessel = commandes système
 
 Modifier l'Apex §Ⅱ :
 
 ```diff
 - Valider via 3 pôles : `sys:anchor` (historique) + Vessel (documentation technique du workspace) + Web/Search (réalité externe).
 + Valider via 3 pôles :
-+   1. `search_memory(tags=["sys:anchor"])` → historique
-+   2. `search_code(query=Σ_input)` → workspace (Vessel)
-+   3. `web_search(query=Σ_input)` → réalité externe
++   1. `search_memory(tags=["sys:anchor"])` → historique scellé
++   2. `bash("grep -rn '{keywords}' /home/giak/projects/expanse/doc/ --include='*.md'")` → workspace (Vessel)
++   3. `web_search(query='{keywords}')` → réalité externe
 ```
+
+**Note :** `search_code` de Mnemolite indexe du code source, pas de la documentation markdown. Vessel nécessite donc une commande système `grep` pour les fichiers textes du workspace.
 
 ### Phase 3 : Tester exemples > règles (protocole A/B)
 
@@ -232,7 +234,7 @@ mindmap
     Unanime
       Rappel associatif pré-Ψ
       Détection binaire post-Ω
-      Vessel = search_code
+      Vessel = grep (commandes système)
       Réduction 12→3 mécanismes
     Débattu
       Exemples > Règles
