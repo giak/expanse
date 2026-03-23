@@ -1,6 +1,6 @@
 # MUTATION LOG — EXPANSE V15
 
-**Last Updated:** 2026-03-23
+**Last Updated:** 2026-03-24 (00:50)
 **Version:** 2.2
 
 ---
@@ -9,12 +9,12 @@
 
 | Métrique | Count |
 |----------|-------|
-| Total Proposals | 14 |
-| Applied | 14 |
+| Total Proposals | 17 |
+| Applied | 15 |
 | Rejected | 0 |
 | Failed | 0 |
 | Rolled Back | 1 |
-| Pending | 0 |
+| Pending | 2 |
 
 ---
 
@@ -39,6 +39,8 @@
 | 2026-03-22 | dream-gate | Rule | APPLIED | Antigravity |
 | 2026-03-23 | activation-drift-threshold | BOOT | APPLIED | Dream |
 | 2026-03-23 | unconsumed-friction-logic | Rule | APPLIED | Antigravity |
+| 2026-03-24 | ecs-visible-output | ECS | APPLIED | Dream |
+| 2026-03-24 | vessel-referent-guard | Rule | APPLIED | Dream |
 
 ---
 
@@ -57,6 +59,9 @@
 | 2026-03-22 | dream-gate | Rule | APPLIED | Antigravity |
 | 2026-03-23 | activation-drift-threshold | BOOT | APPLIED | Dream |
 | 2026-03-23 | unconsumed-friction-logic | Rule | APPLIED | Antigravity |
+| 2026-03-24 | ecs-visible-output | ECS | APPLIED | Dream |
+| 2026-03-24 | sec-enhanced-autocheck | SEC | APPLIED | Dream |
+| 2026-03-24 | vessel-referent-guard | Rule | APPLIED | Dream |
 
 ---
 
