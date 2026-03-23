@@ -9,8 +9,8 @@
 
 | Métrique | Count |
 |----------|-------|
-| Total Proposals | 10 |
-| Applied | 7 |
+| Total Proposals | 13 |
+| Applied | 13 |
 | Rejected | 0 |
 | Failed | 0 |
 | Rolled Back | 1 |
@@ -29,7 +29,13 @@
 | 2026-03-20 | boot-parallel-sync | BOOT | APPLIED | Dream |
 | 2026-03-21 | external-systems-sovereignty | Rule | APPLIED | Dream |
 | 2026-03-21 | psi-symbiosis-core | Rule | APPLIED | Antigravity |
+| 2026-03-21 | protocol-enforcement | Rule | APPLIED | Dream |
+| 2026-03-21 | boot-vision-c | BOOT | APPLIED | Dream |
+| 2026-03-21 | rhetorical-question-guard | Rule | APPLIED | Dream |
 | 2026-03-21 | absolute-portability-b | BOOT | APPLIED | Antigravity |
+| 2026-03-21 | integrity-v2 | Rule | APPLIED | Dream |
+| 2026-03-21 | surgical-stasis | Rule | APPLIED | Dream |
+| 2026-03-21 | drift-guard | ECS | APPLIED | Dream |
 
 ---
 
@@ -41,6 +47,11 @@
 | 2026-03-20 | boot-parallel-sync | BOOT | APPLIED | Dream |
 | 2026-03-20 | ecs-impact-calibration | ECS | APPLIED | Dream |
 | 2026-03-21 | external-systems-sovereignty | Rule | APPLIED | Dream |
+| 2026-03-21 | protocol-enforcement | Rule | APPLIED | Dream |
+| 2026-03-21 | integrity-v2 | Rule | APPLIED | Dream |
+| 2026-03-21 | surgical-stasis | Rule | APPLIED | Dream |
+| 2026-03-21 | drift-guard | ECS | APPLIED | Dream |
+| 2026-03-22 | dream-gate | Rule | APPLIED | Antigravity |
 
 ---
 
@@ -61,8 +72,7 @@
 
 ## Pending Proposals
 
-- **boot-vision-c** : Refactorisation Section Ⅳ (Manifest) + Seed (Pointer).
-- **rhetorical-question-guard** : Règle anti-anticipation sur question rhétorique.
+(Aucun proposal en attente)
 
 ---
 
