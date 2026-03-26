@@ -23,6 +23,7 @@
 | 8 | [08-issues-securite.md](./08-issues-securite.md) | Bugs, TODOs, vulnérabilités, dette technique |
 | 9 | [09-recommandations.md](./09-recommandations.md) | Roadmap, priorités, actions correctives |
 | 10 | [10-optimisations-brainstorm.md](./10-optimisations-brainstorm.md) | Brainstorm optimisations (recherche web, 7 axes) |
+| — | [SUIVI-optimisations.md](./SUIVI-optimisations.md) | Suivi d'avancement des optimisations |
 
 ---
 
