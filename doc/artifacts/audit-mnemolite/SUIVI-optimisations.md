@@ -33,7 +33,7 @@
 | # | Action | Status | Commit | Date |
 |---|--------|--------|--------|------|
 | 4 | Activer reranking par défaut | ✅ Fait | `4bf546e` | 2026-03-26 |
-| 5 | Adaptive RRF k (20/60/80) | ⬜ À faire | — | — |
+| 5 | Adaptive RRF k (20/60/80) | ✅ Fait | `9cc222e` | 2026-03-26 |
 | 6 | Streamable HTTP transport | ⬜ À faire | — | — |
 
 ---
@@ -79,7 +79,7 @@
 
 | Fichier | Tests | Couvre | Commit | Date |
 |---------|-------|--------|--------|------|
-| `test_pgvector_optimizations.py` | 17 | halfvec, ef_search, iterative_scan, reranking, migration, regression | `eaabd65` | 2026-03-26 |
+| `test_pgvector_optimizations.py` | 26 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, migration, regression | `9cc222e` | 2026-03-26 |
 
 ---
 
@@ -87,10 +87,10 @@
 
 ```
 Quick Wins    : ███ 3/3   (100%)
-Court Terme   : █░░ 1/3   (33%)
+Court Terme   : ██░ 2/3   (67%)
 Moyen Terme   : ░░░ 0/5   (0%)
 Long Terme    : ░░░ 0/6   (0%)
 Fixs/Dette    : █░░ 1/5   (20%)
 ─────────────────────────────
-TOTAL         : ██░ 5/22  (23%)
+TOTAL         : ██░ 6/22  (27%)
 ```
