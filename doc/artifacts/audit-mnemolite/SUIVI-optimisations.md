@@ -75,6 +75,14 @@
 
 ---
 
+## Tests TDD
+
+| Fichier | Tests | Couvre | Commit | Date |
+|---------|-------|--------|--------|------|
+| `test_pgvector_optimizations.py` | 17 | halfvec, ef_search, iterative_scan, reranking, migration, regression | `eaabd65` | 2026-03-26 |
+
+---
+
 ## Progression Globale
 
 ```
