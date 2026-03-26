@@ -26,6 +26,17 @@
 - `hybrid_memory_search_service.py` — `embedding_half` + `::halfvec` + pgvector tuning
 - Writes restent en `::vector` — triggers convertissent automatiquement
 
+**Détail commit `4bf546e` :**
+- `hybrid_code_search_service.py` — `default_enable_reranking=True`
+- `hybrid_memory_search_service.py` — `default_enable_reranking=True`
+- Reranker lazy-loaded au 1er search (pas de RAM avant)
+
+**Détail commit `9cc222e` :**
+- `rrf_fusion_service.py` — `get_optimal_k(query)` heuristique statique
+- `hybrid_code_search_service.py` — param `rrf_k` sur `search()` et `_fuse_results()`
+- `search_with_auto_weights()` appelle `get_optimal_k` automatiquement
+- 9 tests TDD : code-heavy→k20, NL→k80, balanced→k60, empty→k60, scoring impact
+
 ---
 
 ## Court Terme (1-2 jours)
