@@ -37,6 +37,11 @@
 - `search_with_auto_weights()` appelle `get_optimal_k` automatiquement
 - 9 tests TDD : code-heavy→k20, NL→k80, balanced→k60, empty→k60, scoring impact
 
+**Détail commit `9b904e9` :**
+- `server.py` — `mcp.run(transport='streamable-http')` remplace le TODO+exit
+- `transport/__init__.py` — documentation complète des 2 transports
+- 4 tests TDD : config transport, appel mcp.run, pas d'erreur exit, config host/port
+
 ---
 
 ## Court Terme (1-2 jours)
@@ -45,7 +50,7 @@
 |---|--------|--------|--------|------|
 | 4 | Activer reranking par défaut | ✅ Fait | `4bf546e` | 2026-03-26 |
 | 5 | Adaptive RRF k (20/60/80) | ✅ Fait | `9cc222e` | 2026-03-26 |
-| 6 | Streamable HTTP transport | ⬜ À faire | — | — |
+| 6 | Streamable HTTP transport | ✅ Fait | `9b904e9` | 2026-03-26 |
 
 ---
 
@@ -90,7 +95,7 @@
 
 | Fichier | Tests | Couvre | Commit | Date |
 |---------|-------|--------|--------|------|
-| `test_pgvector_optimizations.py` | 26 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, migration, regression | `9cc222e` | 2026-03-26 |
+| `test_pgvector_optimizations.py` | 30 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, migration, regression | `9b904e9` | 2026-03-26 |
 
 ---
 
@@ -98,10 +103,10 @@
 
 ```
 Quick Wins    : ███ 3/3   (100%)
-Court Terme   : ██░ 2/3   (67%)
+Court Terme   : ███ 3/3   (100%)  ✅
 Moyen Terme   : ░░░ 0/5   (0%)
 Long Terme    : ░░░ 0/6   (0%)
 Fixs/Dette    : █░░ 1/5   (20%)
 ─────────────────────────────
-TOTAL         : ██░ 6/22  (27%)
+TOTAL         : ██░ 7/22  (32%)
 ```
