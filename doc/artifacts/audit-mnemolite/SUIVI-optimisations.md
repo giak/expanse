@@ -61,7 +61,7 @@
 | 7 | Nomic Embed Code (remplacer jina) | ⬜ À faire | — | — |
 | 8 | Incremental indexing (watch mode) | ⬜ À faire | — | — |
 | 9 | Memory consolidation API | ⬜ À faire | — | — |
-| 10 | Memory decay scoring | ⬜ À faire | — | — |
+| 10 | Memory decay scoring | ✅ Fait | `dd2bb1a` | 2026-03-26 |
 | 11 | Memory graph (relations) | ⬜ À faire | — | — |
 
 ---
@@ -95,7 +95,7 @@
 
 | Fichier | Tests | Couvre | Commit | Date |
 |---------|-------|--------|--------|------|
-| `test_pgvector_optimizations.py` | 30 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, migration, regression | `9b904e9` | 2026-03-26 |
+| `test_pgvector_optimizations.py` | 38 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, memory decay, migration, regression | `dd2bb1a` | 2026-03-26 |
 
 ---
 
@@ -104,9 +104,9 @@
 ```
 Quick Wins    : ███ 3/3   (100%)
 Court Terme   : ███ 3/3   (100%)  ✅
-Moyen Terme   : ░░░ 0/5   (0%)
+Moyen Terme   : █░░ 1/5   (20%)
 Long Terme    : ░░░ 0/6   (0%)
 Fixs/Dette    : █░░ 1/5   (20%)
 ─────────────────────────────
-TOTAL         : ██░ 7/22  (32%)
+TOTAL         : ██░ 8/22  (36%)
 ```
