@@ -171,69 +171,7 @@ Extraire 3-5 lignes de contexte AVANT et APRÈS
 # 3. ÉCRIRE LE PROPOSAL AVEC CONTEXTE COMPLET
 write_file(
   path: "/home/giak/projects/expanse/doc/mutations/{slug}/proposal.md",
-  content: |
-    # PROPOSAL: {slug}
-
-    **Date:** {YYYY-MM-DD}
-    **Time:** {HH:MM}
-    **Author:** Dream (Expanse Sleep)
-    **Type:** {ECS|Style|Boot|Memory|Symbol|Rule}
-    **Status:** PENDING
-    
-    ---
-    
-    ## Problème Détecté
-    {Description avec exemples concrets tirés de sys:history}
-    
-    ---
-    
-    ## Analyse des Logs
-    | UUID | Date | Interaction |
-    | {uuid} | YYYY-MM-DD | Q: ... R: ... |
-    
-    ---
-    
-    ## Section Concernée dans V15
-    - **Ligne:** {numéro exact}
-    - **Section:** {nom de la section}
-    
-    **Contexte exact (5 lignes avant/après):**
-    ```markdown
-    {ligne -5}
-    {ligne -4}
-    {ligne -3}
-    {ligne -2}
-    {ligne -1}
-    {LIGNE À MODIFIER}
-    {ligne +1}
-    {ligne +2}
-    {ligne +3}
-    {ligne +4}
-    {ligne +5}
-    ```
-    
-    ---
-    
-    ## Modification Proposée
-    ```diff
-    {ligne à modifier (copie EXACTE)}
-    -{texte à supprimer}
-    +{texte à ajouter}
-    {ligne à modifier (copie EXACTE)}
-    ```
-    
-    ---
-    
-    ## Impact
-    - Tokens affectés: +/- X
-    - Breaking change: OUI/NON
-    - Risque: FAIBLE|MOYEN|ÉLEVÉ
-    
-    ---
-    
-    ## Validation
-    - [ ] /apply {slug}
-    - [ ] /reject {slug}
+  content: {proposal_content}
 )
 
 # 4. Écrire dans Mnemolite
@@ -270,13 +208,7 @@ read_file(path: "/home/giak/projects/expanse/doc/mutations/.lock")
 SI existe → ERREUR: "Une mutation est déjà en cours. Attendez."
 
 # 2. CRÉER LOCK
-write_file(
-  path: "/home/giak/projects/expanse/doc/mutations/.lock",
-  content: |
-    LOCK: {slug}
-    Date: {YYYY-MM-DD HH:MM}
-    Status: PENDING
-)
+bash(command: "echo '{slug}' > /home/giak/projects/expanse/doc/mutations/.lock")
 
 # 3. VÉRIFIER QUE C'EST UN PROPOSAL
 read_file(path: "/home/giak/projects/expanse/doc/mutations/{slug}/proposal.md")
@@ -340,11 +272,8 @@ V15_MODIFIÉ = V15_ACTUEL avec diff appliqué
 # 9. VÉRIFIER QUE LE DIFF A ÉTÉ APPLIQUÉ
 SI V15_MODIFIÉ contient encore l'ancien texte → ERREUR
 
-# 10. ÉCRIRE V15 MODIFIÉ
-write_file(
-  path: "/home/giak/projects/expanse/runtime/expanse-v15-apex.md",
-  content: {V15_MODIFIÉ}
-)
+# 10. ÉCRIRE V15 MODIFIÉ (via expanse-apply.sh — SEUL chemin d écriture /runtime/)
+bash(command: "echo '$PROPOSAL_CONTENT' | sudo -u expanse /home/giak/projects/expanse/scripts/expanse-apply.sh expanse-v15-apex.md")
 
 # 11. CRÉER APPLIED
 write_file(
@@ -355,7 +284,7 @@ write_file(
     **Date Proposal:** {YYYY-MM-DD}
     **Date Application:** {YYYY-MM-DD HH:MM}
     **Approved by:** User
-    **Applied by:** Dream
+    **Applied by:** Dream (via expanse-apply.sh)
 
     **Proposal:** /home/giak/projects/expanse/doc/mutations/{slug}/proposal.md
     **Backup:** /home/giak/projects/expanse/archive/backups/expanse-v15-{YYYY-MM-DD}-{slug}-backup.md
@@ -367,17 +296,6 @@ write_file(
     -{ancien}
     +{nouveau}
     ```
-
-    ---
-    
-    ## Vérification
-    - [ ] Boot suivant fonctionne
-    - [ ] Signal Ψ [V15 ACTIVE] correct
-    
-    ---
-    
-    ## Rollback
-    bash(command: "cat /home/giak/projects/expanse/archive/backups/expanse-v15-{YYYY-MM-DD}-{slug}-backup.md > /home/giak/projects/expanse/runtime/expanse-v15-apex.md")
 )
 
 # 12. AUTO-VÉRIFICATION
@@ -407,8 +325,8 @@ SI TOUTES VÉRIFICATIONS OK:
   """
 
 SI ERREUR DÉTECTÉE:
-  # ROLLBACK AUTOMATIQUE
-  bash(command: "cat /home/giak/projects/expanse/archive/backups/expanse-v15-{YYYY-MM-DD}-{slug}-backup.md > /home/giak/projects/expanse/runtime/expanse-v15-apex.md")
+  # ROLLBACK AUTOMATIQUE (via expanse-apply.sh)
+  bash(command: "cat /home/giak/projects/expanse/archive/backups/expanse-v15-{YYYY-MM-DD}-{slug}-backup.md | sudo -u expanse /home/giak/projects/expanse/scripts/expanse-apply.sh expanse-v15-apex.md")
   
   # SUPPRIMER LOCK
   bash(command: "rm /home/giak/projects/expanse/doc/mutations/.lock")
@@ -497,16 +415,16 @@ SI d'autres mutations existent:
   """
   
   SI user tape "OUI-ROLLBACK":
-    # RESTAURER BACKUP DE {slug}
-    bash(command: "cat {backup_path} > /home/giak/projects/expanse/runtime/expanse-v15-apex.md")
+    # RESTAURER BACKUP DE {slug} (via expanse-apply.sh)
+    bash(command: "cat {backup_path} | sudo -u expanse /home/giak/projects/expanse/scripts/expanse-apply.sh expanse-v15-apex.md")
     # MARQUER LES MUTATIONS COMME ROLLED_BACK
     # METTRE À JOUR LOG
   SINON:
     OUTPUT: "Rollback annulé."
 
 SINON:
-  # RESTAURER SIMPLEMENT
-  bash(command: "cat {backup_path} > /home/giak/projects/expanse/runtime/expanse-v15-apex.md")
+  # RESTAURER SIMPLEMENT (via expanse-apply.sh)
+  bash(command: "cat {backup_path} | sudo -u expanse /home/giak/projects/expanse/scripts/expanse-apply.sh expanse-v15-apex.md")
 
 # 4. MARQUER {slug} COMME ROLLED_BACK
 Modifier applied.md: Status → ROLLED_BACK
