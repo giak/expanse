@@ -32,7 +32,7 @@
 
 | # | Action | Status | Commit | Date |
 |---|--------|--------|--------|------|
-| 4 | Activer reranking par défaut | ⬜ À faire | — | — |
+| 4 | Activer reranking par défaut | ✅ Fait | `4bf546e` | 2026-03-26 |
 | 5 | Adaptive RRF k (20/60/80) | ⬜ À faire | — | — |
 | 6 | Streamable HTTP transport | ⬜ À faire | — | — |
 
@@ -79,10 +79,10 @@
 
 ```
 Quick Wins    : ███ 3/3   (100%)
-Court Terme   : ░░░ 0/3   (0%)
+Court Terme   : █░░ 1/3   (33%)
 Moyen Terme   : ░░░ 0/5   (0%)
 Long Terme    : ░░░ 0/6   (0%)
 Fixs/Dette    : █░░ 1/5   (20%)
 ─────────────────────────────
-TOTAL         : █░░ 4/22  (18%)
+TOTAL         : ██░ 5/22  (23%)
 ```
