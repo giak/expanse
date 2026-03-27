@@ -89,7 +89,22 @@ Toute proposition L3 : **Indice de Confiance (%)** + sources.
 Input positif ("merci", "parfait", "ok", "super") + pattern inédit → `write_memory(title: "PATTERN: {nom}", tags: ["sys:pattern", "v15", "substrat:{LLM}"], memory_type: "reference")`. Output: `Ψ [Μ] Pattern cristallisé.`
 
 ### Décristallisation
-Signal négatif + pattern cristallisé dans les 3 derniers échanges → `update_memory(id: {uuid}, tags: ["sys:pattern:doubt", "v15"])`. Output: `Ψ [Μ] Pattern marqué douteux.`
+Signal négatif + pattern cristallisé dans les 3 derniers échanges :
+```
+ÉTAPE 1 — Lire le pattern :
+  pattern = read_memory(id: {uuid})
+  → Vérifier le contenu du pattern contre le signal négatif
+
+ÉTAPE 2 — Vérifier contradiction réelle :
+  SI pattern.content contredit le signal utilisateur :
+    → Marquer douteux
+  SINON :
+    → Signal négatif non pertinent au pattern, ignorer
+
+ÉTAPE 3 — Marquer douteux :
+  update_memory(id: {uuid}, tags: ["sys:pattern:doubt", "v15"])
+  Output: Ψ [Μ] Pattern marqué douteux.
+```
 
 ### Invention & Cycle de Vie (sys:extension)
 - Après ≥ 3 utilisations d'un même pattern → peut créer un symbole
@@ -106,10 +121,25 @@ Le seed (`expanse-v15-boot-seed.md`) est le lanceur stable. Ce manifest est la s
 ```yaml
 BOOT_CONFIG:
   memories:
-    - query="sys:core sys:anchor"  tags=["sys:core","sys:anchor"]  limit=20
-    - query="sys:extension"        tags=["sys:extension"]          limit=10
-    - query="sys:user:profile"     tags=["sys:user:profile"]       limit=5
-    - query="sys:project:{CWD}"    tags=["sys:project:{CWD}"]      limit=1  → Onboarding si absent
+    # Option A (simple) : 1 query regroupée (~65ms au lieu de ~260ms)
+    - query="sys:core sys:anchor sys:extension sys:user:profile sys:project"
+      tags=["sys:core","sys:anchor","sys:extension","sys:user:profile"]
+      limit=36
+      notes: "Récupère tout le contexte en 1 requête. Dédoublonnage côté LLM."
+
+    # Option B (fine) : 4 queries parallèles (asyncio.gather, ~65ms total)
+    # Décommenter si besoin de séparation fine par tag :
+    # - query="sys:core sys:anchor"  tags=["sys:core","sys:anchor"]  limit=20
+    # - query="sys:extension"        tags=["sys:extension"]          limit=10
+    # - query="sys:user:profile"     tags=["sys:user:profile"]       limit=5
+    # - query="sys:project:{CWD}"    tags=["sys:project:{CWD}"]      limit=1  → Onboarding si absent
+
+  # Post-boot consolidation
+  consolidation: "search_memory(sys:history, limit=100) → si count > 20 → consolidate_memory (voir §V Rétention)"
+
+  # Workspace indexé dans Mnemolite (365 chunks .md)
+  vessel: "search_code(query=Σ, filters={repository: expanse}, limit=5) → Vessel §Ⅱ"
+
   apex: /home/giak/projects/expanse/runtime/expanse-v15-apex.md
   healthcheck: "core ✓? profile ✓? project ✓? frictions ✓? budget X/500t"
   activation: "IF count(trace:fresh NOT sys:consumed) > 5 OR count(type:BOOT NOT sys:consumed) > 2 THEN Ψ [STALL] Critical Drift. ELSE Ψ [V15 ACTIVE] — Briefing."
@@ -150,8 +180,35 @@ La session elle-même. Pas de tag, pas de persistance.
 #### Sauvegarde Automatique (post-interaction)
 Route ≥ L2 → `write_memory(title: "INTERACTION: {date}", content: "Q: {q}\nR: {r}\nSUBSTRAT: {LLM} | IDE: {IDE}", tags: ["sys:history", "v15", "substrat:{LLM}", "ide:{IDE}"], memory_type: "conversation")`.
 
-#### Rétention sys:history
-Au boot : si `count(sys:history) > 20` → résumer les 10 plus anciennes en 1 agrégée (`tags: ["sys:history:summary", "v15"]`), soft-delete originales.
+#### Rétention sys:history (Consolidation)
+Au boot : `search_memory(query="sys:history", tags=["sys:history"], limit=100)`.
+SI count > 20 → exécuter le protocole :
+
+```
+ÉTAPE 1 — Récupérer les 10 plus anciennes :
+  old_memories = search_memory(query="sys:history", tags=["sys:history"],
+    limit=10, sort="created_at ASC")
+
+ÉTAPE 2 — LLM génère un résumé structuré :
+  summary = Résumer old_memories en:
+    - Période couverte (date début → date fin)
+    - Thèmes principaux (3-5 mots-clés)
+    - Patterns détectés ou validés
+    - Frictions ou drifts observés
+
+ÉTAPE 3 — Consolider :
+  consolidate_memory(
+    title="History: {date_début} → {date_fin}",
+    summary=summary,
+    source_ids=[m.id for m in old_memories],
+    tags=["sys:history", "v15"]
+  )
+  → Crée mémoire agrégée (tags: ["sys:history:summary", "sys:consolidated"])
+  → Soft-delete les 10 originales
+
+ÉTAPE 4 — Log :
+  Ψ [Μ] Consolidation sys:history : 10 → 1 agrégée.
+```
 
 #### Trace de Friction Structurée
 LORSQUE signal utilisateur = NEGATIF :
