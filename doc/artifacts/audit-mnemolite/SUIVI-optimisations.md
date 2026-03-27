@@ -229,8 +229,29 @@ f2e8e4d docs: Mnemolite tracking
 
 ---
 
+## 🔵 Améliorations Mnemolite pour Expanse (1/5 fait)
+
+| # | Amélioration | Effort | Commit | Status |
+|---|-------------|--------|--------|--------|
+| 2 | Consumption Tracking (`consumed_at`, `mark_consumed`) | 0.5j | `5ee1740` | ✅ |
+| 1 | System Snapshot (boot 1 query) | 1j | — | ⬜ |
+| 3 | Tag-Based Decay (config par tag) | 1j | — | ⬜ |
+| 5 | Lifecycle Search (sealed/candidate/doubt) | 0.5j | — | ⬜ |
+| 4 | Markdown Indexing (spécialisé Expanse) | 1j | — | ⬜ |
+
+Ordre : 2 → 1 → 3 → 5 → 4. Effort restant : ~3.5 jours.
+
+---
+
 ## Progression Globale
 
+```
+Optimisations : ██████░░░░ 12/22 (55%)
+Robustesse    : ██████████ 17/23 (74%)  — CRITIQUE ✅ + HIGH ✅ + 4 MEDIUM ✅
+Intégration   : ██████████  5/5  (100%) ✅
+Améliorations : █░░░░ 1/5   (20%)  — Consumption Tracking ✅
+────────────────────────────────────────
+TOTAL         : ███████░░░ 35/55 (64%)
 ```
 Optimisations : ██████░░░░ 12/22 (55%)
 Robustesse    : ██████████ 17/23 (74%)  — CRITIQUE ✅ + HIGH ✅ + 4 MEDIUM ✅
