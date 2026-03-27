@@ -1,7 +1,7 @@
 # Suivi Optimisations Mnemolite
 
 > **Dernière mise à jour :** 2026-03-26 22:43  
-> **Référence :** [10-optimisations-brainstorm.md](./10-optimisations-brainstorm.md)
+> **Référence :** [10-optimisations-brainstorm.md](./10-optimisations-brainstorm.md) · [EMBEDDINGS-ANALYSIS.md](./EMBEDDINGS-ANALYSIS.md)
 
 ---
 
@@ -58,7 +58,7 @@
 
 | # | Action | Status | Commit | Date |
 |---|--------|--------|--------|------|
-| 7 | Nomic Embed Code (remplacer jina) | ⬜ À faire | — | — |
+| 7 | Upgrade code embedding (Nomic CodeRankEmbed 137M) | ⬜ À faire | — | — |
 | 8 | Incremental indexing (watch mode) | ✅ Fait | `7594d96` | 2026-03-27 |
 | 9 | Memory consolidation API | ✅ Fait | `95de1a9` | 2026-03-26 |
 | 10 | Memory decay scoring | ✅ Fait | `dd2bb1a` | 2026-03-26 |
@@ -74,7 +74,7 @@
 | 13 | RAG-Fusion multi-query | ⬜ À faire | — | — |
 | 14 | PCA dimensionality reduction | ⬜ À faire | — | — |
 | 15 | Filesystem watcher | ⬜ À faire | — | — |
-| 16 | BGE-M3 (TEXT upgrade) | ⬜ À faire | — | — |
+| 16 | Upgrade TEXT embedding (BGE-M3 / jina-v5-nano / e5-large) | ⬜ À faire | — | — |
 | 17 | Git-aware indexing | ⬜ À faire | — | — |
 
 ---
@@ -84,7 +84,7 @@
 | # | Action | Status | Commit | Date |
 |---|--------|--------|--------|------|
 | BUG-01 | `self.services` → `self._services` | ✅ Fait | `98724a1` | 2026-03-26 |
-| BUG-02 | Filtre tags search_by_vector | ⬜ À faire | — | — |
+| BUG-02 | Filtre tags search_by_vector | ✅ Fait | `0baa353` | 2026-03-27 |
 | BUG-03 | `cache_hit` hardcodé | ⬜ À faire | — | — |
 | SEC-01 | Authentification API | ⬜ À faire | — | — |
 | SEC-02 | Secrets hardcodés | ⬜ À faire | — | — |
@@ -95,7 +95,7 @@
 
 | Fichier | Tests | Couvre | Commit | Date |
 |---------|-------|--------|--------|------|
-| `test_pgvector_optimizations.py` | 49 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, memory decay, consolidation, incremental indexing, migration, regression | `7594d96` | 2026-03-27 |
+| `test_pgvector_optimizations.py` | 52 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, memory decay, consolidation, incremental indexing, BUG-02 filters, migration, regression | `0baa353` | 2026-03-27 |
 
 ---
 
@@ -106,7 +106,7 @@ Quick Wins    : ███ 3/3   (100%)
 Court Terme   : ███ 3/3   (100%)  ✅
 Moyen Terme   : ███ 3/5   (60%)
 Long Terme    : ░░░ 0/6   (0%)
-Fixs/Dette    : █░░ 1/5   (20%)
+Fixs/Dette    : ██░ 2/5   (40%)
 ─────────────────────────────
-TOTAL         : ███ 10/22 (45%)
+TOTAL         : ███ 11/22 (50%)
 ```
