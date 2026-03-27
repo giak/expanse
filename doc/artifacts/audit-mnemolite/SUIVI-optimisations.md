@@ -36,7 +36,7 @@ Auth: middleware loaded, exempt paths work, key validation works
 | SEC-04 | Subprocess sans sanitisation | 30min | `cfdd6bf` | `os.path.realpath()` + exists check |
 | SEC-01 | Authentification API | 1-2j | `1da0b1a` | API Key middleware (pas JWT — overkill pour Expanse) |
 
-### 🟠 HIGH — Fiabilité (5/7 fait)
+### 🟠 HIGH — Fiabilité (6/7 fait)
 
 | # | Issue | Effort | Commit | Status |
 |---|-------|--------|--------|--------|
@@ -45,6 +45,8 @@ Auth: middleware loaded, exempt paths work, key validation works
 | BUG-03 | `cache_hit` hardcodé | 30min | `16cf074` | ✅ |
 | REL-05 | Dependencies manquantes | 0.5j | `16cf074` | ✅ |
 | REL-01 | Pas de rate limiting | 0.5j | `8820ff1` | ✅ |
+| REL-04 | Circuit breaker partagé (TEXT+CODE) | 0.5j | `816a5a2` | ✅ |
+| REL-04 | Circuit breaker partagé (TEXT+CODE) | 0.5j | `816a5a2` | ✅ |
 | REL-03 | Pas de timeout MCP | 1j | — | ⬜ |
 | REL-04 | Circuit breaker partagé (TEXT+CODE) | 0.5j | — | ⬜ |
 | REL-06 | Cache non invalidé sur writes | 1j | — | ⬜ |
@@ -229,11 +231,11 @@ b18ddae perf(pgvector): halfvec embeddings
 
 ```
 Optimisations : ██████░░░░ 12/22 (55%)
-Robustesse    : ██████░░░░ 11/23 (48%)  — CRITIQUE ✅ + 5 HIGH ✅
+Robustesse    : ███████░░░ 12/23 (52%)  — CRITIQUE ✅ + 6 HIGH ✅
 ────────────────────────────────────────
-TOTAL         : █████░░░░░ 23/45 (51%)
+TOTAL         : █████░░░░░ 24/45 (53%)
 ```
 
 **Sécurité CRITIQUE :** ✅ FAIT  
-**Fiabilité HIGH :** 5/7 fait ✅  
-**Prochaine priorité :** REL-03 MCP timeout, REL-04 circuit breaker, REL-06 cache invalidation
+**Fiabilité HIGH :** 6/7 fait ✅  
+**Prochaine priorité :** REL-03 MCP timeout, REL-06 cache invalidation
