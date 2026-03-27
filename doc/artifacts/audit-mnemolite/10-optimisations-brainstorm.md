@@ -526,9 +526,34 @@ else:
 
 ---
 
+## Statut d'Implémentation (2026-03-27 14:00)
+
+| # | Item | Status | Commit | Décisions & Erreurs |
+|---|------|--------|--------|---------------------|
+| 1 | Iterative scan | ✅ | `1c97600` | **Erreur :** `'on'` invalide pgvector 0.8.1 → `'relaxed_order'` |
+| 2 | ef_search=100 | ✅ | `1c97600` | **Erreur :** asyncpg ne supporte pas multi-SET → loop séparé |
+| 3 | halfvec | ✅ | `b18ddae` | Triggers PostgreSQL auto-sync, migration-free swap |
+| 4 | Reranking | ✅ | `4bf546e` | 2 lignes : `default_enable_reranking=False` → `True` |
+| 5 | Adaptive RRF k | ✅ | `9cc222e` | `get_optimal_k()` heuristique : `(){}.→::` count |
+| 6 | HTTP transport | ✅ | `9b904e9` | 1 ligne : `mcp.run(transport='streamable-http')` |
+| 7 | jina-v5 support | ✅ | `175e263` | Config only, pas de migration (même 768D) |
+| 8 | Incremental indexing | ✅ | `7594d96` | mtime vs `MAX(indexed_at)`, pas besoin de git |
+| 9 | Consolidation | ✅ | `95de1a9` | Outil MCP `consolidate_memory` |
+| 10 | Decay scoring | ✅ | `dd2bb1a` | `exp(-rate * age_days)`, presets par tag |
+| 11 | Memory graph | ⬜ | — | Tables nodes/edges existent, manque API |
+| 12 | Tasks MCP | ⬜ | — | SEP-1686, attendre spec MCP 2026 |
+| 13 | RAG-Fusion | ⬜ | — | 3× embedding cost, overkill pour usage actuel |
+| 14 | PCA reduction | ⬜ | — | Complex, gain marginal avec halfvec déjà fait |
+| 15 | Filesystem watcher | ⬜ | — | watchdog/inotify, useful mais low priority |
+| 16 | BGE-M3 | ⬜ | — | jina-v5 suffisant, BGE-M3 si besoin multilingue |
+| 17 | Git-aware | ⬜ | — | Complex, pas prioritaire |
+
+---
+
 *"The best optimization is the one you ship today. The second best is the one you measure tomorrow."*
 
 ---
 
 *Document généré le 2026-03-26 — Brainstorm optimisations MnemoLite*  
-*Sources : RAG best practices 2026, pgvector production guides, MCP 2026 roadmap, agent memory architectures*
+*Mis à jour le 2026-03-27 — Statut d'implémentation + erreurs + décisions*  
+*Sources : RAG best practices 2026, pgvector production guides, MCP 2026 roadmap, agent memory architectures, EMBEDDINGS-ANALYSIS.md
