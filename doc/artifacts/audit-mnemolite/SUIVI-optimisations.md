@@ -36,7 +36,7 @@ Auth: middleware loaded, exempt paths work, key validation works
 | SEC-04 | Subprocess sans sanitisation | 30min | `cfdd6bf` | `os.path.realpath()` + exists check |
 | SEC-01 | Authentification API | 1-2j | `1da0b1a` | API Key middleware (pas JWT — overkill pour Expanse) |
 
-### 🟠 HIGH — Fiabilité (4/7 fait)
+### 🟠 HIGH — Fiabilité (5/7 fait)
 
 | # | Issue | Effort | Commit | Status |
 |---|-------|--------|--------|--------|
@@ -44,7 +44,7 @@ Auth: middleware loaded, exempt paths work, key validation works
 | REL-02 | CORS ouvert (`"*"`) | 0.5j | `16cf074` | ✅ |
 | BUG-03 | `cache_hit` hardcodé | 30min | `16cf074` | ✅ |
 | REL-05 | Dependencies manquantes | 0.5j | `16cf074` | ✅ |
-| REL-01 | Pas de rate limiting | 0.5j | — | ⬜ |
+| REL-01 | Pas de rate limiting | 0.5j | `8820ff1` | ✅ |
 | REL-03 | Pas de timeout MCP | 1j | — | ⬜ |
 | REL-04 | Circuit breaker partagé (TEXT+CODE) | 0.5j | — | ⬜ |
 | REL-06 | Cache non invalidé sur writes | 1j | — | ⬜ |
@@ -175,8 +175,9 @@ curl http://localhost:8001/health
 |---------|-------|--------|------|
 | `test_pgvector_optimizations.py` | 57 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, memory decay, consolidation, incremental indexing, BUG-02, embedding models, regression | 2026-03-27 |
 | `test_auth_middleware.py` | 6 | API Key validation, exempt paths, env loading | 2026-03-27 |
+| `test_rate_limit_middleware.py` | 5 | Rate tracking, exceeded, per-IP, disabled, exempt paths | 2026-03-27 |
 
-**Validation Docker :** 116 passed / 1 minor fail / 5 skipped  
+**Validation Docker :** 67 passed / 1 minor fail / 5 skipped  
 **Suite complète :** 1168 passed / 106 failed (pre-existing DB config)
 
 ---
@@ -228,11 +229,11 @@ b18ddae perf(pgvector): halfvec embeddings
 
 ```
 Optimisations : ██████░░░░ 12/22 (55%)
-Robustesse    : █████░░░░░ 10/23 (43%)  — CRITIQUE ✅ + 4 HIGH ✅
+Robustesse    : ██████░░░░ 11/23 (48%)  — CRITIQUE ✅ + 5 HIGH ✅
 ────────────────────────────────────────
-TOTAL         : █████░░░░░ 22/45 (49%)
+TOTAL         : █████░░░░░ 23/45 (51%)
 ```
 
-**Sécurité CRITIQUE :** ✅ FAIT (SEC-01 → SEC-04)  
-**Fiabilité HIGH :** 4/7 fait ✅  
-**Prochaine priorité :** REL-01 rate limiting, REL-03 MCP timeout, REL-04 circuit breaker, REL-06 cache invalidation
+**Sécurité CRITIQUE :** ✅ FAIT  
+**Fiabilité HIGH :** 5/7 fait ✅  
+**Prochaine priorité :** REL-03 MCP timeout, REL-04 circuit breaker, REL-06 cache invalidation
