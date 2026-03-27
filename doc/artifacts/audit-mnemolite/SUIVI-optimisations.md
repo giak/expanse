@@ -98,11 +98,31 @@
 
 ---
 
+## Résultats Tests (2026-03-27 07:00)
+
+**Environnement :** Docker (mnemo-api, mnemo-postgres, mnemo-redis)
+
+| Test | Résultat |
+|------|----------|
+| Migration halfvec | ✅ Colonnes, indexes, triggers créés |
+| Peuplement halfvec | ✅ 106 text + 19,289 code + 34,530 memories |
+| Optimizations TDD | ✅ **57 passed**, 5 skipped, 0 failed |
+| Embedding service | ✅ 13/13 passed |
+| RRF fusion | ✅ 20/20 passed |
+| Code chunking | ✅ 25/25 passed |
+| Suite complète | ⚠️ 1168 passed, 106 failed (pre-existing DB config issues) |
+
+**Bug trouvé et fixé pendant les tests :**
+- `asyncpg` ne supporte pas `SET LOCAL a = 1; SET LOCAL b = 2` dans un prepared statement
+- Fix : séparer les commandes SET en appels individuels
+
+---
+
 ## Tests TDD
 
 | Fichier | Tests | Couvre | Commit | Date |
 |---------|-------|--------|--------|------|
-| `test_pgvector_optimizations.py` | 55 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, memory decay, consolidation, incremental indexing, BUG-02 filters, embedding models, migration, regression | `175e263` | 2026-03-27 |
+| `test_pgvector_optimizations.py` | 57 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, memory decay, consolidation, incremental indexing, BUG-02 filters, embedding models, migration, regression | `f779f17` | 2026-03-27 |
 
 ---
 
