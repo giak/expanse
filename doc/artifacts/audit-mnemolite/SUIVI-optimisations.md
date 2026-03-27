@@ -65,7 +65,7 @@
 
 | # | Action | Status | Commit | Date |
 |---|--------|--------|--------|------|
-| 7 | Upgrade code embedding (Nomic CodeRankEmbed 137M) | ⬜ À faire | — | — |
+| 7 | Embedding upgrade (jina-v5 support) | ✅ Fait | `175e263` | 2026-03-27 |
 | 8 | Incremental indexing (watch mode) | ✅ Fait | `7594d96` | 2026-03-27 |
 | 9 | Memory consolidation API | ✅ Fait | `95de1a9` | 2026-03-26 |
 | 10 | Memory decay scoring | ✅ Fait | `dd2bb1a` | 2026-03-26 |
@@ -102,7 +102,7 @@
 
 | Fichier | Tests | Couvre | Commit | Date |
 |---------|-------|--------|--------|------|
-| `test_pgvector_optimizations.py` | 52 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, memory decay, consolidation, incremental indexing, BUG-02 filters, migration, regression | `0baa353` | 2026-03-27 |
+| `test_pgvector_optimizations.py` | 55 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, memory decay, consolidation, incremental indexing, BUG-02 filters, embedding models, migration, regression | `175e263` | 2026-03-27 |
 
 ---
 
@@ -111,9 +111,9 @@
 ```
 Quick Wins    : ███ 3/3   (100%)
 Court Terme   : ███ 3/3   (100%)  ✅
-Moyen Terme   : ███ 3/5   (60%)
+Moyen Terme   : ████ 4/5   (80%)
 Long Terme    : ░░░ 0/6   (0%)
 Fixs/Dette    : ██░ 2/5   (40%)
 ─────────────────────────────
-TOTAL         : ███ 11/22 (50%)
+TOTAL         : ███ 12/22 (55%)
 ```
