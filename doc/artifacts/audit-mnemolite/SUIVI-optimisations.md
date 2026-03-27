@@ -113,8 +113,17 @@
 | Suite complète | ⚠️ 1168 passed, 106 failed (pre-existing DB config issues) |
 
 **Bug trouvé et fixé pendant les tests :**
-- `asyncpg` ne supporte pas `SET LOCAL a = 1; SET LOCAL b = 2` dans un prepared statement
+- `asyncpg` ne supporte pas les SET multiples dans un prepared statement
 - Fix : séparer les commandes SET en appels individuels
+- `iterative_scan='on'` invalide en pgvector 0.8.1 → `'relaxed_order'`
+- Hybrid search ne générait pas d'embedding → auto-génération ajoutée
+
+**Validation live (curl réel) :**
+```
+hybrid search: vector=True, vec=100, lex=5
+vector_time: 100ms, lexical_time: 422ms, fusion: 0.2ms
+Similarity: 0.52-0.55 (cosine distances réelles)
+```
 
 ---
 
@@ -122,7 +131,7 @@
 
 | Fichier | Tests | Couvre | Commit | Date |
 |---------|-------|--------|--------|------|
-| `test_pgvector_optimizations.py` | 57 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, memory decay, consolidation, incremental indexing, BUG-02 filters, embedding models, migration, regression | `f779f17` | 2026-03-27 |
+| `test_pgvector_optimizations.py` | 57 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, memory decay, consolidation, incremental indexing, BUG-02 filters, embedding models, migration, regression | `bf4d9d4` | 2026-03-27 |
 
 ---
 
