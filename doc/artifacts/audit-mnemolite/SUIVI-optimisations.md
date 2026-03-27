@@ -38,14 +38,14 @@ Similarité cosinus: 0.52-0.55 (réelles)
 
 | # | Issue | Source | Effort | Status |
 |---|-------|--------|--------|--------|
+| REL-07 | pool_pre_ping=False | robustesse #11 | 5min | ✅ `16cf074` |
+| REL-02 | CORS ouvert (`"*"`) | robustesse #6 | 0.5j | ✅ `16cf074` |
+| BUG-03 | `cache_hit` hardcodé | audit | 30min | ✅ `16cf074` |
+| REL-05 | Dependencies manquantes | robustesse #9 | 0.5j | ✅ `16cf074` |
 | REL-01 | Pas de rate limiting | robustesse #5 | 0.5j | ⬜ |
-| REL-02 | CORS ouvert (`"*"`) | robustesse #6 | 0.5j | ⬜ |
 | REL-03 | Pas de timeout MCP | robustesse #7 | 1j | ⬜ |
 | REL-04 | Circuit breaker partagé (TEXT+CODE) | robustesse #8 | 0.5j | ⬜ |
-| REL-05 | Dependencies manquantes | robustesse #9 | 0.5j | ⬜ |
 | REL-06 | Cache non invalidé sur writes | robustesse #10 | 1j | ⬜ |
-| REL-07 | pool_pre_ping=False | robustesse #11 | 5min | ⬜ |
-| BUG-03 | `cache_hit` hardcodé | audit | 30min | ⬜ |
 
 ### 🟡 MEDIUM — Qualité (3 jours)
 
@@ -121,10 +121,11 @@ Similarité cosinus: 0.52-0.55 (réelles)
 
 ```
 Optimisations : ██████░░░░ 12/22 (55%)
-Robustesse    : ████░░░░░░  6/23 (26%)  — CRITIQUE fait ✅
+Robustesse    : █████░░░░░ 10/23 (43%)  — CRITIQUE ✅ + 4 HIGH ✅
 ────────────────────────────────────────
-TOTAL         : ████░░░░░░ 18/45 (40%)
+TOTAL         : █████░░░░░ 22/45 (49%)
 ```
 
-**Sécurité CRITIQUE :** ✅ FAIT (SEC-01 → SEC-04)  
-**Prochaine priorité :** 🟠 Fiabilité (REL-01 → REL-07)
+**Sécurité CRITIQUE :** ✅ FAIT  
+**Fiabilité HIGH :** 4/7 fait ✅ (REL-02, REL-05, REL-07, BUG-03)  
+**Prochaine priorité :** REL-01 rate limiting, REL-03 MCP timeout, REL-04 circuit breaker, REL-06 cache invalidation
