@@ -1,7 +1,7 @@
 # Suivi Optimisations & Robustesse Mnemolite
 
-> **Dernière mise à jour :** 2026-03-27 13:55  
-> **Référence :** [10-optimisations-brainstorm.md](./10-optimisations-brainstorm.md) · [EMBEDDINGS-ANALYSIS.md](./EMBEDDINGS-ANALYSIS.md) · [ROBUSTESSE-AUDIT.md](./ROBUSTESSE-AUDIT.md) · [PLAN-securite-phase1.md](./PLAN-securite-phase1.md)
+> **Dernière mise à jour :** 2026-03-27 21:48  
+> **Référence :** [10-optimisations-brainstorm.md](./10-optimisations-brainstorm.md) · [EMBEDDINGS-ANALYSIS.md](./EMBEDDINGS-ANALYSIS.md) · [ROBUSTESSE-AUDIT.md](./ROBUSTESSE-AUDIT.md) · [PLAN-securite-phase1.md](./PLAN-securite-phase1.md) · [PLAN-integration-expanse.md](./PLAN-integration-expanse.md)
 
 ---
 
@@ -10,17 +10,21 @@
 | Catégorie | Total | Fait | Reste | Status |
 |-----------|-------|------|-------|--------|
 | **Optimisations** | 22 | 12 | 10 | 55% |
-| **Robustesse** | 23 | 10 | 13 | 43% |
-| **TOTAL** | **45** | **22** | **23** | **49%** |
+| **Robustesse** | 23 | 17 | 6 | 74% |
+| **Intégration Expanse** | 5 | 5 | 0 | 100% |
+| **TOTAL** | **50** | **34** | **16** | **68%** |
 
-### Validation Live (2026-03-27 13:50)
+### Validation Live (2026-03-27 21:45)
 ```
-Health: status=healthy, DB=True, circuit_breakers=closed
+Health: status=healthy, DB=True, circuit_breakers=all closed
+Workspace Expanse: 413 files indexed, 369 chunks, 180 with embeddings
 Hybrid search: vector=True, vec=100, lex=2-10, sim=0.516-0.530
 Memory search: 3 results (1 lex + 50 vec), decay applied, reranking=True
-TDD: 116 passed, 1 minor fail, 5 skipped
+TDD: 67 passed, 1 minor fail, 5 skipped
 Credentials: all empty (config.py cleaned)
 Auth: middleware loaded, exempt paths work, key validation works
+Rate limit: 100 req/min, headers present
+Config: model_validator catches missing DATABASE_URL
 ```
 
 ---
@@ -38,36 +42,46 @@ Auth: middleware loaded, exempt paths work, key validation works
 
 ### 🟠 HIGH — Fiabilité (7/7 fait ✅)
 
-| # | Issue | Effort | Commit | Status |
-|---|-------|--------|--------|--------|
-| REL-07 | pool_pre_ping=False | 5min | `16cf074` | ✅ |
-| REL-02 | CORS ouvert (`"*"`) | 0.5j | `16cf074` | ✅ |
-| BUG-03 | `cache_hit` hardcodé | 30min | `16cf074` | ✅ |
-| REL-05 | Dependencies manquantes | 0.5j | `16cf074` | ✅ |
-| REL-01 | Pas de rate limiting | 0.5j | `8820ff1` | ✅ |
-| REL-04 | Circuit breaker partagé (TEXT+CODE) | 0.5j | `816a5a2` | ✅ |
-| REL-03 | Pas de timeout MCP | 1j | `a3c9aaa` | ✅ |
+| # | Issue | Effort | Commit | Décision |
+|---|-------|--------|--------|----------|
+| REL-07 | pool_pre_ping=False | 5min | `16cf074` | `True` — vérifie connexions avant usage |
+| REL-02 | CORS ouvert (`"*"`) | 0.5j | `16cf074` | Liste explicite localhost, jamais `"*"` |
+| BUG-03 | `cache_hit` hardcodé | 30min | `16cf074` | Documenté — cache hits return early |
+| REL-05 | Dependencies manquantes | 0.5j | `16cf074` | `sentence-transformers` décommenté |
+| REL-01 | Pas de rate limiting | 0.5j | `8820ff1` | In-memory per IP, 100 req/min |
+| REL-04 | Circuit breaker partagé (TEXT+CODE) | 0.5j | `816a5a2` | 2 breakers indépendants |
+| REL-03 | Pas de timeout MCP | 1j | `a3c9aaa` | `run_with_timeout()` dans BaseMCPComponent |
 
 ### 🟡 MEDIUM — Qualité (4/5 fait)
 
-| # | Issue | Effort | Commit | Status |
-|---|-------|--------|--------|--------|
-| QUA-04 | Health check incomplet | 0.5j | `6613693` | ✅ |
-| QUA-05 | Logging conflict (basicConfig vs structlog) | 0.5j | `6613693` | ✅ |
-| QUA-01 | Config validation au démarrage | 1j | `42cf524` | ✅ |
-| QUA-02 | Error details exposés au client | 0.5j | `42cf524` | ✅ |
-| QUA-03 | Tests manquants (5 services >100 lignes) | 3j | — | ⬜ |
+| # | Issue | Effort | Commit | Décision |
+|---|-------|--------|--------|----------|
+| QUA-04 | Health check incomplet | 0.5j | `6613693` | Redis status + embedding_text/code circuits |
+| QUA-05 | Logging conflict | 0.5j | `6613693` | `logging.basicConfig()` supprimé |
+| QUA-01 | Config validation | 1j | `42cf524` | `model_validator` avec messages clairs |
+| QUA-02 | Error details exposés | 0.5j | `42cf524` | 20+ HTTPException details sanitized |
+| QUA-03 | Tests manquants | 3j | — | ⬜ |
 
 ### 🟢 Optimisations Restantes (0/6 fait)
 
-| # | Action | Effort | Status |
-|---|--------|--------|--------|
-| OPT-11 | Memory graph (relations) | 3j | ⬜ |
-| OPT-12 | Tasks primitive MCP | 3j | ⬜ |
-| OPT-13 | RAG-Fusion multi-query | 2j | ⬜ |
-| OPT-14 | PCA dimensionality reduction | 1sem | ⬜ |
-| OPT-15 | Filesystem watcher | 2j | ⬜ |
-| OPT-17 | Git-aware indexing | 1sem | ⬜ |
+| # | Action | Effort | Notes |
+|---|--------|--------|-------|
+| OPT-11 | Memory graph (relations) | 3j | Tables nodes/edges existent |
+| OPT-12 | Tasks primitive MCP | 3j | Attendre spec MCP 2026 |
+| OPT-13 | RAG-Fusion multi-query | 2j | 3× embedding cost |
+| OPT-14 | PCA dimensionality reduction | 1sem | Gain marginal avec halfvec |
+| OPT-15 | Filesystem watcher | 2j | watchdog/inotify |
+| OPT-17 | Git-aware indexing | 1sem | Complexe |
+
+### 🔵 Intégration Expanse (5/5 fait ✅)
+
+| # | Tâche | Commit | Résultat |
+|---|-------|--------|----------|
+| T1 | Indexer workspace Expanse | `661ad67` | 413 fichiers, 369 chunks, 180 embeddings |
+| T2 | Consolidation sys:history | `a713500` | Protocole 4 étapes dans l'Apex §V |
+| T3 | Boot optimisé | `a713500` | 1 query regroupée (~65ms vs ~260ms) |
+| T4 | read_memory décristallisation | `a713500` | 3 étapes : lire → vérifier → marquer |
+| T5 | Documentation | `a713500` | Vessel + consolidation dans BOOT_CONFIG |
 
 ---
 
@@ -75,151 +89,142 @@ Auth: middleware loaded, exempt paths work, key validation works
 
 ### Quick Wins (3/3) — 2026-03-26
 
-| # | Action | Commit | Impact Mesuré |
-|---|--------|--------|---------------|
-| 1 | Iterative scan pgvector 0.8 | `1c97600` | Fix overfiltering avec WHERE filters |
+| # | Action | Commit | Impact |
+|---|--------|--------|--------|
+| 1 | Iterative scan pgvector 0.8 | `1c97600` | Fix overfiltering |
 | 2 | HNSW tuning (ef_search=100) | `1c97600` | Recall ~92% → ~97% |
-| 3 | halfvec quantification (-50%) | `b18ddae` | Stockage : 19,395 rows peuplées |
-
-**Mini use case :** `search_memory(query="sys:core", tags=["sys:core"])` — avant, les filtres tags pouvaient éliminer tous les candidats HNSW pendant la traversée du graphe → 0 résultats. Après `iterative_scan=relaxed_order` → pgvector continue à chercher jusqu'à trouver des candidats matching les filtres.
-
-**Décision :** `relaxed_order` plutôt que `strict_order` — `relaxed` est plus rapide et suffisant pour la plupart des cas. `strict` serait pour un tri strictement cosine (plus lent).
+| 3 | halfvec quantification (-50%) | `b18ddae` | 19,395 rows peuplées |
 
 ### Court Terme (3/3) — 2026-03-26
 
-| # | Action | Commit | Impact Mesuré |
-|---|--------|--------|---------------|
-| 4 | Activer reranking par défaut | `4bf546e` | `default_enable_reranking=True` |
-| 5 | Adaptive RRF k (20/60/80) | `9cc222e` | Code→k20 (précision), NL→k80 (recall) |
+| # | Action | Commit | Impact |
+|---|--------|--------|--------|
+| 4 | Activer reranking par défaut | `4bf546e` | +20-30% précision |
+| 5 | Adaptive RRF k (20/60/80) | `9cc222e` | Code→k20, NL→k80 |
 | 6 | Streamable HTTP transport | `9b904e9` | `mcp.run(transport='streamable-http')` |
-
-**Mini use case :** `search_code(query="def process_payment(self, amount: float)")` — le query analyzer détecte 3+ code indicators (`()`), sélectionne k=20 (favorise les top ranks). Le reranker BAAI/bge-reranker-base ré-ordonne les top-30 candidats → +20-30% précision.
 
 ### Moyen Terme (4/5) — 2026-03-26/27
 
-| # | Action | Commit | Impact Mesuré |
-|---|--------|--------|---------------|
-| 7 | Embedding upgrade (jina-v5 support) | `175e263` | `jinaai/jina-embeddings-v5-text-nano` (239M, MMTEB 65.5) |
-| 8 | Incremental indexing (99% perf) | `7594d96` | 6.5h → 50s (mtime vs indexed_at) |
-| 9 | Memory consolidation API | `95de1a9` | `consolidate_memory` MCP tool |
-| 10 | Memory decay scoring | `dd2bb1a` | `exp(-rate * age_days)` tag-based |
-
-**Mini use case (consolidation) :** Expanse détecte `count(sys:history) > 20` → `search_memory(query="sys:history", limit=10)` → LLM génère un résumé → `consolidate_memory(title="History: March 20-26", summary="...", source_ids=[...])` → 10 mémoires soft-deleted, 1 mémoire consolidée créée avec tags `["sys:history:summary", "sys:consolidated"]`.
-
-**Mini use case (decay) :** `sys:history` (rate=0.05, half-life ~14 jours) — une mémoire de 14 jours avec score 0.8 se voit appliquer `0.8 × exp(-0.05 × 14) = 0.8 × 0.497 = 0.40`. La mémoire descend naturellement dans les résultats. `sys:core` (rate=0.001, half-life ~2 ans) reste pertinent des mois.
+| # | Action | Commit | Impact |
+|---|--------|--------|--------|
+| 7 | Embedding upgrade (jina-v5) | `175e263` | MMTEB 65.5, 8K context |
+| 8 | Incremental indexing | `7594d96` | 6.5h → 50s |
+| 9 | Memory consolidation | `95de1a9` | `consolidate_memory` MCP tool |
+| 10 | Memory decay scoring | `dd2bb1a` | `exp(-rate * age_days)` |
 
 ### Fixes
 
-| # | Action | Commit | Erreur Résolue |
-|---|--------|--------|----------------|
-| BUG-01 | `self.services` → `self._services` | `98724a1` | `AttributeError` runtime sur `index://status/{repo}` |
-| BUG-02 | Filtre tags search_by_vector | `0baa353` | dict au lieu de `MemoryFilters` → tags ignorés en fallback |
-| — | asyncpg multi-SET | `f779f17` | `asyncpg` ne supporte pas `SET a=1; SET b=2` en prepared statement |
-| — | iterative_scan value | `bf4d9d4` | `'on'` invalide en pgvector 0.8.1 → `'relaxed_order'` |
-| — | Auto-embedding hybrid search | `bf4d9d4` | Route ne générait pas d'embedding → vector désactivé |
-| — | SET parameterized | `462c239` | PostgreSQL SET ne supporte pas `$1` → f-string + int() |
+| # | Action | Commit | Erreur |
+|---|--------|--------|--------|
+| BUG-01 | `self.services` → `self._services` | `98724a1` | AttributeError runtime |
+| BUG-02 | Filtre tags search_by_vector | `0baa353` | dict vs MemoryFilters |
+| — | asyncpg multi-SET | `f779f17` | prepared statement limitation |
+| — | iterative_scan value | `bf4d9d4` | 'on' → 'relaxed_order' |
+| — | Auto-embedding hybrid search | `bf4d9d4` | vector désactivé |
+| — | SET parameterized | `462c239` | PostgreSQL pas de $1 dans SET |
+| — | cache.get_chunks() | `661ad67` | sync method, await cassé |
 
 ---
 
-## Sécurité Faites — Détail avec Erreurs
+## Pipeline Search Final
 
-### SEC-03 : SQL Injection (11 vulnérabilités)
-
-**Décision :** Helper centralisé `api/utils/sql_vector.py` plutôt que de modifier chaque requête individuellement.
-
-**Erreurs rencontrées :**
-1. `iterative_scan='on'` — pgvector 0.8.1 utilise `relaxed_order/strict_order/off`, pas `on/off`. Fix: `'relaxed_order'`.
-2. `SET LOCAL hnsw.ef_search = :ef` — PostgreSQL ne supporte pas les paramètres liés dans les commandes SET. Fix: `f"SET LOCAL hnsw.ef_search = {int(self.ef_search)}"` avec validation `int()`.
-
-**Helper créé :**
-```python
-# api/utils/sql_vector.py
-def format_vector_for_sql(embedding: List[float]) -> str:
-    # Valide: type=list/tuple, non-empty, all numeric
-    # Retourne: "[0.1,0.2,...]" safe for SQL interpolation
+```
+Query → auto-embedding (e5-base 768D)
+  → Hybrid Search (pg_trgm + HNSW halfvec, ef_search=100, iterative_scan=relaxed_order)
+  → RRF fusion (k adaptatif 20/60/80)
+  → Cross-Encoder Rerank (+20-30%)
+  → Temporal Decay (tag-based, presets sys:core=0.001 → sys:history=0.05)
+  → Top-K final
 ```
 
-**Use case :** `write_memory(title="Test", content="...", embedding=[0.1]*768)` → le helper valide que l'embedding est bien une liste de 768 floats → format `[0.1,0.2,...]` → `INSERT INTO memories (embedding) VALUES ('[0.1,...]'::vector)`. Si l'embedding est corrompu (string, nested list, non-numeric) → `ValueError` au lieu d'injection SQL.
+## Pipeline Indexing Final
 
-### SEC-01 : Auth API Key
-
-**Décision :** API Key plutôt que JWT. Raisons :
-- Expanse est un usage **personnel** (pas multi-tenant)
-- API Key = simple, pas de refresh tokens, pas de rotation
-- JWT = overkill, ajoute de la complexité sans bénéfice
-
-**Use case :**
-```bash
-# Config
-MNEMO_AUTH_ENABLED=true MNEMO_API_KEYS=mykey:expanse
-
-# Sans clé → 401
-curl http://localhost:8001/api/v1/memories/stats
-# {"error": "Missing API key", "detail": "Provide X-API-Key header"}
-
-# Avec clé → 200
-curl -H "X-API-Key: mykey" http://localhost:8001/api/v1/memories/stats
-# {"total_memories": 34530, ...}
-
-# Health exempt → 200 sans clé
-curl http://localhost:8001/health
-# {"status": "healthy", ...}
+```
+Workspace → ProjectScanner (21 extensions, skip dot-prefixed dirs)
+  → MarkdownChunker (split par ## headers)
+  → MetadataExtractor (Python/TS)
+  → DualEmbeddingService (TEXT + CODE, circuit breakers indépendants)
+  → Batch insert (halfvec auto-sync trigger)
+  → Cache populate (L1 memory → L2 Redis)
+  → Graph build (nodes + edges)
 ```
 
 ---
 
 ## Tests
 
-| Fichier | Tests | Couvre | Date |
-|---------|-------|--------|------|
-| `test_pgvector_optimizations.py` | 57 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, memory decay, consolidation, incremental indexing, BUG-02, embedding models, regression | 2026-03-27 |
-| `test_auth_middleware.py` | 6 | API Key validation, exempt paths, env loading | 2026-03-27 |
-| `test_rate_limit_middleware.py` | 5 | Rate tracking, exceeded, per-IP, disabled, exempt paths | 2026-03-27 |
+| Fichier | Tests | Couvre |
+|---------|-------|--------|
+| `test_pgvector_optimizations.py` | 57 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, memory decay, consolidation, incremental indexing, BUG-02, embedding models, regression |
+| `test_auth_middleware.py` | 6 | API Key validation, exempt paths, env loading |
+| `test_rate_limit_middleware.py` | 5 | Rate tracking, exceeded, per-IP, disabled, exempt paths |
 
 **Validation Docker :** 67 passed / 1 minor fail / 5 skipped  
-**Suite complète :** 1168 passed / 106 failed (pre-existing DB config)
+**Suite complète :** 1168 passed / 106 failed (pre-existing)
 
 ---
 
-## Validation Live — Résumé des Tests Réels
+## Validation Live — Résumé Complet
 
-| Test | Commande | Résultat |
-|------|----------|----------|
-| Health + pool_pre_ping | `GET /health` | ✅ status=healthy, DB=True, circuit_breakers=closed |
-| Credentials removal | `config.database_url == ""` | ✅ Tous vides |
-| Vector validation | `format_vector_for_sql("bad")` | ✅ ValueError (reject string/empty/nested) |
-| API Key middleware | `curl -H "X-API-Key: test"` | ✅ Exempt /health, validate valid, reject invalid |
-| CORS | `allowed_origins` | ✅ No `"*"`, explicit localhost list |
-| Hybrid search | `POST /v1/code/search/hybrid` | ✅ vec=100, lex=2-10, sim=0.516-0.530, vec_time=19-27ms |
-| Memory search | `POST /api/v1/memories/search` | ✅ 3 results (1 lex + 50 vec), real security memories |
-| TDD suite | `pytest tests/` | ✅ 116 passed |
+| Test | Résultat |
+|------|----------|
+| Health + pool_pre_ping | ✅ status=healthy, DB=True, circuit_breakers=closed |
+| Credentials removal | ✅ Tous vides |
+| Vector validation | ✅ ValueError (reject string/empty/nested) |
+| API Key middleware | ✅ Exempt /health, validate valid, reject invalid |
+| Rate limit headers | ✅ X-RateLimit-Limit: 100, Remaining: 99 |
+| CORS restriction | ✅ No `"*"`, explicit localhost list |
+| Config validation | ✅ Clear error messages with fix instructions |
+| Error sanitization | ✅ Generic messages only (no stack traces) |
+| Hybrid search | ✅ vec=100, lex=2-10, sim=0.516-0.530 |
+| Memory search | ✅ 3 results, decay applied, reranking=True |
+| Workspace indexing | ✅ 413 files, 369 chunks, 180 embeddings |
+| TDD suite | ✅ 67 passed |
 
 ---
 
-## Commits Mnemolite (23 total)
+## Commits (34 total)
 
+### Mnemolite (12)
 ```
-462c239 fix: SET commands cannot use bind parameters
-1da0b1a fix(security): T7+T8+T9 — API Key authentication middleware
-cfdd6bf fix(security): T6 — sanitize subprocess
-42ae540 fix(security): T4+T5 — remove hardcoded credentials
-2c42588 fix(security): T3 — centralize vector formatting
-d302a3e fix(security): T1+T2 — parameterize INTERVAL + ef_search
-bf4d9d4 fix: real-world validation — auto-embedding, iterative_scan
+661ad67 fix: cache.get_chunks() sync
+a3c9aaa fix(security): REL-03 MCP timeout
+816a5a2 fix(security): REL-04 circuit breakers
+8820ff1 fix(security): REL-01 rate limiting
+462c239 fix: SET parameterized
 16cf074 fix(security): REL-07, REL-02, BUG-03, REL-05
-f779f17 test: fix TDD tests for Docker environment
-175e263 feat(embeddings): jina-v5 support
-7594d96 feat(indexing): incremental indexing tool
-95de1a9 feat(memory): consolidation tool
-dd2bb1a feat(memory): decay scoring
-0baa353 fix(memory): BUG-02 MemoryFilters
-9b904e9 feat(mcp): Streamable HTTP transport
-9cc222e feat(search): adaptive RRF k
-eaabd65 test(pgvector): TDD tests
-4bf546e perf(search): reranking enabled
-b18ddae perf(pgvector): halfvec embeddings
-1c97600 fix(pgvector): iterative_scan + ef_search
-98724a1 fix(mcp): indexing_resources bug
+1da0b1a fix(security): T7+T8+T9 API Key
+cfdd6bf fix(security): T6 subprocess
+42ae540 fix(security): T4+T5 credentials
+2c42588 fix(security): T3 vector formatting
+d302a3e fix(security): T1+T2 INTERVAL + ef_search
+f779f17 test: fix TDD for Docker
+```
+
+### Expanse (22)
+```
+a713500 feat(expanse): integrate Mnemolite T2+T3+T4+T5
+2a81102 docs: PLAN-integration T1
+b7da779 docs: tracking QUA-01+02
+3aa2d90 docs: tracking QUA-04+05
+98398be docs: tracking ALL HIGH
+c36bade docs: comprehensive tracking
+83e697c docs: tracking 4 HIGH
+9a5c4ce docs: tracking REL-01
+2fffa6e docs: tracking REL-04
+3c19fb8 docs: tracking progress
+3c9a591 docs: commit tracking details
+399cb74 docs: README index update
+bb0f74a docs: Mnemolite tracking TDD
+b8b88c6 docs: Mnemolite tracking
+34c49bd docs: Mnemolite optimization tracking
+0ecdb62 docs: Mnemolite tracking HTTP transport
+d0aae0e docs: Mnemolite optimization tracking
+c5a0ef3 docs: Mnemolite optimization tracking halfvec
+00f2367 docs: Mnemolite optimization tracking reranking
+f2e8e4d docs: Mnemolite tracking
+3d63d4f docs: Mnemolite optimization tracking
+0b58612 feat(runtime): update Dream pass, refine v15 apex
 ```
 
 ---
@@ -229,11 +234,25 @@ b18ddae perf(pgvector): halfvec embeddings
 ```
 Optimisations : ██████░░░░ 12/22 (55%)
 Robustesse    : ██████████ 17/23 (74%)  — CRITIQUE ✅ + HIGH ✅ + 4 MEDIUM ✅
+Intégration   : ██████████  5/5  (100%) ✅
 ────────────────────────────────────────
-TOTAL         : ██████░░░░ 29/45 (64%)
+TOTAL         : ███████░░░ 34/50 (68%)
 ```
 
 **Sécurité CRITIQUE :** ✅ FAIT (4/4)  
 **Fiabilité HIGH :** ✅ FAIT (7/7)  
-**Qualité MEDIUM :** 4/5 fait (QUA-01 ✅ QUA-02 ✅ QUA-04 ✅ QUA-05 ✅)  
-**Prochaine priorité :** QUA-03 (tests manquants, 3j) ou 🟢 Optimisations restantes
+**Qualité MEDIUM :** 4/5 fait (reste QUA-03 tests, 3j)  
+**Intégration Expanse :** ✅ FAIT (T1-T5, Apex mis à jour)
+
+---
+
+## DB State (2026-03-27 21:45)
+
+| Metric | Value |
+|--------|-------|
+| Chunks totaux | 19,531 |
+| Chunks Expanse | 369 |
+| Chunks Expanse avec embeddings | 180 |
+| Mémoires totales | 34,531 |
+| API status | healthy |
+| Circuit breakers | all closed |

@@ -538,15 +538,37 @@ else:
 | 6 | HTTP transport | ✅ | `9b904e9` | 1 ligne : `mcp.run(transport='streamable-http')` |
 | 7 | jina-v5 support | ✅ | `175e263` | Config only, pas de migration (même 768D) |
 | 8 | Incremental indexing | ✅ | `7594d96` | mtime vs `MAX(indexed_at)`, pas besoin de git |
-| 9 | Consolidation | ✅ | `95de1a9` | Outil MCP `consolidate_memory` |
+| 9 | Consolidation | ✅ | `95de1a9` | Outil MCP `consolidate_memory` — intégré Apex §V |
 | 10 | Decay scoring | ✅ | `dd2bb1a` | `exp(-rate * age_days)`, presets par tag |
-| 11 | Memory graph | ⬜ | — | Tables nodes/edges existent, manque API |
-| 12 | Tasks MCP | ⬜ | — | SEP-1686, attendre spec MCP 2026 |
-| 13 | RAG-Fusion | ⬜ | — | 3× embedding cost, overkill pour usage actuel |
-| 14 | PCA reduction | ⬜ | — | Complex, gain marginal avec halfvec déjà fait |
-| 15 | Filesystem watcher | ⬜ | — | watchdog/inotify, useful mais low priority |
-| 16 | BGE-M3 | ⬜ | — | jina-v5 suffisant, BGE-M3 si besoin multilingue |
-| 17 | Git-aware | ⬜ | — | Complex, pas prioritaire |
+
+## Intégration Expanse (5/5 ✅)
+
+| # | Tâche | Commit | Résultat |
+|---|-------|--------|----------|
+| T1 | Indexer workspace Expanse | `661ad67` | 413 fichiers .md, 369 chunks, 180 embeddings |
+| T2 | Consolidation sys:history | `a713500` | Protocole 4 étapes dans l'Apex §V |
+| T3 | Boot optimisé | `a713500` | 1 query regroupée (~65ms vs ~260ms) |
+| T4 | read_memory décristallisation | `a713500` | 3 étapes : lire → vérifier → marquer |
+| T5 | Documentation | `a713500` | Vessel + consolidation dans BOOT_CONFIG |
+
+### Bugs trouvés pendant l'intégration
+
+| Bug | Cause | Fix | Commit |
+|-----|-------|-----|--------|
+| `cache.get_chunks()` n'existe pas | Méthode est `get()`, code_indexing_service appelait `await get_chunks()` | `get_chunks = get` alias, remove `await` | `661ad67` |
+| Circuit breaker CODE ouvert pendant indexation | Timeout HuggingFace depuis container | Recovery auto après 60s, code temporaire sans embeddings | — |
+
+## Non implémenté (raisons)
+
+| # | Action | Raison |
+|---|--------|--------|
+| 11 | Memory graph | Tables nodes/edges existent, mais API non prioritaire |
+| 12 | Tasks MCP | SEP-1686, spec MCP 2026 non finalisée |
+| 13 | RAG-Fusion | 3× embedding cost, usage personnel Expanse overkill |
+| 14 | PCA reduction | Gain marginal — halfvec déjà -50% |
+| 15 | Filesystem watcher | Useful mais low priority — index_incremental suffit |
+| 16 | BGE-M3 | jina-v5 suffisant, BGE-M3 si besoin multilingue |
+| 17 | Git-aware indexing | Complexe (1sem), pas prioritaire |
 
 ---
 
@@ -555,5 +577,5 @@ else:
 ---
 
 *Document généré le 2026-03-26 — Brainstorm optimisations MnemoLite*  
-*Mis à jour le 2026-03-27 — Statut d'implémentation + erreurs + décisions*  
-*Sources : RAG best practices 2026, pgvector production guides, MCP 2026 roadmap, agent memory architectures, EMBEDDINGS-ANALYSIS.md
+*Mis à jour le 2026-03-27 — Statut + erreurs + décisions + intégration Expanse*  
+*Sources : RAG best practices 2026, pgvector production guides, MCP 2026 roadmap, agent memory architectures, EMBEDDINGS-ANALYSIS.md, ROBUSTESSE-AUDIT.md
