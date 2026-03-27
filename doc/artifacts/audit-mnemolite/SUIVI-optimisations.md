@@ -235,7 +235,7 @@ f2e8e4d docs: Mnemolite tracking
 |---|-------------|--------|--------|--------|
 | 2 | Consumption Tracking (`consumed_at`, `mark_consumed`) | 0.5j | `5ee1740` | ✅ |
 | 1 | System Snapshot (boot 1 query) | 1j | `80b4397` | ✅ |
-| 3 | Tag-Based Decay (config par tag) | 1j | — | ⬜ |
+| 3 | Tag-Based Decay (config par tag) | 1j | `2da211b` | ✅ |
 | 5 | Lifecycle Search (sealed/candidate/doubt) | 0.5j | — | ⬜ |
 | 4 | Markdown Indexing (spécialisé Expanse) | 1j | — | ⬜ |
 
@@ -249,9 +249,9 @@ Ordre : 2 → 1 → 3 → 5 → 4. Effort restant : ~3.5 jours.
 Optimisations : ██████░░░░ 12/22 (55%)
 Robustesse    : ██████████ 17/23 (74%)  — CRITIQUE ✅ + HIGH ✅ + 4 MEDIUM ✅
 Intégration   : ██████████  5/5  (100%) ✅
-Améliorations : ██░░░ 2/5   (40%)  — Consumption Tracking ✅ + System Snapshot ✅
+Améliorations : ███░░ 3/5   (60%)  — Consumption ✅ Snapshot ✅ Decay ✅
 ────────────────────────────────────────
-TOTAL         : ████████░░ 36/55 (65%)
+TOTAL         : ████████░░ 37/55 (67%)
 ```
 Optimisations : ██████░░░░ 12/22 (55%)
 Robustesse    : ██████████ 17/23 (74%)  — CRITIQUE ✅ + HIGH ✅ + 4 MEDIUM ✅
