@@ -25,14 +25,14 @@ Similarité cosinus: 0.52-0.55 (réelles)
 
 ## Backlog Unifié
 
-### 🔴 CRITIQUE — Sécurité (2 jours)
+### 🔴 CRITIQUE — Sécurité (3j) — [Plan détaillé](./PLAN-securite-phase1.md)
 
-| # | Issue | Source | Effort | Status |
-|---|-------|--------|--------|--------|
-| SEC-01 | Pas d'authentification API | robustesse + audit | 1-2j | ⬜ |
-| SEC-02 | Credentials hardcodés | robustesse + audit | 0.5j | ⬜ |
-| SEC-03 | SQL injection via f-string | robustesse #2 | 0.5j | ⬜ |
-| SEC-04 | Subprocess sans sanitisation | robustesse #4 | 0.5j | ⬜ |
+| # | Issue | Effort | Status |
+|---|-------|--------|--------|
+| SEC-03 | SQL injection — 11 vulnérabilités (6 HIGH, 5 MEDIUM) | 2.5h | ✅ `d302a3e` `2c42588` |
+| SEC-02 | Credentials hardcodés (config.py) | 30min | ✅ `42ae540` |
+| SEC-04 | Subprocess sans sanitisation | 30min | ✅ `cfdd6bf` |
+| SEC-01 | Authentification API (API Key middleware) | 1-2j | ✅ `1da0b1a` |
 
 ### 🟠 HIGH — Fiabilité (2 jours)
 
@@ -110,6 +110,7 @@ Similarité cosinus: 0.52-0.55 (réelles)
 | Fichier | Tests | Couvre | Date |
 |---------|-------|--------|------|
 | `test_pgvector_optimizations.py` | 57 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, memory decay, consolidation, incremental indexing, BUG-02, embedding models, regression | 2026-03-27 |
+| `test_auth_middleware.py` | 6 | API Key validation, exempt paths, env loading | 2026-03-27 |
 
 **Validation Docker :** 57 passed / 5 skipped / 0 failed  
 **Suite complète :** 1168 passed / 106 failed (pre-existing)
@@ -120,9 +121,10 @@ Similarité cosinus: 0.52-0.55 (réelles)
 
 ```
 Optimisations : ██████░░░░ 12/22 (55%)
-Robustesse    : █░░░░░░░░░  2/23 ( 9%)
-──────────────────────────────────────
-TOTAL         : ███░░░░░░░ 14/45 (31%)
+Robustesse    : ████░░░░░░  6/23 (26%)  — CRITIQUE fait ✅
+────────────────────────────────────────
+TOTAL         : ████░░░░░░ 18/45 (40%)
 ```
 
-**Prochaine priorité :** 🔴 Sécurité (SEC-01 → SEC-04) avant les optimisations restantes.
+**Sécurité CRITIQUE :** ✅ FAIT (SEC-01 → SEC-04)  
+**Prochaine priorité :** 🟠 Fiabilité (REL-01 → REL-07)
