@@ -48,15 +48,15 @@ Auth: middleware loaded, exempt paths work, key validation works
 | REL-04 | Circuit breaker partagé (TEXT+CODE) | 0.5j | `816a5a2` | ✅ |
 | REL-03 | Pas de timeout MCP | 1j | `a3c9aaa` | ✅ |
 
-### 🟡 MEDIUM — Qualité (0/5 fait)
+### 🟡 MEDIUM — Qualité (2/5 fait)
 
-| # | Issue | Effort | Status |
-|---|-------|--------|--------|
-| QUA-01 | Config validation au démarrage | 1j | ⬜ |
-| QUA-02 | Error details exposés au client | 0.5j | ⬜ |
-| QUA-03 | Tests manquants (5 services >100 lignes) | 3j | ⬜ |
-| QUA-04 | Health check incomplet | 0.5j | ⬜ |
-| QUA-05 | Logging conflict (basicConfig vs structlog) | 0.5j | ⬜ |
+| # | Issue | Effort | Commit | Status |
+|---|-------|--------|--------|--------|
+| QUA-04 | Health check incomplet | 0.5j | `6613693` | ✅ |
+| QUA-05 | Logging conflict (basicConfig vs structlog) | 0.5j | `6613693` | ✅ |
+| QUA-01 | Config validation au démarrage | 1j | — | ⬜ |
+| QUA-02 | Error details exposés au client | 0.5j | — | ⬜ |
+| QUA-03 | Tests manquants (5 services >100 lignes) | 3j | — | ⬜ |
 
 ### 🟢 Optimisations Restantes (0/6 fait)
 
@@ -228,11 +228,12 @@ b18ddae perf(pgvector): halfvec embeddings
 
 ```
 Optimisations : ██████░░░░ 12/22 (55%)
-Robustesse    : ████████░░ 13/23 (57%)  — CRITIQUE ✅ + 7 HIGH ✅ (tous)
+Robustesse    : █████████░ 15/23 (65%)  — CRITIQUE ✅ + HIGH ✅ + 2 MEDIUM ✅
 ────────────────────────────────────────
-TOTAL         : █████░░░░░ 25/45 (56%)
+TOTAL         : ██████░░░░ 27/45 (60%)
 ```
 
 **Sécurité CRITIQUE :** ✅ FAIT (4/4)  
 **Fiabilité HIGH :** ✅ FAIT (7/7)  
-**Prochaine priorité :** 🟡 MEDIUM (QUA-01 → QUA-05) ou 🟢 Optimisations restantes (OPT-11 → OPT-17)
+**Qualité MEDIUM :** 2/5 fait (QUA-04, QUA-05)  
+**Prochaine priorité :** QUA-01 config validation, QUA-02 error sanitization, QUA-03 missing tests
