@@ -8,37 +8,44 @@
 
 ## AXE 1 — Embeddings : Upgrade Modèles
 
-**État actuel :** nomic-embed-text-v1.5 (137M, 768D) + jina-embeddings-v2-base-code (161M, 768D)
+**État actuel :** `intfloat/multilingual-e5-base` (278M, 768D) pour TEXT + `jina-embeddings-v2-base-code` (161M, 768D) pour CODE
 
-### Options Évaluées
+> ⚠️ **Note :** Mnemolite tourne sur AMD Ryzen 7 7840HS — CPU uniquement. ROCm ne supporte pas la Radeon 780M intégrée. Modèles > 1B params = trop lourd. Voir [EMBEDDINGS-ANALYSIS.md](./EMBEDDINGS-ANALYSIS.md).
 
-| Modèle | MTEB Score | Params | Dimensions | Coût | License | Spécialité |
-|--------|-----------|--------|------------|------|---------|------------|
-| nomic-embed-text-v1.5 (actuel TEXT) | ~62 | 137M | 768 | Gratuit | Apache 2.0 | Généraliste, transparent |
-| jina-embeddings-v2-base-code (actuel CODE) | ~62 | 161M | 768 | Gratuit | Apache 2.0 | Code search |
-| **Nomic Embed Code** (nouveau) | **81.7%** CodeSearchNet | — | 768 | Gratuit | Open-source | Code retrieval SOTA |
-| Voyage-code-3 | #1 MTEB-Code | — | 2048 (flex) | $0.18/1M | Propriétaire | 300+ languages, code |
-| BGE-M3 | 63.0 MTEB | — | 1024 | Gratuit | MIT | Hybrid dense+sparse |
-| Qwen3-Embedding-8B | **70.58** multilingual | 8B | 7168 (flex) | Gratuit | Apache 2.0 | #1 multilingual |
+### Options Évaluées (corrigé 2026-03-26)
+
+| Modèle | Params | MMTEB / MTEB Retrieval | Context | Dim | License | CPU Perf | Spécialité |
+|--------|--------|----------------------|---------|-----|---------|----------|------------|
+| `multilingual-e5-base` (actuel TEXT) | 278M | ~64 | 512 | 768 | MIT | ⭐⭐⭐⭐ | Multilingue |
+| `jina-embeddings-v2-base-code` (actuel CODE) | 161M | ~62 | 8192 | 768 | Apache 2.0 | ⭐⭐⭐⭐⭐ | Code search |
+| **jina-embeddings-v5-text-nano** | **239M** | **65.5** | **8K** | **768** | CC-BY-NC-4.0 | ⭐⭐⭐⭐⭐ | SOTA sub-1B, ultra rapide |
+| **jina-embeddings-v5-text-small** | **677M** | **67.0** | **32K** | **1024** | CC-BY-NC-4.0 | ⭐⭐⭐ | SOTA sub-1B, LoRA adapters |
+| **BGE-M3** | 568M | 63.0 | 8K | 1024 | MIT | ⭐⭐⭐⭐ | dense+sparse+multi-vector |
+| `intfloat/multilingual-e5-large-v2` | 335M | ~64.5 | 512 | 1024 | MIT | ⭐⭐⭐⭐ | Upgrade direct |
+| ~~Nomic Embed Code~~ | ~~7B~~ | ~~81.7% CodeSearchNet~~ | — | ~~768~~ | ~~Apache 2.0~~ | ❌ | **Trop gros pour CPU** |
+| **Nomic CodeRankEmbed** | **137M** | **~75% CodeSearchNet** | 8K | 768 | Apache 2.0 | ⭐⭐⭐⭐⭐ | Code, léger, rapide |
+| ~~Qwen3-Embedding-8B~~ | ~~8B~~ | ~~70.58~~ | ~~32K~~ | ~~7168~~ | ~~Apache 2.0~~ | ❌ | **Trop gros pour CPU** |
 
 ### Recommandation
 
-**Court terme :** Tester **Nomic Embed Code** pour remplacer jina-embeddings-v2-base-code.
-- Même famille (nomic), open-source, spécialisé code
-- Entraîné sur CoRNStack avec dual-consistency filtering
-- 81.7% sur Python CodeSearchNet (vs ~70% pour jina v2)
-- Pas de coût API, RAM similaire
-- Effort : 2j
+**Option A (2j) :** Upgrade TEXT uniquement — `jina-embeddings-v5-text-nano` (239M)
+- Plus rapide que l'actuel, meilleur score (65.5 vs ~64), 8K context
+- CC-BY-NC-4.0 (OK pour Expanse/usage personnel)
 
-**Moyen terme :** Évaluer BGE-M3 si besoin multilingue (Expanse en français).
-- Supporte dense + sparse + multi-vector dans un seul modèle
-- Permettrait de remplacer le pg_trgm par du sparse BM25 intégré
-- Effort : 3j
+**Option B (3j) :** Upgrade TEXT + CODE
+- TEXT: `jina-embeddings-v5-text-small` (677M, MMTEB 67.0)
+- CODE: `Nomic CodeRankEmbed` (137M, ~75% CodeSearchNet)
+- TEXT CC-BY-NC-4.0, CODE Apache 2.0
 
-**Long terme :** Qwen3-Embedding-8B si budget RAM disponible (~16GB).
-- #1 MTEB multilingual (70.58)
-- 32K context, supporte code + texte nativement
-- Effort : 5j
+**Option C (2j) :** Upgrade conservateur (MIT/Apache 2.0)
+- TEXT: `intfloat/multilingual-e5-large-v2` (335M, ~64.5)
+- CODE: `Nomic CodeRankEmbed` (137M, ~75% CodeSearchNet)
+- License libre commercial
+
+**Option D (3j) :** Un seul modèle — `BGE-M3` (568M)
+- Dense + sparse + multi-vector, MIT license
+- Remplacerait pg_trgm par sparse BM25
+- Score MTEB inférieur (63.0)
 
 ---
 
