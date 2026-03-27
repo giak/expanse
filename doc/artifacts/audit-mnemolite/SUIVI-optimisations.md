@@ -38,6 +38,13 @@
 - 9 tests TDD : code-heavy→k20, NL→k80, balanced→k60, empty→k60, scoring impact
 
 **Détail commit `9b904e9` :**
+
+**Détail commit `0baa353` (BUG-02) :**
+- `memory_tools.py` — fallback vector-only utilise `MemoryFilters` au lieu de `dict`
+- Tags, memory_type, project_id correctement transmis au `search_by_vector()`
+- 3 tests TDD : MemoryFilters usage, no dict pattern, tags included
+
+**Détail commit `9b904e9` :**
 - `server.py` — `mcp.run(transport='streamable-http')` remplace le TODO+exit
 - `transport/__init__.py` — documentation complète des 2 transports
 - 4 tests TDD : config transport, appel mcp.run, pas d'erreur exit, config host/port
