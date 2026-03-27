@@ -59,7 +59,7 @@
 | # | Action | Status | Commit | Date |
 |---|--------|--------|--------|------|
 | 7 | Nomic Embed Code (remplacer jina) | ⬜ À faire | — | — |
-| 8 | Incremental indexing (watch mode) | ⬜ À faire | — | — |
+| 8 | Incremental indexing (watch mode) | ✅ Fait | `7594d96` | 2026-03-27 |
 | 9 | Memory consolidation API | ✅ Fait | `95de1a9` | 2026-03-26 |
 | 10 | Memory decay scoring | ✅ Fait | `dd2bb1a` | 2026-03-26 |
 | 11 | Memory graph (relations) | ⬜ À faire | — | — |
@@ -95,7 +95,7 @@
 
 | Fichier | Tests | Couvre | Commit | Date |
 |---------|-------|--------|--------|------|
-| `test_pgvector_optimizations.py` | 44 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, memory decay, consolidation, migration, regression | `95de1a9` | 2026-03-26 |
+| `test_pgvector_optimizations.py` | 49 | halfvec, ef_search, iterative_scan, reranking, adaptive RRF k, HTTP transport, memory decay, consolidation, incremental indexing, migration, regression | `7594d96` | 2026-03-27 |
 
 ---
 
@@ -104,9 +104,9 @@
 ```
 Quick Wins    : ███ 3/3   (100%)
 Court Terme   : ███ 3/3   (100%)  ✅
-Moyen Terme   : ██░ 2/5   (40%)
+Moyen Terme   : ███ 3/5   (60%)
 Long Terme    : ░░░ 0/6   (0%)
 Fixs/Dette    : █░░ 1/5   (20%)
 ─────────────────────────────
-TOTAL         : ██░ 9/22  (41%)
+TOTAL         : ███ 10/22 (45%)
 ```
