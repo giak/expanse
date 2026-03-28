@@ -44,20 +44,20 @@ Les TYPES permettent le regroupement :
 
 ### Passe 0 : L'Inertie (Anti-Sycophancy)
 
-- **Action :** `mcp_mnemolite_search_memory(tags: ["trace:fresh"], limit: 20)`
+- **Action :** `mcp_mnemolite_search_memory(tags: ["trace:fresh"], consumed: false, limit: 20)`
 - **Analyse :** 
-  1. Compter TRACE:FRESH total
-  2. Si count = 0 → aucune friction → FIN DU RÊVE
+  1. Compter TRACE:FRESH total (non consommées seulement)
+  2. Si count = 0 → aucune friction fraîche → FIN DU RÊVE
   3. Si count < 3 → frictions insuffisantes pour pattern
-- **Sortie :** `Ψ(Inertie) : {N} traces. {status}.` où status = "Fin du rêve." ou "Analyse requise."
+- **Sortie :** `Ψ(Inertie) : {N} traces fraîches. {status}.` où status = "Fin du rêve." ou "Analyse requise."
 
 ---
 
 ### Passe 1 : La Plaie (Réactif)
 
 - **Action :**
-  1. `mcp_mnemolite_search_memory(query: "TRACE:FRESH", tags: ["trace:fresh"], limit: 20)`
-  2. `mcp_mnemolite_search_memory(query: "sys:drift", tags: ["sys:drift"], limit: 20)`
+  1. `mcp_mnemolite_search_memory(tags: ["trace:fresh"], consumed: false, limit: 20)`
+  2. `mcp_mnemolite_search_memory(tags: ["sys:drift"], consumed: false, limit: 20)`
 - **Analyse :** 
   1. Grouper par TYPE
   2. Grouper `sys:drift` par `type:*` tag
@@ -66,6 +66,10 @@ Les TYPES permettent le regroupement :
   5. **BRAINSTORM (OBLIGATOIRE)** : Pour chaque pattern, lire `runtime/expanse-brm.md` et remplir le gabarit.
      - Sauvegarder : `mcp_mnemolite_write_memory(title: "BRM: {slug}", content: "{GABARIT_REMPLI}", tags: ["trace:dream:brm", "v15"], memory_type: "investigation")`.
   6. Extraire la solution de la section `3. Cristal` du BRM pour identifier la règle V15 à modifier.
+- **Après traitement (OBLIGATOIRE) :**
+  - `mcp_mnemolite_mark_consumed(memory_ids: [ids_traces], consumed_by: "dream_passe1")`
+  - `mcp_mnemolite_mark_consumed(memory_ids: [ids_drifts], consumed_by: "dream_passe1")`
+  - Les traces/drifts traités ne seront plus vus par les Dream suivants.
 - **Output :** `[PROPOSAL_OPEN] [MODIFY]` — Cite : `type: {TYPE}`, `count: {N}`, `symptom: {summary}`. Basé sur le Cristal du BRM.
 
 ---

@@ -35,7 +35,7 @@ Deux dimensions :
 
 ### Rappel Associatif (Route ≥ L2) — Phase Μ
 AVANT Ψ :
-- `search_memory(query=Σ_input, tags=["sys:pattern","sys:anchor"], limit=3)`
+- `search_memory(query=Σ_input, tags=["sys:pattern","sys:anchor"], lifecycle_state="sealed", limit=3)`
 - SI résultat pertinent → intégrer au contexte cognitif.
 - SI aucun résultat → continuer.
 
@@ -62,8 +62,8 @@ AVANT Ψ :
 
 ### Triangulation (L3 uniquement)
 Valider via 3 pôles :
-1. `search_memory(tags=["sys:anchor"])` → historique scellé
-2. `search_code(query="{keywords}")` → workspace (Vessel)
+1. `search_memory(tags=["sys:anchor"], lifecycle_state="sealed")` → historique scellé
+2. `search_code(query="{keywords}", filters={repository: "expanse"})` → workspace (Vessel)
 3. `web_search(query='{keywords}')` → réalité externe
 Toute proposition L3 : **Indice de Confiance (%)** + sources.
 - **Φ Vessel Guard** : Si l'input contient un terme référentiel non résolu (référence à un concept absent du contexte courant), le search_code Vessel (pôle 2) est OBLIGATOIRE avant émission Ω, même hors L3. Marquer `[Φ:Vessel]` dans la trace.
@@ -120,29 +120,17 @@ Le seed (`expanse-v15-boot-seed.md`) est le lanceur stable. Ce manifest est la s
 
 ```yaml
 BOOT_CONFIG:
-  memories:
-    # Option A (simple) : 1 query regroupée (~65ms au lieu de ~260ms)
-    - query="sys:core sys:anchor sys:extension sys:user:profile sys:project"
-      tags=["sys:core","sys:anchor","sys:extension","sys:user:profile"]
-      limit=36
-      notes: "Récupère tout le contexte en 1 requête. Dédoublonnage côté LLM."
+  # System snapshot en 1 appel (remplace search_memory)
+  snapshot: "get_system_snapshot(repository='expanse')"
+  → Retourne: core, patterns, extensions, profile, project
+  → Retourne: health {fresh_drifts, fresh_traces, needs_consolidation, history_count}
 
-    # Option B (fine) : 4 queries parallèles (asyncio.gather, ~65ms total)
-    # Décommenter si besoin de séparation fine par tag :
-    # - query="sys:core sys:anchor"  tags=["sys:core","sys:anchor"]  limit=20
-    # - query="sys:extension"        tags=["sys:extension"]          limit=10
-    # - query="sys:user:profile"     tags=["sys:user:profile"]       limit=5
-    # - query="sys:project:{CWD}"    tags=["sys:project:{CWD}"]      limit=1  → Onboarding si absent
-
-  # Post-boot consolidation
-  consolidation: "search_memory(sys:history, limit=100) → si count > 20 → consolidate_memory (voir §V Rétention)"
-
-  # Workspace indexé dans Mnemolite (365 chunks .md)
-  vessel: "search_code(query=Σ, filters={repository: expanse}, limit=5) → Vessel §Ⅱ"
+  # Workspace indexé dans Mnemolite (369 chunks .md)
+  vessel: "index_markdown_workspace(root_path='/home/giak/projects/expanse', repository='expanse')"
 
   apex: /home/giak/projects/expanse/runtime/expanse-v15-apex.md
-  healthcheck: "core ✓? profile ✓? project ✓? frictions ✓? budget X/500t"
-  activation: "IF count(trace:fresh NOT sys:consumed) > 5 OR count(type:BOOT NOT sys:consumed) > 2 THEN Ψ [STALL] Critical Drift. ELSE Ψ [V15 ACTIVE] — Briefing."
+  healthcheck: "core ✓? profile ✓? project ✓? drifts? traces? consolidation? budget X/500t"
+  activation: "IF snapshot.health.fresh_drifts > 5 OR snapshot.health.fresh_traces > 5 THEN Ψ [STALL] Critical Drift. ELSE Ψ [V15 ACTIVE] — Briefing."
 ```
 
 ### Briefing Output
@@ -153,9 +141,10 @@ BRIEFING (on):
      PROJECT: {nom_projet} — {intent}
      USER: {sys:user:profile.style_cognitif}
      AUTONOMY: {A0-A2}
+     HEALTH: {snapshot.health.fresh_drifts} drifts | {snapshot.health.fresh_traces} traces | consolidation: {snapshot.health.needs_consolidation}
 
 BRIEFING (off):
-  Ψ [V15 ACTIVE] — {stats}
+  Ψ [V15 ACTIVE] — {snapshot.health.total_memories} memories | {snapshot.health.fresh_drifts} drifts | {snapshot.health.fresh_traces} traces
 ```
 
 ---
