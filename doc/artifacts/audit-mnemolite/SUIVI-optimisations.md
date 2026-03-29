@@ -123,6 +123,16 @@ Config: model_validator catches missing DATABASE_URL
 | — | Auto-embedding hybrid search | `bf4d9d4` | vector désactivé |
 | — | SET parameterized | `462c239` | PostgreSQL pas de $1 dans SET |
 | — | cache.get_chunks() | `661ad67` | sync method, await cassé |
+| — | inject_services sans (services) | `4551b6f` | 3 outils sans DI |
+| — | Tags string vs list | `7765521` | FastMCP validation |
+| — | ProjectScanner API | `b028318` | root_path n'existe pas |
+| P0-1 | `batch_generate_embeddings` n'existe pas | `90b106a` | index_markdown_workspace crash |
+| P0-2 | consolidate_memory dict embedding | `90b106a` | Crash DB |
+| P0-3 | project_id undefined fallback | `90b106a` | NameError |
+| P0-4 | index_incremental mauvaise clé | `90b106a` | Service unavailable |
+| P0-5 | Path traversal reindex_file | `90b106a` | Sécurité |
+| P0-6 | Path traversal index_project | `90b106a` | Sécurité |
+| — | Duplicate singleton system_snapshot | `d3635bf` | Maintenance trap |
 
 ---
 
