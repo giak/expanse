@@ -139,6 +139,8 @@ Config: model_validator catches missing DATABASE_URL
 | P2-1 | HybridCodeSearchService recréé/call | `e16e781` | Performance |
 | P2-2 | Parallel queries sur même conn | `e16e781` | Pas de parallélisme |
 | P2-4 | Cache search non invalidé après reindex | `e16e781` | Résultats stale |
+| P3-1 | _convert_to_mcp_node dupliqué 3× | `8d6b633` | Maintenance |
+| P3-2 | validate_tags dupliqué 3× | `8d6b633` | Maintenance |
 
 ---
 
