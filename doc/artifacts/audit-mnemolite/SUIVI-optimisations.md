@@ -133,6 +133,9 @@ Config: model_validator catches missing DATABASE_URL
 | P0-5 | Path traversal reindex_file | `90b106a` | Sécurité |
 | P0-6 | Path traversal index_project | `90b106a` | Sécurité |
 | — | Duplicate singleton system_snapshot | `d3635bf` | Maintenance trap |
+| P1-1 | search_memory hard-fail si embedding down | `280927a` | RuntimeError → graceful degradation |
+| P1-2 | datetime.utcnow() déprécié (9 occurrences) | `280927a` | Python 3.12 warning |
+| P1-3 | database_url.split("@") crash | `280927a` | IndexError |
 
 ---
 
