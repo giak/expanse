@@ -136,6 +136,9 @@ Config: model_validator catches missing DATABASE_URL
 | P1-1 | search_memory hard-fail si embedding down | `280927a` | RuntimeError → graceful degradation |
 | P1-2 | datetime.utcnow() déprécié (9 occurrences) | `280927a` | Python 3.12 warning |
 | P1-3 | database_url.split("@") crash | `280927a` | IndexError |
+| P2-1 | HybridCodeSearchService recréé/call | `e16e781` | Performance |
+| P2-2 | Parallel queries sur même conn | `e16e781` | Pas de parallélisme |
+| P2-4 | Cache search non invalidé après reindex | `e16e781` | Résultats stale |
 
 ---
 
