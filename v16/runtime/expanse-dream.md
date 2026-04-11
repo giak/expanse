@@ -77,7 +77,7 @@ Les TYPES permettent le regroupement :
   2. Grouper `sys:drift` par `type:*` tag
   3. Compter les occurrences par type (trace:fresh + sys:drift combinés)
   4. Si TYPE.count ≥ 2 → pattern récurrent
-  5. **BRAINSTORM (OBLIGATOIRE)** : Pour chaque pattern, lire `runtime/expanse-brm.md` et remplir le gabarit.
+  5. **BRAINSTORM (OBLIGATOIRE)** : Pour chaque pattern, lire `v16/runtime/expanse-brm.md` et remplir le gabarit.
      - Sauvegarder : `mcp_mnemolite_write_memory(title: "BRM: {slug}", content: "{GABARIT_REMPLI}", tags: ["trace:dream:brm", "v16"], memory_type: "investigation")`.
   6. Extraire la solution de la section `3. Cristal` du BRM pour identifier la règle V16 à modifier.
 - **Après traitement (OBLIGATOIRE) :**
