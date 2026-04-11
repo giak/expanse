@@ -27,18 +27,20 @@ Extraire TOUS les éléments:
 4. CHAQUE appel MCP mentionné dans V16: `search_memory`, `write_memory`, `rate_memory`, `search_code`, `get_system_snapshot`, `mark_consumed`
 5. Tous les protocols depuis Mnemolite
 
-### 2. Sonder Mnemolite (6 recherches parallèles)
+### 2. Sonder Mnemolite (7 recherches parallèles)
 
-**Appels MCP EXACTEMENT comme dans V16 et Dream:**
+**Appels MCP EXACTEMENT comme dans V16 et Dream, signature identique à 100%:**
 ```
 mcp_mnemolite_get_system_snapshot(repository="expanse")
 mcp_mnemolite_search_memory(query="sys:core sys:anchor", tags=["sys:core","sys:anchor"], limit=100)
 mcp_mnemolite_search_memory(query="sys:protocol", tags=["sys:protocol"], limit=20)
 mcp_mnemolite_search_memory(query="sys:pattern", tags=["sys:pattern"], limit=100)
 mcp_mnemolite_search_memory(query="sys:pattern:candidate", tags=["sys:pattern:candidate"], limit=100)
-mcp_mnemolite_search_memory(query="sys:history", tags=["sys:history"], limit=50)
-mcp_mnemolite_search_memory(query="sys:drift", tags=["sys:drift"], limit=50)
+mcp_mnemolite_search_memory(query="sys:history", tags=["sys:history"], limit=50, sort="outcome_score DESC")
+mcp_mnemolite_search_memory(query="sys:drift", tags=["sys:drift"], limit=50, consumed=false)
 ```
+
+✅ Signature exacte identique à Dream: paramètre `consumed=false` présent pour drifts.
 
 ### 3. ANALYSER ET COMPRENDRE
 
