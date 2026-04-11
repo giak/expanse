@@ -46,10 +46,13 @@ mcp_mnemolite_search_memory(query="sys:drift", tags=["sys:drift"], limit=50, con
 
 Analyser le contenu de `expanse-v16.md` et des mémoires. Déterminer les relations:
 
-- Si un pattern cite une section V16 → lien `DERIVES_FROM` pattern → apex
-- Si une mémoire cite un pattern → lien `IMPLEMENTS` mémoire → pattern
-- Si une règle cite un outil → lien `CALLS` règle → outil
-- Si deux mémoires sont similaires > 0.7 → lien `RELATES_TO`
+- Si un pattern cite une section V16 → lien `type: "DERIVES_FROM"` pattern → apex
+- Si une mémoire cite un pattern → lien `type: "IMPLEMENTS"` mémoire → pattern
+- Si une règle cite un outil → lien `type: "CALLS"` règle → outil
+- Si deux mémoires sont similaires > 0.7 → lien `type: "RELATES_TO"`
+- Si un pattern cite un protocole → lien `type: "IMPLEMENTS"` pattern → protocole
+
+⚠️ **OBLIGATOIRE**: Chaque lien DOIT avoir un `type` avec une des 4 valeurs exactes ci dessus.
 
 Calculer pour chaque noeud:
 - `size`: 4 + nombre de liens * 2.5
@@ -109,7 +112,7 @@ Calculer pour chaque noeud:
 ⚠️ **BUG CORRIGÉ OBLIGATOIRE**:
 - Chaque lien DOIT avoir `source` et `target`.
 - NE JAMAIS utiliser `id` comme champ source.
-- Tous les liens doivent avoir ces 4 champs: `source`, `target`, `weight`, `color`.
+- Tous les liens doivent avoir ces 5 champs: `source`, `target`, `type`, `weight`, `color`.
 
 ### Optimisations OBLIGATOIRES
 
