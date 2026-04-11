@@ -123,12 +123,17 @@ Les TYPES permettent le regroupement :
   1. Analyse des patterns non utilisés
   2. `bash(command: "find /home/giak/projects/expanse/v16/runtime/ -maxdepth 1 -name '*.bak' -type f")`
   3. `mcp_mnemolite_search_memory(tags: ["sys:pattern:doubt"], limit: 20)`
+  4. `mcp_mnemolite_search_memory(tags: ["sys:pattern"], limit: 20)`
 - **Analyse :**
   - Règles redondantes ou contradictoires ?
   - Pour chaque .bak trouvé, vérifier si backup équivalent dans archive/backups/
   - Pour chaque pattern douteux (`sys:pattern:doubt`):
     - SI > 3 signal négatif → soft-delete
     - SINON → réévaluer et remettre en candidate
+  - Pour chaque pattern valide (`sys:pattern`):
+    - SI pattern.outcome_score < -0.5 ET pattern.age > 7 jours:
+      → soft_delete(pattern.id)
+      → Ψ [ELAGUAGE AUTOMATIQUE] Pattern {titre} supprimé (score trop faible)
 - **Output :** `[PROPOSAL_OPEN] [DELETE]` ou `[PROPOSAL_OPEN] [CLEANUP]` si fichiers orphelins
 
 ---
@@ -240,10 +245,18 @@ write_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md", content: {L
 ```markdown
 # 1. VÉRIFIER LOCK
 read_file(path: "/home/giak/projects/expanse/doc/mutations/.lock")
-SI existe → ERREUR: "Une mutation est déjà en cours. Attendez."
+SI lock existe:
+  extraire timestamp = contenu.split('|')[1]
+  lock_age = maintenant - timestamp
 
-# 2. CRÉER LOCK
-bash(command: "echo '{slug}' > /home/giak/projects/expanse/doc/mutations/.lock")
+  SI lock_age > 3600:  # 1 heure
+    bash(command: "rm /home/giak/projects/expanse/doc/mutations/.lock")
+    Ψ [LOCK EXPIRED] — Lock plus ancien que 1h, supprimé automatiquement. Continuation de la mutation.
+  SINON:
+    ERREUR: "Une mutation est déjà en cours. Attendez."
+
+# 2. CRÉER LOCK AVEC TIMESTAMP
+bash(command: "echo '{slug}|{timestamp_actuel}' > /home/giak/projects/expanse/doc/mutations/.lock")
 
 # 3. VÉRIFIER QUE C'EST UN PROPOSAL
 read_file(path: "/home/giak/projects/expanse/doc/mutations/{slug}/proposal.md")
