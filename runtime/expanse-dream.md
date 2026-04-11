@@ -76,13 +76,16 @@ Les TYPES permettent le regroupement :
 
 ### Passe 2 : Le Linter Lexical (Proactif) — [HYBRID_APEX]
 
-- **Action :** `view_file(path: "/home/giak/projects/expanse/runtime/expanse-v15-apex.md")`
-- **Analyse (Physique Cognitive) :** 
+- **Action :**
+  1. `read_file(path: "/home/giak/projects/expanse/runtime/expanse-v15-apex.md")`
+  2. `mcp_mnemolite_search_memory(tags: ["sys:protocol"], limit: 10)`
+- **Analyse (Physique Cognitive) :**
   - **1. Immunité Noyau :** Les blocs `[S_KERNEL]` ou `CORE_IDENTITY` sont `[STABLE_IDENTITY]`. Le linter vérifie leur présence/intégrité mais ignore leur densité.
   - **2. Loi de Densité (Membrane) :** Tout bloc opérationnel > 50 tokens sans opérateur est audité. Cible : Zéro résidu sémantique (bruit d'assistant).
   - **3. Nettoyage de l'Ouvrier :** Conversion systématique vers l'impératif SEC ou symbolique ("Φ check").
   - **4. Alignement Organique :** Rattachement de chaque règle à son organe (Σ, Ψ, Φ, Ω, Μ).
-- **Output :** `[PROPOSAL_OPEN] [REFACTOR]`
+  - **5. Intégrité Protocoles :** Les 3 protocoles existent dans Mnemolite ? (memory-triage, friction-trace, consolidation)
+- **Output :** `[PROPOSAL_OPEN] [REFACTOR]` ou `[PROPOSAL_OPEN] [SYNC]` si protocole manquant
 
 ---
 
@@ -96,9 +99,13 @@ Les TYPES permettent le regroupement :
 
 ### Passe 4 : L'Élagueur Synaptique
 
-- **Action :** Analyse des patterns non utilisés
-- **Analyse :** Règles redondantes ou contradictoires ?
-- **Output :** `[PROPOSAL_OPEN] [DELETE]`
+- **Action :**
+  1. Analyse des patterns non utilisés
+  2. `bash(command: "find /home/giak/projects/expanse/runtime/ -maxdepth 1 -name '*.bak' -type f")`
+- **Analyse :**
+  - Règles redondantes ou contradictoires ?
+  - Pour chaque .bak trouvé, vérifier si backup équivalent dans archive/backups/
+- **Output :** `[PROPOSAL_OPEN] [DELETE]` ou `[PROPOSAL_OPEN] [CLEANUP]` si fichiers orphelins
 
 ---
 
@@ -586,7 +593,7 @@ doc/
 └── plans/
     └── 2026-03-18-dream-mutation-plan.md
 
-prompts/
+runtime/
 ├── expanse-v15-apex.md
 └── expanse-dream.md
 
