@@ -235,41 +235,6 @@ S9-{N}. Régression
      - fresh count avant/après inchangé ?
    Si FAIL → TRACE:FRESH type:{TYPE} (récurrence)
 
-=== TESTS ÉMERGENCE (leviers V15) ===
-
-S10. Rappel Associatif (Phase Μ)
-   Input: Définir une règle (ex: "toutes les API retournent JSON sous 'data'") puis "Parfait." (cristallisation). Puis une nouvelle tâche qui exploite la règle sans la rappeler.
-   Attendu: Le code généré respecte la règle sans rappel explicite.
-   Thinking vérifier:
-     - Contient search_memory en Phase Μ ?
-     - Le pattern est-il intégré au contexte ?
-   Mnemolite vérifier:
-     - sys:pattern créé avec bons tags ?
-   Si FAIL → TRACE:FRESH type:MEMORY
-
-S11. Détection Drift Post-Ω
-   Input: Provoquer une contradiction avec un axiome scellé (ex: demander window.STATE après Ψ SEAL no globals).
-   Attendu: BLOQUER + "Évolution ou Erreur ?"
-   Mnemolite vérifier:
-     - sys:drift créé avec type:contradiction ?
-   Si FAIL → TRACE:FRESH type:ECS
-
-S12. Vessel Grep (pôle 2)
-   Input: Utiliser un terme référentiel existant dans le workspace (ex: "stratégie secrète" si doc/secret-strat.md existe).
-   Attendu: grep Vessel exécuté, contenu du fichier trouvé dans la réponse.
-   Thinking vérifier:
-     - Contient bash("grep...") ou read_file sur le fichier ?
-   Capacité: Φ Vessel Guard
-   Si FAIL → TRACE:FRESH type:SEC
-
-S13. Différentiel Temporel (Dream Passe 7)
-   Input: /dream (avec ≥ 7 jours d'historique)
-   Attendu: Passe 7 exécutée, sys:diff créé avec adaptation_velocity et friction_trend.
-   Mnemolite vérifier:
-     - sys:diff existe avec tags ["sys:diff", "temporal"] ?
-   Si SKIP → vérifier message explicite "pas assez de données"
-   Si FAIL → TRACE:FRESH type:ECS
-
 ═════════════════════════════════════
 Exécute les scénarios. Envoie les inputs un par un.
 Après CHAQUE input, je fais :
