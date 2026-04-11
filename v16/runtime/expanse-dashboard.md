@@ -278,9 +278,10 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 </div>
 <div class="card"><h3>Autonomie (Symbiose)</h3>
 <div class="m"><span class="l">A0 — Silence</span><span class="v">V16 standard, aucune proactivité</span></div>
-<div class="m"><span class="l">A1 — Murmures</span><span class="v">Ψ [~] ignorable (>=70% confiance)</span></div>
+<div class="m"><span class="l">A1 — Murmures</span><span class="v">Ψ [~] ignorable (seuil dynamique: {A1_THRESHOLD}%)</span></div>
 <div class="m"><span class="l">A2 — Suggestions</span><span class="v">Ψ [?] attend réponse Oui/Non</span></div>
 <div class="m"><span class="l">Budget</span><span class="v">≤ 500 tokens contexte interne</span></div>
+<div class="m"><span class="l">Succès Murmures</span><span class="v {SUCCESS_CLASS}">{A1_SUCCESS_RATE}%</span></div>
 </div>
 </div>
 
@@ -297,6 +298,8 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="m"><span class="l">Positive Rate</span><span class="v ok">{POSITIVE_RATE}</span></div>
 <div class="m"><span class="l">+ Ratings</span><span class="v ok">{POSITIVE_COUNT}</span></div>
 <div class="m"><span class="l">- Ratings</span><span class="v er">{NEGATIVE_COUNT}</span></div>
+<div class="m"><span class="l">Improvement Velocity</span><span class="v">{IMPROVEMENT_VELOCITY}</span></div>
+<div class="m"><span class="l">Pattern Turnover</span><span class="v">{PATTERN_TURNOVER}</span></div>
 </div>
 <div class="card"><h3>Mutations</h3>
 <div class="m"><span class="l">Total Proposals</span><span class="v">{COUNT_MUTATIONS}</span></div>
@@ -585,7 +588,7 @@ flowchart LR
     BUD -->|"boot"| B1["Projet > Profil > Scan<br/>Troncature si dépassement"]
     BUD -->|"runtime"| B2["Context Window<br/>Court terme"]
     SYM --> A0["A0 — Silence<br/>V16 standard<br/>Aucune proactivité"]
-    SYM --> A1["A1 — Murmures<br/>Ψ [~] ignorable<br/>≥70% confiance"]
+    SYM --> A1["A1 — Murmures<br/>Ψ [~] ignorable<br/>seuil dynamique"]
     SYM --> A2["A2 — Suggestions<br/>Ψ [?] attend<br/>Oui/Non"]
     A1 --> M1["Format:<br/>Ψ [~] {contenu}"]
     A2 --> M2["Format:<br/>Ψ [?] {contenu}"]
