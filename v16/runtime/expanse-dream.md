@@ -173,19 +173,22 @@ Les TYPES permettent le regroupement :
      - Δ nombre de sys:pattern (croissance ou stagnation ?)
      - Δ nombre de trace:fresh (friction en hausse ou baisse ?)
      - Δ nombre de sys:drift (dérives auto-détectées : tendance ?)
+     - Δ avg_outcome_score (amélioration ou dégradation ?)
   3. Calculer :
      - `adaptation_velocity` = (patterns créés - patterns prunés) / semaines
      - `friction_trend` = (fresh cette semaine - fresh semaine passée) / fresh semaine passée
+     - `improvement_velocity` = (score_outcome_actuel - score_outcome_semaine_derniere) / semaine
+     - `pattern_turnover` = nombre de patterns remplacés / semaine
 - **Output :** 
   ```
   write_memory(
     title: "DIFF: {date}", 
-    content: "Période: {date_debut}→{date_fin}\nΔ patterns: {+N/-M}\nΔ friction: {trend}\nΔ drift: {count}\nadaptation_velocity: {score}",
+    content: "Période: {date_debut}→{date_fin}\nΔ patterns: {+N/-M}\nΔ friction: {trend}\nΔ drift: {count}\nΔ outcome_score: {Δ_score}\nadaptation_velocity: {score}\nimprovement_velocity: {improvement}",
     tags: ["sys:diff", "temporal", "v16"],
     memory_type: "reference"
   )
   ```
-  `Ψ(Différentiel) : adaptation_velocity={score}, friction_trend={trend}.`
+  `Ψ(Différentiel) : adaptation_velocity={score}, improvement_velocity={improvement}, friction_trend={trend}.`
 
 ---
 
