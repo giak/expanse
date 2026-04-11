@@ -1,6 +1,6 @@
 # MUTATION LOG — EXPANSE V15
 
-**Last Updated:** 2026-03-24 (00:50)
+**Last Updated:** 2026-04-06 (18:57)
 **Version:** 2.2
 
 ---
@@ -9,8 +9,8 @@
 
 | Métrique | Count |
 |----------|-------|
-| Total Proposals | 17 |
-| Applied | 15 |
+| Total Proposals | 18 |
+| Applied | 16 |
 | Rejected | 0 |
 | Failed | 0 |
 | Rolled Back | 1 |
@@ -41,6 +41,7 @@
 | 2026-03-23 | unconsumed-friction-logic | Rule | APPLIED | Antigravity |
 | 2026-03-24 | ecs-visible-output | ECS | APPLIED | Dream |
 | 2026-03-24 | vessel-referent-guard | Rule | APPLIED | Dream |
+| 2026-04-06 | apex-v16-distillation-p2-p4 | Archi | APPLIED | Dream |
 
 ---
 
@@ -62,6 +63,7 @@
 | 2026-03-24 | ecs-visible-output | ECS | APPLIED | Dream |
 | 2026-03-24 | sec-enhanced-autocheck | SEC | APPLIED | Dream |
 | 2026-03-24 | vessel-referent-guard | Rule | APPLIED | Dream |
+| 2026-04-06 | apex-v16-distillation-p2-p4 | Archi | APPLIED | Dream |
 
 ---
 
@@ -82,7 +84,7 @@
 
 ## Pending Proposals
 
-(Aucun proposal en attente)
+(Aucun proposal en attente critique)
 
 ---
 
