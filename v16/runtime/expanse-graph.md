@@ -20,15 +20,24 @@ Mode **MIROIR**. Lire l'Apex, sonder Mnemolite, générer `dashboard/expanse-gra
 read_file(path="v16/runtime/expanse-v16.md")
 ```
 
-Extraire chaque section, chaque règle, chaque commande, chaque outil MCP mentionné.
+Extraire TOUS les éléments:
+1. Chaque section et sous-section de V16
+2. Chaque règle opérationnelle
+3. Chaque commande utilisateur
+4. CHAQUE appel MCP mentionné dans V16: `search_memory`, `write_memory`, `rate_memory`, `search_code`, `get_system_snapshot`, `mark_consumed`
+5. Tous les protocols depuis Mnemolite
 
-### 2. Sonder Mnemolite (4 recherches parallèles)
+### 2. Sonder Mnemolite (6 recherches parallèles)
 
+**Appels MCP EXACTEMENT comme dans V16 et Dream:**
 ```
+mcp_mnemolite_get_system_snapshot(repository="expanse")
 mcp_mnemolite_search_memory(query="sys:core sys:anchor", tags=["sys:core","sys:anchor"], limit=100)
+mcp_mnemolite_search_memory(query="sys:protocol", tags=["sys:protocol"], limit=20)
 mcp_mnemolite_search_memory(query="sys:pattern", tags=["sys:pattern"], limit=100)
 mcp_mnemolite_search_memory(query="sys:pattern:candidate", tags=["sys:pattern:candidate"], limit=100)
 mcp_mnemolite_search_memory(query="sys:history", tags=["sys:history"], limit=50)
+mcp_mnemolite_search_memory(query="sys:drift", tags=["sys:drift"], limit=50)
 ```
 
 ### 3. ANALYSER ET COMPRENDRE
@@ -77,9 +86,11 @@ Calculer pour chaque noeud:
 |------|---------|--------|
 | `APEX` | `#ff4444` | Sections de expanse-v16.md |
 | `REGLE` | `#ff9933` | Règles opérationnelles de V16 |
+| `PROTOCOLE` | `#ffcc33` | sys:protocol Mnemolite |
 | `PATTERN` | `#44ff44` | sys:pattern Mnemolite |
 | `MEMOIRE` | `#8888ff` | sys:history Mnemolite |
 | `OUTIL` | `#ff88ff` | Outils MCP appelés |
+| `DRIFT` | `#ff4488` | sys:drift Mnemolite |
 
 ### Types de Liens et Couleurs
 
@@ -89,6 +100,9 @@ Calculer pour chaque noeud:
 | `IMPLEMENTS` | `#8888ff` |
 | `CALLS` | `#ff88ff` |
 | `RELATES_TO` | `#666688` |
+| `RATE_POSITIVE` | `#44ff44` |
+| `RATE_NEGATIVE` | `#ff4444` |
+| `MARK_CONSUMED` | `#888844` |
 
 ⚠️ **BUG CORRIGÉ OBLIGATOIRE**:
 - Chaque lien DOIT avoir `source` et `target`.
