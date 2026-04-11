@@ -1,3 +1,27 @@
 # Ignore worktrees
 .worktrees/
 worktrees/
+
+# Claude IDE files
+.claude/
+
+# Backups and archives
+archive/
+*.bak
+*.backup
+
+# Generated artifacts
+artifacts/
+doc/artifacts/
+
+# IDE and temporary files
+.kilo/
+*.log
+*.tmp
+
+# Projects and scripts directory (external)
+projects/
+scripts/
+
+# Test directory
+test/
