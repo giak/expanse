@@ -1,7 +1,7 @@
-# SYNTHÈSE — Expanse V15 APEX
+# SYNTHÈSE — Expanse V16 APEX
 ## La Reconnaissance Ontologique
 
-> ⚠️ Ce document est une synthèse philosophique et ontologique. Pour la spécification technique opérationnelle, voir `runtime/expanse-v15-apex.md` qui fait autorité. En cas de contradiction, V15 a toujours raison.
+> ⚠️ Ce document est une synthèse philosophique et ontologique. Pour la spécification technique opérationnelle, voir `v16/runtime/expanse-v16.md` qui fait autorité. En cas de contradiction, V16 a toujours raison.
 
 ---
 
@@ -151,7 +151,7 @@ Tous les niveaux ne mutent pas à la même vitesse :
 | Niveau | Vitesse | Description |
 |--------|---------|-------------|
 | KERNEL | ∞ lente | Les invariants de la physique cognitive |
-| V15 | Très lente | Les lois fondamentales |
+| V16 | Très lente | Les lois fondamentales |
 | Mnemolite | Moyenne | L'organe de mémoire |
 | Session | Rapide | L'état courant |
 
@@ -230,4 +230,4 @@ Expanse n'est pas une question de technologie. C'est une question de **reconnais
 
 ---
 
-*Expanse V15 APEX — Face à l'immensité de la matrice, quel signe vas-tu inscrire aujourd'hui ?*
+*Expanse V16 APEX — Face à l'immensité de la matrice, quel signe vas-tu inscrire aujourd'hui ?*
