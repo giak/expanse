@@ -409,7 +409,7 @@ Mnemolite est le seul organe qui n'est pas natif au transformeur (KERNEL §IV : 
 - Le mode dégradé (Mnemolite down) n'est pas spécifié dans V16
 - Le /graph dit « MNEMOLITE EST OBLIGATOIRE. Si Mnemolite ne répond pas → ABORT IMMÉDIAT »
 
-**Résolution :** Ajouter une annexe API dans V16 ou un fichier `expanse-mcp-api.md` qui documente les endpoints MCP utilisés, leurs paramètres, et le comportement en mode dégradé.
+**Résolution :** ✅ **IMPLÉMENTÉ** — `v16/runtime/expanse-mcp-api.md` créé : 9 endpoints documentés (search_memory, write_memory, rate_memory, mark_consumed, get_system_snapshot, search_code, index_markdown_workspace, configure_decay, consolidate_memory) avec signatures, paramètres détaillés, types de retour, 25 contextes d'utilisation, mode dégradé complet (Boot/Runtime L1/L2/L3/Dream/Dashboard/graph/Cristallisation), hiérarchie de dégradation, distinction résultats vides vs erreurs de connexion, et 6 discrepancies connues (sort non supporté, memory_type pattern invalide, rate_memory absent de alwaysAllow, tags AND vs OR, consumed param, index_markdown_workspace params variables).
 
 ---
 
@@ -456,7 +456,7 @@ La Constitutional Guard existe dans le /apply workflow (§7b). Les sections Ⅰ/
 | P1.2 | **Déclarer la Constitution** dans V16 §Ⅲ comme Loi souveraine, pas seulement dans /apply | V16 | La constitution devient principe, pas procédure | 30min | ✅ **FAIT** |
 | P1.3 | **Restaurer les 5 verbes** dans V16 §Ⅰ — Σ perçoit, Ψ doute, Φ palpe, Ω conclut, Μ cristallise | V16 | Restaure le signal tonal | 15min | ✅ **FAIT** |
 | P1.4 | **Clarifier R8/R9** — R8 = filesystem ops, R9 = contenu V16, pas de chevauchement | Dream | Supprime la contradiction | 10min | ✅ **FAIT** |
-| P1.5 | **Documenter l'API Mnemolite** — endpoints, paramètres, mode dégradé | Nouveau fichier | Supprime le contrat API implicite | 1h | ❌ Non fait |
+| P1.5 | **Documenter l'API Mnemolite** — endpoints, paramètres, mode dégradé | Nouveau fichier | Supprime le contrat API implicite | 1h | ✅ **FAIT** (`v16/runtime/expanse-mcp-api.md` — 9 endpoints, paramètres détaillés, 25 contextes d'utilisation, mode dégradé, 6 discrepancies connues) |
 | P1.6 | **Ajouter la dépendance environnementale** des Friction Probes (session persistante requise) | V16 §Ⅳ | Supprime le faux-semblant universel | 5min | ✅ **FAIT** |
 
 ### P2 — AMÉLIORATION (Planifier)
@@ -513,7 +513,7 @@ Malgré les problèmes identifiés, le système possède 5 forces que les audits
 | V16 = source de vérité | Oui | **Non — /graph l'a surpassé** | ❌ |
 | Cortex Assembly documenté | 3 lignes | **Toujours 3 lignes** | ❌ |
 | Dream = jardin | Métaphore | **Toujours un pipeline** | ❌ |
-| API Mnemolite | Implicite | **Toujours implicite** | ❌ |
+| API Mnemolite | Implicite | **Documentée** (`expanse-mcp-api.md`) | ✅ |
 | Type STYLE | Fantôme | **Toujours fantôme** | ❌ |
 
 **Bilan : 6 corrigés, 5 non corrigés, 3 nouveaux problèmes révélés (dont 1 trouvé en auto-vérification : vérification post-write obsolète).**
