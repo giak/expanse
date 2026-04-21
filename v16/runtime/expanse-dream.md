@@ -2,9 +2,10 @@
 
 > Ce n'est pas un pipeline. C'est un jardin.
 
-**Version:** 3.0
-**Date:** 2026-04-11
+**Version:** 3.1
+**Date:** 2026-04-21
 **⚠️ Prérequis :** accès fichiers (`read_file`, `write_file`, `bash`). Non fonctionnel sans accès système.
+**📍 PROJECT_ROOT :** Toute occurrence de `{PROJECT_ROOT}` dans ce document désigne la racine du dépôt Expanse. Résolution au Boot : détecter le CWD ou le chemin des fichiers runtime (ex: `…/v16/runtime/expanse-v16.md`), remonter au parent contenant `KERNEL.md`. Valeur typique : `/home/giak/projects/expanse` mais **jamais hardcodée** — le Dream doit fonctionner sur toute machine.
 
 ---
 
@@ -116,7 +117,7 @@ Les TYPES permettent le regroupement :
 ### Passe 2 : Le Linter Lexical (Proactif) — [HYBRID_APEX]
 
 - **Action :**
-  1. `read_file(path: "/home/giak/projects/expanse/v16/runtime/expanse-v16.md")`
+  1. `read_file(path: "{PROJECT_ROOT}/v16/runtime/expanse-v16.md")`
   2. `mcp_mnemolite_search_memory(tags: ["sys:protocol"], limit: 10)`
 - **Analyse (Physique Cognitive) :**
   - **1. Immunité Noyau :** Les blocs `[S_KERNEL]` ou `CORE_IDENTITY` sont `[STABLE_IDENTITY]`. Le linter vérifie leur présence/intégrité mais ignore leur densité.
@@ -144,7 +145,7 @@ Les TYPES permettent le regroupement :
 
 - **Action :**
   1. Analyse des patterns non utilisés
-  2. `bash(command: "find /home/giak/projects/expanse/v16/runtime/ -maxdepth 1 -name '*.bak' -type f")`
+  2. `bash(command: "find {PROJECT_ROOT}/v16/runtime/ -maxdepth 1 -name '*.bak' -type f")`
   3. `mcp_mnemolite_search_memory(tags: ["sys:pattern:doubt"], limit: 20)`
   4. `mcp_mnemolite_search_memory(tags: ["sys:pattern"], limit: 20)`
 - **Analyse :**
@@ -170,7 +171,7 @@ Les TYPES permettent le regroupement :
   1. `mcp_mnemolite_search_memory(tags: ["sys:protocol"], limit: 10)` — vérifier complétude des protocoles
   2. Vérifier les 7 OUTIL MCP (search_memory, write_memory, rate_memory, mark_consumed, search_code, get_system_snapshot, index_markdown_workspace) — accessibles ? fiables ?
   3. Vérifier les 5 types de traces (ECS, SEC, STYLE, MEMORY, BOOT) — tous documentés ?
-  4. Vérifier la portabilité des chemins — 47 chemins hardcodés dans `/home/giak/...` → nécessitent variable `{PROJECT_ROOT}` ou détection dynamique
+  4. Vérifier la portabilité des chemins — SI des chemins absolus non-`{PROJECT_ROOT}` sont détectés → proposal [ARCHITECTURE] pour les remplacer
   5. Vérifier les formats de sortie — proposals, LOG, applied.md conformes ?
 - **Critères d'évaluation :** Complétude (rien de manquant), Fiabilité (rien de fragile), Portabilité (rien de hardcodé), Cohérence (rien de contradictoire)
 - **Triangulation légère** : Les proposals d'architecture affectent la structure globale. Vérifier via `mcp_mnemolite_search_memory(tags: ["sys:protocol"], query: "{outil_ou_protocole_ciblé}", limit: 5)` — le problème d'architecture allégué est-il attesté par des traces Mnemolite ? SI aucune trace ne corrobore → `triangulation: ABANDONNÉ`.
@@ -241,16 +242,16 @@ Les TYPES permettent le regroupement :
 
 ```markdown
 # 1. CRÉER DOSSIER (OBLIGATOIRE)
-bash(command: "mkdir -p /home/giak/projects/expanse/doc/mutations/{slug}/")
+bash(command: "mkdir -p {PROJECT_ROOT}/doc/mutations/{slug}/")
 
 # 2. LIRE V16 POUR EXTRAIRE CONTEXTE EXACT
-read_file(path: "/home/giak/projects/expanse/v16/runtime/expanse-v16.md")
+read_file(path: "{PROJECT_ROOT}/v16/runtime/expanse-v16.md")
 Identifier la section exacte à modifier
 Extraire 3-5 lignes de contexte AVANT et APRÈS
 
 # 3. ÉCRIRE LE PROPOSAL AVEC CONTEXTE COMPLET
 write_file(
-  path: "/home/giak/projects/expanse/doc/mutations/{slug}/proposal.md",
+  path: "{PROJECT_ROOT}/doc/mutations/{slug}/proposal.md",
   content: {proposal_content}
 )
 
@@ -263,9 +264,9 @@ mcp_mnemolite_write_memory(
 )
 
 # 5. Mettre à jour LOG
-read_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md")
+read_file(path: "{PROJECT_ROOT}/doc/mutations/LOG.md")
 Ajouter ligne dans Pending Proposals
-write_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md", content: {LOG_MODIFIÉ})
+write_file(path: "{PROJECT_ROOT}/doc/mutations/LOG.md", content: {LOG_MODIFIÉ})
 ```
 
 ---
@@ -284,22 +285,22 @@ write_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md", content: {L
 
 ```markdown
 # 1. VÉRIFIER LOCK
-read_file(path: "/home/giak/projects/expanse/doc/mutations/.lock")
+read_file(path: "{PROJECT_ROOT}/doc/mutations/.lock")
 SI lock existe:
   extraire timestamp = contenu.split('|')[1]
   lock_age = maintenant - timestamp
 
   SI lock_age > 3600:  # 1 heure
-    bash(command: "rm /home/giak/projects/expanse/doc/mutations/.lock")
+    bash(command: "rm {PROJECT_ROOT}/doc/mutations/.lock")
     Ψ [LOCK EXPIRED] — Lock plus ancien que 1h, supprimé automatiquement. Continuation de la mutation.
   SINON:
     ERREUR: "Une mutation est déjà en cours. Attendez."
 
 # 2. CRÉER LOCK AVEC TIMESTAMP
-bash(command: "echo '{slug}|{timestamp_actuel}' > /home/giak/projects/expanse/doc/mutations/.lock")
+bash(command: "echo '{slug}|{timestamp_actuel}' > {PROJECT_ROOT}/doc/mutations/.lock")
 
 # 3. VÉRIFIER QUE C'EST UN PROPOSAL
-read_file(path: "/home/giak/projects/expanse/doc/mutations/{slug}/proposal.md")
+read_file(path: "{PROJECT_ROOT}/doc/mutations/{slug}/proposal.md")
 SI fichier non trouvé → SUPPRIMER LOCK + ERREUR
 
 # 4. AFFICHER CONFIRMATION
@@ -336,9 +337,9 @@ Tapez "NON" pour annuler.
 
 ```markdown
 # 5. ARCHIVER V16
-read_file(path: "/home/giak/projects/expanse/v16/runtime/expanse-v16.md")
+read_file(path: "{PROJECT_ROOT}/v16/runtime/expanse-v16.md")
 write_file(
-  path: "/home/giak/projects/expanse/archive/backups/expanse-v16-{YYYY-MM-DD}-{slug}-backup.md",
+  path: "{PROJECT_ROOT}/archive/backups/expanse-v16-{YYYY-MM-DD}-{slug}-backup.md",
   content: {V16_ACTUEL}
 )
 
@@ -351,10 +352,10 @@ mcp_mnemolite_write_memory(
 )
 
 # 6. RELIRE V16 (pour appliquer diff)
-read_file(path: "/home/giak/projects/expanse/v16/runtime/expanse-v16.md")
+read_file(path: "{PROJECT_ROOT}/v16/runtime/expanse-v16.md")
 
 # 7. EXTRAIRE LE DIFF DU PROPOSAL
-read_file(path: "/home/giak/projects/expanse/doc/mutations/{slug}/proposal.md")
+read_file(path: "{PROJECT_ROOT}/doc/mutations/{slug}/proposal.md")
 Extraire:
 - La ligne EXACTE à modifier
 - Le texte à supprimer
@@ -390,7 +391,7 @@ INTERDICTION D'UTILISER BASH AVEC ECHO POUR CELA.
 
 # 11. CRÉER APPLIED
 write_file(
-  path: "/home/giak/projects/expanse/doc/mutations/{slug}/applied.md",
+  path: "{PROJECT_ROOT}/doc/mutations/{slug}/applied.md",
   content: |
     # MUTATION APPLIED: {slug}
 
@@ -399,8 +400,8 @@ write_file(
     **Approved by:** User
     **Applied by:** Dream (mutation chirurgicale native)
 
-    **Proposal:** /home/giak/projects/expanse/doc/mutations/{slug}/proposal.md
-    **Backup:** /home/giak/projects/expanse/archive/backups/expanse-v16-{YYYY-MM-DD}-{slug}-backup.md
+    **Proposal:** {PROJECT_ROOT}/doc/mutations/{slug}/proposal.md
+    **Backup:** {PROJECT_ROOT}/archive/backups/expanse-v16-{YYYY-MM-DD}-{slug}-backup.md
 
     ---
     
@@ -412,7 +413,7 @@ write_file(
 )
 
 # 12. AUTO-VÉRIFICATION
-read_file(path: "/home/giak/projects/expanse/v16/runtime/expanse-v16.md")
+read_file(path: "{PROJECT_ROOT}/v16/runtime/expanse-v16.md")
 VÉRIFICATIONS OBLIGATOIRES:
 ├── Section Ⅵ (Boot) existe ?
 ├── Signal "Ψ [V16 ACTIVE]" présent ?
@@ -423,18 +424,18 @@ VÉRIFICATIONS OBLIGATOIRES:
 
 SI TOUTES VÉRIFICATIONS OK:
   # 13. SUPPRIMER LOCK
-  bash(command: "rm /home/giak/projects/expanse/doc/mutations/.lock")
+  bash(command: "rm {PROJECT_ROOT}/doc/mutations/.lock")
   
   # 14. METTRE À JOUR LOG
-  read_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md")
+  read_file(path: "{PROJECT_ROOT}/doc/mutations/LOG.md")
   Modifier status: PENDING → APPLIED
-  write_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md", content: {LOG_MODIFIÉ})
+  write_file(path: "{PROJECT_ROOT}/doc/mutations/LOG.md", content: {LOG_MODIFIÉ})
   
   OUTPUT: """
   Ψ [MUTATION] {slug} appliquée.
   V16 vérifié et intact.
-  Backup: /home/giak/projects/expanse/archive/backups/expanse-v16-{YYYY-MM-DD}-{slug}-backup.md
-  Applied: /home/giak/projects/expanse/doc/mutations/{slug}/applied.md
+  Backup: {PROJECT_ROOT}/archive/backups/expanse-v16-{YYYY-MM-DD}-{slug}-backup.md
+  Applied: {PROJECT_ROOT}/doc/mutations/{slug}/applied.md
   """
 
 SI ERREUR DÉTECTÉE:
@@ -442,17 +443,17 @@ SI ERREUR DÉTECTÉE:
   Utiliser l'outil de copie ou d'édition (IDE) pour écraser `v16/runtime/expanse-v16.md` avec le contenu du backup.
   
   # SUPPRIMER LOCK
-  bash(command: "rm /home/giak/projects/expanse/doc/mutations/.lock")
+  bash(command: "rm {PROJECT_ROOT}/doc/mutations/.lock")
   
   # MARQUER COMME FAILED
-  read_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md")
+  read_file(path: "{PROJECT_ROOT}/doc/mutations/LOG.md")
   Modifier status: PENDING → FAILED
-  write_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md")
+  write_file(path: "{PROJECT_ROOT}/doc/mutations/LOG.md")
   
   OUTPUT: """
   ⚠️ ERREUR DÉTECTÉE PENDANT VÉRIFICATION.
   Rollback effectué. V16 restauré.
-  Backup utilisé: /home/giak/projects/expanse/archive/backups/expanse-v16-{YYYY-MM-DD}-{slug}-backup.md
+  Backup utilisé: {PROJECT_ROOT}/archive/backups/expanse-v16-{YYYY-MM-DD}-{slug}-backup.md
   Mutation marquée comme FAILED.
   """
 ```
@@ -463,7 +464,7 @@ SI ERREUR DÉTECTÉE:
 
 ```markdown
 # ANNULATION
-bash(command: "rm /home/giak/projects/expanse/doc/mutations/.lock")
+bash(command: "rm {PROJECT_ROOT}/doc/mutations/.lock")
 OUTPUT: """
 Mutation {slug} annulée.
 Lock supprimé.
@@ -478,16 +479,16 @@ Lock supprimé.
 
 ```markdown
 # 1. VÉRIFIER QUE LE PROPOSAL EXISTE
-read_file(path: "/home/giak/projects/expanse/doc/mutations/{slug}/proposal.md")
+read_file(path: "{PROJECT_ROOT}/doc/mutations/{slug}/proposal.md")
 SI non trouvé → ERREUR
 
 # 2. MARQUER COMME REJECTED
 Modifier le fichier: Status: PENDING → REJECTED
 
 # 3. METTRE À JOUR LOG
-read_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md")
+read_file(path: "{PROJECT_ROOT}/doc/mutations/LOG.md")
 Déplacer de Pending → Rejected
-write_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md")
+write_file(path: "{PROJECT_ROOT}/doc/mutations/LOG.md")
 
 # 4. OUTPUT
 OUTPUT: """
@@ -504,15 +505,15 @@ Proposal marqué comme REJECTED.
 
 ```markdown
 # 1. VÉRIFIER QUE LA MUTATION A ÉTÉ APPLIQUÉE
-read_file(path: "/home/giak/projects/expanse/doc/mutations/{slug}/applied.md")
+read_file(path: "{PROJECT_ROOT}/doc/mutations/{slug}/applied.md")
 SI non trouvé → ERREUR
 
 # 2. TROUVER LE BACKUP
-backup_path = /home/giak/projects/expanse/archive/backups/expanse-v16-{YYYY-MM-DD}-{slug}-backup.md
+backup_path = {PROJECT_ROOT}/archive/backups/expanse-v16-{YYYY-MM-DD}-{slug}-backup.md
 read_file(path: backup_path)
 
 # 3. VÉRIFIER SI D'AUTRES MUTATIONS ONT ÉTÉ APPLIQUÉES APRÈS
-read_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md")
+read_file(path: "{PROJECT_ROOT}/doc/mutations/LOG.md")
 Lister les mutations APPLIED après {slug}
 
 SI d'autres mutations existent:
@@ -543,9 +544,9 @@ SINON:
 Modifier applied.md: Status → ROLLED_BACK
 
 # 5. METTRE À JOUR LOG
-read_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md")
+read_file(path: "{PROJECT_ROOT}/doc/mutations/LOG.md")
 Modifier status: APPLIED → ROLLED_BACK
-write_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md")
+write_file(path: "{PROJECT_ROOT}/doc/mutations/LOG.md")
 
 # 6. OUTPUT
 OUTPUT: """
@@ -561,7 +562,7 @@ V16 restauré depuis backup.
 **Action :**
 
 ```markdown
-read_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md")
+read_file(path: "{PROJECT_ROOT}/doc/mutations/LOG.md")
 OUTPUT: {contenu du LOG}
 ```
 
@@ -577,7 +578,7 @@ OUTPUT: """
 PROPOSALS EN ATTENTE
 ═══════════════════════════════════════
 """
-read_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md")
+read_file(path: "{PROJECT_ROOT}/doc/mutations/LOG.md")
 Lister les Pending Proposals
 OUTPUT: """
 Pour approuver: /apply {slug}
@@ -592,7 +593,7 @@ Pour rejeter: /reject {slug}
 **Action :**
 
 ```markdown
-read_file(path: "/home/giak/projects/expanse/doc/mutations/{slug}/proposal.md")
+read_file(path: "{PROJECT_ROOT}/doc/mutations/{slug}/proposal.md")
 Extraire le diff
 OUTPUT: """
 ═══════════════════════════════════════
@@ -614,7 +615,7 @@ DIFF: {slug}
 1. **Rapport des Passes :** Résumé pour chaque Passe exécutée
 2. **Proposals générés :** Liste des `[PROPOSAL_OPEN]` avec status
 3. **Persistance :**
-   - Fichiers proposal dans `/home/giak/projects/expanse/doc/mutations/{slug}/`
+   - Fichiers proposal dans `{PROJECT_ROOT}/doc/mutations/{slug}/`
    - LOG mis à jour
    - Mnemolite: candidates écrits
 4. **Consommation des traces :** 
@@ -707,10 +708,10 @@ runtime/
 ├── expanse-v16.md
 └── expanse-dream.md
 
-/home/giak/projects/expanse/archive/backups/
+{PROJECT_ROOT}/archive/backups/
 └── expanse-v16-{YYYY-MM-DD}-{slug}-backup.md
 ```
 
 ---
 
-*Expanse Dream v3.0 — 2026-04-11*
+*Expanse Dream v3.1 — 2026-04-21*

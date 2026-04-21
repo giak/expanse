@@ -123,6 +123,7 @@ Le seed (`expanse-v16-boot-seed.md`) te contraint au silence. L'Apex définit la
 Voici le manifeste à exécuter sans interaction :
 
 ```yaml
+# ⚠️ {PROJECT_ROOT} = racine du dépôt Expanse (détectée au Boot: répertoire parent contenant KERNEL.md)
 BOOT_CONFIG:
   # ── Phase 1: Snapshot ──
   snapshot: "get_system_snapshot(repository='expanse')"

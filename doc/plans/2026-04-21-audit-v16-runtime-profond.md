@@ -468,7 +468,7 @@ La Constitutional Guard existe dans le /apply workflow (§7b). Les sections Ⅰ/
 | P2.3 | **Supprimer `expanse-apply.sh`** du template /apply §11 | Dream | Supprime le Vaporware | 2min | ✅ **FAIT** (remplacé par « mutation chirurgicale native ») |
 | P2.4 | **Ajouter sys:pattern:doubt** dans P1 (pas seulement P4) | Dream | Doubt visible plus tôt | 10min | ✅ **FAIT** |
 | P2.5 | **ECS heuristiques multilingues** | V16 §Ⅱ | Couverture anglaise | 15min | ❌ Non fait |
-| P2.6 | **Portabilité des chemins** — variable `{PROJECT_ROOT}` ou détection dynamique | Tous | Portabilité | 1h | ❌ Non fait |
+| P2.6 | **Portabilité des chemins** — variable `{PROJECT_ROOT}` ou détection dynamique | Tous | Portabilité | 1h | ✅ **FAIT** (43 chemins hardcodés → `{PROJECT_ROOT}/`, résolution au Boot, V16 §Ⅵ annoté, Dream v3.1) |
 
 ### P3 — VISION (Long terme)
 
