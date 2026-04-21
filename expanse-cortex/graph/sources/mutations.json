@@ -1,0 +1,696 @@
+{
+  "_comment": "Mutations — generated from doc/mutations/LOG.md",
+  "nodes": [
+    {
+      "id": "mu_crystallization-guard",
+      "type": "MUTATION",
+      "label": "crystallization-guard",
+      "content": "Type: Rule. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "rule",
+        "rolled_back"
+      ],
+      "created_at": "2026-03-19",
+      "nature": "volatile",
+      "status": "ROLLED_BACK",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_crystallization-guard-surgical",
+      "type": "MUTATION",
+      "label": "crystallization-guard-surgical",
+      "content": "Type: Rule. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "rule",
+        "applied"
+      ],
+      "created_at": "2026-03-19",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_surgical-integrity-protocol",
+      "type": "MUTATION",
+      "label": "surgical-integrity-protocol",
+      "content": "Type: Rule. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "rule",
+        "applied"
+      ],
+      "created_at": "2026-03-19",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_ecs-impact-calibration",
+      "type": "MUTATION",
+      "label": "ecs-impact-calibration",
+      "content": "Type: ECS. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "ecs",
+        "applied"
+      ],
+      "created_at": "2026-03-20",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_boot-parallel-sync",
+      "type": "MUTATION",
+      "label": "boot-parallel-sync",
+      "content": "Type: BOOT. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "boot",
+        "applied"
+      ],
+      "created_at": "2026-03-20",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Σ"
+    },
+    {
+      "id": "mu_external-systems-sovereignty",
+      "type": "MUTATION",
+      "label": "external-systems-sovereignty",
+      "content": "Type: Rule. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "rule",
+        "applied"
+      ],
+      "created_at": "2026-03-21",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_psi-symbiosis-core",
+      "type": "MUTATION",
+      "label": "psi-symbiosis-core",
+      "content": "Type: Rule. Applied By: Antigravity.",
+      "tags": [
+        "mutation",
+        "rule",
+        "applied"
+      ],
+      "created_at": "2026-03-21",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_protocol-enforcement",
+      "type": "MUTATION",
+      "label": "protocol-enforcement",
+      "content": "Type: Rule. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "rule",
+        "applied"
+      ],
+      "created_at": "2026-03-21",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_boot-vision-c",
+      "type": "MUTATION",
+      "label": "boot-vision-c",
+      "content": "Type: BOOT. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "boot",
+        "applied"
+      ],
+      "created_at": "2026-03-21",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Σ"
+    },
+    {
+      "id": "mu_rhetorical-question-guard",
+      "type": "MUTATION",
+      "label": "rhetorical-question-guard",
+      "content": "Type: Rule. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "rule",
+        "applied"
+      ],
+      "created_at": "2026-03-21",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_absolute-portability-b",
+      "type": "MUTATION",
+      "label": "absolute-portability-b",
+      "content": "Type: BOOT. Applied By: Antigravity.",
+      "tags": [
+        "mutation",
+        "boot",
+        "applied"
+      ],
+      "created_at": "2026-03-21",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Σ"
+    },
+    {
+      "id": "mu_integrity-v2",
+      "type": "MUTATION",
+      "label": "integrity-v2",
+      "content": "Type: Rule. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "rule",
+        "applied"
+      ],
+      "created_at": "2026-03-21",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_surgical-stasis",
+      "type": "MUTATION",
+      "label": "surgical-stasis",
+      "content": "Type: Rule. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "rule",
+        "applied"
+      ],
+      "created_at": "2026-03-21",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_drift-guard",
+      "type": "MUTATION",
+      "label": "drift-guard",
+      "content": "Type: ECS. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "ecs",
+        "applied"
+      ],
+      "created_at": "2026-03-21",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_dream-gate",
+      "type": "MUTATION",
+      "label": "dream-gate",
+      "content": "Type: Rule. Applied By: Antigravity.",
+      "tags": [
+        "mutation",
+        "rule",
+        "applied"
+      ],
+      "created_at": "2026-03-22",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_activation-drift-threshold",
+      "type": "MUTATION",
+      "label": "activation-drift-threshold",
+      "content": "Type: BOOT. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "boot",
+        "applied"
+      ],
+      "created_at": "2026-03-23",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Σ"
+    },
+    {
+      "id": "mu_unconsumed-friction-logic",
+      "type": "MUTATION",
+      "label": "unconsumed-friction-logic",
+      "content": "Type: Rule. Applied By: Antigravity.",
+      "tags": [
+        "mutation",
+        "rule",
+        "applied"
+      ],
+      "created_at": "2026-03-23",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_ecs-visible-output",
+      "type": "MUTATION",
+      "label": "ecs-visible-output",
+      "content": "Type: ECS. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "ecs",
+        "applied"
+      ],
+      "created_at": "2026-03-24",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_vessel-referent-guard",
+      "type": "MUTATION",
+      "label": "vessel-referent-guard",
+      "content": "Type: Rule. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "rule",
+        "applied"
+      ],
+      "created_at": "2026-03-24",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_apex-v16-distillation-p2-p4",
+      "type": "MUTATION",
+      "label": "apex-v16-distillation-p2-p4",
+      "content": "Type: Archi. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "archi",
+        "applied"
+      ],
+      "created_at": "2026-04-06",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ω"
+    },
+    {
+      "id": "mu_sec-enhanced-autocheck",
+      "type": "MUTATION",
+      "label": "sec-enhanced-autocheck",
+      "content": "Type: SEC. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "sec",
+        "applied"
+      ],
+      "created_at": "2026-03-24",
+      "nature": "vivide",
+      "status": "APPLIED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "mu_master-matrix",
+      "type": "MUTATION",
+      "label": "master-matrix",
+      "content": "Type: Archi. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "archi",
+        "rejected"
+      ],
+      "created_at": "2026-03-20",
+      "nature": "incandescent",
+      "status": "REJECTED",
+      "parent_organ": "Ω"
+    },
+    {
+      "id": "mu_ecs-heuristics-expansion",
+      "type": "MUTATION",
+      "label": "ecs-heuristics-expansion",
+      "content": "Type: ECS. Applied By: Dream.",
+      "tags": [
+        "mutation",
+        "ecs",
+        "rejected"
+      ],
+      "created_at": "2026-03-20",
+      "nature": "incandescent",
+      "status": "REJECTED",
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "fi_log",
+      "type": "FICHIER",
+      "label": "doc/mutations/LOG.md",
+      "content": "Historique mutations",
+      "tags": [
+        "fichier",
+        "mutations",
+        "log"
+      ],
+      "created_at": "2026-03-19",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Μ"
+    }
+  ],
+  "edges": [
+    {
+      "source": "mu_crystallization-guard",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_crystallization-guard",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_crystallization-guard-surgical",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_crystallization-guard-surgical",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_surgical-integrity-protocol",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_surgical-integrity-protocol",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_ecs-impact-calibration",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_ecs-impact-calibration",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_boot-parallel-sync",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_boot-parallel-sync",
+      "target": "ap6",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_external-systems-sovereignty",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_external-systems-sovereignty",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_psi-symbiosis-core",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_psi-symbiosis-core",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_protocol-enforcement",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_protocol-enforcement",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_boot-vision-c",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_boot-vision-c",
+      "target": "ap6",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_rhetorical-question-guard",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_rhetorical-question-guard",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_absolute-portability-b",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_absolute-portability-b",
+      "target": "ap6",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_integrity-v2",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_integrity-v2",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_surgical-stasis",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_surgical-stasis",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_drift-guard",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_drift-guard",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_dream-gate",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_dream-gate",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_activation-drift-threshold",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_activation-drift-threshold",
+      "target": "ap6",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_unconsumed-friction-logic",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_unconsumed-friction-logic",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_ecs-visible-output",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_ecs-visible-output",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_vessel-referent-guard",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_vessel-referent-guard",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_apex-v16-distillation-p2-p4",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_apex-v16-distillation-p2-p4",
+      "target": "ap5",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_sec-enhanced-autocheck",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_sec-enhanced-autocheck",
+      "target": "ap3",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_master-matrix",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_master-matrix",
+      "target": "ap5",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_ecs-heuristics-expansion",
+      "target": "fi_log",
+      "type": "DERIVES_FROM",
+      "weight": 0.6,
+      "condition": null
+    },
+    {
+      "source": "mu_ecs-heuristics-expansion",
+      "target": "ap2",
+      "type": "ALTERS",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "mu_crystallization-guard-surgical",
+      "target": "mu_crystallization-guard",
+      "type": "SUPERSEDES",
+      "weight": 0.8,
+      "condition": null
+    }
+  ]
+}

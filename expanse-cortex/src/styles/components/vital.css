@@ -1,0 +1,85 @@
+/* ════════════════════════════════════════════════════════════════
+   COMPONENTS / VITAL — Coeur cognitif vital flow animations
+   Layer priority: medium (overrides base, overridden by utilities)
+   ════════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  /* ════════ COEUR COGNITIF — Vital animations ════════ */
+
+  .vital-pulse {
+    animation: vitalPulse 3s ease-in-out infinite;
+  }
+  @keyframes vitalPulse {
+    0%, 100% { opacity: 0.06; }
+    50% { opacity: 0.15; }
+  }
+
+  .nucleus-breath {
+    animation: nucleusBreath 4s ease-in-out infinite;
+  }
+  @keyframes nucleusBreath {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+  }
+
+  .mutation-pulse {
+    animation: mutationPulse 2.5s ease-in-out infinite;
+  }
+  @keyframes mutationPulse {
+    0%, 100% { opacity: 0.85; }
+    50% { opacity: 1; }
+  }
+
+  .drift-spark {
+    animation: driftSpark 1.8s ease-in-out infinite;
+  }
+  @keyframes driftSpark {
+    0%, 100% { opacity: 0.7; }
+    30% { opacity: 1; }
+    60% { opacity: 0.4; }
+    80% { opacity: 0.9; }
+  }
+
+  .vital-flow {
+    animation: vitalFlow 6s linear infinite;
+  }
+  @keyframes vitalFlow {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -200; }
+  }
+
+  .vital-flow-reverse {
+    animation: vitalFlowReverse 8s linear infinite;
+  }
+  @keyframes vitalFlowReverse {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: 215; }
+  }
+
+  .vital-edge-flow {
+    animation: vitalEdgeFlow 3s linear infinite;
+  }
+  @keyframes vitalEdgeFlow {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -48; }
+  }
+
+  .friction-spark {
+    animation: frictionSpark 1.5s ease-in-out infinite;
+  }
+  @keyframes frictionSpark {
+    0%, 100% { opacity: 0.4; }
+    30% { opacity: 1; }
+    60% { opacity: 0.15; }
+    80% { opacity: 0.75; }
+  }
+
+  .vital-edge-flow-reverse {
+    animation: vitalEdgeFlowReverse 4s linear infinite;
+  }
+  @keyframes vitalEdgeFlowReverse {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: 48; }
+  }
+}

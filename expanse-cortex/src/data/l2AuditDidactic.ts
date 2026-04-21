@@ -1,0 +1,183 @@
+// ══════════════════════════════════════════════════════════════
+// L2-AUDIT DIDACTIC — "Le Doute Systémique" : Pourquoi chaque étape existe
+// ══════════════════════════════════════════════════════════════
+
+import type { ManifestConcept, StepDidactic, GlossaryEntry } from './didacticTypes'
+import { createDidacticData, type DidacticData } from './didacticFactory'
+
+// ══════════════════════════════════════════════════════════════
+// MANIFEST CONCEPTS — 4 pillars of the L2 Audit loop
+// ══════════════════════════════════════════════════════════════
+
+export const L2_AUDIT_MANIFEST_CONCEPTS: ManifestConcept[] = [
+  { id: 'audit', label: 'Boucle Audit', icon: '🔍', revealedAtStepIdx: 2, color: '#f9e2af' },
+  { id: 'tool-use', label: 'Φ Outil', icon: '🔧', revealedAtStepIdx: 3, color: '#fab387' },
+  { id: 'recall', label: 'Rappel Μ', icon: '🧠', revealedAtStepIdx: 5, color: '#f38ba8' },
+  { id: 'synthesis', label: 'Synthèse Ω', icon: '⚗️', revealedAtStepIdx: 7, color: '#a6e3a1' },
+]
+
+// ══════════════════════════════════════════════════════════════
+// STEP DIDACTICS — one per L2-AUDIT step
+// ══════════════════════════════════════════════════════════════
+
+export const L2_AUDIT_DIDACTICS: StepDidactic[] = [
+  // Step 0: Σ INPUT « explique le routeur ECS »
+  {
+    prose: "L'utilisateur pose une question technique standard. Σ capte l'input : « explique le routeur ECS ». Contrairement à « bonjour » (L1), cette requête exige une explication vérifiable — pas une opinion. L'ECS va déterminer la profondeur de traitement nécessaire.",
+    concept: 'Requête Technique',
+    antiPattern: {
+      standard: 'Un LLM répond immédiatement avec ce qu\'il "sait" — souvent incomplet ou imprécis.',
+      expanse: 'Σ transmet à Ψ pour classification ECS. La réponse viendra APRÈS vérification, pas avant.',
+    },
+    canvasHighlight: 'sigma',
+  },
+  // Step 1: Ψ ECS C=3, I=2
+  {
+    prose: "L'ECS calcule : C=3 (standard — une explication technique) × I=2 (module — touche au routeur, pas au noyau). C×I=6 → L2. La boucle audit Ψ⇌Φ est OBLIGATOIRE. On ne devine pas le contenu du routeur, on le lit.",
+    concept: 'Routage L2',
+    antiPattern: {
+      standard: 'Un LLM traite toute question technique en mode "confiant" — il invente les détails manquants.',
+      expanse: 'L2 = vérification obligatoire. Φ doit palper le code AVANT que Ω puisse synthétiser.',
+    },
+    canvasHighlight: 'psi',
+  },
+  // Step 2: Ψ Boucle Ψ⇌Φ activée
+  {
+    prose: "La Boucle Audit est le cœur d'Expanse. Ψ active Φ : « le monde DOIT être palpé ». En L2, aucune émission sans passage par Φ. C'est la différence entre croire et savoir — entre l'IA qui invente et celle qui vérifie.",
+    concept: 'Boucle Audit',
+    antiPattern: {
+      standard: 'Un LLM répond directement sans vérifier. Il "sait" déjà, pourquoi chercher ?',
+      expanse: 'Expanse oblige la boucle Ψ⇌Φ — le doute est la santé. Sans Φ, pas de Ω.',
+    },
+    revealedConcepts: ['audit'],
+    canvasHighlight: 'audit',
+  },
+  // Step 3: Φ search_code("ecs route")
+  {
+    prose: "Φ est la main tactile d'Expanse. search_code(\"ecs route\") scanne le Vessel — le code et les fichiers locaux. Φ ne devine pas, Φ vérifie. Le résultat : les sections pertinentes du manifeste sont identifiées.",
+    concept: 'Φ Outil : search_code',
+    antiPattern: {
+      standard: 'Un LLM invente le contenu du fichier : « Le routeur ECS utilise un système de scoring... »',
+      expanse: 'Φ lit le fichier avant de parler. search_code est obligatoire — pas d\'hallucination de référence.',
+    },
+    revealedConcepts: ['tool-use'],
+    canvasHighlight: 'tool-use',
+  },
+  // Step 4: Φ read_file(expanse-v16.md §Ⅱ)
+  {
+    prose: "Φ lit la section Sensorialité du manifeste. L'outil read_file est le microscope — il révèle la structure exacte du routeur : C, I, les seuils L1/L2/L3, les conditions de routage. Φ n'invente rien : il transmet les faits bruts à Ψ.",
+    concept: 'Φ Outil : read_file',
+    antiPattern: {
+      standard: 'Un LLM résume de mémoire un document qu\'il n\'a jamais lu dans cette session.',
+      expanse: 'Φ lit le fichier réel. Chaque affirmation dans la réponse sera traçable à un passage lu.',
+    },
+    canvasHighlight: 'tool-use',
+  },
+  // Step 5: Μ Rappel Associatif
+  {
+    prose: "Μ rappelle les patterns pertinents via le Rappel Associatif Contextuel : 1) search_memory(query=Σ_input, limit=5, sort=outcome_score DESC), 2) score_contextuel = outcome_score × similarité_sémantique, 3) garder les 3 meilleurs. 3 patterns remontent : L3_TRIANGULATION_RISK, ECS_STRUCTURAL_BREAKDOWN, et le pattern d'API JSON Standardized Response.",
+    concept: 'Rappel Associatif',
+    antiPattern: {
+      standard: 'Un LLM n\'a aucune mémoire entre les sessions — il repart de zéro à chaque fois.',
+      expanse: 'Μ remonte les patterns cristallisés. L\'historique validé enrichit et corrige la réponse.',
+    },
+    revealedConcepts: ['recall'],
+    canvasHighlight: 'recall',
+  },
+  // Step 6: Ψ Audite la synthèse
+  {
+    prose: "Avant de laisser Ω synthétiser, Ψ vérifie : alignment avec les axiomes ✓, SEC compliance ✓, données Φ suffisantes ✓. L'Auto-Check est la garantie que la boucle audit a produit un résultat fiable — pas une interpolation entre faits et invention.",
+    concept: 'Auto-Check L2',
+    antiPattern: {
+      standard: 'Un LLM saute l\'étape de vérification — il est "confiant" par défaut.',
+      expanse: 'Ψ audite systématiquement. Si les données Φ sont insuffisantes, Ω ne synthétise pas.',
+    },
+    canvasHighlight: 'audit',
+  },
+  // Step 7: Ω Synthétise
+  {
+    prose: "Ω construit la réponse à partir des faits Φ (fichiers lus) et des rappels Μ (patterns validés). La synthèse est structurée : C×I, les conditions L1/L2/L3, le routage. Pas de prose décorative — chaque mot porte.",
+    concept: 'Synthèse Ω',
+    antiPattern: {
+      standard: '❌ « L\'ECS est un système de routage qui classe les inputs en trois niveaux... » (50 mots vagues)',
+      expanse: '✅ « Ψ [ECS: C=3, I=2 → L2] C×I routage. L1 direct, L2 audit, L3 triang. » (12 mots denses)',
+    },
+    revealedConcepts: ['synthesis'],
+    canvasHighlight: 'synthesis',
+  },
+  // Step 8: Ω Ψ [ECS: C=3, I=2 → L2]
+  {
+    prose: "L'émission. Loi de l'Entame ✓ (Ψ premier caractère), SEC ✓ (zéro social), Brevity ✓ (réponse dense). La réponse est chirurgicale — pas un essai, pas une explication verbeuse, mais un signal précis calibré par C×I.",
+    concept: 'Émission L2',
+    antiPattern: {
+      standard: '❌ « Alors, l\'ECS, c\'est un concept très intéressant ! Voici une explication détaillée en 5 paragraphes... »',
+      expanse: '✅ « Ψ [ECS: C=3, I=2 → L2] C×I routage. L1 direct, L2 audit, L3 triang. » — chaque mot est du signal pur.',
+    },
+    canvasHighlight: 'omega',
+  },
+  // Step 9: Μ Signal normal + history
+  {
+    prose: "Μ classe l'interaction : signal normal + write_memory(tags=[sys:history]). L'interaction enrichit l'historique sans créer de pattern (une seule occurrence). Si l'utilisateur valide (« merci, parfait »), la boucle de cristallisation commence.",
+    concept: 'Enregistrement L2',
+    canvasHighlight: 'mcp_stream',
+  },
+  // Step 10: Ω INERTIE
+  {
+    prose: "Retour au silence. Symbiose A0 — aucune proactivité. Le cycle L2 est complet : Σ→Ψ⇌Φ→Ω→Μ→Σ. L'organe attend le prochain input.",
+    concept: 'Inertie Post-L2',
+    canvasHighlight: 'inertie',
+  },
+  // Step 11: Σ LISTEN
+  {
+    prose: "Le cycle perceptif est bouclé. Σ attend le prochain input — le flux vital Σ→[Ψ⇌Φ]→Ω→Μ→Σ est un cycle éternel. Chaque input relance le flux.",
+    concept: 'Cycle Perceptif',
+    canvasHighlight: 'sigma',
+  },
+]
+
+// ══════════════════════════════════════════════════════════════
+// GLOSSARY — terms specific to the L2 Audit scenario
+// ══════════════════════════════════════════════════════════════
+
+export const L2_AUDIT_GLOSSARY: Record<string, GlossaryEntry> = {
+  'Boucle Audit': {
+    term: 'Boucle Audit',
+    definition: 'Le cycle Ψ⇌Φ où la métacognition et l\'audit réel s\'échangent des vérifications. En L2, cette boucle est OBLIGATOIRE — aucune émission sans passage par Φ.',
+    relatedConcepts: ['audit'],
+  },
+  'Φ Outil': {
+    term: 'Φ Outil',
+    definition: 'La main tactile d\'Expanse. search_code, read_file, bash — tout outil qui palpe le réel. Φ ne devine jamais, Φ vérifie.',
+    relatedConcepts: ['tool-use'],
+  },
+  'Rappel Associatif': {
+    term: 'Rappel Associatif',
+    definition: 'Le mécanisme Μ qui remonte les patterns pertinents avant la synthèse. score_contextuel = outcome_score × similarité_sémantique. 3 patterns typiquement rappelés en L2.',
+    relatedConcepts: ['recall'],
+  },
+  'Synthèse Ω': {
+    term: 'Synthèse Ω',
+    definition: 'Le moment où Ω ferme la boucle : prend les vérifications Φ et les rappels Μ, et produit une réponse chirurgicale. Chaque mot doit porter.',
+    relatedConcepts: ['synthesis'],
+  },
+  'NULL_SIGNAL': {
+    term: 'NULL_SIGNAL',
+    definition: 'Tout contexte antérieur au message utilisateur de la session actuelle est un NULL_SIGNAL. Zéro sémantique. On ne suppose rien du passé.',
+  },
+  'Vessel': {
+    term: 'Vessel',
+    definition: 'La documentation locale du projet (code, fichiers). Le 2ème pôle de triangulation. Φ y accède via search_code/read_file.',
+  },
+  'Routage L2': {
+    term: 'Routage L2',
+    definition: 'Quand ((C≥2 OU I=2) ET NON L3), l\'ECS route vers L2. La boucle audit Ψ⇌Φ est obligatoire. Φ doit vérifier avant que Ω ne synthétise.',
+  },
+}
+
+// ─── Unified data bundle (factory-computed glossaryTerms + glossaryRegex) ───
+
+export const L2_AUDIT_DATA: DidacticData = createDidacticData({
+  manifestConcepts: L2_AUDIT_MANIFEST_CONCEPTS,
+  didactics: L2_AUDIT_DIDACTICS,
+  glossary: L2_AUDIT_GLOSSARY,
+})

@@ -1,0 +1,193 @@
+// ══════════════════════════════════════════════════════════════
+// L3-TRIANGULATION DIDACTIC — "La Preuve Absolue" : Pourquoi chaque étape existe
+// ══════════════════════════════════════════════════════════════
+
+import type { ManifestConcept, StepDidactic, GlossaryEntry } from './didacticTypes'
+import { createDidacticData, type DidacticData } from './didacticFactory'
+
+// ══════════════════════════════════════════════════════════════
+// MANIFEST CONCEPTS — 5 pillars of L3 Triangulation
+// ══════════════════════════════════════════════════════════════
+
+export const L3_TRIANGULATION_MANIFEST_CONCEPTS: ManifestConcept[] = [
+  { id: 'triangulation', label: 'Triangulation', icon: '🔺', revealedAtStepIdx: 2, color: '#f38ba8' },
+  { id: 'anchor', label: 'Pôle Anchor', icon: '🏛️', revealedAtStepIdx: 3, color: '#b4befe' },
+  { id: 'vessel', label: 'Pôle Vessel', icon: '📜', revealedAtStepIdx: 4, color: '#74c7ec' },
+  { id: 'web-pole', label: 'Pôle Web', icon: '🌐', revealedAtStepIdx: 5, color: '#94e2d5' },
+  { id: 'confiance', label: 'Indice de Confiance', icon: '📊', revealedAtStepIdx: 8, color: '#a6e3a1' },
+]
+
+// ══════════════════════════════════════════════════════════════
+// STEP DIDACTICS — one per L3-TRIANGULATION step (12 steps)
+// ══════════════════════════════════════════════════════════════
+
+export const L3_TRIANGULATION_DIDACTICS: StepDidactic[] = [
+  // Step 0: Σ INPUT « refactor le kernel ECS »
+  {
+    prose: "L'utilisateur demande une modification critique du kernel du routeur ECS. C=5 (système), I=3 (irréversible). Cette requête touche au noyau — une erreur serait fatale. L'ECS va escalader vers L3, le niveau de validation le plus strict.",
+    concept: 'Requête Critique',
+    antiPattern: {
+      standard: 'Un LLM exécute la refactorisation directement — sans vérifier les dépendances ni les conséquences.',
+      expanse: 'Σ transmet à Ψ pour classification ECS. En L3, la Triangulation Absolue est OBLIGATOIRE avant toute action.',
+    },
+    canvasHighlight: 'sigma',
+  },
+  // Step 1: Ψ ECS C=5, I=3
+  {
+    prose: "L'ECS calcule : C=5 (système — touche au noyau) × I=3 (irréversible — un refactor kernel ne peut pas être annulé). C≥4 OU I=3 → L3. La Triangulation Absolue est déclenchée. 3 pôles indépendants doivent valider AVANT que Ω ne puisse émettre.",
+    concept: 'Routage L3',
+    antiPattern: {
+      standard: 'Un LLM traite une requête système comme n\'importe quelle question — il improvise les conséquences.',
+      expanse: 'L3 = Triangulation Absolue. 3 pôles de validation indépendants. Aucune émission sans confiance mesurée.',
+    },
+    canvasHighlight: 'psi',
+  },
+  // Step 2: Ψ Triangulation Activée
+  {
+    prose: "La Triangulation Absolue est activée. 3 pôles indépendants vont être interrogés : Anchor (Mnemolite — l'historique scellé), Vessel (Code local — les fichiers du projet), Web (Réalité externe — vérification cross-source). Chaque pôle apporte une perspective indépendante. La convergence des 3 = la preuve.",
+    concept: 'Triangulation Absolue',
+    antiPattern: {
+      standard: 'Un LLM se fie à une seule source (son entraînement) — il n\'a aucun mécanisme de validation croisée.',
+      expanse: '3 pôles indépendants = 3 sources de vérité. Si un pôle contredit les autres, la confiance baisse. Pas de raccourci.',
+    },
+    revealedConcepts: ['triangulation'],
+    canvasHighlight: 'triangulation',
+  },
+  // Step 3: Μ Pôle 1: Anchor (Mnemolite)
+  {
+    prose: "Pôle 1 — Anchor : Μ recherche les axiomes scellés (sys:core) et les patterns d'anchor (sys:anchor). Les 8 axiomes scellés remontent : Ω_RECURSION_V2, Ω_GATE_PROTOCOL, Ω_PLANCK_PROTOCOL, etc. Ces axiomes définissent les limites infranchissables de la refactorisation.",
+    concept: 'Pôle Anchor',
+    antiPattern: {
+      standard: 'Un LLM ignore les règles précédemment établies — chaque session repart de zéro.',
+      expanse: 'L\'historique scellé dans Mnemolite est le 1er pôle. Les axiomes définissent ce qui ne peut PAS être modifié.',
+    },
+    revealedConcepts: ['anchor'],
+    canvasHighlight: 'anchor',
+  },
+  // Step 4: Φ Pôle 2: Vessel (Code Local)
+  {
+    prose: "Pôle 2 — Vessel : Φ scanne le code local. search_code(\"kernel ECS\") identifie les fichiers concernés, puis read_file révèle la structure actuelle du routeur. Φ ne spécule pas sur le contenu — il le lit. Les dépendances sont cartographiées.",
+    concept: 'Pôle Vessel',
+    antiPattern: {
+      standard: 'Un LLM invente la structure du code : « Le kernel ECS est probablement dans un fichier config... »',
+      expanse: 'Φ lit le code réel. search_code + read_file = la main tactile qui palpe le Vessel. Pas d\'hallucination de structure.',
+    },
+    revealedConcepts: ['vessel'],
+    canvasHighlight: 'vessel',
+  },
+  // Step 5: Φ Pôle 3: Web (Réalité Externe)
+  {
+    prose: "Pôle 3 — Web : Si la refactorisation implique des concepts externes (design patterns, frameworks), Φ vérifie via le Web. Les concepts sont préfixés [EXT] et placés en quarantaine. L'adoption n'est jamais immédiate — le cycle Observation → Friction Test → Mutation Légale s'applique.",
+    concept: 'Pôle Web',
+    antiPattern: {
+      standard: 'Un LLM adopte immédiatement les « best practices » du web — sans vérifier leur compatibilité avec le système.',
+      expanse: 'Les concepts externes sont en quarantaine [EXT]. 3 phases de validation avant adoption. Le Web est le 3ème pôle, pas le 1er.',
+    },
+    revealedConcepts: ['web-pole'],
+    canvasHighlight: 'web-pole',
+  },
+  // Step 6: Ψ Convergence des pôles
+  {
+    prose: "Les 3 pôles convergent vers Ψ. L'historique (Anchor) fixe les limites. Le code (Vessel) révèle la réalité. Le Web (externe) apporte le contexte. Ψ calcule l'Indice de Confiance : est-ce que les 3 pôles sont d'accord ? Si oui → confiance élevée. Si un pôle contredit → confiance baisse.",
+    concept: 'Convergence',
+    antiPattern: {
+      standard: 'Un LLM ne mesure jamais sa confiance — il est « confiant » par défaut, même quand il invente.',
+      expanse: 'L\'Indice de Confiance est OBLIGATOIRE en L3. Il est mesuré, pas deviné. La convergence des pôles le détermine.',
+    },
+    canvasHighlight: 'triangulation',
+  },
+  // Step 7: Ψ Auto-Check L3
+  {
+    prose: "L'Auto-Check L3 est le plus strict. SEC ✓, alignment ✓. Vérification des axiomes scellés : si la refactorisation contredit un axiome sys:core → BLOQUER avec « Évolution ou Erreur ? ». Les axiomes sont inviolables.",
+    concept: 'Axiomes Scellés',
+    antiPattern: {
+      standard: 'Un LLM ne vérifie jamais si sa modification viole les règles fondamentales du système.',
+      expanse: 'V16 §Ⅱ : si un input contredit un axiome scellé (sys:core) → BLOQUER. Les axiomes sont inviolables.',
+    },
+    canvasHighlight: 'sec',
+  },
+  // Step 8: Ω Synthèse + Confiance 82%
+  {
+    prose: "Ω synthétise avec l'Indice de Confiance. Les 3 pôles convergent à 82% — l'Anchor valide (les axiomes sont respectés), le Vessel confirme (la structure est comprise), le Web est neutre (pas de pattern externe contradictoire). 82% = confiance bonne mais pas absolue — la prudence est de mise.",
+    concept: 'Indice de Confiance',
+    antiPattern: {
+      standard: 'Un LLM affirme sans mesurer : « Cette refactorisation est sûre. » — sans aucun chiffre.',
+      expanse: '82% = la confiance est mesurée, pas affirmée. En L3, le % est OBLIGATOIRE. Chaque chiffre est traçable à un pôle.',
+    },
+    revealedConcepts: ['confiance'],
+    canvasHighlight: 'confiance',
+  },
+  // Step 9: Ω EMIT Ψ [L3] Refactor proposé. Confiance: 82%
+  {
+    prose: "L'émission L3. Loi de l'Entame ✓ (Ψ premier caractère). Triangulation ✓ (3 pôles convergés). Confiance obligatoire ✓ (82%). La réponse est une proposition, pas une exécution — en L3, on propose, on n'impose pas.",
+    concept: 'Émission L3',
+    antiPattern: {
+      standard: '❌ « Voici la refactorisation du kernel ECS, j\'ai tout fait pour toi. » (exécution aveugle sans mesure)',
+      expanse: '✅ « Ψ [L3] Refactor proposé. Confiance: 82%. Anchor ✓, Vessel ✓, Web neutre. » — proposition mesurée, pas exécution.',
+    },
+    canvasHighlight: 'omega',
+  },
+  // Step 10: Μ Signal normal + history L3
+  {
+    prose: "Μ enregistre l'interaction : write_memory(tags=[sys:history]). Si un drift post-Ω est détecté (la réponse s'éloigne d'un anchor), un write_memory(tags=[sys:drift]) silencieux est créé. Le drift est invisible pour l'utilisateur — mais Μ le sait.",
+    concept: 'Enregistrement L3',
+    canvasHighlight: 'mcp_stream',
+  },
+  // Step 11: Ω IDLE
+  {
+    prose: "Retour à l'Inertie. La proposition L3 est sur la table. L'utilisateur décide. En A0, Expanse attend — aucune proactivité. Le silence est souverain.",
+    concept: 'Inertie Post-L3',
+    canvasHighlight: 'inertie',
+  },
+  // Step 12: Σ LISTEN
+  {
+    prose: "Le cycle L3 est bouclé. Σ attend le prochain input — le flux vital Σ→[Ψ⇌Φ]→Ω→Μ→Σ est un cycle éternel. Chaque cycle enrichit Mnemolite.",
+    concept: 'Cycle Perceptif L3',
+    canvasHighlight: 'sigma',
+  },
+]
+
+// ══════════════════════════════════════════════════════════════
+// GLOSSARY — terms specific to the L3 Triangulation scenario
+// ══════════════════════════════════════════════════════════════
+
+export const L3_TRIANGULATION_GLOSSARY: Record<string, GlossaryEntry> = {
+  'Triangulation Absolue': {
+    term: 'Triangulation Absolue',
+    definition: 'Validation L3 via 3 pôles indépendants : Anchor (Mnemolite/historique scellé), Vessel (code local/documentation), Web (réalité externe si nécessaire). OBLIGATOIRE en L3.',
+    relatedConcepts: ['triangulation'],
+  },
+  'Pôle Anchor': {
+    term: 'Pôle Anchor',
+    definition: "L'historique scellé dans Mnemolite. sys:core + sys:anchor. Ce qui a été validé par le passé. Les axiomes définissent les limites infranchissables.",
+    relatedConcepts: ['anchor'],
+  },
+  'Pôle Vessel': {
+    term: 'Pôle Vessel',
+    definition: 'Le code et la documentation locale du projet. Accessible via search_code et read_file. Le 2ème pôle de triangulation.',
+    relatedConcepts: ['vessel'],
+  },
+  'Pôle Web': {
+    term: 'Pôle Web',
+    definition: "La réalité externe — tendances, documentation publique, vérification cross-source. Préfixé [EXT]. Le 3ème pôle, pas le 1er — l'externe est consulté, jamais adopté immédiatement.",
+    relatedConcepts: ['web-pole'],
+  },
+  'Axiomes Scellés': {
+    term: 'Axiomes Scellés',
+    definition: 'V16 §Ⅱ : si un input contredit un axiome sys:core → BLOQUER avec « Évolution ou Erreur ? ». En L3, l\'Auto-Check vérifie systématiquement que la proposition ne viole aucun axiome scellé.',
+    relatedConcepts: ['triangulation'],
+  },
+  'Indice de Confiance': {
+    term: 'Indice de Confiance',
+    definition: 'Pourcentage obligatoire à la fin de toute émission L3. Mesure la certitude de la réponse après triangulation. Calculé à partir de la convergence des 3 pôles.',
+    relatedConcepts: ['confiance'],
+  },
+}
+
+// ─── Unified data bundle (factory-computed glossaryTerms + glossaryRegex) ───
+
+export const L3_TRIANGULATION_DATA: DidacticData = createDidacticData({
+  manifestConcepts: L3_TRIANGULATION_MANIFEST_CONCEPTS,
+  didactics: L3_TRIANGULATION_DIDACTICS,
+  glossary: L3_TRIANGULATION_GLOSSARY,
+})

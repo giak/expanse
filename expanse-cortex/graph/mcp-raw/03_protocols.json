@@ -1,0 +1,142 @@
+[
+  {
+    "id": "d6c4f25c-bfcf-4c3e-8148-91404b1a1354",
+    "title": "PROTOCOL: consolidation",
+    "content_preview": "Protocole de Consolidation sys:history\n\nDÉCLENCHEUR :\nAu boot : search_memory(query=\"sys:history\", tags=[\"sys:history\"], limit=100).\nSI count > 20 → exécuter le protocole.\n\nÉTAPE 1 — Récupérer les 10 plus anciennes :\n  old_memories = search_memory(query=\"sys:history\", tags=[\"sys:history\"],\n    limit...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:protocol",
+      "v15",
+      "protocol:consolidation"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-01T06:09:41.152825+00:00"
+  },
+  {
+    "id": "0874717d-9792-4d82-887a-3df7356e7d30",
+    "title": "PROTOCOL: friction-trace",
+    "content_preview": "Trace de Friction Structurée — Détection et Format\n\nSIGNAUX NÉGATIFS (détection) :\n- Mots-clés : \"non\", \"faux\", \"pas ça\", \"recommence\", \"incorrect\", \"pas bon\"\n- Pattern mixte : mot positif + correction (\"super, mais refait tout\")\n- Changement de sujet brutal après réponse\n- Demande explicite de modi...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:protocol",
+      "v15",
+      "protocol:friction-trace"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-01T06:09:33.942201+00:00"
+  },
+  {
+    "id": "3bb4c023-7589-4213-903a-3114eec28ef3",
+    "title": "PROTOCOL: consolidation",
+    "content_preview": "Protocole de Consolidation sys:history\n\nDÉCLENCHEUR :\nAu boot : search_memory(query=\"sys:history\", tags=[\"sys:history\"], limit=100).\nSI count > 20 → exécuter le protocole.\n\nÉTAPE 1 — Récupérer les 10 plus anciennes :\n  old_memories = search_memory(query=\"sys:history\", tags=[\"sys:history\"],\n    limit...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:protocol",
+      "v15",
+      "protocol:consolidation"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-01T06:06:57.048586+00:00"
+  },
+  {
+    "id": "7c025abc-132b-4da6-8d79-bf36dee575cc",
+    "title": "PROTOCOL: friction-trace",
+    "content_preview": "Trace de Friction Structurée — Détection et Format\n\nSIGNAUX NÉGATIFS (détection) :\n- Mots-clés : \"non\", \"faux\", \"pas ça\", \"recommence\", \"incorrect\", \"pas bon\"\n- Pattern mixte : mot positif + correction (\"super, mais refait tout\")\n- Changement de sujet brutal après réponse\n- Demande explicite de modi...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:protocol",
+      "v15",
+      "protocol:friction-trace"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-01T06:06:55.151987+00:00"
+  },
+  {
+    "id": "fa987472-ada5-4046-adc0-1feccf8a33cf",
+    "title": "PROTOCOL: friction-trace",
+    "content_preview": "Trace de Friction Structurée — Détection et Format\n\nSIGNAUX NÉGATIFS (détection) :\n- Mots-clés : \"non\", \"faux\", \"pas ça\", \"recommence\", \"incorrect\", \"pas bon\"\n- Pattern mixte : mot positif + correction (\"super, mais refait tout\")\n- Changement de sujet brutal après réponse\n- Demande explicite de modi...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:protocol",
+      "v15",
+      "protocol:friction-trace"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-01T06:06:54.838083+00:00"
+  },
+  {
+    "id": "e049d86b-6e08-49ef-b0d6-a924eda9ef46",
+    "title": "PROTOCOL: consolidation",
+    "content_preview": "Protocole de Consolidation sys:history\n\nDÉCLENCHEUR :\nAu boot : search_memory(query=\"sys:history\", tags=[\"sys:history\"], limit=100).\nSI count > 20 → exécuter le protocole.\n\nÉTAPE 1 — Récupérer les 10 plus anciennes :\n  old_memories = search_memory(query=\"sys:history\", tags=[\"sys:history\"],\n    limit...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:protocol",
+      "v15",
+      "protocol:consolidation"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-01T06:06:42.941279+00:00"
+  },
+  {
+    "id": "8180a67b-7ba1-4693-a01f-3657fb3e37b2",
+    "title": "PROTOCOL: consolidation",
+    "content_preview": "Protocole de Consolidation sys:history\n\nDÉCLENCHEUR :\nAu boot : search_memory(query=\"sys:history\", tags=[\"sys:history\"], limit=100).\nSI count > 20 → exécuter le protocole.\n\nÉTAPE 1 — Récupérer les 10 plus anciennes :\n  old_memories = search_memory(query=\"sys:history\", tags=[\"sys:history\"],\n    limit...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:protocol",
+      "v15",
+      "protocol:consolidation"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-01T06:06:42.937148+00:00"
+  },
+  {
+    "id": "eb4bfbb1-10dc-462a-bcf1-986883f472c2",
+    "title": "PROTOCOL: friction-trace",
+    "content_preview": "Trace de Friction Structurée — Détection et Format\n\nSIGNAUX NÉGATIFS (détection) :\n- Mots-clés : \"non\", \"faux\", \"pas ça\", \"recommence\", \"incorrect\", \"pas bon\"\n- Pattern mixte : mot positif + correction (\"super, mais refait tout\")\n- Changement de sujet brutal après réponse\n- Demande explicite de modi...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:protocol",
+      "v15",
+      "protocol:friction-trace"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-01T06:06:39.653210+00:00"
+  },
+  {
+    "id": "ab587d61-887b-4d35-971a-f7420fed5c25",
+    "title": "PROTOCOL: friction-trace",
+    "content_preview": "Trace de Friction Structurée — Détection et Format\n\nSIGNAUX NÉGATIFS (détection) :\n- Mots-clés : \"non\", \"faux\", \"pas ça\", \"recommence\", \"incorrect\", \"pas bon\"\n- Pattern mixte : mot positif + correction (\"super, mais refait tout\")\n- Changement de sujet brutal après réponse\n- Demande explicite de modi...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:protocol",
+      "v15",
+      "protocol:friction-trace"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-01T06:06:39.538486+00:00"
+  },
+  {
+    "id": "f224d3b3-cf16-415e-b064-b1ae0e2c7521",
+    "title": "PROTOCOL: memory-triage",
+    "content_preview": "Tags Mnemolite — Tableau de référence :\n| Tag | Rôle | Quand |\n| sys:history | Logs interactions L2+ | Après interaction L2+ |\n| sys:pattern | Patterns validés | Sur validation user (Μ) |\n| sys:pattern:candidate | Patterns détectés | Par Dream (auto) |\n| sys:anchor | Scellements | Sur Ψ SEAL |\n| sys...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:protocol",
+      "v15",
+      "protocol:memory-triage"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-01T06:06:27.339976+00:00"
+  }
+]

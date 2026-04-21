@@ -1,0 +1,158 @@
+/* ════════════════════════════════════════════════════════════════
+   COMPONENTS / AURA-LIFECYCLE — Aura field, physiological,
+   node lifecycle animations, generic pulse keyframe
+   Layer priority: medium (overrides base, overridden by utilities)
+   ════════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  /* ════════ AURA field animations ════════ */
+
+  .aura-ring-pulse {
+    animation: auraRingPulse 3s ease-in-out infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  @keyframes auraRingPulse {
+    0%, 100% { transform: scale(0.97); }
+    50% { transform: scale(1.03); }
+  }
+
+  .aura-fissure-pulse {
+    animation: auraFissurePulse 0.4s ease-in-out infinite alternate;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  @keyframes auraFissurePulse {
+    0% { transform: scale(0.98); }
+    100% { transform: scale(1.04); }
+  }
+
+  .aura-fissure-flash {
+    animation: auraFissureFlash 0.6s ease-in-out infinite alternate;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  @keyframes auraFissureFlash {
+    0% { opacity: 0.4; stroke-width: 1.5; }
+    100% { opacity: 0.8; stroke-width: 3; }
+  }
+
+  /* Irisation halo — slow rotation makes the multi-color sweep feel alive */
+  .aura-irisation-halo {
+    animation: auraIrisationRotate 12s linear infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  @keyframes auraIrisationRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* ════════ Physiological animations ════════ */
+
+  .radar-ping-ring {
+    animation: radarPingRing 1.8s ease-out none;
+    transform-origin: center;
+    transform-box: fill-box;
+    opacity: 0;
+  }
+  @keyframes radarPingRing {
+    0% { transform: scale(0.3); opacity: 0.8; stroke-width: 2; }
+    50% { opacity: 0.4; }
+    100% { transform: scale(4); opacity: 0; stroke-width: 0.5; }
+  }
+
+  .radar-ping-flash {
+    animation: radarPingFlash 0.8s ease-out none;
+    transform-origin: center;
+    transform-box: fill-box;
+    opacity: 0;
+  }
+  @keyframes radarPingFlash {
+    0% { opacity: 0.6; transform: scale(1.5); }
+    100% { opacity: 0; transform: scale(0.5); }
+  }
+
+  .target-flash-ring {
+    animation: targetFlashRing 1.2s ease-out none;
+    transform-origin: center;
+    transform-box: fill-box;
+    opacity: 0;
+  }
+  @keyframes targetFlashRing {
+    0% { opacity: 0.5; transform: scale(0.6); }
+    30% { opacity: 0.8; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1.8); }
+  }
+
+  .data-packet-capsule {
+    animation: dataPacketFloat 0.6s ease-in-out infinite alternate;
+  }
+  @keyframes dataPacketFloat {
+    0% { transform: translateY(-0.5px); }
+    100% { transform: translateY(0.5px); }
+  }
+
+  /* ════════ Node lifecycle animations ════════ */
+
+  .node-spawn-ring {
+    animation: nodeSpawnRing 1.5s ease-out none;
+    transform-origin: center;
+    transform-box: fill-box;
+    opacity: 0;
+  }
+  @keyframes nodeSpawnRing {
+    0% { opacity: 0.6; transform: scale(0.3); }
+    30% { opacity: 0.4; }
+    100% { opacity: 0; transform: scale(2); }
+  }
+
+  .node-guard-flash {
+    animation: nodeGuardFlash 1s ease-in-out infinite alternate;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  @keyframes nodeGuardFlash {
+    0% { opacity: 0.4; }
+    100% { opacity: 0.8; }
+  }
+
+  .node-delete-ring {
+    animation: nodeDeleteRing 1.8s ease-out none;
+    transform-origin: center;
+    transform-box: fill-box;
+    opacity: 0;
+  }
+  @keyframes nodeDeleteRing {
+    0% { opacity: 0.5; transform: scale(0.5); }
+    40% { opacity: 0.3; }
+    100% { opacity: 0; transform: scale(2.5); }
+  }
+
+  .node-morph-ring {
+    animation: nodeMorphRing 1.2s ease-in-out infinite alternate;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  @keyframes nodeMorphRing {
+    0% { opacity: 0.2; transform: scale(0.95); }
+    100% { opacity: 0.6; transform: scale(1.1); }
+  }
+
+  .node-core-glow {
+    animation: nodeCoreGlow 1s ease-in-out infinite alternate;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  @keyframes nodeCoreGlow {
+    0% { opacity: 0.1; transform: scale(0.9); }
+    100% { opacity: 0.4; transform: scale(1.15); }
+  }
+
+  /* Generic pulse keyframe (used by active step glow dot) */
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+}

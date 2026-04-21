@@ -1,0 +1,316 @@
+{
+  "_comment": "FICHIER + OUTIL — generated from expanse-graph.md sections 5A-5D + FICHIER table + SKILL-REGISTRY.md",
+  "nodes": [
+    {
+      "id": "fi_seed",
+      "type": "FICHIER",
+      "label": "expanse-v16-boot-seed.md",
+      "content": "La Porte Logique. 3 directives. Exemption directe.",
+      "tags": [
+        "fichier",
+        "boot",
+        "seed"
+      ],
+      "created_at": "2026-04-06",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "fi_v16",
+      "type": "FICHIER",
+      "label": "v16/runtime/expanse-v16.md",
+      "content": "L'Apex — Runtime",
+      "tags": [
+        "fichier",
+        "runtime",
+        "apex"
+      ],
+      "created_at": "2026-04-06",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "fi_dream",
+      "type": "FICHIER",
+      "label": "v16/runtime/expanse-dream.md",
+      "content": "Le Jardinier — Auto-évolution",
+      "tags": [
+        "fichier",
+        "runtime",
+        "dream"
+      ],
+      "created_at": "2026-04-06",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "fi_log",
+      "type": "FICHIER",
+      "label": "doc/mutations/LOG.md",
+      "content": "Historique mutations",
+      "tags": [
+        "fichier",
+        "mutations",
+        "log"
+      ],
+      "created_at": "2026-04-06",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "fi_kernel",
+      "type": "FICHIER",
+      "label": "KERNEL.md",
+      "content": "L'Origine du Langage",
+      "tags": [
+        "fichier",
+        "reference",
+        "kernel"
+      ],
+      "created_at": "2026-04-06",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "fi_dashboard",
+      "type": "FICHIER",
+      "label": "v16/runtime/expanse-dashboard.md",
+      "content": "Dashboard",
+      "tags": [
+        "fichier",
+        "runtime",
+        "dashboard"
+      ],
+      "created_at": "2026-04-06",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "fi_testrunner",
+      "type": "FICHIER",
+      "label": "v16/runtime/expanse-test-runner.md",
+      "content": "Test Runner",
+      "tags": [
+        "fichier",
+        "runtime",
+        "test"
+      ],
+      "created_at": "2026-04-06",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "fi_brm",
+      "type": "FICHIER",
+      "label": "v16/runtime/expanse-brm.md",
+      "content": "Behavior Realism Model",
+      "tags": [
+        "fichier",
+        "runtime",
+        "brm"
+      ],
+      "created_at": "2026-04-06",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "ot_skill1",
+      "type": "OUTIL",
+      "label": "system-read",
+      "content": "Skill: system-read",
+      "tags": [
+        "outil",
+        "skill"
+      ],
+      "created_at": "2026-03-13",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Φ"
+    },
+    {
+      "id": "ot_skill2",
+      "type": "OUTIL",
+      "label": "audit",
+      "content": "Skill: audit",
+      "tags": [
+        "outil",
+        "skill"
+      ],
+      "created_at": "2026-03-13",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Φ"
+    },
+    {
+      "id": "ot_skill3",
+      "type": "OUTIL",
+      "label": "brainstorm",
+      "content": "Skill: brainstorm",
+      "tags": [
+        "outil",
+        "skill"
+      ],
+      "created_at": "2026-03-13",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Φ"
+    },
+    {
+      "id": "ot_skill4",
+      "type": "OUTIL",
+      "label": "writing-plans",
+      "content": "Skill: writing-plans",
+      "tags": [
+        "outil",
+        "skill"
+      ],
+      "created_at": "2026-03-13",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Φ"
+    },
+    {
+      "id": "ot_skill5",
+      "type": "OUTIL",
+      "label": "proposing-tests",
+      "content": "Skill: proposing-tests",
+      "tags": [
+        "outil",
+        "skill"
+      ],
+      "created_at": "2026-03-13",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Φ"
+    },
+    {
+      "id": "ot_skill6",
+      "type": "OUTIL",
+      "label": "executing-plans",
+      "content": "Skill: executing-plans",
+      "tags": [
+        "outil",
+        "skill"
+      ],
+      "created_at": "2026-03-13",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Φ"
+    },
+    {
+      "id": "ot_skill7",
+      "type": "OUTIL",
+      "label": "anti-regression",
+      "content": "Skill: anti-regression",
+      "tags": [
+        "outil",
+        "skill"
+      ],
+      "created_at": "2026-03-13",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Φ"
+    },
+    {
+      "id": "ot_skill8",
+      "type": "OUTIL",
+      "label": "retrospective",
+      "content": "Skill: retrospective",
+      "tags": [
+        "outil",
+        "skill"
+      ],
+      "created_at": "2026-03-13",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Φ"
+    },
+    {
+      "id": "fi_skillreg",
+      "type": "FICHIER",
+      "label": "skills/SKILL-REGISTRY.md",
+      "content": "Outils externes développement",
+      "tags": [
+        "fichier",
+        "skills"
+      ],
+      "created_at": "2026-03-13",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Μ"
+    }
+  ],
+  "edges": [
+    {
+      "source": "fi_seed",
+      "target": "ap6",
+      "type": "TRIGGERS",
+      "weight": 0.8,
+      "condition": "seed lu"
+    },
+    {
+      "source": "ot_skill1",
+      "target": "fi_skillreg",
+      "type": "DERIVES_FROM",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "ot_skill2",
+      "target": "fi_skillreg",
+      "type": "DERIVES_FROM",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "ot_skill3",
+      "target": "fi_skillreg",
+      "type": "DERIVES_FROM",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "ot_skill4",
+      "target": "fi_skillreg",
+      "type": "DERIVES_FROM",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "ot_skill5",
+      "target": "fi_skillreg",
+      "type": "DERIVES_FROM",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "ot_skill6",
+      "target": "fi_skillreg",
+      "type": "DERIVES_FROM",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "ot_skill7",
+      "target": "fi_skillreg",
+      "type": "DERIVES_FROM",
+      "weight": 0.5,
+      "condition": null
+    },
+    {
+      "source": "ot_skill8",
+      "target": "fi_skillreg",
+      "type": "DERIVES_FROM",
+      "weight": 0.5,
+      "condition": null
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+/* ════════════════════════════════════════════════════════════════
+   UTILITIES — @apply convenience classes
+   Layer priority: highest (overrides base and components)
+   ════════════════════════════════════════════════════════════════ */
+
+@layer utilities {
+  .hud-label {
+    @apply text-overlay0 text-xs;
+  }
+
+  .hud-value {
+    @apply text-fg text-xs font-medium;
+  }
+
+  .hud-heading {
+    @apply text-blue text-xs font-semibold uppercase tracking-wider opacity-90;
+  }
+
+  .tag-chip {
+    @apply bg-white/10 text-blue px-1.5 py-0.5 rounded text-xs;
+  }
+}

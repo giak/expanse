@@ -1,0 +1,50 @@
+/* ════════════════════════════════════════════════════════════════
+   BASE — Resets, body defaults, accessibility
+   Layer priority: lowest (overridden by components and utilities)
+   ════════════════════════════════════════════════════════════════ */
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: radial-gradient(ellipse at center, var(--color-app-bg-mid) 0%, var(--color-app-bg-deep) 100%);
+    color: var(--color-fg);
+    font-family: 'JetBrains Mono', monospace;
+    overflow: hidden;
+  }
+
+  /* Sigma container — graph viewport */
+  .sigma-container {
+    position: absolute;
+    inset: 0;
+    animation: fadeIn 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .sigma-container canvas {
+    filter:
+      drop-shadow(0 0 16px rgba(0, 0, 0, 0.4))
+      contrast(1.01)
+      saturate(1.05);
+  }
+
+  /* Keyboard accessibility — focus-visible for interactive SVG nodes */
+  .graph-node-focus:focus-visible {
+    outline: none;
+    filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-blue) 80%, transparent)) drop-shadow(0 0 16px color-mix(in srgb, var(--color-blue) 40%, transparent));
+  }
+  .graph-node-focus:focus-visible circle,
+  .graph-node-focus:focus-visible polygon {
+    stroke: var(--color-blue);
+    stroke-width: 3;
+    stroke-opacity: 0.9;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(1.01); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+}

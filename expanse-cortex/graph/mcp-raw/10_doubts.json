@@ -1,0 +1,28 @@
+[
+  {
+    "id": "d04b31ff-4795-456e-9d40-c5ca6e4e61a6",
+    "title": "PATTERN: Expanse_Cognitive_HA",
+    "content_preview": "PATTERN: Expanse_Cognitive_HA\nDESCRIPTION: Modèle de Haute Disponibilité (HA) hybridant les structures distribuées standards (Cell-based, Consensus Raft) et le cycle de résilience cognitive ΣΨΦΩ.\nPRINCIPIES:\n1. Isolation par Cellules (réduction du Blast Radius).\n2. Persistance via Quorum (Graines de...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:pattern:doubt",
+      "v15"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-20T13:40:21.659366+00:00"
+  },
+  {
+    "id": "eb16b765-5d7d-4c26-a90a-18c1e88cb8b3",
+    "title": "PATTERN: L3 Triangulation Synthesis",
+    "content_preview": "PATTERN: L3-TRIANGULATION-SYNTHESIS\nCONTEXTE: Demande d'architecture complexe (C4/I3).\nRECONNAISSANCE: Convergence entre l'Axiome de Surgicalité (Isolation) et les tendances Web 2026 (Cell-Based Multi-Cloud).\nMÉTHODE:\n1. Scan Web pour le futurisme (2026).\n2. Scan Vessel pour l'ontologie (KERNEL).\n3....",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:pattern:doubt",
+      "v15"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-20T01:40:03.846636+00:00"
+  }
+]

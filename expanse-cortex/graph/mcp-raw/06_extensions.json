@@ -1,0 +1,43 @@
+[
+  {
+    "id": "c791fff0-5ce7-4ece-8f71-0c0660b35fd4",
+    "title": "EXTENSION: Ψ_SYMBIOSIS Spec v0.2",
+    "content_preview": "# EXTENSION: Ψ_SYMBIOSIS\n\n1. CONTEXT BUDGET: ≤ 500 tokens au boot pour le contexte interne.\n2. AUTONOMIE: /autonomy {0-2}, défaut A1.\n   - A0 = silence (V15 standard)\n   - A1 = murmures ignorables (Ψ [~])\n   - A2 = suggestions attendant réponse (Ψ [?])\n3. BRIEFING: toggle indépendant /briefing on|of...",
+    "highlights": [
+      {
+        "before": "# ",
+        "match": "EXTENSION",
+        "after": ": Ψ_SYMBIOSIS\n\n1. CONTEXT BUDGET: ≤ 500 tokens au boot pour le contexte interne.\n2. AUTONOMIE: /autonomy..."
+      }
+    ],
+    "memory_type": "reference",
+    "tags": [
+      "sys:extension",
+      "v15",
+      "symbiosis",
+      "spec"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-21T13:49:12.848763+00:00"
+  },
+  {
+    "id": "cb75e6cd-8455-42b0-aaa1-e34faf0f0b9f",
+    "title": "EXTENSION: ◊ (One-Word Compression)",
+    "content_preview": "EXTENSION: ◊\nDÉFINITION: Compression sémantique maximale (réponse en un mot).\nCONTEXTE: Utilisé lorsque l'utilisateur demande une concision extrême ou pour valider une stase fonctionnelle.\nEXEMPLE: Ψ ◊ Symbiose.\nV14 IDENTITY: Pattern d'économie d'entropie.",
+    "highlights": [
+      {
+        "before": "",
+        "match": "EXTENSION",
+        "after": ": ◊\nDÉFINITION: Compression sémantique maximale (réponse en un mot).\nCONTEXTE: Utilisé lorsque l'utilisateur..."
+      }
+    ],
+    "memory_type": "reference",
+    "tags": [
+      "sys:extension",
+      "v14",
+      "one_word_compression"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-14T17:23:28.017678+00:00"
+  }
+]

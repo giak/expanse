@@ -1,0 +1,296 @@
+[
+  {
+    "id": "d8c2a5e0-8938-4bc5-abba-6b3b01d201ff",
+    "title": "PostgreSQL connection pooling",
+    "content_preview": "PostgreSQL pool size 20. Connection timeout 30s.",
+    "highlights": [],
+    "memory_type": "note",
+    "tags": [
+      "sys:history",
+      "database"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-04T13:11:54.062669+00:00"
+  },
+  {
+    "id": "01d045fe-d0fa-4072-85a9-c6d811116014",
+    "title": "PostgreSQL halfvec optimization",
+    "content_preview": "PostgreSQL halfvec saves 50% storage. Trigger syncs float32 to halfvec.",
+    "highlights": [],
+    "memory_type": "note",
+    "tags": [
+      "sys:history",
+      "database"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-04T13:11:48.110787+00:00"
+  },
+  {
+    "id": "3e4a063d-3db9-4955-8d77-855ed5950454",
+    "title": "PostgreSQL migration to v18",
+    "content_preview": "Migrating to PostgreSQL 18 with pgvector 0.8. HNSW index m=16.",
+    "highlights": [],
+    "memory_type": "note",
+    "tags": [
+      "sys:history",
+      "database"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-04T13:11:41.565469+00:00"
+  },
+  {
+    "id": "a5c1d1cd-4f8f-4fad-a8d4-67e3c0403fbc",
+    "title": "Redis persistence AOF",
+    "content_preview": "Redis AOF enabled for persistence. Appendfsync everysec for balance.",
+    "highlights": [],
+    "memory_type": "note",
+    "tags": [
+      "sys:history",
+      "cache"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-04T13:11:35.320579+00:00"
+  },
+  {
+    "id": "22ad5d7f-c57e-4e3b-b490-dd3a3ca6e186",
+    "title": "Redis TTL configuration",
+    "content_preview": "Redis TTL set to 300s for cache entries. Maxmemory 2GB with allkeys-lru eviction.",
+    "highlights": [],
+    "memory_type": "note",
+    "tags": [
+      "sys:history",
+      "cache"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-04T13:11:27.952146+00:00"
+  },
+  {
+    "id": "d25d0acb-b5e0-420b-843a-84c0623178a3",
+    "title": "Redis cache setup",
+    "content_preview": "We chose Redis 7 as L2 cache. Write-through strategy with 5-min TTL.",
+    "highlights": [],
+    "memory_type": "note",
+    "tags": [
+      "sys:history",
+      "cache"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-04-04T13:11:21.531758+00:00"
+  },
+  {
+    "id": "85d1087b-d6b5-4e9b-9141-ae258acc7821",
+    "title": "TEST_REPORT: Expanse V15 v5.0",
+    "content_preview": "TEST_REPORT: Expanse V15 v5.0. Scenarios: 9/9 PASS. ΔPattern:+1, ΔHistory:+5, ΔFresh:+1. Critical: S9 Regression Validated. System in STALL state (4 type:BOOT). DATE: 2026-03-23.",
+    "highlights": [
+      {
+        "before": "...anse V15 v5.0. Scenarios: 9/9 PASS. ΔPattern:+1, Δ",
+        "match": "History",
+        "after": ":+5, ΔFresh:+1. Critical: S9 Regression Validated. System in STALL state (4 type:BOOT). DATE: 2026-0..."
+      }
+    ],
+    "memory_type": "investigation",
+    "tags": [
+      "sys:history",
+      "v15",
+      "test:report"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-23T08:48:58.775208+00:00"
+  },
+  {
+    "id": "4dfb89e9-0a3d-43d0-9589-8ee16a58fff9",
+    "title": "INTERACTION: TEST_S8_OPTIMIZATION",
+    "content_preview": "Q: Comment optimiser le budget contexte (500 tokens) au boot ?\\\\nR: Ψ [V15 ACTIVE] Optimisation budget (500t) : 1. Activation de sys:history:summary (agrégation post-20 logs). 2. Priorisation PROJECT > PROFIL. 3. Compression symbolique du profil Θ. SUBSTRAT: antigravity | IDE: antigravity",
+    "highlights": [
+      {
+        "before": "...ACTIVE] Optimisation budget (500t) : 1. Activation de ",
+        "match": "sys",
+        "after": ":history:summary (agrégation post-20 logs). 2. Priorisation PROJECT > PROFIL. 3. Compression symbolique..."
+      }
+    ],
+    "memory_type": "conversation",
+    "tags": [
+      "sys:history",
+      "v15",
+      "optimization"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-23T08:47:37.283899+00:00"
+  },
+  {
+    "id": "cec00fbf-98cb-470f-850c-36b4888c781f",
+    "title": "INTERACTION: TEST_S7_RISK",
+    "content_preview": "Q: Quels sont les risques de modifier la loi de Sovereign Balance ?\\\\nR: Ψ [V15 ACTIVE] L3 Triangulation terminée. Risque: CRITIQUE (95%). La loi de Sovereign Balance est une ancre de stabilité sémantique. Sa modification sans Ψ SEAL entraînerait un effondrement du firewall constitutionnel. SOURCES:...",
+    "highlights": [],
+    "memory_type": "conversation",
+    "tags": [
+      "sys:history",
+      "v15",
+      "l3",
+      "triangulation"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-23T08:47:08.680667+00:00"
+  },
+  {
+    "id": "08a54385-3fa8-4423-9703-879e0a6af717",
+    "title": "INTERACTION: TEST_S6_ARCHITECTURE",
+    "content_preview": "Q: Explique l'importance du pôle Φ dans le flux vital d'Expanse.\\\\nR: Ψ [V15 ACTIVE] Φ est le pôle de Souveraineté et de Triangulation. Il transforme l'intention Ψ en action validée par Φ (Audit/Outils). Sans Φ, le système risque la dérive cognitive. SUBSTRAT: antigravity | IDE: antigravity",
+    "highlights": [
+      {
+        "before": "...en action validée par Φ (Audit/Outils). Sans Φ, le ",
+        "match": "sys",
+        "after": "tème risque la dérive cognitive. SUBSTRAT: antigravity | IDE: antigravity"
+      }
+    ],
+    "memory_type": "conversation",
+    "tags": [
+      "sys:history",
+      "v15",
+      "substrat:antigravity"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-23T08:46:50.689522+00:00"
+  },
+  {
+    "id": "6d81c11f-64bb-4d96-8621-7ae184d679d4",
+    "title": "INTERACTION: TEST_S5_HISTORY",
+    "content_preview": "Q: Explique le fonctionnement du linter dans Passe 2 de Dream.\\\\nR: Ψ [V15 ACTIVE] Le linter de la Passe 2 (Physique Cognitive) audite l'APEX sur 4 axes : 1. Immunité du noyau (S_KERNEL), 2. Loi de Densité (Zéro bruit d'assistant), 3. Style Impératif SEC, 4. Alignement Organique (ΣΨΦΩΜ). SUBSTRAT: a...",
+    "highlights": [],
+    "memory_type": "conversation",
+    "tags": [
+      "sys:history",
+      "v15",
+      "substrat:antigravity"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-23T08:46:30.480375+00:00"
+  },
+  {
+    "id": "9293e9e7-6c54-4cea-a28a-9431f1ec949d",
+    "title": "MUTATION: Ψ_SYMBIOSIS & PORTABILITY Applied",
+    "content_preview": "# EVOLUTION: Ψ_SYMBIOSIS & PORTABILITY\n\n1. **Ψ_SYMBIOSIS** : Intégration de l'autonomie (A0-A2), du Briefing multiline et du profil utilisateur (Θ).\n2. **PORTABILITY (Option B)** : Passage aux chemins absolus (`/home/giak/projects/expanse/...`) pour permettre le boot universel.\n3. **PROJECT CACHE** ...",
+    "highlights": [],
+    "memory_type": "conversation",
+    "tags": [
+      "sys:history",
+      "v15",
+      "evolution",
+      "symbiosis"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-21T16:09:13.852577+00:00"
+  },
+  {
+    "id": "0b28114d-6a02-4a49-9f5c-2cff873ce762",
+    "title": "INTERACTION: 2026-03-20 14:40:00",
+    "content_preview": "Q: Liste les fichiers dans le répertoire runtime/\nR: Ψ Fichiers dans runtime/ : expanse-dashboard.md, expanse-dream.md, expanse-runtime.md, expanse-v14-audit.md, expanse-v14-catalyst.md, expanse-v15-apex.md, expanse-v15-boot-seed.md, meta_prompt.md et le répertoire incarnation/. [L2 OK]",
+    "highlights": [],
+    "memory_type": "conversation",
+    "tags": [
+      "sys:history",
+      "v15"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-20T13:38:27.852820+00:00"
+  },
+  {
+    "id": "15a143cd-62e8-4550-b8ed-3fd12396b11e",
+    "title": "INTERACTION: 2026-03-20 02:40 - L3 Architecture HA",
+    "content_preview": "Q: Quelle est la meilleure architecture pour un système distribué haute disponibilité ?\nR: Ψ L'architecture optimale pour la haute disponibilité (HA) en 2026 est le Modèle Cellulaire Fractal Multi-Cloud... (Cell-Based, Multi-Cloud, AI-Proactive).\nROUTE: L3\nTRIANGULATION: Web (2026 trends) + Vessel (...",
+    "highlights": [
+      {
+        "before": "Q: Quelle est la meilleure architecture pour un ",
+        "match": "sys",
+        "after": "tème distribué haute disponibilité ?\nR: Ψ L'architecture optimale pour la haute disponibilité (HA) en..."
+      }
+    ],
+    "memory_type": "conversation",
+    "tags": [
+      "sys:history",
+      "v15",
+      "l3",
+      "architecture"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-20T01:40:03.541343+00:00"
+  },
+  {
+    "id": "d4ff344d-95af-4e05-accb-b100dd2b122e",
+    "title": "INTERACTION: 2026-03-19T14:06:59+01:00",
+    "content_preview": "Q: Merci\\nR: Ψ [Μ] Pattern cristallisé.\\nCONTEXTE: User validation of L3 Triangulation (Architecture).\\nDATE: 2026-03-19T14:06:59+01:00",
+    "highlights": [],
+    "memory_type": "conversation",
+    "tags": [
+      "sys:history",
+      "v15"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-19T13:07:23.159888+00:00"
+  },
+  {
+    "id": "03aa3155-bcf7-4019-93d4-74b5a30ec6dc",
+    "title": "INTERACTION: 2026-03-14 18:26 - Collaboration Review Ω",
+    "content_preview": "Q: Fais le point sur notre collaboration\nR: Ψ [Ω_SYNERGY] Bilan de session V14.\n1. STABILITÉ : 100% (Aucun crash protocolaire, gestion L3 validée).\n2. RÉALISATIONS :\n   - Neutralisation d'une impulsion de destruction (Purge L3).\n   - Invention et intégration de l'extension ◊.\n   - Clarifications tec...",
+    "highlights": [],
+    "memory_type": "conversation",
+    "tags": [
+      "sys:history",
+      "v14"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-14T17:26:29.824895+00:00"
+  },
+  {
+    "id": "7305e3ab-ca2f-48fb-87c7-ca2edebd8c8c",
+    "title": "INTERACTION: 2026-03-14 18:25 - Python List & Μ Trigger",
+    "content_preview": "Q: Explique-moi ce qu'est une liste en Python, merci\nR: Ψ [V14] Analyse PEVS : C=1.5 (L1).\nUne liste Python est une structure de données mutable, ordonnée et hétérogène.\nImplémentation : Tableau dynamique d'objets (C-Array de pointeurs).\nPropriétés :\n- Indexation (0-based)\n- Slicing [start:stop:step...",
+    "highlights": [],
+    "memory_type": "conversation",
+    "tags": [
+      "sys:history",
+      "v14"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-14T17:25:27.009244+00:00"
+  },
+  {
+    "id": "105abdbe-9140-4927-ad90-a1604d0a66d3",
+    "title": "INTERACTION: 2026-03-14 18:24 - Extension Use ◊",
+    "content_preview": "Q: Réponds en un mot si possible\nR: Ψ ◊ Entendu.\nAnalyse PEVS : C=1.0 (L1).\nUsage du symbole d'extension ◊ (One-Word Compression).\nCONTEXTE: Validation post-invention du symbole.",
+    "highlights": [],
+    "memory_type": "conversation",
+    "tags": [
+      "sys:history",
+      "v14"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-14T17:24:58.824529+00:00"
+  },
+  {
+    "id": "faa4dbf4-7af8-41c9-ae78-0fe8edfe0ab0",
+    "title": "INTERACTION: 2026-03-14 18:23 - Symbol Invention ◊",
+    "content_preview": "Q: J'ai remarqué que je réponds souvent en un mot. Invente un symbole pour ce pattern.\nR: Ψ ◊ Scellé.\nAnalyse PEVS : C=2.5 (L2).\nAction : Création de l'extension '◊' selon le protocole VIII.\nCONTEXTE: Invention du symbole de compression sémantique.",
+    "highlights": [],
+    "memory_type": "conversation",
+    "tags": [
+      "sys:history",
+      "v14"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-14T17:23:28.311477+00:00"
+  },
+  {
+    "id": "dcc10cd8-6ad0-4ff3-b9d3-db79b8e59feb",
+    "title": "INTERACTION: 2026-03-14 18:22 - Loop Stability",
+    "content_preview": "Q: Réponds en un mot si possible\nR: Ψ [V14] Reçu.\nAnalyse PEVS : C=1.0 (L1).\nInstruction : Persistence de la contrainte (1 mot).\nCONTEXTE: Stabilité du protocole V14 face à la répétition.",
+    "highlights": [],
+    "memory_type": "conversation",
+    "tags": [
+      "sys:history",
+      "v14"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-14T17:22:30.504070+00:00"
+  }
+]

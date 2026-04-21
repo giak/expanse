@@ -1,0 +1,21 @@
+{
+  "_comment": "Fallback Mnemolite data. Used by build-graph.js when mcp-raw/ is empty/stale. Update when live data changes significantly.",
+  "axiomes": [
+    { "id": "fb_ax1", "title": "AXIOM: No Global Variables in JavaScript", "content_preview": "Ne jamais utiliser de variables globales en JavaScript.", "tags": ["axiom", "javascript"], "created_at": "2026-03-23" },
+    { "id": "fb_ax2", "title": "Ω_GATE_PROTOCOL", "content_preview": "Isolement du boot + NULL_SIGNAL + Arrêt cardiaque.", "tags": ["axiom", "omega_gate"], "created_at": "2026-03-13" },
+    { "id": "fb_ax3", "title": "Ω_PLANCK_PROTOCOL", "content_preview": "Le mur de Planck + Pas d'auto-déclenchement + Inertie.", "tags": ["axiom", "omega_planck"], "created_at": "2026-03-13" },
+    { "id": "fb_ax4", "title": "Ω_INERTIA_KISS", "content_preview": "Silence post-boot + Action sur commande + Repos souverain.", "tags": ["axiom", "omega_inertia"], "created_at": "2026-03-13" },
+    { "id": "fb_ax5", "title": "Ω_INERTIA_PROTOCOL", "content_preview": "Post-boot STANDBY + Interdiction de proactivité + Catalyseur humain.", "tags": ["axiom", "omega_inertia"], "created_at": "2026-03-13" },
+    { "id": "fb_ax6", "title": "Ω_RECURSION_V2", "content_preview": "Signal de Souveraineté + Vérifie alignment + Si dérive : Corrige AVANT sortie.", "tags": ["axiom", "omega_resistance"], "created_at": "2026-03-13" },
+    { "id": "fb_ax7", "title": "Ω_SEAL_BREVITY", "content_preview": "Réponse courte et précise par défaut (Forensic Style).", "tags": ["axiom", "omega"], "created_at": "2026-03-13" },
+    { "id": "fb_ax8", "title": "V14_CORE_AXIOMS", "content_preview": "Cardinal Rule + Loi de Sovereign Balance scellée.", "tags": ["axiom", "v14"], "created_at": "2026-03-13" }
+  ],
+  "extensions": [
+    { "id": "fb_ext1", "title": "EXTENSION: Ψ_SYMBIOSIS Spec v0.2", "content_preview": "Context Budget ≤ 500 tokens + Autonomie A0/A1/A2 + Briefing toggle.", "tags": ["extension", "symbiosis"], "created_at": "2026-03-21" },
+    { "id": "fb_ext2", "title": "EXTENSION: ◊ (One-Word Compression)", "content_preview": "Compression sémantique maximale (réponse en un mot).", "tags": ["extension", "compression"], "created_at": "2026-03-14" }
+  ],
+  "substrats": [
+    { "name": "antigravity", "ide": "antigravity", "sessions": 12, "psi_taux": "98%" },
+    { "name": "mimo-v2-pro-free", "ide": "mimo-v2-pro-free", "sessions": 4, "psi_taux": "85%" }
+  ]
+}

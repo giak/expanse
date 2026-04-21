@@ -1,0 +1,223 @@
+/* ════════════════════════════════════════════════════════════════
+   COMPONENTS / CONTROLS — Scenario popover, scrollbar, step-log cards
+   Layer priority: medium (overrides base, overridden by utilities)
+   ════════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  /* ════════ Scrollbar styles ════════ */
+
+  .step-log-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.08) transparent;
+  }
+  .step-log-scroll::-webkit-scrollbar { width: 4px; }
+  .step-log-scroll::-webkit-scrollbar-track { background: transparent; }
+  .step-log-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+  }
+  .step-log-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.15);
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+
+  /* ════════ Scenario popover ════════ */
+
+  .scenario-trigger:hover {
+    filter: brightness(1.2);
+  }
+
+  .scenario-popover {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 0;
+    z-index: 50;
+    animation: popoverFadeIn 0.12s ease-out forwards;
+  }
+  .scenario-popover::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 16px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--color-crust);
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+  }
+  @keyframes popoverFadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scenario-popover-inner {
+    min-width: 260px;
+    max-width: 340px;
+    max-height: 360px;
+    overflow-y: auto;
+    background: var(--color-crust);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    box-shadow:
+      0 8px 32px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(0,0,0,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.03);
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-surface1) transparent;
+  }
+  .scenario-popover-inner::-webkit-scrollbar { width: 4px; }
+  .scenario-popover-inner::-webkit-scrollbar-track { background: transparent; }
+  .scenario-popover-inner::-webkit-scrollbar-thumb {
+    background: var(--color-surface1);
+    border-radius: 2px;
+  }
+  .scenario-popover-inner::-webkit-scrollbar-thumb:hover {
+    background: var(--color-surface2);
+  }
+
+  .scenario-popover-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--color-fg);
+    background: transparent;
+    border: none;
+    border-left: 2px solid transparent;
+    cursor: pointer;
+    transition: background 0.1s, border-left-color 0.1s;
+  }
+  .scenario-popover-item:hover {
+    background: rgba(255,255,255,0.04);
+    border-left-color: var(--color-surface2);
+  }
+  .scenario-popover-item.active {
+    background: rgba(255,255,255,0.02);
+  }
+
+  /* ════════ Step log card states ════════ */
+
+  .step-log-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.03);
+  }
+  .step-log-card:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.06);
+  }
+  .step-log-active {
+    border-color: transparent;
+  }
+  .step-log-active:hover {
+    filter: brightness(1.1);
+  }
+  .step-log-past {
+    opacity: 0.6;
+  }
+  .step-log-past:hover {
+    opacity: 0.85;
+  }
+  .step-log-future {
+    opacity: 0.35;
+  }
+  .step-log-future:hover {
+    opacity: 0.55;
+  }
+
+  /* ════════ Tint cards — semantic color-mix backgrounds (StepSidebar + DidacticPanel) ════════ */
+
+  .tint-blue {
+    background: color-mix(in srgb, var(--color-blue) 4%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-blue) 8%, transparent);
+  }
+  .tint-green {
+    background: color-mix(in srgb, var(--color-green) 4%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-green) 8%, transparent);
+  }
+  .tint-mauve {
+    background: color-mix(in srgb, var(--color-mauve) 4%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-mauve) 8%, transparent);
+  }
+  .tint-sapphire {
+    background: color-mix(in srgb, var(--color-sapphire) 4%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-sapphire) 8%, transparent);
+  }
+  .tint-lavender {
+    background: color-mix(in srgb, var(--color-lavender) 4%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-lavender) 8%, transparent);
+  }
+  .tint-yellow {
+    background: color-mix(in srgb, var(--color-yellow) 4%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-yellow) 8%, transparent);
+  }
+
+  /* ════════ Tint chips — inline badges with subtle fg background ════════ */
+
+  .tint-fg-chip {
+    background: color-mix(in srgb, var(--color-fg) 4%, transparent);
+    color: var(--color-overlay2);
+  }
+  .tint-fg-sky-chip {
+    background: color-mix(in srgb, var(--color-fg) 4%, transparent);
+    color: var(--color-sky);
+  }
+
+  /* ════════ Green badge — stronger tint for visual effect tags ════════ */
+
+  .tint-green-badge {
+    color: var(--color-green);
+    background: color-mix(in srgb, var(--color-green) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-green) 15%, transparent);
+  }
+
+  /* ════════ Canvas + overlay static backgrounds ════════ */
+
+  .signal-canvas-bg {
+    background: radial-gradient(ellipse at center, var(--color-app-bg-mid) 0%, var(--color-app-bg-deep) 100%);
+  }
+  .app-bg {
+    background: var(--color-app-bg);
+  }
+
+  /* ════════ Focus shadow — zoom-out overlay ════════ */
+
+  .focus-shadow {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+
+  /* ════════ Step log utilities ════════ */
+
+  .step-log-max-h {
+    max-height: 35%;
+  }
+  .border-l-transparent {
+    border-left: 2px solid transparent;
+  }
+
+  /* ════════ Text decoration ════════ */
+
+  .skip-ink-none {
+    text-decoration-skip-ink: none;
+    -webkit-text-decoration-skip: none;
+  }
+
+  /* ════════ SVG transitions ════════ */
+
+  .opacity-transition-slow {
+    transition: opacity 0.6s ease;
+  }
+  .stroke-dashoffset-fast {
+    transition: stroke-dashoffset 0.1s ease-out;
+  }
+}

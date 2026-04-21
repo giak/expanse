@@ -1,0 +1,816 @@
+{
+  "_comment": "Dream protocol — generated from expanse-graph.md sections 4A-4G",
+  "nodes": [
+    {
+      "id": "pr0",
+      "type": "PROTOCOLE",
+      "label": "P0: L'Inertie (Anti-Sycophancy)",
+      "content": "search trace:fresh consumed:false. count=0→FIN. count<3→insuffisant.",
+      "tags": [
+        "protocole",
+        "passe",
+        "p0"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "pr1",
+      "type": "PROTOCOLE",
+      "label": "P1: La Plaie (Réactif)",
+      "content": "search trace:fresh+sys:drift. Grouper par TYPE. TYPE.count≥2→pattern. BRM obligatoire. Consommation sélective.",
+      "tags": [
+        "protocole",
+        "passe",
+        "p1"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "pr2",
+      "type": "PROTOCOLE",
+      "label": "P2: Le Linter Lexical (Proactif)",
+      "content": "read V16 + search sys:protocol. 5 vérifications Physique Cognitive.",
+      "tags": [
+        "protocole",
+        "passe",
+        "p2"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "pr3",
+      "type": "PROTOCOLE",
+      "label": "P3: Le Radar à Émergence",
+      "content": "search sys:extension. Usage≥10→SEAL. Usage=0→PRUNE.",
+      "tags": [
+        "protocole",
+        "passe",
+        "p3"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "pr4",
+      "type": "PROTOCOLE",
+      "label": "P4: L'Élagueur Synaptique",
+      "content": "search doubt+pattern. bash find .bak. >3 signaux négatifs→soft-delete.",
+      "tags": [
+        "protocole",
+        "passe",
+        "p4"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "pr5",
+      "type": "PROTOCOLE",
+      "label": "P5: L'Architecture",
+      "content": "Évalue outils et formats.",
+      "tags": [
+        "protocole",
+        "passe",
+        "p5"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "pr6",
+      "type": "PROTOCOLE",
+      "label": "P6: La Santé Cognitive (Θ & SS)",
+      "content": "search history+profile. Verbosity Drift + Ψ Compliance + SS. Audit par substrat.",
+      "tags": [
+        "protocole",
+        "passe",
+        "p6"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "pr7",
+      "type": "PROTOCOLE",
+      "label": "P7: Le Différentiel Temporel (∂Ω/∂t)",
+      "content": "search history+diff. 4 métriques: adaptation_velocity, friction_trend, improvement_velocity, pattern_turnover.",
+      "tags": [
+        "protocole",
+        "passe",
+        "p7"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "pr_prop1",
+      "type": "PROTOCOLE",
+      "label": "1. Créer dossier",
+      "content": "bash: mkdir -p doc/mutations/{slug}/",
+      "tags": [
+        "protocole",
+        "proposal",
+        "mkdir"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Φ"
+    },
+    {
+      "id": "pr_prop2",
+      "type": "PROTOCOLE",
+      "label": "2. Lire V16 pour contexte exact",
+      "content": "read V16, extraire 3-5 lignes AVANT/APRÈS",
+      "tags": [
+        "protocole",
+        "proposal",
+        "read"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Φ"
+    },
+    {
+      "id": "pr_prop3",
+      "type": "PROTOCOLE",
+      "label": "3. Écrire proposal.md",
+      "content": "write_file proposal avec contexte complet",
+      "tags": [
+        "protocole",
+        "proposal",
+        "write"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Φ"
+    },
+    {
+      "id": "pr_prop4",
+      "type": "PROTOCOLE",
+      "label": "4. Écrire Mnemolite",
+      "content": "write_memory tags:sys:pattern:candidate",
+      "tags": [
+        "protocole",
+        "proposal",
+        "mnemo"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "pr_prop5",
+      "type": "PROTOCOLE",
+      "label": "5. Mettre à jour LOG",
+      "content": "read+write LOG.md, ajouter dans Pending",
+      "tags": [
+        "protocole",
+        "proposal",
+        "log"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "cm9",
+      "type": "COMMANDE",
+      "label": "/apply {slug}",
+      "content": "14 étapes: lock→proposal→archive→snapshot→reread→guard→apply→verify→unlock→log→applied",
+      "tags": [
+        "cmd",
+        "dream",
+        "mutation"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "cm10",
+      "type": "COMMANDE",
+      "label": "/reject {slug}",
+      "content": "Vérifier proposal → marquer REJECTED → mettre à jour LOG",
+      "tags": [
+        "cmd",
+        "dream",
+        "mutation"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "cm11",
+      "type": "COMMANDE",
+      "label": "/rollback {slug}",
+      "content": "Vérifier APPLIED → trouver backup → vérifier mutations postérieures → restaurer",
+      "tags": [
+        "cmd",
+        "dream",
+        "mutation"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "cm12",
+      "type": "COMMANDE",
+      "label": "/mutations",
+      "content": "read_file LOG.md → output contenu",
+      "tags": [
+        "cmd",
+        "dream",
+        "mutation"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "cm13",
+      "type": "COMMANDE",
+      "label": "/proposals",
+      "content": "Lister Pending Proposals du LOG",
+      "tags": [
+        "cmd",
+        "dream",
+        "mutation"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "cm14",
+      "type": "COMMANDE",
+      "label": "/diff {slug}",
+      "content": "Lire proposal, extraire et afficher le diff",
+      "tags": [
+        "cmd",
+        "dream",
+        "mutation"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "pr_out",
+      "type": "PROTOCOLE",
+      "label": "Output Final du Rêve",
+      "content": "Rapport: passes exécutées, proposals, persistance, consommation traces",
+      "tags": [
+        "protocole",
+        "dream-output"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "rg_sec1",
+      "type": "REGLE",
+      "label": "R1: LOCK obligatoire",
+      "content": "Une mutation à la fois. Fichier .lock avec timestamp. Expiration 1h.",
+      "tags": [
+        "regle",
+        "securite"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "rg_sec2",
+      "type": "REGLE",
+      "label": "R2: Archive avec SLUG",
+      "content": "Backup unique par mutation.",
+      "tags": [
+        "regle",
+        "securite"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "rg_sec3",
+      "type": "REGLE",
+      "label": "R3: Contexte exact requis",
+      "content": "5 lignes avant/après dans proposal.",
+      "tags": [
+        "regle",
+        "securite"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "rg_sec4",
+      "type": "REGLE",
+      "label": "R4: Auto-vérification post-write",
+      "content": "7 checks structurels après write_file V16.",
+      "tags": [
+        "regle",
+        "securite"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "rg_sec5",
+      "type": "REGLE",
+      "label": "R5: Rollback automatique si erreur",
+      "content": "Si un check échoue → restaurer backup.",
+      "tags": [
+        "regle",
+        "securite"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "rg_sec6",
+      "type": "REGLE",
+      "label": "R6: LOG toujours synchronisé",
+      "content": "LOG.md reflète l'état réel à chaque étape.",
+      "tags": [
+        "regle",
+        "securite"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "rg_sec7",
+      "type": "REGLE",
+      "label": "R7: Consommation sélective",
+      "content": "mark_consumed sur traces traitées. Sélectif P1 ou complet.",
+      "tags": [
+        "regle",
+        "securite"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "rg_sec8",
+      "type": "REGLE",
+      "label": "R8: bash() pour filesystem",
+      "content": "mkdir et fichier operations via bash().",
+      "tags": [
+        "regle",
+        "securite"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "rg_sec9",
+      "type": "REGLE",
+      "label": "R9: Chirurgie obligatoire",
+      "content": "Jamais altérer format/indentation hors-cible.",
+      "tags": [
+        "regle",
+        "securite"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "rg_chk1",
+      "type": "REGLE",
+      "label": "Check 1: Section Ⅳ (Boot) existe ?",
+      "content": "",
+      "tags": [
+        "regle",
+        "verification"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "rg_chk2",
+      "type": "REGLE",
+      "label": "Check 2: Signal Ψ [V16 ACTIVE] présent ?",
+      "content": "",
+      "tags": [
+        "regle",
+        "verification"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "rg_chk3",
+      "type": "REGLE",
+      "label": "Check 3: 6 Sections (Ⅰ-Ⅵ) intactes ?",
+      "content": "",
+      "tags": [
+        "regle",
+        "verification"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "rg_chk4",
+      "type": "REGLE",
+      "label": "Check 4: Accolades {} fermées ?",
+      "content": "",
+      "tags": [
+        "regle",
+        "verification"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "rg_chk5",
+      "type": "REGLE",
+      "label": "Check 5: Backticks ``` fermés ?",
+      "content": "",
+      "tags": [
+        "regle",
+        "verification"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "rg_chk6",
+      "type": "REGLE",
+      "label": "Check 6: Pas de caractères corrompus ?",
+      "content": "",
+      "tags": [
+        "regle",
+        "verification"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "rg_chk7",
+      "type": "REGLE",
+      "label": "Check 7: Le diff a bien été appliqué ?",
+      "content": "",
+      "tags": [
+        "regle",
+        "verification"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "vivide",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "rg_constitutional",
+      "type": "REGLE",
+      "label": "Constitutional Guard",
+      "content": "Sections IMMUTABLES: §Ⅰ Incarnation, §Ⅲ Souveraineté, §Ⅵ Boot. Si touche une ligne → REJET AUTO.",
+      "tags": [
+        "regle",
+        "gate",
+        "constitutional"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "permanent",
+      "status": null,
+      "parent_organ": "Μ"
+    },
+    {
+      "id": "drift_type_ecs",
+      "type": "DRIFT",
+      "label": "TRACE:ECS",
+      "content": "ECS — Complexity/Impact mismatch or calibration drift",
+      "tags": [
+        "trace:fresh",
+        "drift-type",
+        "ecs"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "incandescent",
+      "status": null,
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "drift_type_sec",
+      "type": "DRIFT",
+      "label": "TRACE:SEC",
+      "content": "SEC — Security violation or protocol breach",
+      "tags": [
+        "trace:fresh",
+        "drift-type",
+        "sec"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "incandescent",
+      "status": null,
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "drift_type_style",
+      "type": "DRIFT",
+      "label": "TRACE:STYLE",
+      "content": "STYLE — Non documenté dans la table source — possiblement couvert par SEC",
+      "tags": [
+        "trace:fresh",
+        "drift-type",
+        "style"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "incandescent",
+      "status": null,
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "drift_type_memory",
+      "type": "DRIFT",
+      "label": "TRACE:MEMORY",
+      "content": "MEMORY — Mnemolite recall failure or staleness",
+      "tags": [
+        "trace:fresh",
+        "drift-type",
+        "memory"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "incandescent",
+      "status": null,
+      "parent_organ": "Ψ"
+    },
+    {
+      "id": "drift_type_boot",
+      "type": "DRIFT",
+      "label": "TRACE:BOOT",
+      "content": "BOOT — Boot sequence anomaly or friction",
+      "tags": [
+        "trace:fresh",
+        "drift-type",
+        "boot"
+      ],
+      "created_at": "2026-04-11",
+      "nature": "incandescent",
+      "status": null,
+      "parent_organ": "Σ"
+    }
+  ],
+  "edges": [
+    {
+      "source": "pr0",
+      "target": "pr1",
+      "type": "TRIGGERS",
+      "weight": 0.8,
+      "condition": "count≥1"
+    },
+    {
+      "source": "pr1",
+      "target": "pr2",
+      "type": "FEEDS_INTO",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr2",
+      "target": "pr3",
+      "type": "FEEDS_INTO",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr3",
+      "target": "pr4",
+      "type": "FEEDS_INTO",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr4",
+      "target": "pr5",
+      "type": "FEEDS_INTO",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr5",
+      "target": "pr6",
+      "type": "FEEDS_INTO",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr6",
+      "target": "pr7",
+      "type": "FEEDS_INTO",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr0",
+      "target": "ot3",
+      "type": "CALLS",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr1",
+      "target": "ot3",
+      "type": "CALLS",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr1",
+      "target": "ot3",
+      "type": "CALLS",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr1",
+      "target": "ot4",
+      "type": "CALLS",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr1",
+      "target": "ot6",
+      "type": "CALLS",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr2",
+      "target": "ot2",
+      "type": "CALLS",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr3",
+      "target": "ot3",
+      "type": "CALLS",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr4",
+      "target": "ot3",
+      "type": "CALLS",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr6",
+      "target": "ot3",
+      "type": "CALLS",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr7",
+      "target": "ot3",
+      "type": "CALLS",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "pr7",
+      "target": "ot1",
+      "type": "CALLS",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "cm9",
+      "target": "fi_v16",
+      "type": "ALTERS",
+      "weight": 0.8,
+      "condition": "OUI confirmé"
+    },
+    {
+      "source": "cm9",
+      "target": "rg_constitutional",
+      "type": "GUARDS",
+      "weight": 0.8,
+      "condition": "avant apply"
+    },
+    {
+      "source": "cm10",
+      "target": "fi_log",
+      "type": "ALTERS",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "cm11",
+      "target": "fi_v16",
+      "type": "ALTERS",
+      "weight": 0.8,
+      "condition": "OUI-ROLLBACK confirmé"
+    },
+    {
+      "source": "cm9",
+      "target": "fi_log",
+      "type": "REFERENCES",
+      "weight": 0.8,
+      "condition": null
+    },
+    {
+      "source": "drift_type_ecs",
+      "target": "fi_dream",
+      "type": "DERIVES_FROM",
+      "weight": 0.4,
+      "condition": null
+    },
+    {
+      "source": "drift_type_sec",
+      "target": "fi_dream",
+      "type": "DERIVES_FROM",
+      "weight": 0.4,
+      "condition": null
+    },
+    {
+      "source": "drift_type_style",
+      "target": "fi_dream",
+      "type": "DERIVES_FROM",
+      "weight": 0.4,
+      "condition": null
+    },
+    {
+      "source": "drift_type_memory",
+      "target": "fi_dream",
+      "type": "DERIVES_FROM",
+      "weight": 0.4,
+      "condition": null
+    },
+    {
+      "source": "drift_type_boot",
+      "target": "fi_dream",
+      "type": "DERIVES_FROM",
+      "weight": 0.4,
+      "condition": null
+    }
+  ]
+}

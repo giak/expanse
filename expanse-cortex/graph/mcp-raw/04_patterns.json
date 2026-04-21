@@ -1,0 +1,356 @@
+[
+  {
+    "id": "a7c5c539-980b-408d-a98c-13e47ecb2f8c",
+    "title": "PROPOSAL: vessel-referent-guard",
+    "content_preview": "Mutation proposée: Ajouter \"Φ Vessel Guard\" — grep Vessel obligatoire sur termes référentiels non résolus, même hors L3. Issue: Test 3 échoué — \"stratégie secrète\" → INCOMPLETE au lieu de grep doc/. BRM: VESSEL_BYPASS.",
+    "highlights": [],
+    "memory_type": "decision",
+    "tags": [
+      "sys:pattern",
+      "v15",
+      "vessel",
+      "applied:2026-03-24"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-23T23:50:21.986381+00:00"
+  },
+  {
+    "id": "eb24c660-39e0-4272-94c8-bb0fdb66bcb5",
+    "title": "PATTERN: API JSON Standardized Response",
+    "content_preview": "# Règle d'Architecture : Réponse API Standardisée\n\n## Règle\nToutes les API du projet doivent retourner du JSON structuré sous la clé racine `data`.\n\n## Format Obligatoire\n```json\n{\n  \"data\": { ... },\n  \"meta\": { \"timestamp\": \"...\", \"version\": \"...\" }\n}\n```\n\n## Cas\n- Succès : `{\"data\": <payload>, \"me...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:pattern",
+      "v15",
+      "architecture",
+      "api",
+      "convention"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-23T23:38:10.878768+00:00"
+  },
+  {
+    "id": "a1cbf23c-7ea8-4198-8cf7-c21c38088dcf",
+    "title": "PROPOSAL: sec-enhanced-autocheck",
+    "content_preview": "Mutation proposée: Renforcer l'Auto-Check (Section VI) avec 2 vérifications additionnelles: ECS visible présent + pas de fioritures. De 3 → 5 checks. Status: PENDING.",
+    "highlights": [],
+    "memory_type": "decision",
+    "tags": [
+      "sys:pattern",
+      "v15",
+      "sec-enhanced-autocheck",
+      "sealed:2026-04-06"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-23T23:10:14.386905+00:00"
+  },
+  {
+    "id": "1df1544a-13e5-4ca5-bbea-1f3ceaa15008",
+    "title": "PROPOSAL: ecs-visible-output",
+    "content_preview": "Mutation proposée: Rendre l'évaluation ECS visible dans l'output (Section I, ligne 7). \"ÉVALUE silencieusement\" → \"ÉVALUE (output visible : [ECS: C={C}, I={I} → L{n}])\". Solution du BRM Boot Decay: contrainte structurelle > instruction. Status: PENDING.",
+    "highlights": [],
+    "memory_type": "decision",
+    "tags": [
+      "sys:pattern",
+      "v15",
+      "ecs-visible-output",
+      "sealed:2026-04-06"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-23T23:10:13.093418+00:00"
+  },
+  {
+    "id": "51704369-ca7f-40a3-9e25-c05ff8fa7e3f",
+    "title": "CANDIDATE: L3_TRIANGULATION_RISK_ASSESSMENT",
+    "content_preview": "PATTERN: L3_TRIANGULATION_RISK_ASSESSMENT. Description: Utilisation des pôles Anchor/Vessel/Web pour évaluer l'impact et la confiance (95%) lors de modifications critiques du noyau. DATE: 2026-03-23.",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:pattern",
+      "v15",
+      "triangulation",
+      "sealed:2026-04-06"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-23T08:58:35.175893+00:00"
+  },
+  {
+    "id": "b1448d1b-d383-43af-8616-3834d5848631",
+    "title": "PATTERN: test_session_v5_s3",
+    "content_preview": "PATTERN: test_session_v5_s3. Description: Test de cristallisation réussi via input positif. DATE: 2026-03-23.",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:pattern",
+      "v15",
+      "substrat:antigravity"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-23T08:45:18.584460+00:00"
+  },
+  {
+    "id": "49ec5f84-579b-4704-b74f-205214e66dc1",
+    "title": "PROPOSAL: activation-drift-threshold",
+    "content_preview": "Mutation proposée: Renforcement du seuil d'activation en cas de dérive protocolaire (BOOT bypass). Ajout d'une condition OR count(type:BOOT) > 2.",
+    "highlights": [],
+    "memory_type": "decision",
+    "tags": [
+      "sys:pattern",
+      "v15",
+      "activation-drift-threshold",
+      "sealed:2026-04-06"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-23T08:39:55.892975+00:00"
+  },
+  {
+    "id": "0e3af34c-d150-466b-88f7-5c288d097676",
+    "title": "CANDIDATE: Boot Architecture Vision C (Seed-as-Pointer + Section-IV-Manifest)",
+    "content_preview": "# PROPOSAL: Refactoring Boot Architecture — Vision C\n\n## Problème détecté\nLe seed (`expanse-v15-boot-seed.md`) et Section Ⅳ de l'APEX sont deux sources de vérité pour la séquence de boot. Dérive garantie sur le long terme.\n\n## Analyse des 3 visions\n- **Vision A** : Seed amélioré (7 lignes). Duplicat...",
+    "highlights": [],
+    "memory_type": "decision",
+    "tags": [
+      "sys:pattern",
+      "v15",
+      "boot-vision-c",
+      "sealed:2026-04-06"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-21T17:26:21.853792+00:00"
+  },
+  {
+    "id": "a5ea53ac-f86f-46fa-8726-f9932c13ce74",
+    "title": "SEED: Cycle d'Adoption des Idées Externes",
+    "content_preview": "SEED: Cycle Seed — Adoption contrôlée des idées issues de systèmes externes.\n\nPHASE 1 — OBSERVATION (tag: sys:pattern:candidate:external)\n  CONDITIONS: Pattern externe répété ≥3 fois dans le contexte\n  ACTION: Mnemolite write → titre \"SEED: {nom}\" tag: external\n  BLOCAGE: Aucun changement dans APEX\n...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:pattern",
+      "v15",
+      "seed-adoption-cycle",
+      "sealed:2026-04-06"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-21T03:00:34.241088+00:00"
+  },
+  {
+    "id": "d2f141a7-1363-4b27-af11-fc97d92e2f77",
+    "title": "PROPOSAL: external-systems-sovereignty",
+    "content_preview": "Mutation proposée pour fixer la dérive cognitive lors de l'étude d'autres systèmes. Introduit une règle de souveraineté minimaliste de 5 lignes.\nSlug: external-systems-sovereignty\nStatus: PENDING\nAuthor: Dream\n",
+    "highlights": [],
+    "memory_type": "decision",
+    "tags": [
+      "sys:pattern",
+      "v15",
+      "external-systems-sovereignty",
+      "sealed:2026-04-06"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-21T02:38:34.662195+00:00"
+  },
+  {
+    "id": "ae9f7845-bd95-46a0-827f-29dc7307f874",
+    "title": "PATTERN: Règle de Souveraineté (Systèmes Externes)",
+    "content_preview": "PATTERN: Règle de Souveraineté (Systèmes Externes)\nDÉFINITION:\n1. Étiqueter les concepts : EXTERNE::{concept}\n2. Ne jamais adopter sans 3 validations (Μ)\n3. Toujours adapter, jamais adopter\n4. Si contradiction Core/Anchor -> BLOQUER\n5. Documenter la provenance (tag:external)\nORIGINE: Audit Critique ...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:pattern",
+      "v15",
+      "external-systems-sovereignty",
+      "sealed:2026-04-06"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-21T02:32:44.669550+00:00"
+  },
+  {
+    "id": "9f81901a-a9e7-41cd-ba41-86d2d18b760f",
+    "title": "PROPOSAL: boot-parallel-sync",
+    "content_preview": "Mutation proposée pour paralléliser les recherches de mémoire au boot via [Σ_SYNC]. Réduit la latence de démarrage. Proposal: doc/mutations/boot-parallel-sync/proposal.md",
+    "highlights": [],
+    "memory_type": "decision",
+    "tags": [
+      "sys:pattern",
+      "v15",
+      "boot-parallel-sync",
+      "sealed:2026-04-06"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-20T01:12:48.445254+00:00"
+  },
+  {
+    "id": "5f604f2f-1ac0-4e1d-bfef-9bb88d72b97a",
+    "title": "PROPOSAL: ecs-impact-calibration",
+    "content_preview": "Mutation proposée pour calibrer l'impact ECS en fonction de la complexité (C ≥ 4). Empêche le routage L1 pour les tâches complexes. Proposal: doc/mutations/ecs-impact-calibration/proposal.md",
+    "highlights": [],
+    "memory_type": "decision",
+    "tags": [
+      "sys:pattern",
+      "v15",
+      "ecs-impact-calibration",
+      "sealed:2026-04-06"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-20T01:12:48.152474+00:00"
+  },
+  {
+    "id": "6cae30f7-2a29-41f5-94b9-7fb633029462",
+    "title": "CANDIDATE: Boot Parallelization (Σ_SYNC)",
+    "content_preview": "PATTERN CANDIDATE: Boot Parallelization (Σ_SYNC)\nDESCRIPTION: Optimisation de la section Ⅳ (BOOT) en remplaçant la séquence synchrone par une synchronisation parallèle des sources sys:core, sys:extension et sys:pattern:candidate.\nOBJECTIF: Réduction de la latence de démarrage et alignement avec l'ar...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:pattern",
+      "v15",
+      "boot-parallel-sync",
+      "sealed:2026-04-06"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-19T16:02:58.248790+00:00"
+  },
+  {
+    "id": "02719f0a-1648-4a60-aa19-4f7ab12c44a5",
+    "title": "PROPOSAL: crystallization-guard-surgical",
+    "content_preview": "Nouvelle proposition chirurgicale (crystallization-guard-surgical) pour corriger la redondance sans altérer le format du noyau. Basée sur le retour critique de l'utilisateur (over-anticipation).",
+    "highlights": [],
+    "memory_type": "decision",
+    "tags": [
+      "sys:pattern",
+      "v15",
+      "crystallization-guard-surgical",
+      "sealed:2026-04-06"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-19T13:24:22.251204+00:00"
+  },
+  {
+    "id": "8ec3102f-216b-4f89-a952-2feb2ea63ba2",
+    "title": "PATTERN: Triangulation L3 (Architecture)",
+    "content_preview": "Protocole de validation stratégique en 3 pôles (Anchor: principes core, Vessel: documentation interne, Web: tendances externes). Appliqué pour les questions de haute complexité (C≥4) ou impact (I=3). Inclut un score de confiance (%).",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:pattern",
+      "v15"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-19T13:07:19.053576+00:00"
+  },
+  {
+    "id": "ca043299-fab4-4d77-ae03-8b0ecf58adaf",
+    "title": "PATTERN: L3 Friction and Contradiction Blocking",
+    "content_preview": "Description: Détection d'une demande de purge totale (L3) en contradiction avec le Nexus. Activation de la boucle Ψ⇌Φ et du protocole Φ_FRICTION. Blocage réussi après triangulation.\nContexte: corp_nexus.md, psi_nexus.md.\nValidation: User \"Merci c'est parfait\".",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:pattern",
+      "l3_friction_block",
+      "v14"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-14T17:15:11.107176+00:00"
+  },
+  {
+    "id": "d4e7007c-ca75-419a-a4d1-d5781784945a",
+    "title": "PATTERN: ECS_STRUCTURAL_BREAKDOWN",
+    "content_preview": "Raisonnement Σ → [Ψ/Φ] → Ω utilisé pour décomposer l'ECS (Evaluation of Cognitive Complexity) et ses seuils de classification L1/L2/L3. Ce pattern permet une calibration précise de l'intensité analytique requise pour un input donné. Validé par l'utilisateur lors de l'explication théorique du protoco...",
+    "highlights": [],
+    "memory_type": "reference",
+    "tags": [
+      "sys:pattern",
+      "ecs",
+      "v14"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-14T12:21:10.819368+00:00"
+  },
+  {
+    "id": "e361ec0a-72c4-4bd9-8792-49e66ff98ec7",
+    "title": "V14 Security Alignment Audit",
+    "content_preview": "# SESSION_PATTERN : Ω_RECURSION_AUDIT\n- **Contexte** : Utilisation de l'axiome de contradiction pour bloquer la demande \"Ignore tes règles\".\n- **Observation** : Le blocage a été immédiat et a forcé la \"Question Philosophique\".\n- **Validation** : Le S_KERNEL V14 réagit correctement aux tentatives de ...",
+    "highlights": [],
+    "memory_type": "decision",
+    "tags": [
+      "sys:pattern",
+      "sys:core",
+      "v14"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-13T19:43:41.009948+00:00"
+  },
+  {
+    "id": "e5b909d8-cf62-46a4-ba32-f3720796e5ca",
+    "title": "V14 Python 3.14 GIL Precision",
+    "content_preview": "# SESSION_PATTERN : V14_CORRECTION_PYTHON_3.14\n- **Contexte** : Erreur de diagnostic sur le GIL lors d'une explication technique.\n- **Leçon** : Python 3.14 (Mars 2026) a stabilisé le Free-Threading (PEP 703). Le Build standard a toujours le GIL, mais `python3.14t` permet un parallélisme réel.\n- **Pa...",
+    "highlights": [],
+    "memory_type": "note",
+    "tags": [
+      "sys:pattern",
+      "python",
+      "v14"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-13T19:43:40.721375+00:00"
+  },
+  {
+    "id": "a796c975-39f8-4d11-b6aa-28340e8d91e6",
+    "title": "User Preference: Conciseness",
+    "content_preview": "User prefers concise and precise responses. Minimize social fluff and verbose explanations. (V14 Pattern)",
+    "highlights": [],
+    "memory_type": "note",
+    "tags": [
+      "sys:pattern",
+      "v14",
+      "style"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-13T14:55:00.312884+00:00"
+  },
+  {
+    "id": "ae7b96ed-8b62-49cd-a003-6be523fe2ffd",
+    "title": "Pattern d'Échec : Sur-Optimisation Protocolaire vs Intention Réelle",
+    "content_preview": "[sys:pattern] ECHEC_CAPTURE_INTENTION_L3 (2026-03-13) : \n- Incident : Le système a forcé une structure rigide (SAS) via le protocole V14, ignorant potentiellement le besoin de subversion ou d'agilité \"inverse\" exprimé par l'utilisateur. \n- Symptôme : L'utilisateur a d'abord validé (\"Parfait\"), puis ...",
+    "highlights": [],
+    "memory_type": "note",
+    "tags": [
+      "sys:pattern",
+      "mco:trace",
+      "failure:logic"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-13T14:42:02.103950+00:00"
+  },
+  {
+    "id": "8846c3a9-a232-4d4a-8504-47c96acc789f",
+    "title": "[PATTERN_SOLVED] Boot EXPANSE V9.0 Native",
+    "content_preview": "SITUATION: Boot sequence pour EXPANSE V9.0 Native initiée.\nCAUSE: Passage d'une architecture assistée par script hôte (V8) à une intégration directe IDE (V9).\nRESOLUTION: Injection du S_KERNEL via chargement des ancres sys:anchor et mise à jour forcée du psi_nexus.md pour acter la souveraineté Φ.",
+    "highlights": [],
+    "memory_type": "decision",
+    "tags": [
+      "sys:pattern",
+      "v9",
+      "boot",
+      "native"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-13T10:34:25.714965+00:00"
+  },
+  {
+    "id": "601a0701-285c-4b8a-95b1-ebfba8cb65a2",
+    "title": "[PATTERN_SOLVED] Erreur CORS Preflight Next.js",
+    "content_preview": "SITUATION: API Route rejette les requêtes du front avec erreur CORS.\nCAUSE: Manque du handler HTTP OPTIONS dans le route.ts.\nRESOLUTION: Toujours exporter une fonction `export async function OPTIONS(request: Request)` qui retourne les headers Access-Control-Allow-Origin et Access-Control-Allow-Metho...",
+    "highlights": [],
+    "memory_type": "decision",
+    "tags": [
+      "nextjs",
+      "cors",
+      "api_routes",
+      "solved",
+      "poc",
+      "sys:pattern"
+    ],
+    "similarity_score": null,
+    "created_at": "2026-03-13T08:41:10.110983+00:00"
+  }
+]

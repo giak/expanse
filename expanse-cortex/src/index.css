@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* Tailwind v4 resolves @import at AST level — @apply in utilities.css
+   resolves against @theme regardless of source order. */
+
+/* ── Base: resets, body defaults, accessibility ── */
+@import "./styles/base.css";
+
+/* ── Components: visual styles split by domain ── */
+@import "./styles/components/vital.css";
+@import "./styles/components/boot.css";
+@import "./styles/components/matter-nature.css";
+@import "./styles/components/signal-fx.css";
+@import "./styles/components/aura-lifecycle.css";
+@import "./styles/components/hud.css";
+@import "./styles/components/controls.css";
+
+/* ── Utilities: @apply convenience classes (highest cascade priority) ── */
+@import "./styles/utilities.css";
+
+/* ════════ CATPPUCCIN MOCHA — @theme palette (Tailwind v4) ════════ */
+/* Registers all colors as CSS vars (--color-*) AND Tailwind utilities.
+ * Usage: text-crust, bg-base, border-surface0, fill-blue, etc.
+ * Also available as var(--color-crust) in plain CSS. */
+@theme {
+  /* ── Crust → Mantle: deepest backgrounds ── */
+  --color-crust:   #11111b;
+  --color-mantle:  #181825;
+  --color-base:    #1e1e2e;
+  --color-surface0:#313244;
+  --color-surface1:#45475a;
+  --color-surface2:#585b70;
+  --color-overlay0:#6c7086;
+  --color-overlay1:#7f849c;
+  --color-overlay2:#9399b2;
+  --color-subtext0:#a6adc8;
+  --color-subtext1:#bac2de;
+  --color-fg:       #cdd6f4;
+
+  /* ── Accent colors ── */
+  --color-rosewater:#f5e0dc;
+  --color-flamingo: #f2cdcd;
+  --color-pink:     #f5c2e7;
+  --color-mauve:    #cba6f7;
+  --color-red:      #f38ba8;
+  --color-maroon:   #eba0ac;
+  --color-peach:    #fab387;
+  --color-yellow:   #f9e2af;
+  --color-green:    #a6e3a1;
+  --color-teal:     #94e2d5;
+  --color-sky:      #89dceb;
+  --color-sapphire: #74c7ec;
+  --color-blue:     #89b4fa;
+  --color-lavender: #b4befe;
+  --color-lilac:    #d9b3f0;
+
+  /* ── App-specific aliases (semantic names → Catppuccin colors) ── */
+  --color-app-bg:     #0a0a0f;
+  --color-app-bg-mid: #0f0f17;
+  --color-app-bg-deep:#07070a;
+  --color-card:       #12121a;
+  --color-sidebar:    #0c0c14;
+
+  /* ── Mnemolite organ colors (dynamic in TS, static in CSS) ── */
+  --color-apex:     #f38ba8;
+  --color-regle:    #fab387;
+  --color-protocole:#f9e2af;
+  --color-pattern:  #a6e3a1;
+  --color-memoire:  #89b4fa;
+  --color-outil:    #cba6f7;
+  --color-drift:    #f38ba8;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   LAYER ARCHITECTURE (Tailwind v4 native CSS cascade layers)
+
+   Priority (lowest → highest):
+     @layer base        — resets, body, accessibility
+     @layer components  — HUD, animations, matter/curtain/nature,
+                          controls (popover, scrollbar, cards)
+     @layer utilities   — @apply convenience classes
+
+   Unlayered styles (highest priority) are reserved for
+   inline styles set via React props — never add CSS rules
+   outside a layer.
+   ════════════════════════════════════════════════════════════════ */
