@@ -25,3 +25,24 @@ scripts/
 
 # Test directory
 test/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Temporary/debug files
+output.html
+page_content.html
+screenshot.png
+server.pid
+fix_browser.sh
+my_verify.py
+test_browser.py
+verify.py
+verify_page.py
+
+# Kilocode (already ignored .kilo/)
+.kilocode/
+
+# Corrupted filenames from MCP extraction
+sys:*
