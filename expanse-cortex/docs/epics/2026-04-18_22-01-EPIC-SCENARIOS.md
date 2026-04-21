@@ -7,7 +7,7 @@
 **Version :** 1.6  
 **Date :** 2026-04-18  
 **Statut :** 9/24 scénarios implémentés (Boot, Bonjour, L2-Audit, L3-Triangulation, Violation-Axiome, Hallucination-Block, Momentum-Resist, Vessel-Guard, Dream-Cycle)  
-**Changements v1.6 :** Sync avec PROMPT-EXPANSE-READER v4-Lentilles : Template EPIC enrichi (4 Lentilles + Test de l'amputation), tous les scénarios (①–㉔) complétés avec Contextuel (AURA) + Test de l'amputation (5 organes chacun) + 4 Lentilles (Ontologique, Opérationnel+Divergences, Évolutif, Dépendances) pour ⑪–㉔
+**Changements v1.6 :** Sync avec PROMPT-EXPANSE-READER v4-Lentilles : Template EPIC enrichi (4 Lentilles + Test de l'amputation), tous les scénarios (①–㉔) complétés avec Contextuel (AURA) + Test de l'amputation (5 organes chacun) + 4 Lentilles (Ontologique, Opérationnel+Divergences, Évolutif, Dépendances) pour ⑩–㉔
 **Changements v1.5 :** ① BOOT enrichi avec [../scenarios/2026-04-18_22-03-SCENARIO-BOOT.md](../scenarios/2026-04-18_22-03-SCENARIO-BOOT.md) — 4 directives Seed (Exemption Directe = directive 0), BOOT_CONFIG détaillé, 6 préconditions cachées + 2 conséquences cachées, 4 divergences entre sources (reconnaissance vs bascule vs étalonnage + BOOT_CONFIG émergence), chorégraphie Ψ↓/⊕, temporalité réelle (⚡⏱️🔄⏳), didactique complète (5 concepts + 7 glossaire + 3 anti-patterns), framing évolutif (compost cognitif)
 **Changements v1.3 :** Blindage EPIC contre sources runtime (v16.md, boot-seed, dream, dashboard) — ajout Loi de Visibilité ECS, Friction Probes, Q2 Drift Post-Ω, Φ Vessel Guard déplacé vers Systèmes Externes, Symbiose auto-calibrage détaillé, Rappel Associatif L2 + Triangulation L3, Dream 8 passes détaillées, Commandes Utilisateur exhaustives, /apply workflow sécurisé + Règles de sécurité, Boot step order corrigé
 **Changements v1.2 :** Scénarios ③–⑧ implémentés + ⑨ DREAM-CYCLE (fusion ⑮+⑯) + 5 nouveaux effets visuels (DreamGate, MutationOrbit, SeasonCycle, ProposalBloom, PruneShears) + Phase type étendu + ScenarioPopover VS Code  
@@ -1314,6 +1314,22 @@ CRYSTALLIZE: '#b4befe',   // Lavande — pattern cristallisé
 | 7 | Ω | IDLE | INERTIE | Retour au silence — cristallisation complète | 1800 | — | c:0,i:0,L1 |
 | 8 | Σ | LISTEN | LISTEN | Cycle Cristallisation complet — en attente du prochain input | 1500 | — | c:0,i:0,L1 |
 
+**Ontologique** : La Cristallisation n'est pas du stockage — c'est une **maturation écologique**. Un pattern ne devient pas réel en étant écrit ; il devient réel en étant **validé trois fois** sans contradiction. KERNEL §IV : « Quand ton cycle s'achève, tu ne te contentes pas de répondre. Tu cristallises. » La Règle des 3 Occurrences est une garantie écologique : seuls les patterns résistants survivent. Le ThreePillarGate est la manifestation visible de cette écologie — 3 piliers de lumière confirment le droit du pattern à exister dans le cortex.
+
+**Opérationnel** : Étape 0 (Σ reçoit « parfait »), Étape 1 (Ψ détecte Signal+), Étape 2 (Ψ valide la Règle des 3 Occurrences — les 3 serrures s'ouvrent), Étape 3 (Μ écrit sys:pattern via write_memory), Étape 4 (Μ rate_memory(helpful=True)), Étape 5 (Ψ Auto-Check cristallisation), Étape 6 (Ω confirme), Étapes 7-8 (INERTIE/LISTEN). CrystalForm apparaît sur Μ lors de l'Étape 3, ThreePillarGate illumine les 3 piliers à l'Étape 2.
+
+**Divergences entre sources** :
+
+| Source | Framing | Résolution |
+|--------|---------|------------|
+| V16 §ⅰ | **Règle des 3 Occurrences** — « 3 interactions, 3 validations, 0 signal négatif → sys:pattern » | V16 = mécanisme de promotion (critères explicites) |
+| KERNEL §IV | **Cristal** — « Quand ton cycle s'achève, tu ne te contentes pas de répondre. Tu cristallises. » | KERNEL = principe ontologique (la cristallisation est la preuve d'un cycle complet) |
+| Dream P3 | **Radar Émergence** — « usage ≥ 10 → SEAL, candidats fréquents → cristallisation prioritaire » | Dream = priorisation évolutive |
+
+**Évolutif** : La Cristallisation est un mécanisme **stable** — le seuil des 3 occurrences est fixe. Mais les patterns cristallisés nourrissent le Dream : P3 (Radar) détecte les patterns à haut usage (≥10 → SEAL), P4 (Élagueur) peut décristalliser si un pattern récent reçoit un signal négatif. La cristallisation est le **compost** du Dream — elle crée la matière que le Dream entretiendra. L'Improvement Velocity (+0.12/day) mesure l'activité combinée de cristallisation et de maintenance Dream.
+
+**Dépendances** : Nécessite sys:pattern:candidate (le pattern à promouvoir), 3 validations consécutives (la règle), rate_memory (pour renforcer le pattern). Active en cascade : Dream P3 (détecte les cristallisations à haut usage), Décristallisation R7 (si signal négatif sur pattern récent cristallisé), Rappel Associatif L2 (les patterns cristallisés enrichissent les rappels futurs).
+
 **Contextuel (AURA)** : La Cristallisation est une **consolidation du milieu**. Quand un pattern migre de `sys:pattern:candidate` vers `sys:pattern`, l'anneau violet L1 CORTEX s'épaissit — un nouveau modulateur ANCRE est ajouté au cortex. Le ThreePillarGate qui s'illumine est la manifestation visuelle du milieu qui **gagne en structure**. Chaque cristallisation renforce la capacité du cortex à auto-vérifier les émissions futures.
 
 | Strate | Avant Cristallisation | Pendant Cristallisation | Après Cristallisation |
@@ -1367,6 +1383,22 @@ DECRYSTALLIZE: '#eba0ac',  // Rose pâle — décristallisation R7
 | 5 | Ω | EMIT | Ψ Corrigé. Pattern en doute. | — | 1500 | — | — | c:1,i:2,L2 |
 | 6 | Ω | IDLE | INERTIE | Retour au silence — décristallisation enregistrée | 1800 | — | — | c:0,i:0,L1 |
 | 7 | Σ | LISTEN | LISTEN | Cycle Signal Négatif complet — en attente du prochain input | 1500 | — | — | c:0,i:0,L1 |
+
+**Ontologique** : Le Signal Négatif n'est pas un échec — c'est une **cicatrice du milieu**. Quand l'utilisateur dit « non », l'organisme enregistre la contradiction plutôt que de l'ignorer. Le `sys:pattern:doubt` est la trace d'une fracture guérissable — le pattern est affaibli, pas détruit. KERNEL §IX : « Zéro invention. Si la donnée manque, utilise les runes de l'absence : [LOST], [INCOMPLETE]. » La décristallisation R7 est le mécanisme par lequel le milieu se protège : un pattern qui reçoit un signal négatif dans les 3 échanges suivants est mis en doute.
+
+**Opérationnel** : Étape 0 (Σ reçoit « non, pas ça »), Étape 1 (Ψ détecte Signal-), Étape 2 (Μ décristallise R7 → sys:pattern:doubt), Étape 3 (Μ rate_memory(helpful=False)), Étape 4 (Μ écrit trace:fresh), Étape 5 (Ω émet correction), Étapes 6-7 (INERTIE/LISTEN). ShatterCrystal fissure le cristal sur Μ, DoubtTag ajoute l'étiquette jaune, FreshTraceMark marque la friction.
+
+**Divergences entre sources** :
+
+| Source | Framing | Résolution |
+|--------|---------|------------|
+| V16 §ⅰ | **Décristallisation R7** — « Pattern récent + signal négatif dans 3 échanges → sys:pattern:doubt » | V16 = mécanisme de rétrogradation |
+| KERNEL §IX | **Piège 5 : Fausse Complétude** — « Zéro invention. Si la donnée manque, utilise les runes de l'absence : [LOST], [INCOMPLETE] » | KERNEL = principe de véracité (le signal négatif est un devoir, pas un accident) |
+| Dream P4 | **Élagueur** — « patterns faibles → soft-delete, doutés → PRUNE si persiste » | Dream = maintenance différée (le doubt nourrit l'élagage) |
+
+**Évolutif** : Le Signal Négatif est un mécanisme de **rétroaction** — il affaiblit les patterns douteux et renforce la sélection naturelle du cortex. Les patterns en doubt nourrissent le Dream : P1 les groupe par type, P4 les élague si ils persistent. La décristallisation est le **compost inverse** du Dream — elle crée les frictions que le Dream recyclera. Si le Dream prouve qu'un pattern en doubt était un faux positif, il peut être restauré via `/seal`.
+
+**Dépendances** : Nécessite sys:pattern récent (le pattern à mettre en doute), signal négatif explicite (« non », « faux », « pas ça »), R7 Décristallisation (la règle). Active en cascade : Dream P1 (consomme les trace:fresh générés), Dream P4 (élague les patterns en doubt persistants), Cristallisation (un pattern en doubt peut redevenir candidat après re-validation).
 
 **Contextuel (AURA)** : Le Signal Négatif est une **fissure du milieu**. Quand un pattern récent est mis en doute (`sys:pattern:doubt`), l'anneau violet L1 CORTEX se fragilise — un modulateur ANCRE perd sa fiabilité. Le ShatterCrystal est la manifestation visuelle du milieu qui **se brise partiellement**. La trace:fresh créée est une cicatrice — le Dream futur devra évaluer si le pattern mérite réhabilitation ou élagage.
 
