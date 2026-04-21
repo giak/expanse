@@ -41,24 +41,25 @@ Chaque étape produit un artefact spécifique qui nourrit la suivante. Aucune é
 6. Lire l'EPIC-CONTEXTE-AURA → comprendre le contexte comme milieu (3 strates, Cortex Assembly, dendrites)
 7. Synthèse croisée → vérifier cohérence, détecter divergences
 
-**3 Lentilles à appliquer (§Ⅲ)** :
+**4 Lentilles à appliquer (§Ⅲ)** :
 - **Ontologique** (KERNEL/SYNTHESE) : Pourquoi ça doit être ?
 - **Opérationnel** (V16/boot-seed) : Comment ça s'exécute ? (seuils, conditions exactes)
 - **Évolutif** (Dream/BRM) : Comment ça mute ?
+- **Contextuelle** (EPIC-CONTEXTE-AURA) : Dans quel milieu ça existe ? Chaque mécanisme opère DANS un contexte qui n'est pas un contenant passif mais un **milieu** (l'AURA). La taille et la composition du contexte (3 strates L0/L1/L2) changent qualitativement le fonctionnement de chaque organe. Un mécanisme qui enrichit le contexte (L1 croît), l'appauvrit (L1 rétrécit), ou le consomme (L2 dense) a un impact contextuel mesurable. Μ n'injecte pas de l'information — Μ injecte des **modulateurs de comportement** (7 genres L1 : LOI, ANCRE, PROTOCOLE, EXTENSION, PATTERN, PROFIL, CONTEXTE).
 
-> **Lentille AURA** (EPIC-CONTEXTE-AURA) : Chaque mécanisme opère DANS un contexte qui n'est pas un contenant passif mais un **milieu** (l'AURA). La taille et la composition du contexte (3 strates L0/L1/L2) changent qualitativement le fonctionnement de chaque organe. Quand tu lis un mécanisme, demande-toi : *quelle strate AURA ce mécanisme enrichit-il ? Et comment l'AURA modifie-t-elle ce mécanisme en retour ?*
-
-**Format de sortie (§Ⅷ)** — 9 sections obligatoires :
+**Format de sortie (§Ⅷ)** — 10 sections + 2 sous-sections obligatoires :
 1. Ce que c'est (une phrase)
 2. Pourquoi ça doit être (Ontologique)
 3. Comment ça s'exécute (Opérationnel) + sous-section **Divergences entre sources**
 4. Comment ça mute (Évolutif)
-5. Dépendances (Amont / Latéral / Aval)
-6. Préconditions cachées
-7. Ce qu'un lecteur de surface raterait (anti-patterns)
-8. La chorégraphie (décomposition notation compressée) + sous-section **Temporalité réelle** (⚡ simultané / 🔄 conditionnel / ⏳ différé / ⏱️ séquentiel)
+5. Dans quel milieu ça existe (Contextuel) — impact sur les strates L0/L1/L2, modulateurs L1 impliqués
+6. Dépendances (Amont / Latéral / Aval)
+7. Préconditions cachées
+8. Ce qu'un lecteur de surface raterait (anti-patterns)
+9. Test de l'amputation — pour chaque organe impliqué, que se passe-t-il si on le retire ? Si l'absence ne brise rien, l'organe est décoratif, pas fonctionnel.
+10. La chorégraphie (décomposition notation compressée) + sous-section **Temporalité réelle** (⚡ simultané / 🔄 conditionnel / ⏳ différé / ⏱️ séquentiel)
 
-**Exemple travaillé** : `docs/scenarios/2026-04-18_22-03-SCENARIO-BOOT.md` — application complète du Reader au mécanisme Boot.
+**Exemples travaillés** : Le Reader §Ⅺ contient deux exemples contrastés — Dream P1 (complexe, 5 organes) et Cortex Assembly (simple mais crucial, 2 organes). Voir aussi `docs/scenarios/2026-04-18_22-03-SCENARIO-BOOT.md` pour l'application au mécanisme Boot.
 
 ---
 
@@ -73,15 +74,17 @@ Chaque étape produit un artefact spécifique qui nourrit la suivante. Aucune é
 
 **Structure d'un scénario** :
 - Référence au Reader (méthode suivie, sections utilisées)
-- Les 9 sections du format §Ⅷ (produites par l'étape ①)
+- Les 10 sections + 2 sous-sections du format §Ⅷ (produites par l'étape ①)
 - Vérification de complétude (§Ⅶ — 12 critères)
-- Épreuve de vérité (§Ⅹ — 4 critères)
+- Épreuve de vérité (§Ⅹ — 5 critères, dont le test de l'amputation)
 
 **Ce que le scénario capture que le Reader ne spécifie pas** :
 - Les **divergences entre sources** (reconnaissance vs bascule vs étalonnage, etc.)
 - Les **préconditions cachées** et **conséquences cachées**
 - La **temporalité réelle** (⚡🔄⏳⏱️) — pas la séquence de présentation
 - Les **anti-patterns de lecture** (ce qu'un lecteur de surface raterait)
+- L'**impact contextuel** (strates L0/L1/L2, modulateurs L1 impliqués)
+- Le **test de l'amputation** (chaque organe est-il indispensable ?)
 
 ---
 
@@ -178,7 +181,7 @@ Fournir au LLM :
 - Les fichiers source pertinents (KERNEL.md, V16, Dream, BRM, SYNTHESE, EPIC-CONTEXTE-AURA)
 
 Le LLM produit :
-- Une description au format §Ⅷ (9 sections + 2 sous-sections obligatoires)
+- Une description au format §Ⅷ (10 sections + 2 sous-sections obligatoires, dont Contextuelle et Test de l'amputation)
 ```
 
 **Étape 2 — Écrire le scénario**
@@ -212,9 +215,9 @@ Le LLM produit :
 │  ① LIRE                                                          │
 │  ┌──────────────────────┐                                         │
 │  │ PROMPT-EXPANSE-READER │──── Lecture des 7 sources runtime      │
-│  │ (méta-prompt)         │──── 3+1 Lentilles (onto/opérat/évol+AURA)│
-│  │                       │──── 9 Gardes-contre-pièges             │
-│  │                       │──── Format §Ⅷ (9 sections)            │
+│  │ (méta-prompt)         │──── 4 Lentilles (onto/opérat/évol+context)│
+│  │                       │──── 9 Gardes-contre-pièges              │
+│  │                       │──── Format §Ⅷ (10 sections + 2 sous)  │
 │  └──────────┬───────────┘                                         │
 │             │                                                     │
 │             ▼                                                     │
@@ -255,7 +258,7 @@ Le LLM produit :
 
 Avant de considérer un mécanisme comme entièrement visualisé :
 
-- [ ] **Reader appliqué** : Les 7 sources lues (runtime + EPIC-CONTEXTE-AURA), 3 lentilles + lentille AURA appliquées, 9 gardes vérifiées
+- [ ] **Reader appliqué** : Les 7 sources lues (runtime + EPIC-CONTEXTE-AURA), 4 lentilles appliquées (ontologique, opérationnel, évolutif, contextuelle), 9 gardes vérifiées
 - [ ] **Scénario écrit** : `docs/scenarios/SCENARIO-{NOM}.md` au format §Ⅷ complet
 - [ ] **EPIC mise à jour** : Entrée ajoutée dans `docs/epics/2026-04-18_22-01-EPIC-SCENARIOS.md` §Ⅳ
 - [ ] **Phases ajoutées** : Type `Phase` + `PHASE_COLORS` + `ROUTE_PALETTE`
