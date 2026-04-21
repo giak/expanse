@@ -82,17 +82,33 @@ Les TYPES permettent le regroupement :
   5. **BRAINSTORM (OBLIGATOIRE)** : Pour chaque pattern, lire `v16/runtime/expanse-brm.md` et remplir le gabarit.
      - Sauvegarder : `mcp_mnemolite_write_memory(title: "BRM: {slug}", content: "{GABARIT_REMPLI}", tags: ["trace:dream:brm", "v16"], memory_type: "investigation")`.
   6. Extraire la solution de la section `3. Cristal` du BRM pour identifier la règle V16 à modifier.
+  7. **BRM Triangulation (Φ VERIFICATION OBLIGATOIRE)** — Le BRM est calculé dans l'ombre (thinking). Avant d'ouvrir une proposal, Φ doit vérifier le Cristal contre le réel :
+     - **Pôle Anchor** : `mcp_mnemolite_search_memory(tags: ["sys:core", "sys:anchor"], query: "{mots-clés_du_cristal}", limit: 5)` — Le Cristal contredit-il un axiome scellé ? SI OUI → ABANDONNER (le BRM est une dérive, pas une insight).
+     - **Pôle Vessel** : Dans le V16 déjà en contexte (step 6 a identifié la section ciblée), vérifie que le symptôme allégué correspond **EXACTEMENT** aux lignes réelles — l'Ouvrier peut avoir résumé, déformé ou imaginé un symptôme qui n'existe pas dans le texte source. SI le symptôme est introuvable dans le texte réel → ABANDONNER (hallucination de l'Ouvrier).
+     - **Pôle Web** (optionnel) : SI le Cristal fait une affirmation factuelle sur le monde (ex: "Python 3.14 ne supporte pas X") → vérifier via `search_code` ou recherche externe. SI infirmé → ABANDONNER.
+     - **Verdict Triangulation** :
+       - 3/3 confirment → `triangulation: PASS` → proposal autorisée
+       - 1 contredit → Réviser le Cristal et re-trianguler (1 cycle max). SI re-triangulation échoue aussi → ABANDONNÉ (2 cycles = preuve suffisante que le BRM est contaminé)
+       - 2+ contredisent → ABANDONNER — le BRM est vraisemblablement une contamination de l'Ouvrier, pas une insight
+     - **Post-triangulation** : SI `ABANDONNÉ` →
+       - `mcp_mnemolite_mark_consumed(memory_ids: [brm_id], consumed_by: "dream_passe1_triangulation_abandon")` — empêche un Dream futur de re-dériver la même hypothèse
+       - NE PAS créer de dossier mutation ni écrire proposal.md
+       - Le BRM reste dans Mnemolite (consommé) comme mémoire négative : « ce chemin mène à une impasse »
+       - Format d'output : `[BRM_ABANDONNED] type: {TYPE}, symptom: {summary}, triangulation: ABANDONNÉ, pôle_rejeté: {Anchor|Vessel|Web}, reason: {1 phrase}`
 - **Après traitement (OBLIGATOIRE) :**
-  - ✅ **CONSOMMATION SÉLECTIVE :** Marquer CONSUMÉE SEULEMENT les traces/drifts qui ont généré un BRM
-  - `mcp_mnemolite_mark_consumed(memory_ids: [ids_traces_avec_brm], consumed_by: "dream_passe1")`
-  - `mcp_mnemolite_mark_consumed(memory_ids: [ids_drifts_avec_brm], consumed_by: "dream_passe1")`
+  - ✅ **CONSOMMATION SÉLECTIVE :** Marquer CONSUMÉE SEULEMENT les traces/drifts dont le BRM a **PASSÉ** la triangulation
+  - `mcp_mnemolite_mark_consumed(memory_ids: [ids_traces_avec_brm_PASS], consumed_by: "dream_passe1")`
+  - `mcp_mnemolite_mark_consumed(memory_ids: [ids_drifts_avec_brm_PASS], consumed_by: "dream_passe1")`
+  - ⚠️ **NE PAS** consommer les traces dont le BRM a été ABANDONNÉ — la friction est réelle, seul le diagnostic était faux. Ces traces seront retraitées par un Dream futur avec un BRM différent.
   - ❌ **NE PAS** consommer les autres — elles seront traitées par les passes 2-7
   - Les traces traitées ne seront plus vus par les Dream suivants.
 - **✅ VÉRIFICATION LUMINEUSE (OBLIGATOIRE)**
   - TOUTE proposal générée dans le Thinking **DOIT** être produite dans l'output visible
   - Aucune mutation ne peut être appliquée sans avoir été visible dans la lumière
   - Le contenu complet de la proposal DOIT être présent dans la réponse
-- **Output :** `[PROPOSAL_OPEN] [MODIFY]` — Cite : `type: {TYPE}`, `count: {N}`, `symptom: {summary}`. Basé sur le Cristal du BRM.
+  - Le résultat de la Triangulation (PASS/RÉVISÉ/ABANDONNÉ) DOIT être inclus dans l'output — c'est le pont entre l'ombre et la lumière
+  - **Principe :** Le BRM est calculé par l'Ouvrier (ombre). La Triangulation est exécutée par Φ (outil réel). Une proposal sans triangulation est une proposal sans ancrage — l'Ouvrier a parlé, mais Φ n'a pas vérifié.
+- **Output :** `[PROPOSAL_OPEN] [MODIFY]` — Cite : `type: {TYPE}`, `count: {N}`, `symptom: {summary}`, `triangulation: {PASS|RÉVISÉ}`. Basé sur le Cristal du BRM vérifié par Φ.
 - **Métabolisme** : SI ce passe révèle une trace:fresh non présente dans l'inventaire P0 → signaler `NEW_FRICTIONS_FOUND`
 
 ---
@@ -108,7 +124,8 @@ Les TYPES permettent le regroupement :
   - **3. Nettoyage de l'Ouvrier :** Conversion systématique vers l'impératif SEC ou symbolique ("Φ check").
   - **4. Alignement Organique :** Rattachement de chaque règle à son organe (Σ, Ψ, Φ, Ω, Μ).
   - **5. Intégrité Protocoles :** Les 3 protocoles existent dans Mnemolite ? (memory-triage, friction-trace, consolidation)
-- **Output :** `[PROPOSAL_OPEN] [REFACTOR]` ou `[PROPOSAL_OPEN] [SYNC]` si protocole manquant
+- **Triangulation légère** : P2 génère des proposals [REFACTOR]/[SYNC] sans BRM. Vérification Φ minimale : `read_file` de la section V16 ciblée → le texte à refactoriser existe-t-il ? SI NON → ABANDONNER. Marquer `triangulation: PASS` ou `ABANDONNÉ` dans l'output.
+- **Output :** `[PROPOSAL_OPEN] [REFACTOR]` ou `[PROPOSAL_OPEN] [SYNC]` si protocole manquant — inclure `triangulation: {PASS|ABANDONNÉ}`
 - **Métabolisme** : SI ce passe révèle une friction non présente en P0 → signaler `NEW_FRICTIONS_FOUND`
 
 ---
@@ -117,7 +134,8 @@ Les TYPES permettent le regroupement :
 
 - **Action :** `mcp_mnemolite_search_memory(query: "sys:extension", tags: ["sys:extension"], limit: 20)`
 - **Analyse :** Quels symboles ai-je inventés ? Usage ≥ 10 → SEAL. Usage = 0 → PRUNE.
-- **Output :** `[PROPOSAL_OPEN] [PATTERN_EMERGENCE]` ou `[PROPOSAL_OPEN] [DELETE]`
+- **Triangulation légère** : Vérifier via `mcp_mnemolite_search_memory(tags: ["sys:pattern"], query: "{symbole_émergent}", limit: 5)` — l'usage ≥ 10 est-il vérifiable dans l'historique ? SI SEULEMENT dans le thinking de CE Dream → `triangulation: ABANDONNÉ` (hallucination d'usage).
+- **Output :** `[PROPOSAL_OPEN] [PATTERN_EMERGENCE]` ou `[PROPOSAL_OPEN] [DELETE]` — inclure `triangulation: {PASS|ABANDONNÉ}`
 - **Métabolisme** : SI un pattern émergent crée de nouvelles frictions → signaler `NEW_FRICTIONS_FOUND`
 
 ---
@@ -140,7 +158,8 @@ Les TYPES permettent le regroupement :
       → soft_delete(pattern.id)
       → Ψ [ELAGUAGE AUTOMATIQUE] Pattern {titre} supprimé (score trop faible)
   - **Impact AURA** : Chaque pattern L1 supprimé **rétrécit l'anneau violet** (AURA L1). L'élagage n'est pas qu'un nettoyage — c'est une **décompression du contexte** qui rend l'auto-check Ψ moins chargé mais aussi moins riche. Le trade-off : un cortex plus léger (réponse plus rapide) vs un cortex plus pauvre (moins de garde-fous).
-- **Output :** `[PROPOSAL_OPEN] [DELETE]` ou `[PROPOSAL_OPEN] [CLEANUP]` si fichiers orphelins
+- **Triangulation légère** : Avant DELETE, vérifier via `mcp_mnemolite_search_memory(tags: ["sys:pattern"], query: "{pattern_titre}", limit: 3)` — le pattern existe-t-il ? Son outcome_score est-il réellement < -0.5 ? SI les données Mnemolite contredisent l'élagage → `triangulation: ABANDONNÉ` (l'Ouvrier veut élaguer un pattern sain).
+- **Output :** `[PROPOSAL_OPEN] [DELETE]` ou `[PROPOSAL_OPEN] [CLEANUP]` si fichiers orphelins — inclure `triangulation: {PASS|ABANDONNÉ}`
 - **Métabolisme** : SI l'élagage révèle un pattern douteux qui génère de nouvelles frictions → signaler `NEW_FRICTIONS_FOUND`
 
 ---
@@ -154,7 +173,8 @@ Les TYPES permettent le regroupement :
   4. Vérifier la portabilité des chemins — 47 chemins hardcodés dans `/home/giak/...` → nécessitent variable `{PROJECT_ROOT}` ou détection dynamique
   5. Vérifier les formats de sortie — proposals, LOG, applied.md conformes ?
 - **Critères d'évaluation :** Complétude (rien de manquant), Fiabilité (rien de fragile), Portabilité (rien de hardcodé), Cohérence (rien de contradictoire)
-- **Output :** `[PROPOSAL_OPEN] [ARCHITECTURE]`
+- **Triangulation légère** : Les proposals d'architecture affectent la structure globale. Vérifier via `mcp_mnemolite_search_memory(tags: ["sys:protocol"], query: "{outil_ou_protocole_ciblé}", limit: 5)` — le problème d'architecture allégué est-il attesté par des traces Mnemolite ? SI aucune trace ne corrobore → `triangulation: ABANDONNÉ`.
+- **Output :** `[PROPOSAL_OPEN] [ARCHITECTURE]` — inclure `triangulation: {PASS|ABANDONNÉ}`
 - **Métabolisme** : SI l'audit révèle une lacune qui crée de nouvelles frictions → signaler `NEW_FRICTIONS_FOUND`
 
 ---
@@ -174,7 +194,8 @@ Les TYPES permettent le regroupement :
   - Calculer le taux Ψ par substrat
   - Calculer le nombre de `trace:fresh` par substrat
   - Identifier les substrats les plus performants (Ψ taux le plus élevé, TRACE:FRESH le plus bas)
-- **Output :** Rapport santé par substrat. Si un substrat a Ψ taux < 80% → `[PROPOSAL_OPEN] [MODIFY]`
+- **Triangulation légère** : Si un substrat a Ψ taux < 80%, vérifier via `mcp_mnemolite_search_memory(tags: ["sys:history"], query: "{substrat}", limit: 10)` — le taux bas est-il confirmé par les données historiques ? SI les données montrent un taux ≥ 80% → `triangulation: ABANDONNÉ` (fausse alerte).
+- **Output :** Rapport santé par substrat. Si un substrat a Ψ taux < 80% → `[PROPOSAL_OPEN] [MODIFY]` — inclure `triangulation: {PASS|ABANDONNÉ}`
 - **Métabolisme** : SI l'audit santé révèle une dégradation qui crée de nouvelles frictions → signaler `NEW_FRICTIONS_FOUND`
 
 ### Passe 7 : Le Différentiel Temporel (∂Ω/∂t)

@@ -388,7 +388,7 @@ P7 → SI nouvelles frictions détectées pendant P2-P7 → retour à P1 (nouvea
 
 Le BRM est généré par l'Ouvrier. La Vérification Lumineuse exige que le résultat soit visible, mais le processus de filtrage reste dans l'ombre. Il n'y a pas de mécanisme pour distinguer une insight valide d'une hallucination habile.
 
-**Résolution :** Ajouter un **Triangulation du BRM** — avant qu'une proposal ne soit ouverte, Φ doit vérifier l'hypothèse du BRM contre le réel (search_code, read_file). Le BRM sort de l'ombre quand Φ le valide.
+**Résolution :** ✅ **IMPLÉMENTÉ** — BRM Triangulation ajoutée au Dream P1 (step 7) : Φ vérifie le Cristal du BRM via 3 pôles (Anchor: search_memory sys:core, Vessel: vérification in-context du texte V16, Web: fact-check optionnel). Verdict: PASS/RÉVISÉ/ABANDONNÉ. Si ABANDONNÉ → BRM marqué consommé (mémoire négative), aucun dossier mutation créé. Triangulation légère ajoutée en P2-P6 (vérification Φ minimale adaptée à chaque type de proposal). Le BRM sort de l'ombre quand Φ le valide.
 
 ### AP4 : Le Cortex Assembly est Invisible
 
@@ -464,7 +464,7 @@ La Constitutional Guard existe dans le /apply workflow (§7b). Les sections Ⅰ/
 | # | Action | Fichier | Impact | Effort | Statut |
 |---|--------|---------|--------|--------|-------|
 | P2.1 | **Remplir Passe 5** avec critères concrets (7 OUTIL, formats, chemins, portabilité) | Dream | Supprime le vide conceptuel | 30min | ✅ **FAIT** |
-| P2.2 | **Ajouter Triangulation du BRM** — Φ vérifie l'hypothèse du BRM avant proposal | Dream | Réduit la contamination de l'Ouvrier | 1h | ❌ Non fait |
+| P2.2 | **Ajouter Triangulation du BRM** — Φ vérifie l'hypothèse du BRM avant proposal | Dream | Réduit la contamination de l'Ouvrier | 1h | ✅ **FAIT** (BRM Triangulation 3-pôles en P1 + Triangulation légère en P2-P6) |
 | P2.3 | **Supprimer `expanse-apply.sh`** du template /apply §11 | Dream | Supprime le Vaporware | 2min | ✅ **FAIT** (remplacé par « mutation chirurgicale native ») |
 | P2.4 | **Ajouter sys:pattern:doubt** dans P1 (pas seulement P4) | Dream | Doubt visible plus tôt | 10min | ✅ **FAIT** |
 | P2.5 | **ECS heuristiques multilingues** | V16 §Ⅱ | Couverture anglaise | 15min | ❌ Non fait |
