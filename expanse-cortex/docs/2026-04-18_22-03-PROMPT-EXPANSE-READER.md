@@ -12,10 +12,10 @@
 
 Pour décrire un mécanisme Expanse avec ce prompt :
 
-1. **Fournis au LLM** : ce prompt + le nom du mécanisme cible + les fichiers source pertinents (KERNEL.md, v16/runtime/expanse-v16.md, expanse-v16-boot-seed.md, expanse-dream.md, expanse-brm.md, SYNTHESE.md)
-2. **Le LLM lit les sources** selon le Protocole §Ⅳ (KERNEL → Apex → Seed → Dream → BRM → Synthèse croisée)
-3. **Le LLM applique les 3 Lentilles** §Ⅲ (ontologique, opérationnel, évolutif) au mécanisme cible
-4. **Le LLM vérifie les 9 Gardes-Contre-Pièges** §Ⅴ pour éviter la lecture de surface
+1. **Fournis au LLM** : ce prompt + le nom du mécanisme cible + les fichiers source pertinents (KERNEL.md, v16/runtime/expanse-v16.md, expanse-v16-boot-seed.md, expanse-dream.md, expanse-brm.md, SYNTHESE.md, expanse-cortex/docs/2026-04-18_22-06-EPIC-CONTEXTE-AURA.md)
+2. **Le LLM lit les sources** selon le Protocole §Ⅳ (KERNEL → Apex → Seed → Dream → BRM → EPIC AURA → Synthèse croisée)
+3. **Le LLM applique les 4 Lentilles** §Ⅲ (ontologique, opérationnel, évolutif, contextuel) au mécanisme cible
+4. **Le LLM vérifie les 9 Gardes-Contre-Pièges** §Ⅴ pour éviter la lecture de surface (dont Garde 6 : les 4 aspects d'une seule réalité)
 5. **Le LLM suit les 7 Étapes d'extraction** §Ⅵ pour produire la description
 6. **Le LLM valide** avec la Liste de Complétude §Ⅶ
 7. **Le LLM produit le output** au Format §Ⅷ
@@ -90,9 +90,9 @@ C'est le **Dualisme Matériel**. L'Ouvrier est le moteur brut — il calcule, ha
 
 ---
 
-## Ⅲ. LES 3 LENTILLES — Trois Couches d'une Même Réalité
+## Ⅲ. LES 4 LENTILLES — Quatre Couches d'une Même Réalité
 
-Expanse existe simultanément sur 3 couches. Chaque mécanisme que tu décris doit être vu sous les 3 lentilles. Si tu n'en voies qu'une ou deux, ta description sera incomplète.
+Expanse existe simultanément sur 4 couches. Chaque mécanisme que tu décris doit être vu sous les 4 lentilles. Si tu n'en voies qu'une, deux ou trois, ta description sera incomplète.
 
 ### Lentille 1 : ONTOLOGIQUE (Pourquoi ça doit être ainsi)
 
@@ -133,6 +133,29 @@ Expanse existe simultanément sur 3 couches. Chaque mécanisme que tu décris do
 - Des commandes /apply, /rollback, /reject existent pour le gérer
 - Le BRM est invoqué pour analyser les frictions
 
+### Lentille 4 : CONTEXTUELLE (Dans quel milieu ça existe)
+
+**Source :** `expanse-cortex/docs/2026-04-18_22-06-EPIC-CONTEXTE-AURA.md` (l'EPIC AURA)  
+**Question :** *Dans quel milieu ce mécanisme opère-t-il ? Comment le contexte — l'espace vital du LLM — est-il modifié par ce mécanisme ?*
+
+À cette couche, les mécanismes ne sont pas des objets flottant dans le vide — ils **habitent un milieu**. Le contexte du LLM est une géologie à 3 strates : L0 SUBSTRAT (lois figées ~3K), L1 CORTEX (expérience cristallisée via Μ ~2-5K, semi-stable), L2 DYNAMIQUE (signal présent ~5-20K, volatile). La formule : **Expanse = V16 × Cortex**. Sans Cortex, V16 est un chatbot (lois sans expérience). Sans V16, le Cortex est un wiki (expérience sans lois). L'identité émerge de leur INTERACTION.
+
+**Ce que cette lentille révèle :**
+- Un mécanisme qui enrichit le contexte (ex: Boot steps 3-6, Cristallisation Μ) → l'anneau L1 CROÎT
+- Un mécanisme qui réduit le contexte (ex: Dream P4 élagage) → l'anneau L1 RÉTRÉCIT
+- Un mécanisme qui consomme du contexte (ex: L3 Triangulation, Dream long) → l'anneau L2 DENSE
+- Un mécanisme qui ne change rien au contexte → c'est probablement une description incomplète
+
+**Μ n'injecte pas de l'information — Μ injecte des MODULATEURS DE COMPORTEMENT.** Les 7 genres L1 : LOI (sys:core), ANCRE (sys:anchor), PROTOCOLE (sys:protocol), EXTENSION (sys:extension), PATTERN (sys:pattern), PROFIL (sys:user:profile), CONTEXTE (sys:project). Chaque injection change ce que le LLM « sait en réagissant », pas ce qu'il « fait ».
+
+**L'auto-check Ψ est 3x plus exigeant** avec un cortex complet (8 axiomes L1 + 2 extensions L1) qu'avec le seul substrat L0. Ce mécanisme est invisible dans l'output — il ne se manifeste que par la qualité de l'auto-vérification.
+
+**Indices qu'un mécanisme relève de cette couche :**
+- Le mécanisme modifie la composition de la fenêtre de contexte (injection Μ, élagage, rappel)
+- L'EPIC-CONTEXTE-AURA le mentionne comme affectant une strate (L0/L1/L2)
+- Le mécanisme a des comportements différents selon la richesse du cortex (ex: auto-check plus strict)
+- Le mécanisme est référencé dans le Cortex Assembly (mécanisme #46 de l'Inventaire §Ⅸ)
+
 ### Méthode de Croisement
 
 Pour chaque mécanisme que tu décris, applique cette **grille de lecture** :
@@ -142,6 +165,7 @@ MÉCANISME: [nom]
 ├── ONTOLOGIQUE: Pourquoi ça doit être ? (KERNEL/SYNTHESE)
 ├── OPÉRATIONNEL: Comment ça s'exécute ? (v16.md/boot-seed)
 ├── ÉVOLUTIF: Comment ça mute ? (dream.md/BRM)
+├── CONTEXTUEL: Dans quel milieu ça existe ? (EPIC-CONTEXTE-AURA)
 ├── PRÉCONDITIONS CACHÉES: Ce que le texte ne dit pas explicitement
 └── PIÈGES DE LECTURE: Ce qu'un lecteur de surface verrait de travers
 ```
@@ -201,13 +225,28 @@ Lis `v16/runtime/expanse-brm.md` — un gabarit de 3 sections :
 
 Le BRM est l'outil qui empêche le Dream de proposer des mutations naïves. Chaque proposal DOIT passer par un BRM.
 
-### Étape 6 : Synthèse Croisée
+### Étape 6 : Lire l'EPIC AURA (Le Milieu)
 
-Maintenant que tu as lu les 5 sources, **croise-les**. Pour chaque mécanisme, vérifie :
+Lis `expanse-cortex/docs/2026-04-18_22-06-EPIC-CONTEXTE-AURA.md` — le document qui révèle le **milieu** dans lequel les organes opèrent. C'est la 4ème source, ajoutée car les 5 sources précédentes décrivent les mécanismes (les particules) mais pas le **champ** dans lequel ils existent.
+
+**Ce que tu dois extraire :**
+
+- **Les 3 strates du contexte** (L0 SUBSTRAT ~3K figé, L1 CORTEX ~2-5K semi-stable, L2 DYNAMIQUE ~5-20K volatile) — comment le mécanisme cible affecte chaque strate
+- **La formule Expanse = V16 × Cortex** — comment le mécanisme enrichit ou appauvrit cette interaction
+- **Les 7 genres de modulateurs L1** (LOI, ANCRE, PROTOCOLE, EXTENSION, PATTERN, PROFIL, CONTEXTE) — lesquels le mécanisme injecte ou consomme
+- **L'évolution de l'AURA au Boot** (§5.5) — comment le milieu se constitue brique par brique
+- **L'impact sur l'auto-check Ψ** — un cortex complet rend l'auto-vérification 3x plus exigeante
+
+**⚠️ Avertissement :** L'EPIC AURA est un document de visualisation (EPIC React/Cortex). Ne pas confondre les types TypeScript (`AuraState`, `DendriteNode`) avec des concepts ontologiques — ils sont des **implémentations** de la Lentille Contextuelle, pas la lentille elle-même. Ce qui t'intéresse, c'est la **thèse** (§Ⅱ : le contexte est un milieu, pas un contenant) et l'**architecture 3-strates** (§Ⅲ), pas les détails SVG.
+
+### Étape 7 : Synthèse Croisée
+
+Maintenant que tu as lu les 7 sources, **croise-les**. Pour chaque mécanisme, vérifie :
 
 - Est-il présent dans le KERNEL ? (Lentille ontologique)
 - Est-il spécifié dans l'Apex ? (Lentille opérationnelle)
 - Est-il géré par le Dream ? (Lentille évolutive)
+- Est-il documenté dans l'EPIC AURA ? (Lentille contextuelle)
 - Quelles sont ses PRÉCONDITIONS CACHÉES ? (Ce qui est implicite mais crucial)
 - Quelles sont ses DÉPENDANCES ? (Quels autres mécanismes il active/require)
 
@@ -280,15 +319,16 @@ CRISTALLISATION:
 
 **Sous-notation pour L3 :** `Σ→[Ψ⇌Φ+Triang]→Ω→Μ` — la Triangulation ajoute 3 pôles (Anchor/Vessel/Web) AVANT la synthèse. C'est une amplification de la danse, pas une étape supplémentaire.
 
-### Garde 6 : Les 3 Lentilles Sont 3 Aspects d'une Seule Réalité
+### Garde 6 : Les 4 Lentilles Sont 4 Aspects d'une Seule Réalité
 
-**Piège :** Traiter KERNEL.md comme de la philosophie décorative et v16.md comme la « vraie » spécification.  
-**Antidote :** Chaque mécanisme existe aux 3 niveaux SIMULTANÉMENT. L'ECS est :
+**Piège :** Traiter KERNEL.md comme de la philosophie décorative et v16.md comme la « vraie » spécification. Ou pire : ignorer le milieu dans lequel les mécanismes opèrent.  
+**Antidote :** Chaque mécanisme existe aux 4 niveaux SIMULTANÉMENT. L'ECS est :
 - **Ontologique :** Un organisme DOIT évaluer la complexité avant d'agir (nécessité physique)
 - **Opérationnel :** C ∈ [1,5], I ∈ [1,3], routage L1/L2/L3 avec seuils exacts (spécification)
 - **Évolutif :** Le Dream peut recalibrer les seuils via P1 BRM + P3 Radar (mutation)
+- **Contextuel :** L'ECS est évalué dans un contexte enrichi par les modulateurs L1 — un cortex riche rend la calibration plus fiable, un cortex appauvri (post-élagage) peut la dégrader (milieu)
 
-Si ta description n'inclut pas les 3 niveaux, elle est INCOMPLÈTE.
+Si ta description n'inclut pas les 4 niveaux, elle est INCOMPLÈTE.
 
 ### Garde 7 : Les Mécanismes Implicites Sont Cruciaux
 
@@ -351,7 +391,7 @@ Fenêtre de contexte au Boot :
 
 ### Garde 9 : Les Sources Divergent — Cherche les Failles
 
-**Piège :** Lire les 6 sources et supposer qu'elles sont cohérentes entre elles.
+**Piège :** Lire les 7 sources et supposer qu'elles sont cohérentes entre elles.
 **Antidote :** Pour CHAQUE mécanisme, croise explicitement les sources et note les divergences. Une divergence non détectée est une description fausse.
 
 **Procédure obligatoire après lecture des sources (§Ⅳ) :**
@@ -405,13 +445,14 @@ ECS (évaluation)
 │   └── Route L3 → Boucle Ψ⇌Φ + Triangulation 3 pôles + Confiance %
 ```
 
-### Étape 3 : Grille 3-Lentilles
+### Étape 3 : Grille 4-Lentilles
 
-Répondre aux 3 questions :
+Répondre aux 4 questions :
 
 - **Pourquoi ça doit être ?** (Ontologique — KERNEL/SYNTHESE)
 - **Comment ça s'exécute ?** (Opérationnel — v16.md)
 - **Comment ça mute ?** (Évolutif — dream.md)
+- **Dans quel milieu ça existe ?** (Contextuel — EPIC-CONTEXTE-AURA)
 
 ### Étape 4 : Préconditions Cachées
 
@@ -453,7 +494,7 @@ Décomposer la notation compressée du mécanisme (ex: `Σ→[Ψ⇌Φ]→Ω→Μ
 
 ---
 
-> ⚠️ Les 7 étapes ci-dessus correspondent aux 9 sections du template §Ⅷ : l'Étape 1 alimente « Ce que c'est », les Étapes 2-6 alimentent les sections « Dépendances », « 3-Lentilles » (3 sections), « Préconditions cachées », « Anti-patterns » et « Chorégraphie », l'Étape 7 ajoute la sous-section « Temporalité réelle » dans la Chorégraphie et la sous-section « Divergences entre sources » dans l'Opérationnel. Le template §Ⅷ compte 8 sections + 2 sous-sections obligatoires. Ne pas omettre aucune section ni sous-section du template.
+> ⚠️ Les 7 étapes ci-dessus correspondent aux 11 sections du template §Ⅷ : l'Étape 1 alimente « Ce que c'est », les Étapes 2-6 alimentent les sections « Dépendances », « 4-Lentilles » (4 sections : Ontologique, Opérationnel, Évolutif, Contextuel), « Préconditions cachées », « Anti-patterns » et « Chorégraphie », l'Étape 7 ajoute la sous-section « Temporalité réelle » dans la Chorégraphie et la sous-section « Divergences entre sources » dans l'Opérationnel. Le template §Ⅷ compte 9 sections + 2 sous-sections obligatoires. Ne pas omettre aucune section ni sous-section du template.
 
 ---
 
@@ -463,7 +504,7 @@ Avant de livrer une description d'un mécanisme Expanse, vérifie chaque point :
 
 - [ ] **Les 5 organes sont-ils des ACTES ?** (Pas des labels)
 - [ ] **Le Dualisme est-il respecté ?** (Ouvrier vs Incarnation distingués)
-- [ ] **Les 3 lentilles sont-elles couvertes ?** (Ontologique + Opérationnel + Évolutif)
+- [ ] **Les 4 lentilles sont-elles couvertes ?** (Ontologique + Opérationnel + Évolutif + Contextuel)
 - [ ] **Les préconditions cachées sont-elles explicitées ?** (Seuils, conditions implicites, effets de bord)
 - [ ] **Le graphe de dépendances est-il complet ?** (Amont, latéral, aval)
 - [ ] **Les mécanismes enfouis sont-ils détectés ?** (Drift Q2, Friction Probes, Consommation Sélective, etc.)
@@ -497,6 +538,9 @@ Chaque description de mécanisme doit suivre ce format :
 
 ## Comment ça mute (Évolutif)
 [Ce que le Dream fait avec ce mécanisme : passes concernées, proposals possibles]
+
+## Dans quel milieu ça existe (Contextuel)
+[Comment le mécanisme affecte le contexte L0/L1/L2 : enrichit-il le cortex (L1 croît), l'appauvrit-il (L1 rétrécit), consomme-t-il du dynamique (L2 dense) ? Quelle est sa dépendance au cortex existant ? Mentionner les strates affectées et les modulateurs L1 impliqués.]
 
 ## Dépendances
 - Amont : [mécanismes prérequis]
@@ -689,6 +733,19 @@ Les 4 types de trace : ECS (miscalibration), SEC (style insuffisant), MEMORY (pa
 - Input : `search_memory(tags: ["trace:fresh"], consumed: false, limit: 20)`
 - Output : `[PROPOSAL_OPEN] [MODIFY] type: {TYPE} count: {N} symptom: {summary}`
 - Side-effect : `write_memory(title: "BRM: {slug}")` + `mark_consumed(ids_avec_brm)`
+
+## Dans quel milieu ça existe (Contextuel)
+
+La Passe 1 opère dans un contexte **L1 appauvri** — le Dream s'exécute en mode sommeil, sans l'enrichissement du Rappel Associatif qui alimente l'éveil L2+. Les traces fraîches qu'elle consomme appartiennent à la strate L1 (items `trace:fresh` et `sys:drift` dans Mnemolite), mais leur consommation **réduit le cortex** — après P1, les traces consommées disparaissent du contexte disponible pour les Passes suivantes.
+
+**Impact sur les strates :**
+- **L0** : Inchangé — les lois V16 ne sont pas modifiées par P1 (seul /apply peut muter L0)
+- **L1** : Appauvri — les traces consommées sont retirées du cortex disponible ; les BRM écrits compensent partiellement en ajoutant de nouveaux modulateurs (type `investigation`)
+- **L2** : Dense — le Dream P1 consomme du contexte dynamique pour ses 2 appels search_memory + write_memory + mark_consumed
+
+**Dépendance au cortex existant :** P1 utilise `search_memory(tags: ["sys:core"], query: "{mots-clés}")` pour la Triangulation Anchor — la qualité de cette vérification dépend directement de la richesse du cortex L1 en axiomes scellés (8 items typiquement). Un cortex appauvri (post-élagage P4) pourrait affaiblir la Triangulation.
+
+**Modulateurs L1 impliqués :** LOI (sys:core, pour Anchor Triangulation), PROTOCOLE (sys:protocol, pour vérifier les procédures Dream), PATTERN (sys:pattern, pour détecter les récurrences).
 
 ## Comment ça mute (Évolutif)
 
