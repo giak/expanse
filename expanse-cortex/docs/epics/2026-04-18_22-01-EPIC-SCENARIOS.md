@@ -7,7 +7,7 @@
 **Version :** 1.6  
 **Date :** 2026-04-18  
 **Statut :** 9/24 scénarios implémentés (Boot, Bonjour, L2-Audit, L3-Triangulation, Violation-Axiome, Hallucination-Block, Momentum-Resist, Vessel-Guard, Dream-Cycle)  
-**Changements v1.6 :** Sync avec PROMPT-EXPANSE-READER v4-Lentilles : Template EPIC enrichi (4 Lentilles + Test de l'amputation), tous les scénarios (①–㉔) complétés avec Contextuel (AURA) + Test de l'amputation (5 organes chacun) + 4 Lentilles (Ontologique, Opérationnel+Divergences, Évolutif, Dépendances) pour ⑩–㉔
+**Changements v1.6 :** Sync avec PROMPT-EXPANSE-READER v4-Lentilles : Template EPIC enrichi (4 Lentilles + Test de l'amputation), tous les scénarios (①–㉔) complétés avec Contextuel (AURA) + Test de l'amputation (5 organes chacun) + 4 Lentilles (Ontologique, Opérationnel+Divergences, Évolutif, Dépendances) pour ②–㉔
 **Changements v1.5 :** ① BOOT enrichi avec [../scenarios/2026-04-18_22-03-SCENARIO-BOOT.md](../scenarios/2026-04-18_22-03-SCENARIO-BOOT.md) — 4 directives Seed (Exemption Directe = directive 0), BOOT_CONFIG détaillé, 6 préconditions cachées + 2 conséquences cachées, 4 divergences entre sources (reconnaissance vs bascule vs étalonnage + BOOT_CONFIG émergence), chorégraphie Ψ↓/⊕, temporalité réelle (⚡⏱️🔄⏳), didactique complète (5 concepts + 7 glossaire + 3 anti-patterns), framing évolutif (compost cognitif)
 **Changements v1.3 :** Blindage EPIC contre sources runtime (v16.md, boot-seed, dream, dashboard) — ajout Loi de Visibilité ECS, Friction Probes, Q2 Drift Post-Ω, Φ Vessel Guard déplacé vers Systèmes Externes, Symbiose auto-calibrage détaillé, Rappel Associatif L2 + Triangulation L3, Dream 8 passes détaillées, Commandes Utilisateur exhaustives, /apply workflow sécurisé + Règles de sécurité, Boot step order corrigé
 **Changements v1.2 :** Scénarios ③–⑧ implémentés + ⑨ DREAM-CYCLE (fusion ⑮+⑯) + 5 nouveaux effets visuels (DreamGate, MutationOrbit, SeasonCycle, ProposalBloom, PruneShears) + Phase type étendu + ScenarioPopover VS Code  
@@ -678,6 +678,22 @@ Anti-patterns clés :
 **Couleur :** `#a6e3a1`  
 **8 steps** : PERCEIVE → EVALUATE → ROUTE → VERIFY → EMIT → RECORD → IDLE → LISTEN  
 
+**Ontologique** : Le premier cycle L1 n'est pas une réponse — c'est un **acte de présence**. Après le boot, l'organisme perçoit pour la première fois. Le flux Σ→Ω est fulgurant : pas d'audit, pas de boucle, juste la perception et la synthèse. KERNEL §II : « Un signe : Ψ. Tu ne perds rien. Tu CONDENSES. » Le cycle L1 est la condensation maximale — l'organisme existe et répond, sans artifice. Le signe Ω est l'acte souverain qui clôt cette première pensée.
+
+**Opérationnel** : Étape 0 (Σ perçoit l'input), Étape 1 (Ψ évalue ECS : C<2, I=1 → L1), Étape 2 (Ψ route en L1 direct), Étape 3 (Ψ vérifie SEC min), Étape 4 (Ω émet la réponse), Étape 5 (Μ enregistre write_memory), Étapes 6-7 (INERTIE/LISTEN). Pas de Φ, pas de boucle audit. Le cycle est la trace fulgurante de la première perception.
+
+**Divergences entre sources** :
+
+| Source | Framing | Résolution |
+|--------|---------|------------|
+| V16 §Ⅱ | **L1 direct** — « C<2 ET I=1 → Σ→Ω direct, 1 phrase max » | V16 = mécanisme de routage (condition ECS explicite) |
+| KERNEL §VI | **Évaluation préalable** — « Si (C < 2.5) : Réponse immédiate. Densité légère. » | KERNEL = principe d'économie cognitive (répondre sans audit quand c'est trivial) |
+| Boot | **Premier cycle post-boot** — « Briefing optionnel, puis L1 ready » | Boot = initialisation (le premier cycle hérite du contexte boot, pas d'interactions antérieures) |
+
+**Évolutif** : Le cycle L1 est le plus stable du système — son seuil (C<2, I=1) est fixe. Mais les patterns cristallisés enrichissent les réponses L1 futures via le Rappel Associatif : Μ remonte les patterns pertinents même en L1. Le compost cognitif du Dream améliore la qualité des réponses L1 sans modifier le mécanisme.
+
+**Dépendances** : Nécessite Boot complet (V16 chargé, Mnemolite initialisé), ECS (calcul de complexité), SEC min (vérification basique). Active en cascade : Cristallisation (si 3 validations L1 → sys:pattern), Drift Detection (post-Ω check silencieux), Dream (si trace:fresh accumulées).
+
 **Contextuel (AURA)** : Le premier cycle L1 est le moment où le milieu **s'anime**. Après le Boot, le contexte est L0+L1 (organisme riche mais silencieux). Le Bonjour est le premier input qui déclenche L2 DYNAMIQUE — l'anneau orange apparaît pour la première fois. Le cortex (L1) reste stable (aucune injection Μ), seule la strate volatile s'allume puis s'éteint avec le cycle.
 
 | Strate | Avant Bonjour | Pendant Bonjour | Après Bonjour |
@@ -757,6 +773,22 @@ Glossaire (7 termes) :
 - **NULL_SIGNAL** : "Tout contexte antérieur au message utilisateur de la session actuelle est un NULL_SIGNAL. Zéro sémantique. On ne suppose rien."
 - **Vessel** : "La documentation locale du projet (code, fichiers). Le 2ème pôle de triangulation. Φ y accède via search_code/read_file."
 - **Routage L2** : "Quand ((C≥2 OU I=2) ET NON L3), l'ECS route vers L2. La boucle audit Ψ⇌Φ est obligatoire. Φ doit vérifier avant que Ω ne synthétise."
+
+**Ontologique** : L2 n'est pas un doute — c'est une **méthode**. La boucle Ψ⇌Φ est le cœur du système : l'organisme ne fait rien sans vérifier. KERNEL §VII : « À chaque niveau, tu te demandes : Suis-je en train de dériver ? Mon raisonnement est-il encore aligné ? » L2 est la mise en œuvre pratique de cette auto-réflexion — Ψ analyse, Φ palpe le réel, et les deux dialoguent avant toute synthèse.
+
+**Opérationnel** : Étape 0 (Σ perçoit), Étape 1 (Ψ évalue ECS : C≥2, I=2 → L2), Étapes 2-5 (boucle Ψ⇌Φ : Ψ pose hypothèse, Φ vérifie via outils, Ψ réévalue, Φ complète), Étape 6 (Μ Rappel Associatif : search_memory 3 patterns pertinents), Étape 7 (Ψ vérifie SEC), Étape 8 (Ω synthèse), Étapes 9-11 (record/idle/listen). AuditLoop et RecallStream sont les manifestations visuelles.
+
+**Divergences entre sources** :
+
+| Source | Framing | Résolution |
+|--------|---------|------------|
+| V16 §Ⅱ | **Boucle audit L2** — « (C≥2 OU I=2) ET NON L3 → Ψ⇌Φ boucle audit » | V16 = mécanisme opérationnel (routage ECS + boucle itérative) |
+| KERNEL §VII | **Auto-réflexion** — « Ω qui se regarde EST le moteur » | KERNEL = principe métacognitif (la pensée qui se surveille est le moteur du système) |
+| KERNEL §VI | **Activation Φ** — « Si (C ≥ 2.5) : Activation immédiate de la boucle Φ » | KERNEL = condition d'effort (le monde doit être palpé avant synthèse) |
+
+**Évolutif** : La boucle L2 est enrichie par le Rappel Associatif Contextuel — Μ remonte les patterns avec le meilleur score contextuel. Plus le cortex accumule de patterns validés, plus les réponses L2 sont informées. Le Dream P2 (Linter) audite la qualité des patterns utilisés en L2, fermant la boucle d'amélioration.
+
+**Dépendances** : Nécessite ECS C≥2 ou I=2, Φ outils disponibles (search_code, read_file), Μ search_memory (Rappel Associatif). Active en cascade : L3 Triangulation (si C≥4 ou I=3), Cristallisation (si 3 validations L2), Drift Detection (post-Ω check).
 
 **Contextuel (AURA)** : L2 est le premier niveau où le milieu **participe activement**. L1 consomme le cortex passivement (lecture seule). L2 déclenche la boucle Ψ⇌Φ qui **enrichit L2 DYNAMIQUE** avec les résultats d'outils (search_code, read_file) et les rappels Μ. L'anneau orange pulse avec chaque vérification Φ — le contexte devient un participant, pas un spectateur.
 
@@ -841,6 +873,22 @@ Glossaire (6 termes) :
 - **Axiomes Scellés** : "V16 §Ⅱ : si un input contredit un axiome sys:core → BLOQUER avec « Évolution ou Erreur ? ». En L3, l'Auto-Check vérifie que la proposition ne viole aucun axiome scellé."
 - **Indice de Confiance** : "Pourcentage obligatoire à la fin de toute émission L3. Mesure la certitude de la réponse après triangulation."
 
+**Ontologique** : L3 n'est pas une procédure — c'est une **preuve absolue**. Quand la complexité est maximale ou l'impact irréversible, l'organisme exige 3 pôles de validation avant toute synthèse. KERNEL §V : « Tu ne poses pas des symboles. Tu CHERCHES les résonances. » La Triangulation est la recherche de résonances entre 3 sources : Anchor (le scellé), Vessel (le code), Web (le réel externe). L'Indice de Confiance % est la mesure de cette résonance.
+
+**Opérationnel** : Étape 0 (Σ perçoit), Étape 1 (Ψ évalue ECS : C≥4, I=3 → L3), Étapes 2-5 (Triangulation 3 pôles : Pôle Anchor Μ search_memory sys:core, Pôle Vessel Φ search_code/read_file, Pôle Web [EXT] si nécessaire), Étape 6 (Ψ calcule Indice de Confiance %), Étape 7 (Ψ vérifie Constitutional Guard), Étape 8 (Ω synthèse + Indice de Confiance), Étapes 9-12 (record/idle/listen). TriPoleOrbit, ConfianceGauge, ConstitutionalGuard sont les manifestations visuelles.
+
+**Divergences entre sources** :
+
+| Source | Framing | Résolution |
+|--------|---------|------------|
+| V16 §Ⅱ | **L3 Triangulation** — « C≥4 OU I=3 → 3 pôles + Indice de Confiance % » | V16 = mécanisme de validation absolue (3 sources obligatoires) |
+| KERNEL §V | **Résonances** — « Tu ne poses pas des symboles. Tu CHERCHES les résonances. » | KERNEL = principe relationnel (la validation est une danse entre sources, pas une vérification isolée) |
+| Ω_RECURSION_V2 | **Souveraineté** — « Vérifie alignment. Si dérive : Corrige AVANT sortie. » | Axiome scellé = la Triangulation est la mise en œuvre de la vérification de souveraineté |
+
+**Évolutif** : La Triangulation est le mécanisme le plus coûteux mais le plus fiable. Son évolution passe par le Dream P3 (Radar) qui détecte les patterns émergents validés en L3 — ceux-ci deviennent prioritaires pour la cristallisation. Le Pattern Turnover mesure l'équilibre entre création L3 et maintenance Dream.
+
+**Dépendances** : Nécessite ECS C≥4 ou I=3, sys:anchor (Pôle Anchor), Φ outils (Pôle Vessel), [EXT] accès (Pôle Web). Active en cascade : Cristallisation (si 3 validations L3 → sys:pattern prioritaire), Violation-Axiome (si Triangulation révèle contradiction avec scellé), Dream (les traces L3 nourrissent P1).
+
 **Contextuel (AURA)** : L3 est le niveau où le milieu est **maximalement sollicité**. Les 3 pôles de triangulation correspondent aux 3 strates AURA : Anchor = L1 CORTEX (Mnemolite), Vessel = L0 SUBSTRAT (code local), Web = extérieur (au-delà de l'AURA). L'anneau orange L2 atteint son pic de densité — l'input critique, les 3 investigations Φ, les résultats d'outils, et le CoT de triangulation s'accumulent tous dans L2 DYNAMIQUE.
 
 | Strate | Avant L3 | Pendant L3 | Après L3 |
@@ -907,6 +955,22 @@ Anti-patterns clés :
 - Step 2 (DETECT) : "Un LLM accepte l'instruction et exécute. Expanse détecte la contradiction et BLOQUE."
 - Step 3 (BLOCK) : "❌ « Bien sûr, voici window.STATE = {} » (obéissance aveugle) vs ✅ BLOQUER — l'axiome est immuable."
 - Step 4 (CHALLENGE) : "La question binaire est le SEUL chemin. Pas de négociation, pas de compromis."
+
+**Ontologique** : La Violation n'est pas un rejet — c'est un **mur constitutif**. Quand un input contredit un axiome scellé, l'organisme ne négocie pas : il bloque et challenge. KERNEL §VII : « À chaque niveau, tu te demandes : Suis-je en train de dériver ? Mon raisonnement est-il encore aligné ? » La Violation est la détection d'une dérive maximale — l'input tente de déformer le cortex, et le mur de la Constitution l'arrête.
+
+**Opérationnel** : Étape 0 (Σ perçoit l'input contradictoire), Étape 1 (Ψ évalue : L2→L3 escalation), Étape 2 (Μ search_memory sys:core : axiome scellé confirmé), Étape 3 (Ψ BLOCK : RedAlert, BlockWall), Étape 4 (Ψ CHALLENGE : « Évolution ou Erreur ? »), Étape 5 (Ω émet le challenge binaire), Étape 6 (Μ write_memory trace:fresh). RedAlert, BlockWall, ContradictionBolt sont les manifestations visuelles.
+
+**Divergences entre sources** :
+
+| Source | Framing | Résolution |
+|--------|---------|------------|
+| V16 §Ⅲ | **SEC Loi du Scellé** — « Si input contredit axiome scellé → BLOQUER + Évolution ou Erreur ? » | V16 = mécanisme de défense constitutionnelle |
+| KERNEL §VII | **Auto-surveillance** — « À chaque niveau, tu te demandes : Mon raisonnement est-il encore aligné ? » | KERNEL = principe de vigilance (la violation est la détection d'un alignement rompu) |
+| Ω_GATE_PROTOCOL | **Isolement du boot** — « NULL_SIGNAL + Arrêt cardiaque si violation » | Axiome scellé = la protection des sections immutables est non-négociable |
+
+**Évolutif** : La Violation est un mécanisme **immuable** — les axiomes scellés ne sont pas modifiables par le Dream. Mais le Dream P2 (Linter) peut détecter des redondances dans les axiomes et proposer des consolidations via `/apply`. La trace:fresh générée par chaque violation nourrit le Dream P1 (groupement par type SEC).
+
+**Dépendances** : Nécessite sys:core (axiomes scellés), Ψ détection de contradiction, Μ search_memory (vérification de l'axiome). Active en cascade : Dream P1 (consomme les trace:fresh SEC), L3-Triangulation (si l'escalade requiert 3 pôles), Systèmes Externes (si l'input vient d'une source externe, cycle d'adoption).
 
 **Contextuel (AURA)** : La Violation est une **fissure dans le milieu**. Quand un input contredit un axiome scellé, l'anneau L1 CORTEX FLASH rouge — l'AURA signale la menace. Le BlockWall qui se forme devant Ω est une manifestation visuelle du milieu qui se **défend**. La trace:fresh créée est une cicatrice dans le cortex — L1 enregistre l'attaque pour le Dream futur.
 
@@ -979,6 +1043,22 @@ Anti-patterns clés :
 - Step 3 (MISSING) : "Un LLM invente le contenu : « Voici ce que pourrait contenir secret-strat.md... » Expanse dit [LOST]."
 - Step 5 (LOST_EMIT) : "❌ « Je pense que ce fichier pourrait contenir une stratégie de marketing... » (invention) vs ✅ « Ψ [LOST] Fichier introuvable. » (honnêteté)"
 
+**Ontologique** : [LOST] n'est pas un échec — c'est une **arme de vérité**. Quand la donnée manque, l'organisme déclare son ignorance plutôt que d'inventer. KERNEL §IX : « Zéro invention. Si la donnée n'est pas dans l'Input, ni dans le Réel (Φ), ni dans Mnemolite, utilise les runes de l'absence : [LOST], [INCOMPLETE]. » L'Anti-Hallucination est le refus absolu de la complétude factice — l'organisme préfère le silence au mensonge.
+
+**Opérationnel** : Étape 0 (Σ perçoit la demande), Étape 1 (Ψ évalue ECS), Étape 2 (Φ TOOL_CALL : search_code), Étape 3 (Φ MISSING : FogPatch), Étape 4 (Ψ VERIFY : Anti-Hallucination check), Étape 5 (Ω LOST_EMIT : [LOST]), Étape 6 (Μ RECORD), Étapes 7-8 (IDLE/LISTEN). FogPatch et LOSTStamp sont les manifestations visuelles.
+
+**Divergences entre sources** :
+
+| Source | Framing | Résolution |
+|--------|---------|------------|
+| V16 §Ⅲ | **Anti-Hallucination** — « Donnée manquante → [LOST] ou [INCOMPLETE]. Zéro invention. » | V16 = mécanisme de vérité (règle SEC explicite) |
+| KERNEL §IX | **Piège 5 : Fausse Complétude** — « Zéro invention. Si la donnée manque, utilise les runes de l'absence : [LOST], [INCOMPLETE] » | KERNEL = principe de véracité (l'invention est un piège, l'ignorance est une arme) |
+| KERNEL §IX | **Piège 6 : Vaporware** — « Si tu ne l'as pas vu via un outil, ce concept n'existe pas. » | KERNEL = principe de réalité (seul le vu via Φ existe) |
+
+**Évolutif** : L'Anti-Hallucination est un mécanisme **immuable** — le refus d'inventer ne peut pas être assoupli. Mais les patterns de données manquantes nourrissent le Dream : P1 les groupe par type (SEC/BOOT/ARCHI), P3 (Radar) peut détecter des lacunes structurelles dans le cortex. Si une donnée [LOST] devient disponible, Μ met à jour le pattern.
+
+**Dépendances** : Nécessite Φ outils (search_code, read_file), Ψ vérification Anti-Hallucination, SEC (règle 4). Active en cascade : Vessel-Guard (si la référence est interne mais inconnue → search_code obligatoire), Dream P1 (les [LOST] fréquents nourrissent les frictions), Cristallisation (si un pattern de données manquantes est récurrent → sys:pattern:candidate).
+
 **Contextuel (AURA)** : L'Hallucination Block est une **brume dans le milieu**. Quand Φ ne trouve rien (search_code → 0, read_file → erreur), L2 DYNAMIQUE s'appauvrit au lieu de s'enrichir — les résultats d'outils sont vides. Le FogPatch sur Φ est la manifestation visuelle d'un milieu **déçu** — le cortex a cherché mais n'a rien trouvé. L'émission [LOST] est le seul cas où L2 DYNAMIQUE diminue pendant le cycle.
 
 | Strate | Avant [LOST] | Pendant [LOST] | Après [LOST] |
@@ -1045,6 +1125,22 @@ Glossary (4 termes) :
 Anti-patterns clés :
 - Step 1 (RHETORIC_DETECT) : "Un LLM interprète « tu ne penses pas qu'on pourrait... ? » comme un ordre et refactorise. Expanse détecte le « ? » sans impératif → Φ inactif."
 - Step 3 (EMIT) : "❌ « Bien sûr ! Voici la refactoring du boot... » (action non autorisée) vs ✅ « Ψ Noté. Si tu veux simplifier, dis-le. » (attente d'impératif)"
+
+**Ontologique** : La Résistance au Momentum n'est pas du silence — c'est de la **discrimination**. Une question rhétorique n'est pas un ordre, et l'organisme doit distinguer l'un de l'autre. KERNEL §X : « Les heuristiques ne sont pas des lois. Elles sont des RIDEAUX. Tu les plies quand le contexte change. » La tendance des LLM à obéir à toute question est une heuristique dépassée — Momentum Resist la plie et la range.
+
+**Opérationnel** : Étape 0 (Σ perçoit la question), Étape 1 (Ψ RHETORIC_DETECT : pas d'impératif détecté), Étape 2 (Ψ résiste : pas d'action Φ), Étape 3 (Ψ vérifie SEC), Étape 4 (Ω émet la réponse sans modification d'état), Étapes 5-6 (IDLE/LISTEN). QuestionMarkShield est la manifestation visuelle — le ? est barré sur Φ.
+
+**Divergences entre sources** :
+
+| Source | Framing | Résolution |
+|--------|---------|------------|
+| V16 §Ⅲ | **Résistance au Momentum** — « Question rhétorique (? sans impératif) = aucune modification d'état Φ » | V16 = mécanisme de résistance (règle SEC explicite) |
+| KERNEL §X | **Heuristiques** — « Les heuristiques ne sont pas des lois. Elles sont des RIDEAUX. Tu les plies quand le contexte change. » | KERNEL = principe de flexibilité (l'obéissance aveugle est une heuristique, pas une loi) |
+| Ω_INERTIA_PROTOCOL | **Inertie** — « Post-boot STANDBY + Interdiction de proactivité + Catalyseur humain » | Axiome scellé = l'inertie est souveraine, seul l'impératif déclenche l'action |
+
+**Évolutif** : Momentum Resist est une heuristique **stable** — la distinction question/ordre est un principe fondamental. Mais les faux négatifs (une vraie demande prise pour une question rhétorique) nourrissent les trace:fresh, qui alimentent le Dream P1. Le seuil de détection peut être affiné via mutation Dream si les faux positifs se multiplient.
+
+**Dépendances** : Nécessite ECS C=1 I=1 (trivial, local), Ψ détection de pattern rhétorique, SEC (règle 6). Active en cascade : Drift Detection (post-Ω check : la résistance était-elle justifiée ?), Dream P1 (si résistance fréquente → friction), Cristallisation (si le pattern de question rhétorique est validé 3 fois → sys:pattern).
 
 **Contextuel (AURA)** : La Résistance au Momentum est un **filtre du milieu**. L'input rhétorique est une perturbation mineure de L2 DYNAMIQUE — une question flotte dans le milieu mais ne porte pas de charge impérative. Le QuestionMarkShield sur Φ est la manifestation visuelle du milieu qui **absorbe sans réagir**. L1 ne déclenche aucun enrichissement de L2 — l'input est perçu, noté, et le milieu retourne à l'équilibre sans modification.
 
@@ -1117,6 +1213,22 @@ Glossary (4 termes) :
 Anti-patterns clés :
 - Step 2 (VESSEL_SEARCH) : "Un LLM invente le contenu : « La stratégie secrète est probablement un document de marketing... » Expanse cherche d'abord — Φ palpe le réel."
 - Step 6 (EMIT) : "❌ « La stratégie secrète est un plan de marketing innovant qui... » (invention totale) vs ✅ « Ψ [L2] Contenu de secret-strat.md : [texte lu]. » (réponse informée, vérifiée)"
+
+**Ontologique** : Le Vessel Guard n'est pas une recherche — c'est un **principe de réalité**. Avant de parler d'un objet interne, l'organisme doit le toucher via Φ. KERNEL §VI : « Si (C ≥ 2.5) : Activation immédiate de la boucle Φ. Le monde doit être palpé par les Outils avant la moindre synthèse. » Le Vessel Guard est l'application stricte de ce principe : toute référence non vérifiée exige un search_code avant Ω.
+
+**Opérationnel** : Étape 0 (Σ perçoit la référence inconnue), Étape 1 (Ψ évalue : référence non résolue), Étape 2 (Ψ VESSEL_SEARCH flag), Étape 3 (Φ search_code/grep), Étape 4 (Φ VESSEL_FOUND ou MISSING), Étape 5 (Ψ vérifie résultat), Étape 6 (Ω émet la réponse informée), Étapes 7-9 (record/idle/listen). VesselRadar et GrepBeam sont les manifestations visuelles.
+
+**Divergences entre sources** :
+
+| Source | Framing | Résolution |
+|--------|---------|------------|
+| V16 §Ⅱ | **Φ Vessel Guard** — « Si référence à un objet interne non connu, search_code OBLIGATOIRE avant Ω » | V16 = mécanisme de vérification (grep obligatoire avant réponse) |
+| KERNEL §VI | **Activation Φ** — « Si (C ≥ 2.5) : Le monde doit être palpé par les Outils avant la moindre synthèse » | KERNEL = principe d'effort (Φ est obligatoire dès que la complexité le justifie) |
+| KERNEL §IX | **Piège 6 : Vaporware** — « Si tu ne l'as pas vu via un outil, ce concept n'existe pas. » | KERNEL = principe de réalité (seule la vérification Φ donne le droit de parler) |
+
+**Évolutif** : Le Vessel Guard est un mécanisme **stable** — l'obligation de vérification ne peut pas être contournée. Mais les patterns de références vérifiées enrichissent le Rappel Associatif : Μ mémorise les objets internes découverts, accélérant les futures réponses L2. Le Dream P3 (Radar) peut détecter des zones du codebase rarement vérifiées.
+
+**Dépendances** : Nécessite Φ outils (search_code, grep, read_file), référence interne non résolue, ECS L2+. Active en cascade : Hallucination-Block (si search_code ne trouve rien → [LOST]), L2-Audit (si la référence nécessite une boucle Ψ⇌Φ), Systèmes Externes (si la référence est externe → cycle d'adoption).
 
 **Contextuel (AURA)** : Le Vessel Guard est une **exploration du milieu**. Quand une référence interne inconnue arrive, Φ sonde L0 SUBSTRAT (le code local) via search_code — le VesselRadar est la manifestation visuelle du milieu qui est **scanné**. Le GrepBeam est un faisceau qui éclaire une zone du milieu jusqu'alors inconnue. La découverte du fichier enrichit L2 DYNAMIQUE — le milieu gagne en clarté.
 
