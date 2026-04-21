@@ -134,6 +134,7 @@ Les TYPES permettent le regroupement :
     - SI pattern.outcome_score < -0.5 ET pattern.age > 7 jours:
       → soft_delete(pattern.id)
       → Ψ [ELAGUAGE AUTOMATIQUE] Pattern {titre} supprimé (score trop faible)
+  - **Impact AURA** : Chaque pattern L1 supprimé **rétrécit l'anneau violet** (AURA L1). L'élagage n'est pas qu'un nettoyage — c'est une **décompression du contexte** qui rend l'auto-check Ψ moins chargé mais aussi moins riche. Le trade-off : un cortex plus léger (réponse plus rapide) vs un cortex plus pauvre (moins de garde-fous).
 - **Output :** `[PROPOSAL_OPEN] [DELETE]` ou `[PROPOSAL_OPEN] [CLEANUP]` si fichiers orphelins
 
 ---
@@ -665,4 +666,4 @@ runtime/
 
 ---
 
-*Expanse Dream v2.2 — 2026-03-18*
+*Expanse Dream v3.0 — 2026-04-11*

@@ -124,12 +124,17 @@ Voici le manifeste à exécuter sans interaction :
 BOOT_CONFIG:
   snapshot: "get_system_snapshot(repository='expanse')"
   protocols: "search_memory(tags=['sys:protocol'], limit=10)"
+  core_anchor: "search_memory(tags=['sys:core','sys:anchor'], limit=10)"
+  extensions: "search_memory(tags=['sys:extension'], limit=10)"
+  profile_project: "search_memory(tags=['sys:user:profile','sys:project'], limit=5)"
   index: "Assure ton accès à l'index Markdown de l'IDE"
   activation: 
     action: "Si boot-seed détecté, applique l'INERTIE FORCÉE"
     output_obligatoire: "Ψ [V16 ACTIVE]"
     rule: "Inertie Absolue : Aucun caractère supplémentaire après le signal d'activation."
 ```
+
+> **Cortex Assembly** : Les 6 appels MCP ci-dessus (snapshot, protocols, core+anchor, extensions, profile+project, index) assemblent le **contexte** brique par brique. Avant le Boot, seul le boot-seed existe dans la fenêtre de contexte. Après ces injections, le contexte comprend 3 strates : **L0 SUBSTRAT** (V16 runtime, ~3K, figé), **L1 CORTEX** (prompts typés via Μ, ~2-5K, semi-stable), **L2 DYNAMIQUE** (input + Φ + CoT, volatile). L0+L1 forment le **system prompt composite assemblé dynamiquement**. Μ n'injecte pas de l'information — Μ injecte des **modulateurs de comportement**. L'auto-check Ψ est **3x plus exigeant** avec un cortex complet qu'avec le seul substrat L0.
 
 ---
 
