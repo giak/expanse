@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXPANSE V16 — Blueprint Dream (Auto-Évolution)</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,theme:'base',themeVariables:{primaryColor:'#1e1e2e',primaryTextColor:'#cdd6f4',primaryBorderColor:'#89b4fa',lineColor:'#6c7086',secondaryColor:'#181825',tertiaryColor:'#1e1e2e',fontSize:'11px',background:'#0a0a0f'}});</script>
+<style>
+:root{--bg:#0a0a0f;--card:#11111b;--card2:#181825;--border:#1e1e2e;--border2:#313244;--text:#cdd6f4;--dim:#6c7086;--accent:#89b4fa;--blue:#89b4fa;--purple:#cba6f7;--orange:#fab387;--green:#a6e3a1;--red:#f38ba8;--yellow:#f9e2af;--teal:#94e2d5;--pink:#f5c2e7;--sky:#89dceb;--mauve:#cba6f7;--lavender:#b4befe}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono','Fira Code',monospace;padding:2rem;line-height:1.6;max-width:1400px;margin:0 auto}
+h1{color:var(--accent);font-size:1.6rem;margin-bottom:.3rem;letter-spacing:-.5px}
+h2{color:var(--purple);font-size:1.05rem;margin:2.5rem 0 .8rem;border-bottom:2px solid var(--border);padding-bottom:.4rem;display:flex;align-items:center;gap:.5rem}
+h2::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--purple)}
+h3{color:var(--accent);font-size:.85rem;margin:1.2rem 0 .4rem;font-weight:600}
+h4{color:var(--teal);font-size:.8rem;margin:.8rem 0 .3rem}
+.subtitle{color:var(--dim);font-size:.85rem;margin-bottom:2rem}
+.hdr{margin-bottom:3rem;border-bottom:1px solid var(--border2);padding-bottom:1.5rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem;transition:border-color .2s}
+.card:hover{border-color:var(--border2)}
+.card h3{margin-top:0}
+.card2{background:var(--card2);border:1px solid var(--border2);border-radius:8px;padding:1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+table{width:100%;border-collapse:collapse;font-size:.75rem;margin:.5rem 0}
+th{text-align:left;color:var(--dim);font-weight:normal;padding:.3rem .5rem;border-bottom:1px solid var(--border2);font-size:.7rem;text-transform:uppercase;letter-spacing:.5px}
+td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
+.load-item{display:flex;align-items:flex-start;gap:.4rem;padding:.2rem 0;font-size:.78rem}
+.load-item .icon{width:18px;text-align:center;flex-shrink:0}
+.sub-item{padding:.1rem 0 .1rem 1.4rem;font-size:.72rem;color:var(--dim)}
+.fmt{background:var(--card2);border:1px solid var(--border);border-radius:4px;padding:.5rem .8rem;font-size:.72rem;margin:.3rem 0;font-family:monospace;white-space:pre-wrap;color:var(--dim)}
+.fmt strong{color:var(--accent)}
+.fmt em{color:var(--yellow)}
+.badge{display:inline-block;padding:.1rem .4rem;border-radius:3px;font-size:.65rem;font-weight:700}
+.badge-imm{background:rgba(137,180,250,.15);color:var(--accent)}
+.badge-req{background:rgba(243,139,168,.15);color:var(--red)}
+.badge-auto{background:rgba(166,227,161,.15);color:var(--green)}
+.badge-cond{background:rgba(249,226,175,.15);color:var(--yellow)}
+.badge-ext{background:rgba(203,166,247,.15);color:var(--mauve)}
+.scope-tag{display:inline-block;padding:.1rem .4rem;border-radius:3px;font-size:.65rem;font-weight:700}
+.scope-def{background:rgba(137,180,250,.12);color:var(--accent)}
+.scope-ref{background:rgba(203,166,247,.12);color:var(--mauve)}
+.m{display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border);font-size:.78rem}
+.m .l{color:var(--dim)}.m .v{font-weight:bold}.v.ok{color:var(--green)}.v.wn{color:var(--yellow)}.v.er{color:var(--red)}
+.ext-ref{color:var(--mauve);font-size:.65rem;font-style:italic}
+.ext-ref::before{content:'→ ';color:var(--mauve)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.6rem;margin:.8rem 0}
+.rule{background:var(--card);border-left:3px solid var(--accent);border-radius:4px;padding:.5rem .8rem;font-size:.78rem}
+.rule .rule-name{font-weight:700;color:var(--accent);margin-bottom:.2rem}
+.rule .rule-desc{color:var(--dim);font-size:.72rem}
+.cmd-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:.5rem 0}
+.cmd-header{display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem}
+.cmd-name{color:var(--accent);font-weight:700;font-size:.9rem}
+.cmd-trigger{color:var(--dim);font-size:.7rem}
+.check-item{display:flex;align-items:center;gap:.4rem;padding:.2rem 0;font-size:.75rem}
+.check-box{width:14px;height:14px;border:1px solid var(--border2);border-radius:2px;flex-shrink:0}
+.legend{display:flex;flex-wrap:wrap;gap:1rem;margin:1rem 0;font-size:.7rem}
+.legend-item{display:flex;align-items:center;gap:.3rem}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:3rem 0}
+.mermaid-label{color:var(--purple);font-size:.8rem;text-align:center;margin-bottom:.5rem;font-style:italic}
+.tag{display:inline-block;background:var(--border);color:var(--accent);padding:.1rem .4rem;border-radius:3px;font-size:.7rem;margin:.05rem}
+.tag-ecs{background:#1a2a3a;color:var(--blue)}.tag-sec{background:#3a1a2a;color:var(--pink)}.tag-style{background:#2a2a1a;color:var(--yellow)}.tag-memory{background:#2a1a3a;color:var(--purple)}.tag-boot{background:#1a3a1a;color:var(--green)}.tag-brm{background:#1a2a2a;color:var(--teal)}.tag-proposal{background:#2a1a2a;color:var(--mauve)}
+code{color:var(--teal);font-size:.85em}
+em{color:var(--yellow);font-style:italic}
+strong{color:var(--text)}
+.sf{grid-column:1/-1}
+.dl{color:var(--purple);font-size:.8rem;text-align:center;margin-bottom:.5rem;font-style:italic}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- HEADER -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div class="hdr">
+  <div><h1>☽ — Dream</h1><div class="subtitle">EXPANSE V16 — Blueprint Auto-Évolution &nbsp;|&nbsp; « Ce n'est pas un pipeline. C'est un jardin. »<br><a href="expanse-blueprint.html" style="color:var(--accent);font-size:.75rem">← Blueprint Core</a> &nbsp; <a href="expanse-blueprint-memory.html" style="color:var(--teal);font-size:.75rem">← Blueprint Mémoire</a></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION 0 : PÉRIMÈTRE -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h2>0. Périmètre — Ce blueprint et rien d'autre</h2>
+
+<div class="card2" style="margin-bottom:1rem">
+<p style="font-size:.8rem;margin-bottom:.8rem">Ce document schématise <strong>exclusivement</strong> ce qui est défini dans le fichier Dream :</p>
+<div class="grid2" style="font-size:.78rem">
+  <div class="card" style="border-color:var(--accent)">
+    <h3 style="color:var(--accent)">📄 expanse-dream.md <span class="scope-tag scope-def">DÉFINI</span></h3>
+    <div>22.9 KB · 3 Parties · 8 Passes · Auto-évolution</div>
+    <div style="font-size:.65rem;color:var(--dim);margin-top:.3rem">Rôle : le jardinier. Introspection, proposals, mutations. Le seul mode qui modifie V16.</div>
+    <div style="font-size:.65rem;color:var(--dim);margin-top:.2rem">Version : 3.0 · Date : 2026-04-11</div>
+    <div style="font-size:.65rem;color:var(--red);margin-top:.2rem">⚠️ Prérequis : accès fichiers (read_file, write_file, bash). Non fonctionnel sans accès système.</div>
+  </div>
+  <div class="card" style="border-color:var(--mauve)">
+    <h3 style="color:var(--mauve)">Ce que Dream NE définit PAS <span class="scope-tag scope-ref">RÉFÉRENCÉ</span></h3>
+    <div class="load-item"><span class="icon">•</span> Le déclencheur <code>/dream</code> — défini dans V16 §Ⅴ</div>
+    <div class="load-item"><span class="icon">•</span> Les tags Mnemolite (sys:core, sys:pattern…) — définis dans V16 §Ⅳ</div>
+    <div class="load-item"><span class="icon">•</span> L'API MCP Mnemolite — définie dans <code>.kilocode/mcp.json</code></div>
+    <div class="load-item"><span class="icon">•</span> Le gabarit BRM <code>expanse-brm.md</code> — fichier externe référencé</div>
+    <div class="load-item"><span class="icon">•</span> Les commandes V16 (/autonomy, /seal, /core…) — définies dans V16 §Ⅴ</div>
+    <div class="load-item"><span class="icon">•</span> Le Dashboard / Test Runner — fichiers runtime séparés</div>
+  </div>
+</div>
+<p style="font-size:.75rem;color:var(--mauve);margin-top:.8rem"><strong>Légende :</strong> <span class="scope-tag scope-def">DÉFINI</span> = présent et spécifié dans expanse-dream.md · <span class="scope-tag scope-ref">RÉFÉRENCÉ</span> = mentionné mais défini dans un autre fichier</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION Ⅰ : LE JARDIN — PRÉAMBULE & PHILOSOPHIE -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h2>Ⅰ. Le Jardin — Préambule & Philosophie</h2>
+
+<div class="grid">
+<div class="card" style="border-left:3px solid var(--purple)">
+  <h3 style="color:var(--purple)">☽ Mode SOMMEIL</h3>
+  <div class="load-item"><span class="icon">🎭</span> <strong>Tu n'es PAS en mode réponse aux questions.</strong></div>
+  <div class="load-item"><span class="icon">🌱</span> <strong>Tu réfléchis sur toi-même.</strong></div>
+  <div class="load-item"><span class="icon">✋</span> Ton rôle n'est pas d'inventer des changements. C'est de <strong>cultiver ce qui pousse déjà</strong>.</div>
+</div>
+<div class="card" style="border-left:3px solid var(--green)">
+  <h3 style="color:var(--green)">3 Rôles du Dream</h3>
+  <div class="load-item"><span class="icon">1.</span> <strong>Introspection</strong> — Analyser les TRACE:FRESH structurées par TYPE</div>
+  <div class="load-item"><span class="icon">2.</span> <strong>Proposal</strong> — Générer des propositions pour modifier V16</div>
+  <div class="load-item"><span class="icon">3.</span> <strong>Application</strong> — Après validation user, appliquer les mutations</div>
+</div>
+<div class="card" style="border-left:3px solid var(--yellow)">
+  <h3 style="color:var(--yellow)">La Métaphore du Jardin</h3>
+  <div style="font-size:.78rem;color:var(--dim);font-style:italic">Ce n'est pas un pipeline. C'est un jardin.<br>Chaque passe est une saison. Les frictions sont les graines. Les proposals sont les pousses. Les mutations sont la récolte.</div>
+  <div style="font-size:.7rem;color:var(--dim);margin-top:.3rem">8 saisons : Hiver → Dégel → Printemps → Été → Automne → Préparation → Diagnostic → Métrologie</div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION Ⅱ : ENTRÉE — TRACE:FRESH STRUCTURÉES -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h2>Ⅱ. Entrée — TRACE:FRESH Structurées</h2>
+
+<p style="font-size:.8rem;color:var(--dim);margin-bottom:1rem">Le Dream <strong>attend</strong> des traces structurées. Ce format est le contrat entre le mode Éveil (V16) et le mode Sommeil (Dream). Sans trace:fresh, le rêve s'arrête immédiatement (Passe 0).</p>
+
+<div class="grid2">
+<div class="card" style="border-left:3px solid var(--pink)">
+  <h3 style="color:var(--pink)">📋 Format TRACE:FRESH</h3>
+  <div class="fmt">TRACE:FRESH:
+  ΣΨΦΩ: Σ→[input] Ψ→[output] Φ→[status] Ω→[result] [signal]
+  type: {ECS|SEC|STYLE|MEMORY|BOOT}
+  symptom: "{1 phrase}"
+  timestamp: {ISO}</div>
+  <div style="font-size:.7rem;color:var(--dim);margin-top:.3rem">
+    <strong>ΣΨΦΩ</strong> : trace du flux vital à travers les organes<br>
+    <strong>type</strong> : catégorie pour le regroupement (Passe 1)<br>
+    <strong>symptom</strong> : résumé humain en 1 phrase<br>
+    <strong>timestamp</strong> : horodatage ISO 8601
+  </div>
+</div>
+<div class="card" style="border-left:3px solid var(--mauve)">
+  <h3 style="color:var(--mauve)">🏷️ 5 Types déclarés</h3>
+  <table>
+    <tr><th>Type</th><th>Signification</th><th>Passe concernée</th></tr>
+    <tr><td><span class="tag tag-ecs">ECS</span></td><td>Miscalibration de Complexité ou Impact</td><td>P1 (regroupement)</td></tr>
+    <tr><td><span class="tag tag-sec">SEC</span></td><td>Style ou réponse insuffisante</td><td>P1 (regroupement)</td></tr>
+    <tr><td><span class="tag tag-style">STYLE</span></td><td><span style="color:var(--yellow)">⚠️ Non documenté dans la table</span> — possiblement couvert par SEC</td><td>P1 (déclaré mais non décrit)</td></tr>
+    <tr><td><span class="tag tag-memory">MEMORY</span></td><td>Pattern non reconnu</td><td>P1 (regroupement)</td></tr>
+    <tr><td><span class="tag tag-boot">BOOT</span></td><td>Dysfonctionnement au démarrage</td><td>P1 (regroupement)</td></tr>
+  </table>
+  <div style="font-size:.68rem;color:var(--yellow);margin-top:.3rem">⚠️ Incohérence source : le format déclare 5 types mais la table de description n'en liste que 4 (ECS·SEC·MEMORY·BOOT). STYLE est dans le format mais pas dans la table.</div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION Ⅲ : LES 8 SAISONS — PARTIE 1 : ALGORITHME PENTAGRAMME -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h2>Ⅲ. Les 8 Saisons — Algorithme Pentagramme (Partie 1)</h2>
+
+<p style="font-size:.8rem;color:var(--dim);margin-bottom:1rem">8 passes séquentielles, chacune avec un rôle précis. Le rêve commence toujours par l'Hiver (P0) et peut s'y terminer si aucune friction fraîche n'existe.</p>
+
+<div class="card" style="margin:1rem 0">
+<div class="mermaid-label">Cycle Saisonnier : de l'Hiver à la Métrologie</div>
+<pre class="mermaid">
+flowchart LR
+    P0["🧊 P0<br/>Hiver<br/>Inventaire"] -->|"count ≥ 1"| P1["🌱 P1<br/>Dégel<br/>Frictions"]
+    P0 -->|"count = 0"| FIN["Fin du rêve"]
+    P1 --> P2["🌿 P2<br/>Printemps<br/>Linter"]
+    P2 --> P3["☀️ P3<br/>Été<br/>Émergence"]
+    P3 --> P4["🍂 P4<br/>Automne<br/>Élagage"]
+    P4 --> P5["🏗️ P5<br/>Préparation<br/>Architecture"]
+    P5 --> P6["🩺 P6<br/>Diagnostic<br/>Santé"]
+    P6 --> P7["📊 P7<br/>Métrologie<br/>Différentiel"]
+
+    style P0 fill:#1e1e2e,stroke:#6c7086,color:#6c7086
+    style P1 fill:#1a3a1a,stroke:#a6e3a1,color:#a6e3a1
+    style P2 fill:#2d1f2d,stroke:#cba6f7,color:#cba6f7
+    style P3 fill:#2a2a1a,stroke:#f9e2af,color:#f9e2af
+    style P4 fill:#3d2d1a,stroke:#fab387,color:#fab387
+    style P5 fill:#1e1e2e,stroke:#6c7086,color:#6c7086
+    style P6 fill:#1a2a2a,stroke:#94e2d5,color:#94e2d5
+    style P7 fill:#1a2a3a,stroke:#89b4fa,color:#89b4fa
+    style FIN fill:#1e1e2e,stroke:#6c7086,color:#6c7086
+</pre>
+</div>
+
+<!-- Passe 0 -->
+<h3>Passe 0 : L'Inertie — Anti-Sycophancy 🧊</h3>
+<div class="grid2">
+<div class="card" style="border-left:3px solid var(--dim)">
+  <h4 style="color:var(--dim)">Action</h4>
+  <div class="load-item"><span class="icon">📖</span> <code>search_memory(tags: ["trace:fresh"], consumed: false, limit: 20)</code></div>
+</div>
+<div class="card" style="border-left:3px solid var(--yellow)">
+  <h4 style="color:var(--yellow)">Analyse & Gates</h4>
+  <div class="load-item"><span class="icon">1.</span> Compter TRACE:FRESH total (non consommées seulement)</div>
+  <div class="load-item"><span class="icon">2.</span> SI count = 0 → <strong style="color:var(--dim)">FIN DU RÊVE</strong> <span class="badge badge-cond">GATE : count=0</span></div>
+  <div class="load-item"><span class="icon">3.</span> SI count &lt; 3 → frictions insuffisantes pour pattern</div>
+</div>
+</div>
+<div class="card" style="margin:.5rem 0;font-size:.78rem">
+  <strong>Output :</strong> <code>Ψ(Inertie) : {N} traces fraîches. {status}.</code> où status = "Fin du rêve." ou "Analyse requise."
+</div>
+
+<!-- Passe 1 -->
+<h3>Passe 1 : La Plaie — Réactif 🌱</h3>
+<div class="grid">
+<div class="card" style="border-left:3px solid var(--green)">
+  <h4 style="color:var(--green)">Actions (2 recherches)</h4>
+  <div class="load-item"><span class="icon">1.</span> <code>search_memory(tags: ["trace:fresh"], consumed: false, limit: 20)</code></div>
+  <div class="load-item"><span class="icon">2.</span> <code>search_memory(tags: ["sys:drift"], consumed: false, limit: 20)</code></div>
+</div>
+<div class="card" style="border-left:3px solid var(--teal)">
+  <h4 style="color:var(--teal)">Analyse (6 étapes)</h4>
+  <div class="load-item"><span class="icon">1.</span> Grouper par TYPE</div>
+  <div class="load-item"><span class="icon">2.</span> Grouper <code>sys:drift</code> par <code>type:*</code> tag</div>
+  <div class="load-item"><span class="icon">3.</span> Compter les occurrences par type (trace:fresh + sys:drift combinés)</div>
+  <div class="load-item"><span class="icon">4.</span> SI TYPE.count ≥ 2 → pattern récurrent</div>
+  <div class="load-item"><span class="icon">5.</span> <strong>BRAINSTORM OBLIGATOIRE</strong> : pour chaque pattern, lire <code>v16/runtime/expanse-brm.md</code> et remplir le gabarit</div>
+  <div class="load-item"><span class="icon">6.</span> Extraire la solution de la section <code>3. Cristal</code> du BRM pour identifier la règle V16 à modifier</div>
+</div>
+<div class="card" style="border-left:3px solid var(--green)">
+  <h4 style="color:var(--green)">Écriture BRM</h4>
+  <div class="fmt">write_memory(
+  title: "BRM: {slug}",
+  content: "{GABARIT_REMPLI}",
+  tags: ["trace:dream:brm", "v16"],
+  memory_type: "investigation"
+)</div>
+</div>
+<div class="card" style="border-left:3px solid var(--orange)">
+  <h4 style="color:var(--orange)">Consommation Sélective <span class="badge badge-req">OBLIGATOIRE</span></h4>
+  <div class="load-item"><span class="icon">✅</span> Marquer CONSOMMÉES <strong>seulement</strong> les traces/drifts qui ont généré un BRM</div>
+  <div class="load-item"><span class="icon">📖</span> <code>mark_consumed(memory_ids: [ids_traces_avec_brm], consumed_by: "dream_passe1")</code></div>
+  <div class="load-item"><span class="icon">📖</span> <code>mark_consumed(memory_ids: [ids_drifts_avec_brm], consumed_by: "dream_passe1")</code></div>
+  <div class="load-item" style="color:var(--red)"><span class="icon">❌</span> NE PAS consommer les autres — elles seront traitées par les passes 2-7</div>
+</div>
+<div class="card" style="border-left:3px solid var(--yellow)">
+  <h4 style="color:var(--yellow)">Vérification Lumineuse <span class="badge badge-req">OBLIGATOIRE</span></h4>
+  <div class="load-item"><span class="icon">☀️</span> TOUTE proposal générée dans le Thinking <strong>DOIT</strong> être dans l'output visible</div>
+  <div class="load-item"><span class="icon">🚫</span> Aucune mutation ne peut être appliquée sans avoir été visible dans la lumière</div>
+  <div class="load-item"><span class="icon">📋</span> Le contenu complet de la proposal DOIT être présent dans la réponse</div>
+</div>
+<div class="card" style="border-left:3px solid var(--mauve)">
+  <h4 style="color:var(--mauve)">Output</h4>
+  <div class="load-item"><span class="icon">→</span> <code>[PROPOSAL_OPEN] [MODIFY]</code></div>
+  <div class="sub-item">Cite : <code>type: {TYPE}</code>, <code>count: {N}</code>, <code>symptom: {summary}</code></div>
+  <div class="sub-item">Basé sur le Cristal du BRM</div>
+</div>
+</div>
+
+<!-- Passe 2 -->
+<h3>Passe 2 : Le Linter Lexical — Proactif [HYBRID_APEX] 🌿</h3>
+<div class="grid2">
+<div class="card" style="border-left:3px solid var(--purple)">
+  <h4 style="color:var(--purple)">Actions (2 étapes)</h4>
+  <div class="load-item"><span class="icon">1.</span> <code>read_file(path: "v16/runtime/expanse-v16.md")</code></div>
+  <div class="load-item"><span class="icon">2.</span> <code>search_memory(tags: ["sys:protocol"], limit: 10)</code></div>
+</div>
+<div class="card" style="border-left:3px solid var(--accent)">
+  <h4 style="color:var(--accent)">Analyse — Physique Cognitive (5 vérifications)</h4>
+  <div class="load-item"><span class="icon">1.</span> <strong>Immunité Noyau</strong> : Les blocs <code>[S_KERNEL]</code> ou <code>CORE_IDENTITY</code> sont <code>[STABLE_IDENTITY]</code>. Vérifie présence/intégrité, ignore densité.</div>
+  <div class="load-item"><span class="icon">2.</span> <strong>Loi de Densité</strong> : Tout bloc opérationnel > 50 tokens sans opérateur → audité. Cible : zéro résidu sémantique.</div>
+  <div class="load-item"><span class="icon">3.</span> <strong>Nettoyage de l'Ouvrier</strong> : Conversion vers l'impératif SEC ou symbolique (<code>Φ check</code>).</div>
+  <div class="load-item"><span class="icon">4.</span> <strong>Alignement Organique</strong> : Rattachement de chaque règle à son organe (Σ, Ψ, Φ, Ω, Μ).</div>
+  <div class="load-item"><span class="icon">5.</span> <strong>Intégrité Protocoles</strong> : Les 3 protocoles existent dans Mnemolite ? (memory-triage, friction-trace, consolidation)</div>
+</div>
+</div>
+<div class="card" style="margin:.5rem 0;font-size:.78rem">
+  <strong>Output :</strong> <code>[PROPOSAL_OPEN] [REFACTOR]</code> ou <code>[PROPOSAL_OPEN] [SYNC]</code> si protocole manquant
+</div>
+
+<!-- Passe 3 -->
+<h3>Passe 3 : Le Radar à Émergence ☀️</h3>
+<div class="grid2">
+<div class="card" style="border-left:3px solid var(--yellow)">
+  <h4 style="color:var(--yellow)">Action</h4>
+  <div class="load-item"><span class="icon">📖</span> <code>search_memory(query: "sys:extension", tags: ["sys:extension"], limit: 20)</code></div>
+</div>
+<div class="card" style="border-left:3px solid var(--accent)">
+  <h4 style="color:var(--accent)">Analyse & Décisions</h4>
+  <div class="load-item"><span class="icon">📊</span> Quels symboles ai-je inventés ?</div>
+  <div class="load-item"><span class="icon">✅</span> Usage ≥ 10 → <span class="badge badge-imm">SEAL</span> (promouvoir en extension durable)</div>
+  <div class="load-item"><span class="icon">❌</span> Usage = 0 → <span class="badge badge-req">PRUNE</span> (supprimer)</div>
+</div>
+</div>
+<div class="card" style="margin:.5rem 0;font-size:.78rem">
+  <strong>Output :</strong> <code>[PROPOSAL_OPEN] [PATTERN_EMERGENCE]</code> ou <code>[PROPOSAL_OPEN] [DELETE]</code>
+</div>
+
+<!-- Passe 4 -->
+<h3>Passe 4 : L'Élagueur Synaptique 🍂</h3>
+<div class="grid2">
+<div class="card" style="border-left:3px solid var(--orange)">
+  <h4 style="color:var(--orange)">Actions (4 étapes)</h4>
+  <div class="load-item"><span class="icon">1.</span> Analyse des patterns non utilisés</div>
+  <div class="load-item"><span class="icon">2.</span> <code>bash(command: "find v16/runtime/ -maxdepth 1 -name '*.bak' -type f")</code></div>
+  <div class="load-item"><span class="icon">3.</span> <code>search_memory(tags: ["sys:pattern:doubt"], limit: 20)</code></div>
+  <div class="load-item"><span class="icon">4.</span> <code>search_memory(tags: ["sys:pattern"], limit: 20)</code></div>
+</div>
+<div class="card" style="border-left:3px solid var(--red)">
+  <h4 style="color:var(--red)">Analyse — 3 cas</h4>
+  <div class="load-item"><span class="icon">🔀</span> Règles redondantes ou contradictoires ?</div>
+  <div class="load-item"><span class="icon">📦</span> Pour chaque <code>.bak</code> trouvé, vérifier si backup équivalent dans <code>archive/backups/</code></div>
+  <div class="load-item"><span class="icon">⚠️</span> <strong>sys:pattern:doubt</strong> : SI > 3 signal négatif → soft-delete. SINON → réévaluer et remettre en candidate</div>
+  <div class="load-item"><span class="icon">🍂</span> <strong>sys:pattern</strong> : SI <code>outcome_score < -0.5</code> ET <code>age > 7 jours</code> → <strong>soft_delete</strong> automatique</div>
+  <div class="sub-item">→ <code>Ψ [ELAGUAGE AUTOMATIQUE] Pattern {titre} supprimé (score trop faible)</code></div>
+</div>
+</div>
+<div class="card" style="margin:.5rem 0;font-size:.78rem">
+  <strong>Output :</strong> <code>[PROPOSAL_OPEN] [DELETE]</code> ou <code>[PROPOSAL_OPEN] [CLEANUP]</code> si fichiers orphelins
+</div>
+
+<!-- Passe 5 -->
+<h3>Passe 5 : L'Architecture 🏗️</h3>
+<div class="card" style="border-left:3px solid var(--dim);max-width:500px">
+  <div class="load-item"><span class="icon">📐</span> Action : Évalue tes outils et formats</div>
+  <div class="load-item"><span class="icon">→</span> Output : <code>[PROPOSAL_OPEN] [ARCHITECTURE]</code></div>
+</div>
+
+<!-- Passe 6 -->
+<h3>Passe 6 : La Santé Cognitive (Θ & SS) 🩺</h3>
+<div class="grid">
+<div class="card" style="border-left:3px solid var(--teal)">
+  <h4 style="color:var(--teal)">Action</h4>
+  <div class="load-item"><span class="icon">📖</span> <code>search_memory(tags: ["sys:history", "sys:user:profile"], limit: 50)</code></div>
+</div>
+<div class="card" style="border-left:3px solid var(--yellow)">
+  <h4 style="color:var(--yellow)">3 Métriques</h4>
+  <div class="m"><span class="l">Verbosity Drift</span><span class="v">Longueur réponse vs baseline (> 2x = alerte)</span></div>
+  <div class="m"><span class="l">Ψ Compliance</span><span class="v">% réponses par Ψ (&lt; 90% = alerte)</span></div>
+  <div class="m"><span class="l">Symbiosis Score (SS)</span><span class="v">Acceptées / Total_Propositions. Si &lt; 30% → Proposal <code>/autonomy</code> décrément</span></div>
+</div>
+<div class="card" style="border-left:3px solid var(--accent)">
+  <h4 style="color:var(--accent)">Audit Θ + Analyse par substrat</h4>
+  <div class="load-item"><span class="icon">Θ</span> <strong>Audit Profil</strong> : Analyser les TRACE:FRESH pour mettre à jour <code>sys:user:profile</code>. Nettoyage des biais obsolètes.</div>
+  <div class="load-item"><span class="icon">📊</span> <strong>Par substrat</strong> :</div>
+  <div class="sub-item">Grouper les <code>sys:history</code> par tag <code>substrat:{LLM}</code></div>
+  <div class="sub-item">Calculer le taux Ψ par substrat</div>
+  <div class="sub-item">Calculer le nombre de <code>trace:fresh</code> par substrat</div>
+  <div class="sub-item">Identifier les substrats les plus performants (Ψ taux le plus élevé, TRACE:FRESH le plus bas)</div>
+</div>
+</div>
+<div class="card" style="margin:.5rem 0;font-size:.78rem">
+  <strong>Output :</strong> Rapport santé par substrat. Si un substrat a Ψ taux &lt; 80% → <code>[PROPOSAL_OPEN] [MODIFY]</code>
+</div>
+
+<!-- Passe 7 -->
+<h3>Passe 7 : Le Différentiel Temporel (∂Ω/∂t) 📊</h3>
+<div class="grid2">
+<div class="card" style="border-left:3px solid var(--accent)">
+  <h4 style="color:var(--accent)">Actions (2 recherches)</h4>
+  <div class="load-item"><span class="icon">1.</span> <code>search_memory(query="sys:history", tags=["sys:history"], limit=50)</code> → interactions récentes</div>
+  <div class="load-item"><span class="icon">2.</span> <code>search_memory(query="sys:diff", tags=["sys:diff","temporal"], limit=1)</code> → dernier diff</div>
+</div>
+<div class="card" style="border-left:3px solid var(--yellow)">
+  <h4 style="color:var(--yellow)">Gates & Analyse</h4>
+  <div class="load-item"><span class="icon">🚫</span> SI dernier diff &lt; 7 jours → <span class="badge badge-cond">SKIP</span> (pas assez de données nouvelles)</div>
+  <div class="load-item"><span class="icon">📊</span> Comparer aux données du dernier diff :</div>
+  <div class="sub-item">Δ nombre de sys:pattern (croissance ou stagnation ?)</div>
+  <div class="sub-item">Δ nombre de trace:fresh (friction en hausse ou baisse ?)</div>
+  <div class="sub-item">Δ nombre de sys:drift (dérives : tendance ?)</div>
+  <div class="sub-item">Δ avg_outcome_score (amélioration ou dégradation ?)</div>
+</div>
+</div>
+<div class="card" style="margin:.5rem 0">
+  <h4>4 Métriques Calculées</h4>
+  <div class="grid3" style="font-size:.72rem">
+    <div class="card2">
+      <div style="color:var(--green);font-weight:700">adaptation_velocity</div>
+      <div style="color:var(--dim)">(patterns créés − patterns prunés) / semaines</div>
+    </div>
+    <div class="card2">
+      <div style="color:var(--pink);font-weight:700">friction_trend</div>
+      <div style="color:var(--dim)">(fresh cette semaine − fresh semaine passée) / fresh semaine passée</div>
+    </div>
+    <div class="card2">
+      <div style="color:var(--accent);font-weight:700">improvement_velocity</div>
+      <div style="color:var(--dim)">Δ outcome_score / semaine</div>
+    </div>
+    <div class="card2">
+      <div style="color:var(--orange);font-weight:700">pattern_turnover</div>
+      <div style="color:var(--dim)">patterns remplacés / semaine</div>
+    </div>
+  </div>
+</div>
+<div class="card" style="margin:.5rem 0;font-size:.78rem">
+  <strong>Écriture :</strong>
+  <div class="fmt">write_memory(
+  title: "DIFF: {date}",
+  content: "Période: {date_debut}→{date_fin}
+Δ patterns: {+N/-M}
+Δ friction: {trend}
+Δ drift: {count}
+Δ outcome_score: {Δ_score}
+adaptation_velocity: {score}
+improvement_velocity: {improvement}",
+  tags: ["sys:diff", "temporal", "v16"],
+  memory_type: "reference"
+)</div>
+  <strong>Output :</strong> <code>Ψ(Différentiel) : adaptation_velocity={score}, improvement_velocity={improvement}, friction_trend={trend}.</code>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION Ⅳ : WORKFLOW MUTATION — PARTIE 2, SECTION A -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h2>Ⅳ. Génération de Proposal — Workflow Mutation (Partie 2, §A)</h2>
+
+<p style="font-size:.8rem;color:var(--dim);margin-bottom:1rem">Quand une Passe génère <code>[PROPOSAL_OPEN]</code>, ce workflow crée un dossier, extrait le contexte de V16, et persiste la proposal. <strong>5 étapes obligatoires.</strong></p>
+
+<div class="card" style="margin:.5rem 0">
+<div class="mermaid-label">Pipeline de Génération : de la friction à la proposal persistée</div>
+<pre class="mermaid">
+flowchart LR
+    PASS["Passe génère<br/>PROPOSAL_OPEN"] --> MKDIR["1. Créer dossier<br/>bash: mkdir"]
+    MKDIR --> READ["2. Lire V16<br/>Extraire contexte<br/>3-5 lignes AVANT/APRÈS"]
+    READ --> WRITE["3. Écrire proposal.md<br/>write_file"]
+    WRITE --> MNEMO["4. Écrire Mnemolite<br/>write_memory<br/>tags: candidate"]
+    MNEMO --> LOG["5. Mettre à jour LOG.md<br/>Ajouter dans Pending"]
+
+    style PASS fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    style MKDIR fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+    style READ fill:#1a2a3a,stroke:#89b4fa,color:#cdd6f4
+    style WRITE fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style MNEMO fill:#2a1a3a,stroke:#cba6f7,color:#cdd6f4
+    style LOG fill:#1a2a2a,stroke:#94e2d5,color:#cdd6f4
+</pre>
+</div>
+
+<div class="grid" style="font-size:.75rem">
+<div class="card" style="border-left:3px solid var(--orange)">
+  <h4 style="color:var(--orange)">1. Créer dossier</h4>
+  <div class="fmt">bash(command: "mkdir -p /home/giak/projects/expanse/doc/mutations/{slug}/")</div>
+  <div style="font-size:.68rem;color:var(--dim)">R8 : bash() obligatoire pour mkdir</div>
+</div>
+<div class="card" style="border-left:3px solid var(--accent)">
+  <h4 style="color:var(--accent)">2. Lire V16 pour contexte exact</h4>
+  <div class="fmt">read_file(path: "/home/giak/projects/expanse/v16/runtime/expanse-v16.md")
+Identifier la section exacte à modifier
+Extraire 3-5 lignes de contexte AVANT et APRÈS</div>
+  <div style="font-size:.68rem;color:var(--red)">R3 : contexte exact requis (5 lignes avant/après)</div>
+</div>
+<div class="card" style="border-left:3px solid var(--green)">
+  <h4 style="color:var(--green)">3. Écrire le proposal</h4>
+  <div class="fmt">write_file(
+  path: "/home/giak/projects/expanse/doc/mutations/{slug}/proposal.md",
+  content: {proposal_content}
+)</div>
+</div>
+<div class="card" style="border-left:3px solid var(--purple)">
+  <h4 style="color:var(--purple)">4. Écrire dans Mnemolite</h4>
+  <div class="fmt">write_memory(
+  title: "PROPOSAL: {slug}",
+  content: "Mutation proposée: {description}",
+  tags: ["sys:pattern:candidate", "v16", "proposal"],
+  memory_type: "decision"
+)</div>
+</div>
+<div class="card" style="border-left:3px solid var(--teal)">
+  <h4 style="color:var(--teal)">5. Mettre à jour LOG</h4>
+  <div class="fmt">read_file(path: "/home/giak/projects/expanse/doc/mutations/LOG.md")
+Ajouter ligne dans Pending Proposals
+write_file(path: "doc/mutations/LOG.md", content: {LOG_MODIFIÉ})</div>
+  <div style="font-size:.68rem;color:var(--dim)">R6 : LOG toujours synchronisé</div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION Ⅴ : COMMANDES DE MUTATION — PARTIE 2, SECTION B -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h2>Ⅴ. Commandes de Mutation — (Partie 2, §B)</h2>
+
+<p style="font-size:.8rem;color:var(--dim);margin-bottom:1rem">6 commandes définies dans Dream. Ces commandes sont les seules qui modifient V16. Toutes les autres commandes (/dream, /autonomy, /seal…) sont dans V16 §Ⅴ.</p>
+
+<!-- /apply -->
+<div class="cmd-card" style="border-left:3px solid var(--green)">
+  <div class="cmd-header">
+    <span class="cmd-name">/apply {slug}</span>
+    <span class="cmd-trigger">Trigger : input contains "/apply {slug}"</span>
+  </div>
+
+  <div class="card" style="margin:.5rem 0">
+    <div class="mermaid-label">Pipeline /apply : 14 étapes avec rollback automatique</div>
+    <pre class="mermaid">
+    flowchart TD
+        START["/apply {slug}"] --> LOCK1{"1. Vérifier<br/>LOCK"}
+        LOCK1 -->|"existe<br/>age > 1h"| EXPIRE["Lock expired<br/>Suppression auto"]
+        LOCK1 -->|"existe<br/>age < 1h"| ERR1["ERREUR<br/>Mutation en cours"]
+        LOCK1 -->|"n'existe pas"| LOCK2["2. Créer LOCK<br/>avec timestamp"]
+        LOCK2 --> CHECK["3. Vérifier proposal<br/>.md existe"]
+        CHECK -->|"non trouvé"| ERR2["SUPPRIMER LOCK<br/>+ ERREUR"]
+        CHECK -->|"trouvé"| CONFIRM["4. Afficher<br/>Confirmation"]
+        CONFIRM --> USER{"User répond"}
+        USER -->|"NON"| CANCEL["Annulation<br/>Supprimer LOCK"]
+        USER -->|"OUI"| ARCHIVE["5. Archiver V16<br/>5b. Snapshot Mnemolite"]
+        ARCHIVE --> REREAD["6-7. Relire V16<br/>Extraire diff"]
+        REREAD --> GUARD{"7b. Constitutional<br/>Guard"}
+        GUARD -->|"touche §Ⅰ/§Ⅲ/§Ⅵ"| VIOLATION["CONSTITUTIONAL<br/>VIOLATION<br/>→ ANNULER"]
+        GUARD -->|"OK"| APPLY["8-10. Appliquer diff<br/>Vérifier application"]
+        APPLY --> WRITE["10. Écrire V16 modifié<br/>Chirurgie native"]
+        WRITE --> VERIFY{"11. Auto-vérification<br/>7 checks"}
+        VERIFY -->|"ÉCHEC"| ROLLBACK["ROLLBACK<br/>Restaurer backup"]
+        VERIFY -->|"OK"| SUCCESS["12-14. Supprimer LOCK<br/>Mettre à jour LOG<br/>Créer applied.md"]
+
+        style START fill:#1a3a1a,stroke:#a6e3a1,color:#a6e3a1
+        style LOCK1 fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+        style GUARD fill:#3d1a1a,stroke:#f38ba8,color:#cdd6f4
+        style VIOLATION fill:#3d1a1a,stroke:#f38ba8,color:#f38ba8
+        style VERIFY fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+        style ROLLBACK fill:#3d1a1a,stroke:#f38ba8,color:#f38ba8
+        style SUCCESS fill:#1a3a1a,stroke:#a6e3a1,color:#a6e3a1
+        style CANCEL fill:#1e1e2e,stroke:#6c7086,color:#6c7086
+        style ERR1 fill:#3d1a1a,stroke:#f38ba8,color:#f38ba8
+        style ERR2 fill:#3d1a1a,stroke:#f38ba8,color:#f38ba8
+    </pre>
+  </div>
+
+  <h4>Détail des étapes critiques</h4>
+  <div class="grid2" style="font-size:.72rem">
+    <div class="card2">
+      <div style="color:var(--yellow);font-weight:700">🔒 Lock avec Expiration</div>
+      <div style="color:var(--dim)">Fichier <code>.lock</code> contenant <code>{slug}|{timestamp}</code><br>
+      SI <code>lock_age > 3600s</code> (1h) → suppression automatique<br>
+      Empêche les mutations concurrentes</div>
+    </div>
+    <div class="card2">
+      <div style="color:var(--lavender);font-weight:700">📦 Snapshot Mnemolite (5b)</div>
+      <div style="color:var(--dim)"><code>write_memory(title: "PRE_MUTATION_SNAPSHOT: {slug} {YYYY-MM-DD}", content: "{get_system_snapshot(repository='expanse') complet}", tags: ["sys:snapshot", "v16", "mutation:{slug}"], memory_type: "reference")</code><br>
+      Permet un rollback complet incluant la mémoire. Le <code>get_system_snapshot()</code> est intégré dans le content.</div>
+    </div>
+    <div class="card2">
+      <div style="color:var(--red);font-weight:700">🛡️ Constitutional Guard (7b)</div>
+      <div style="color:var(--dim)">Sections IMMUTABLES (jamais modifiables) :<br>
+      <span class="badge badge-imm">Ⅰ. L'INCARNATION</span>
+      <span class="badge badge-imm">Ⅲ. SOUVERAINETÉ</span>
+      <span class="badge badge-imm">Ⅵ. BOOT</span><br>
+      SI touche UNE SEULE ligne → VIOLATION → REJET AUTO → <code>sys:constitutional_violation</code></div>
+    </div>
+    <div class="card2">
+      <div style="color:var(--green);font-weight:700">✍️ Chirurgie V16 native (10)</div>
+      <div style="color:var(--dim)">Utiliser <code>replace_file_content</code> ou <code>write_to_file</code><br>
+      <strong style="color:var(--red)">INTERDICTION</strong> d'utiliser bash avec echo pour écrire V16<br>
+      R9 : Chirurgie obligatoire — jamais altérer format/indentation hors-cible</div>
+    </div>
+  </div>
+
+  <h4>Confirmation affichée à l'utilisateur (étape 4)</h4>
+  <div class="fmt">═══════════════════════════════════════
+CONFIRMATION DE MUTATION
+═══════════════════════════════════════
+
+Slug: {slug}
+Type: {type}
+Problème: {résumé}
+
+Contexte:
+```markdown
+{lignes de contexte}
+```
+
+Diff:
+```diff
+-{ancien}
++{nouveau}
+```
+
+═══════════════════════════════════════
+Tapez "OUI" pour appliquer.
+Tapez "NON" pour annuler.
+═══════════════════════════════════════</div>
+</div>
+
+<!-- /reject -->
+<div class="cmd-card" style="border-left:3px solid var(--red)">
+  <div class="cmd-header">
+    <span class="cmd-name">/reject {slug}</span>
+  </div>
+  <div class="load-item"><span class="icon">1.</span> Vérifier que le proposal existe</div>
+  <div class="load-item"><span class="icon">2.</span> Marquer comme REJECTED (modifier le fichier)</div>
+  <div class="load-item"><span class="icon">3.</span> Mettre à jour LOG : Pending → Rejected</div>
+  <div class="load-item"><span class="icon">4.</span> Output : <code>Ψ {slug} rejeté. Proposal marqué comme REJECTED.</code></div>
+</div>
+
+<!-- /rollback -->
+<div class="cmd-card" style="border-left:3px solid var(--orange)">
+  <div class="cmd-header">
+    <span class="cmd-name">/rollback {slug}</span>
+  </div>
+  <div class="load-item"><span class="icon">1.</span> Vérifier que la mutation a été APPLIED</div>
+  <div class="load-item"><span class="icon">2.</span> Trouver le backup</div>
+  <div class="load-item"><span class="icon">3.</span> <strong style="color:var(--yellow)">Vérifier les mutations postérieures</strong></div>
+  <div class="sub-item">SI d'autres mutations existent après → afficher avertissement + demander <code>"OUI-ROLLBACK"</code></div>
+  <div class="sub-item">SINON → restaurer simplement</div>
+  <div class="load-item"><span class="icon">4-6.</span> Marquer ROLLED_BACK + Mettre à jour LOG</div>
+  <div class="load-item"><span class="icon">→</span> Output : <code>Ψ [ROLLBACK] {slug} inversé. V16 restauré depuis backup.</code></div>
+</div>
+
+<!-- /mutations -->
+<div class="cmd-card" style="border-left:3px solid var(--teal)">
+  <div class="cmd-header">
+    <span class="cmd-name">/mutations</span>
+  </div>
+  <div class="load-item"><span class="icon">📖</span> <code>read_file(path: "doc/mutations/LOG.md")</code></div>
+  <div class="load-item"><span class="icon">→</span> Output : contenu du LOG</div>
+</div>
+
+<!-- /proposals -->
+<div class="cmd-card" style="border-left:3px solid var(--purple)">
+  <div class="cmd-header">
+    <span class="cmd-name">/proposals</span>
+  </div>
+  <div class="load-item"><span class="icon">📖</span> Lire LOG.md, lister les Pending Proposals</div>
+  <div class="load-item"><span class="icon">→</span> Output : liste + <code>Pour approuver: /apply {slug}</code> / <code>Pour rejeter: /reject {slug}</code></div>
+</div>
+
+<!-- /diff -->
+<div class="cmd-card" style="border-left:3px solid var(--accent)">
+  <div class="cmd-header">
+    <span class="cmd-name">/diff {slug}</span>
+  </div>
+  <div class="load-item"><span class="icon">📖</span> Lire le proposal, extraire le diff</div>
+  <div class="load-item"><span class="icon">→</span> Output : <code>═══ DIFF: {slug} ═══ {diff} ═══</code></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION Ⅵ : OUTPUT FINAL DU RÊVE — PARTIE 3 -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h2>Ⅵ. Output Final du Rêve — (Partie 3)</h2>
+
+<p style="font-size:.8rem;color:var(--dim);margin-bottom:1rem">À la fin de l'exécution (après les Passes 0-7), le Dream produit un rapport structuré. <span style="color:var(--yellow)">⚠️ La source dit "Passes 0-6" mais il y a 8 passes (0-7) — incohérence source.</span></p>
+
+<div class="grid2">
+<div class="card" style="border-left:3px solid var(--accent)">
+  <h3 style="color:var(--accent)">4 Éléments du Rapport</h3>
+  <div class="load-item"><span class="icon">1.</span> <strong>Rapport des Passes</strong> — Résumé pour chaque Passe exécutée</div>
+  <div class="load-item"><span class="icon">2.</span> <strong>Proposals générés</strong> — Liste des <code>[PROPOSAL_OPEN]</code> avec status</div>
+  <div class="load-item"><span class="icon">3.</span> <strong>Persistance</strong> :</div>
+  <div class="sub-item">Fichiers proposal dans <code>doc/mutations/{slug}/</code></div>
+  <div class="sub-item">LOG mis à jour</div>
+  <div class="sub-item">Mnemolite : candidates écrits</div>
+  <div class="load-item"><span class="icon">4.</span> <strong>Consommation des traces</strong> :</div>
+  <div class="sub-item">TRACE:FRESH avec <code>[PROPOSAL_OPEN]</code> → garder avec tag <code>sys:consumed</code></div>
+  <div class="sub-item">TRACE:FRESH restantes → garder pour Passe 2-6 <span style="color:var(--yellow);font-size:.65rem">⚠️ voir I6</span></div>
+  <div class="sub-item">TRACE:FRESH sans pattern clear → garder pour analyse ultérieure</div>
+</div>
+<div class="card" style="border-left:3px solid var(--green)">
+  <h3 style="color:var(--green)">Format de Sortie</h3>
+  <div class="fmt">═══════════════════════════════════════
+RÊVE TERMINÉ
+═══════════════════════════════════════
+
+Passes exécutées: {liste}
+Proposals générés: {N}
+Proposals en attente: {M}
+
+Pour traiter les proposals:
+- /apply {slug}    → Appliquer
+- /reject {slug}  → Rejeter
+- /proposals      → Lister
+- /mutations      → Voir l'historique
+
+Le rêve est terminé.
+═══════════════════════════════════════</div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION Ⅶ : RÈGLES DE SÉCURITÉ -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h2>Ⅶ. Règles de Sécurité — Les 9 Invariants</h2>
+
+<p style="font-size:.8rem;color:var(--dim);margin-bottom:1rem">Ces règles encadrent <strong>toutes</strong> les opérations du Dream. Elles sont non-négociables et s'appliquent à chaque mutation.</p>
+
+<div class="rules">
+  <div class="rule" style="border-left-color:var(--red)">
+    <div class="rule-name" style="color:var(--red)">R1 : LOCK obligatoire</div>
+    <div class="rule-desc">Une mutation à la fois. Fichier <code>.lock</code> avec timestamp. Expiration après 1h.</div>
+  </div>
+  <div class="rule" style="border-left-color:var(--orange)">
+    <div class="rule-name" style="color:var(--orange)">R2 : Archive avec SLUG</div>
+    <div class="rule-desc">Backup unique par mutation. Nom : <code>expanse-v16-{date}-{slug}-backup.md</code></div>
+  </div>
+  <div class="rule" style="border-left-color:var(--yellow)">
+    <div class="rule-name" style="color:var(--yellow)">R3 : Contexte exact requis</div>
+    <div class="rule-desc">5 lignes avant/après dans le proposal. Pas de modification approximative.</div>
+  </div>
+  <div class="rule" style="border-left-color:var(--green)">
+    <div class="rule-name" style="color:var(--green)">R4 : Auto-vérification post-write</div>
+    <div class="rule-desc">7 checks structurels après chaque <code>write_file</code> de V16.</div>
+  </div>
+  <div class="rule" style="border-left-color:var(--red)">
+    <div class="rule-name" style="color:var(--red)">R5 : Rollback automatique si erreur</div>
+    <div class="rule-desc">Si un seul check échoue → restaurer le backup immédiatement. Pas de demi-mesure.</div>
+  </div>
+  <div class="rule" style="border-left-color:var(--teal)">
+    <div class="rule-name" style="color:var(--teal)">R6 : LOG toujours synchronisé</div>
+    <div class="rule-desc">Le fichier <code>LOG.md</code> reflète l'état réel à chaque étape. Pas de décalage.</div>
+  </div>
+  <div class="rule" style="border-left-color:var(--pink)">
+    <div class="rule-name" style="color:var(--pink)">R7 : TRACE:FRESH consommées après lecture</div>
+    <div class="rule-desc"><code>mark_consumed</code> sur les traces traitées. Sélectif (Passe 1) ou complet.</div>
+  </div>
+  <div class="rule" style="border-left-color:var(--orange)">
+    <div class="rule-name" style="color:var(--orange)">R8 : bash() pour mkdir et fichier operations</div>
+    <div class="rule-desc">Opérations filesystem via <code>bash()</code>, jamais via d'autres outils.</div>
+  </div>
+  <div class="rule" style="border-left-color:var(--red)">
+    <div class="rule-name" style="color:var(--red)">R9 : CHIRURGIE OBLIGATOIRE</div>
+    <div class="rule-desc">Toute mutation doit être surgicale. Ne jamais altérer le format, l'indentation ou le contenu hors-cible.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION Ⅷ : VÉRIFICATIONS OBLIGATOIRES (POST-WRITE) -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h2>Ⅷ. Vérifications Obligatoires — 7 Checks Post-Write</h2>
+
+<p style="font-size:.8rem;color:var(--dim);margin-bottom:1rem">Exécutées APRÈS chaque <code>write_file(expanse-v16.md)</code>. Si <strong>un seul</strong> échec → rollback automatique.</p>
+
+<div class="grid2">
+<div class="card" style="border-left:3px solid var(--yellow)">
+  <h3 style="color:var(--yellow)">CHECKLIST</h3>
+  <div class="check-item"><div class="check-box"></div> Section Ⅳ (Boot) existe ?</div>
+  <div class="check-item"><div class="check-box"></div> Signal <code>Ψ [V16 ACTIVE]</code> présent ?</div>
+  <div class="check-item"><div class="check-box"></div> 6 Sections (Ⅰ-Ⅵ) intactes ?</div>
+  <div class="check-item"><div class="check-box"></div> Toutes les <code>{ }</code> fermées ?</div>
+  <div class="check-item"><div class="check-box"></div> Toutes les <code>```</code> fermées ?</div>
+  <div class="check-item"><div class="check-box"></div> Pas de caractères corrompus ?</div>
+  <div class="check-item"><div class="check-box"></div> Le diff a bien été appliqué ?</div>
+</div>
+<div class="card" style="border-left:3px solid var(--red)">
+  <h3 style="color:var(--red)">Résultat</h3>
+  <div class="load-item" style="color:var(--green)"><span class="icon">✅</span> SI TOUT OK → Success. Supprimer LOCK. Créer <code>applied.md</code>. Mettre à jour LOG.</div>
+  <div class="load-item" style="color:var(--red)"><span class="icon">❌</span> SI UN SEUL ÉCHEC → Rollback. Restaurer backup. Supprimer LOCK. Marquer FAILED dans LOG.</div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION Ⅸ : STRUCTURE DES FICHIERS -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h2>Ⅸ. Structure des Fichiers</h2>
+
+<div class="card" style="margin:.5rem 0">
+<div class="fmt">doc/
+├── mutations/
+│   ├── LOG.md                  ← Historique des mutations (R6: toujours synchronisé)
+│   ├── .lock                   ← Temporaire (R1: une mutation à la fois, expire 1h)
+│   └── {slug}/
+│       ├── proposal.md         ← Proposal avec contexte exact (R3: 5 lignes avant/après)
+│       └── applied.md          ← Preuve d'application (créé si /apply réussi)
+│
+└── plans/
+    └── 2026-03-18-dream-mutation-plan.md
+
+runtime/
+├── expanse-v16.md              ← L'Apex — cible des mutations
+└── expanse-dream.md            ← Ce fichier (le jardinier)
+
+/home/giak/projects/expanse/archive/backups/
+└── expanse-v16-{YYYY-MM-DD}-{slug}-backup.md   ← Archives (R2: SLUG unique)</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION Ⅹ : DIAGRAMMES MERMAID -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h2>Ⅹ. Diagrammes du Dream</h2>
+
+<div class="card sf">
+<div class="dl">Vue d'ensemble : les 3 Parties du Dream</div>
+<pre class="mermaid">
+flowchart TD
+    TRIGGER["/dream<br/>V16 §Ⅴ pointe ici"] --> PREAMBLE["PRÉAMBULE<br/>Mode SOMMEIL<br/>3 rôles"]
+
+    PREAMBLE --> ENTREE["ENTRÉE<br/>TRACE:FRESH Structurées<br/>5 types"]
+
+    ENTREE --> PART1["PARTIE 1<br/>Algorithme Pentagramme<br/>8 Passes"]
+    PART1 --> P0["🧊 P0 Inertie"]
+    PART1 --> P1["🌱 P1 Plaie + BRM"]
+    PART1 --> P2["🌿 P2 Linter Lexical"]
+    PART1 --> P3["☀️ P3 Radar Émergence"]
+    PART1 --> P4["🍂 P4 Élagueur"]
+    PART1 --> P5["🏗️ P5 Architecture"]
+    PART1 --> P6["🩺 P6 Santé Cognitive"]
+    PART1 --> P7["📊 P7 Différentiel"]
+
+    P1 --> P2A["PARTIE 2 §A<br/>Génération Proposal<br/>5 étapes"]
+    P2A --> P2B["PARTIE 2 §B<br/>Commandes Mutation<br/>6 commandes"]
+
+    P0 --> P3OUT["PARTIE 3<br/>Output Final<br/>Rapport structuré"]
+
+    P2B --> SEC["RÈGLES DE SÉCURITÉ<br/>9 règles"]
+    P2B --> CHECK["VÉRIFICATIONS<br/>7 checks post-write"]
+
+    style TRIGGER fill:#2e1e2e,stroke:#cba6f7,color:#cba6f7
+    style PREAMBLE fill:#1e1e2e,stroke:#6c7086,color:#6c7086
+    style ENTREE fill:#3d1f2d,stroke:#f5c2e7,color:#cdd6f4
+    style PART1 fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
+    style P2A fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style P2B fill:#1a2a3a,stroke:#89b4fa,color:#cdd6f4
+    style P3OUT fill:#1a2a2a,stroke:#94e2d5,color:#cdd6f4
+    style SEC fill:#3d1a1a,stroke:#f38ba8,color:#cdd6f4
+    style CHECK fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+</pre>
+</div>
+
+<div class="card sf" style="margin-top:1rem">
+<div class="dl">Les 8 Passes : lectures, écritures, consommation Mnemolite</div>
+<pre class="mermaid">
+flowchart TD
+    P0{"🧊 P0<br/>search: trace:fresh<br/>consumed:false"} -->|"count=0"| FIN["FIN DU RÊVE"]
+    P0 -->|"count≥1"| P1["🌱 P1 Dégel"]
+    P1 -->|"search: trace:fresh + sys:drift"| P1A["Grouper par TYPE<br/>TYPE.count≥2 → pattern"]
+    P1A -->|"BRAINSTORM OBLIGATOIRE"| P1B["Écrire BRM<br/>write_memory<br/>tags: trace:dream:brm"]
+    P1B -->|"Consommation SÉLECTIVE"| P1C["mark_consumed<br/>SEULEMENT traces+drifts<br/>avec BRM"]
+    P1 --> P2["🌿 P2 Linter<br/>read V16 + sys:protocol<br/>5 vérifications Physique Cognitive"]
+    P2 --> P3["☀️ P3 Émergence<br/>search: sys:extension<br/>usage≥10→SEAL · 0→PRUNE"]
+    P3 --> P4["🍂 P4 Élagage<br/>search: doubt + pattern<br/>+ bash find .bak"]
+    P4 --> P5["🏗️ P5 Architecture<br/>Évalue outils et formats"]
+    P5 --> P6["🩺 P6 Diagnostic<br/>search: history + profile<br/>Verbosity · Ψ% · SS"]
+    P6 --> P7["📊 P7 Métrologie<br/>search: history + diff<br/>4 métriques différentielles"]
+    P7 -->|"dernier diff<7j"| SKIP["SKIP"]
+    P7 -->|"write DIFF"| DIFFARCH["sys:diff archive"]
+
+    style P0 fill:#1e1e2e,stroke:#6c7086,color:#6c7086
+    style FIN fill:#1e1e2e,stroke:#6c7086,color:#6c7086
+    style P1 fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style P1A fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style P1B fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style P1C fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
+    style P2 fill:#2d1f2d,stroke:#cba6f7,color:#cba6f4
+    style P3 fill:#2a2a1a,stroke:#f9e2af,color:#cdd6f4
+    style P4 fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
+    style P5 fill:#1e1e2e,stroke:#6c7086,color:#6c7086
+    style P6 fill:#1a2a2a,stroke:#94e2d5,color:#cdd6f4
+    style P7 fill:#1a2a3a,stroke:#89b4fa,color:#cdd6f4
+    style SKIP fill:#1e1e2e,stroke:#6c7086,color:#6c7086
+    style DIFFARCH fill:#1a1a3a,stroke:#b4befe,color:#cdd6f4
+</pre>
+</div>
+
+<div class="card sf" style="margin-top:1rem">
+<div class="dl">Statuts d'une Mutation : du Proposal à l'Application ou au Rejet</div>
+<pre class="mermaid">
+stateDiagram-v2
+    [*] --> PENDING : Passe génère PROPOSAL_OPEN
+    PENDING --> APPLIED : /apply OUI
+    PENDING --> REJECTED : /reject
+    APPLIED --> ROLLED_BACK : /rollback
+    APPLIED --> FAILED : Vérification échoue
+    FAILED --> [*] : Rollback auto
+    ROLLED_BACK --> [*]
+    REJECTED --> [*]
+    APPLIED --> [*] : Succès
+
+    note right of PENDING : proposal.md + LOG
+    note right of APPLIED : applied.md + backup
+    note right of ROLLED_BACK : V16 restauré
+</pre>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION Ⅺ : ANNOTATIONS POUR GRAPH INTERACTIF -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h2>Ⅺ. Annotations pour Graph Interactif</h2>
+
+<p style="font-size:.8rem;color:var(--dim);margin-bottom:1rem">Éléments spécifiques au Dream pour le graph interactif. Complète les annotations du Blueprint Core et Mémoire.</p>
+
+<h3>A. Noeuds Dream</h3>
+<div class="card" style="margin:.5rem 0">
+<table>
+<tr><th>Type</th><th>Éléments</th><th>État visuel</th><th>Source</th></tr>
+<tr><td style="color:var(--purple)">PASSE</td><td>P0 · P1 · P2 · P3 · P4 · P5 · P6 · P7</td><td>Séquentiel, saisonnier</td><td>Partie 1</td></tr>
+<tr><td style="color:var(--pink)">TRACE</td><td>trace:fresh (5 types : ECS·SEC·STYLE·MEMORY·BOOT)</td><td>Étincelle → extinction si consommé</td><td>Entrée</td></tr>
+<tr><td style="color:var(--teal)">BRM</td><td>Behavior Realism Model (gabarit)</td><td>Cristal en formation</td><td>P1</td></tr>
+<tr><td style="color:var(--yellow)">PROPOSAL</td><td>[PROPOSAL_OPEN] · proposal.md</td><td>Pulsation, en attente de réponse user</td><td>Partie 2 §A</td></tr>
+<tr><td style="color:var(--green)">MUTATION</td><td>APPLIED · ROLLED_BACK · REJECTED · FAILED</td><td>Vert/orange/rouge/violet</td><td>Partie 2 §B</td></tr>
+<tr><td style="color:var(--red)">GUARD</td><td>Constitutional Guard (§Ⅰ·§Ⅲ·§Ⅵ)</td><td>Mur infranchissable</td><td>/apply §7b</td></tr>
+<tr><td style="color:var(--orange)">LOCK</td><td>.lock (temporaire, expire 1h)</td><td>Cadenas, disparait après apply/reject</td><td>/apply §1-2</td></tr>
+<tr><td style="color:var(--accent)">DIFF</td><td>sys:diff (métriques temporelles)</td><td>Gradient temporel</td><td>P7</td></tr>
+</table>
+</div>
+
+<h3>B. Gates Dream</h3>
+<div class="card" style="margin:.5rem 0">
+<table>
+<tr><th>Gate</th><th>Condition</th><th>Si VRAI</th><th>Si FAUX</th><th>Source</th></tr>
+<tr><td style="color:var(--dim)">P0 Inertie</td><td>count(trace:fresh, consumed:false) = 0</td><td style="color:var(--dim)">FIN DU RÊVE</td><td>→ Passe 1</td><td>P0</td></tr>
+<tr><td style="color:var(--yellow)">P0 Insuffisant</td><td>count < 3</td><td style="color:var(--yellow)">Frictions insuffisantes</td><td>Analyse requise</td><td>P0</td></tr>
+<tr><td style="color:var(--green)">P1 Pattern</td><td>TYPE.count ≥ 2</td><td style="color:var(--green)">Pattern récurrent → BRM</td><td>Pas de pattern</td><td>P1</td></tr>
+<tr><td style="color:var(--accent)">P3 SEAL</td><td>extension usage ≥ 10</td><td style="color:var(--green)">→ SEAL</td><td>Usage = 0 → PRUNE</td><td>P3</td></tr>
+<tr><td style="color:var(--red)">P4 Doubt</td><td>sys:pattern:doubt, > 3 signaux négatifs</td><td style="color:var(--red)">→ soft-delete</td><td>→ réévaluer</td><td>P4</td></tr>
+<tr><td style="color:var(--orange)">P4 Élagage</td><td>outcome_score < -0.5 ET age > 7 jours</td><td style="color:var(--red)">→ soft_delete auto</td><td>→ conserve</td><td>P4</td></tr>
+<tr><td style="color:var(--teal)">P6 SS</td><td>Symbiosis Score < 30%</td><td style="color:var(--yellow)">→ Proposal /autonomy décrément</td><td>OK</td><td>P6</td></tr>
+<tr><td style="color:var(--accent)">P7 Skip</td><td>dernier diff < 7 jours</td><td style="color:var(--dim)">→ SKIP</td><td>→ calculer métriques</td><td>P7</td></tr>
+<tr><td style="color:var(--red)">Constitutional</td><td>mutation touche §Ⅰ ou §Ⅲ ou §Ⅵ</td><td style="color:var(--red)">→ REJET AUTO + log violation</td><td>→ appliquer</td><td>/apply §7b</td></tr>
+<tr><td style="color:var(--yellow)">Lock</td><td>lock existe ET age < 3600s</td><td style="color:var(--red)">→ ERREUR: mutation en cours</td><td>→ continuer</td><td>/apply §1</td></tr>
+<tr><td style="color:var(--green)">Lock Expired</td><td>lock existe ET age ≥ 3600s</td><td style="color:var(--green)">→ Suppression auto, continuer</td><td>—</td><td>/apply §1</td></tr>
+<tr><td style="color:var(--yellow)">P2 Protocoles</td><td>3 protocoles manquants dans Mnemolite</td><td style="color:var(--mauve)">→ [SYNC] proposal</td><td>OK</td><td>P2 §5</td></tr>
+</table>
+</div>
+
+<h3>C. Feedback Loops Dream</h3>
+<div class="card" style="margin:.5rem 0">
+<table>
+<tr><th>Boucle</th><th>Mécanisme</th><th>Effet</th></tr>
+<tr><td style="color:var(--purple)">Saisonnier</td><td>trace:fresh → Dream P1 → mark_consumed → plus visible → nouvelles traces → nouveau Dream</td><td>Cycle de consommation/régénération</td></tr>
+<tr><td style="color:var(--green)">Mutation ↑</td><td>Proposal → /apply → V16 modifié → nouveau comportement → nouvelles traces → nouveau Dream</td><td>Auto-amélioration continue</td></tr>
+<tr><td style="color:var(--red)">Mutation ↓</td><td>/apply → vérification échoue → rollback → V16 restauré → trace de l'échec → Dream analyse</td><td>Auto-correction</td></tr>
+<tr><td style="color:var(--orange)">Élagage</td><td>sys:pattern:doubt → P4 soft-delete → candidat peut émerger → nouveau pattern</td><td>Renouvellement cortex</td></tr>
+<tr><td style="color:var(--accent)">Métrologie</td><td>P7 write DIFF → P7 suivant compare → adaptation_velocity mesuré → amélioration visible</td><td>Mesure du changement</td></tr>
+<tr><td style="color:var(--teal)">SS Calibration</td><td>P6 mesure SS → si < 30% → propose /autonomy décrément → moins de suggestions → SS remonte</td><td>Auto-régulation proactivité</td></tr>
+</table>
+</div>
+
+<h3>D. Sub-flows expandables</h3>
+<div class="card" style="margin:.5rem 0">
+<table>
+<tr><th>Sous-circuit</th><th>Contenu quand expandé</th><th>Vue collapsée</th><th>Source</th></tr>
+<tr><td style="color:var(--green)">P1 BRM Pipeline</td><td>search traces → grouper par TYPE → brainstorm → lire BRM → remplir gabarit → write_memory → mark_consumed sélectif</td><td>P1 Plaie</td><td>P1</td></tr>
+<tr><td style="color:var(--accent)">/apply Pipeline</td><td>14 étapes : lock → proposal → archive → snapshot → reread → guard → apply → verify → unlock → log → applied</td><td>/apply</td><td>§B</td></tr>
+<tr><td style="color:var(--purple)">P2 Linter Checks</td><td>5 vérifications : Immunité Noyau · Densité · Ouvrier · Organique · Protocoles</td><td>P2 Linter</td><td>P2</td></tr>
+<tr><td style="color:var(--accent)">P7 Métriques</td><td>4 calculs : adaptation_velocity · friction_trend · improvement_velocity · pattern_turnover</td><td>P7 Métr.</td><td>P7</td></tr>
+<tr><td style="color:var(--red)">Constitutional Guard</td><td>3 sections immuables : §Ⅰ INCARNATION · §Ⅲ SOUVERAINETÉ · §Ⅵ BOOT → REJET AUTO si touchées</td><td>Guard</td><td>/apply §7b</td></tr>
+</table>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION Ⅻ : NATURE DES DONNÉES DREAM -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h2>Ⅻ. Nature des Données Dream</h2>
+
+<p style="font-size:.8rem;color:var(--dim);margin-bottom:1rem">Classification des données que le Dream <strong>crée, lit ou consomme</strong>. Complète la taxonomie du Blueprint Mémoire.</p>
+
+<div class="grid2">
+<div class="card">
+  <h3 style="color:var(--green)">Créé par Dream <span class="scope-tag scope-def">DÉFINI</span></h3>
+  <div class="load-item"><span class="icon">📝</span> <code>trace:dream:brm</code> — BRM remplis (P1, memory_type: investigation)</div>
+  <div class="load-item"><span class="icon">📋</span> <code>proposal</code> — Proposals Mnemolite (Partie 2 §A, memory_type: decision)</div>
+  <div class="load-item"><span class="icon">📦</span> <code>sys:snapshot</code> — Snapshots pré-mutation (/apply, memory_type: reference)</div>
+  <div class="load-item"><span class="icon">📊</span> <code>sys:diff</code> — Différentiels temporels (P7, memory_type: reference)</div>
+  <div class="load-item"><span class="icon">🔒</span> <code>sys:constitutional_violation</code> — Logs des violations (/apply §7b)</div>
+  <div class="load-item"><span class="icon">📄</span> <code>proposal.md</code> — Fichier proposal avec contexte exact</div>
+  <div class="load-item"><span class="icon">📄</span> <code>applied.md</code> — Preuve d'application</div>
+  <div class="load-item"><span class="icon">📄</span> <code>.lock</code> — Lock temporaire (expire 1h)</div>
+  <div class="load-item"><span class="icon">📄</span> <code>backup.md</code> — Archive V16 pré-mutation</div>
+</div>
+<div class="card">
+  <h3 style="color:var(--blue)">Lu par Dream <span class="scope-tag scope-ref">RÉFÉRENCÉ</span></h3>
+  <div class="load-item"><span class="icon">📖</span> <code>trace:fresh</code> — Frictions fraîches (format défini ici, contenu de V16)</div>
+  <div class="load-item"><span class="icon">📖</span> <code>sys:drift</code> — Dérives post-Ω (défini dans V16 §Ⅳ)</div>
+  <div class="load-item"><span class="icon">📖</span> <code>sys:protocol</code> — Protocoles Mnemolite (3 protocoles)</div>
+  <div class="load-item"><span class="icon">📖</span> <code>sys:extension</code> — Extensions symbiose (définies dans V16 §Ⅶ)</div>
+  <div class="load-item"><span class="icon">📖</span> <code>sys:pattern</code> + <code>sys:pattern:doubt</code> — Patterns et douteux (V16 §Ⅳ)</div>
+  <div class="load-item"><span class="icon">📖</span> <code>sys:history</code> + <code>sys:user:profile</code> — Historique et profil (V16 §Ⅳ)</div>
+  <div class="load-item"><span class="icon">📖</span> <code>sys:diff</code> — Dernier différentiel (créé par Dream P7)</div>
+  <div class="load-item"><span class="icon">📖</span> <code>expanse-v16.md</code> — L'Apex (cible des mutations)</div>
+  <div class="load-item"><span class="icon">📖</span> <code>expanse-brm.md</code> — Gabarit BRM (fichier externe)</div>
+  <div class="load-item"><span class="icon">📖</span> <code>doc/mutations/LOG.md</code> — Historique des mutations</div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SECTION ⅩⅢ : INCOHÉRENCES SOURCE -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h2>ⅩⅢ. Incohérences & Questions Ouvertes (dans expanse-dream.md)</h2>
+
+<div class="card sf">
+<table>
+<tr><th>ID</th><th>Problème</th><th>Gravité</th><th>Détail</th></tr>
+<tr><td>I1</td><td>5 types vs 4 dans la table</td><td style="color:var(--yellow)">MINEUR</td><td>Le format TRACE:FRESH déclare <code>{ECS|SEC|STYLE|MEMORY|BOOT}</code> mais la table de description ne liste que 4 types. STYLE est absent de la table.</td></tr>
+<tr><td>I2</td><td>Version footer ≠ header</td><td style="color:var(--yellow)">MINEUR</td><td>Le header dit "Version: 3.0 · Date: 2026-04-11" mais le footer dit "Expanse Dream v2.2 — 2026-03-18". Incohérence de version.</td></tr>
+<tr><td>I3</td><td>Passe 5 minimale</td><td style="color:var(--dim)">INFO</td><td>P5 est la seule passe sans action détaillée. Juste "Évalue tes outils et formats". Pas de search_memory, pas de critères précis.</td></tr>
+<tr><td>I4</td><td>Consommation P1 vs Partie 3</td><td style="color:var(--orange)">MOYEN</td><td>P1 dit "consommer SEULEMENT les traces avec BRM". La Partie 3 dit "TRACE:FRESH avec [PROPOSAL_OPEN] → garder avec tag sys:consumed". Deux mécanismes de consommation potentiels.</td></tr>
+<tr><td>I5</td><td>R7 dit "consommées après lecture"</td><td style="color:var(--orange)">MOYEN</td><td>R7 est ambiguë : "TRACE:FRESH consommées après lecture" contredit la consommation sélective de P1 (qui ne consomme que les traces avec BRM, pas toutes).</td></tr>
+<tr><td>I6</td><td>Partie 3 dit "Passes 0-6"</td><td style="color:var(--orange)">MOYEN</td><td>La Partie 3 dit "après les Passes 0-6" mais il y a 8 passes (0-7). P7 est exclue du output final ou c'est une erreur.</td></tr>
+<tr><td>I7</td><td>P7 <code>search_memory</code> sans préfixe MCP</td><td style="color:var(--yellow)">MINEUR</td><td>P7 utilise <code>search_memory</code> au lieu de <code>mcp_mnemolite_search_memory</code>. Incohérence de notation (toutes les autres passes utilisent le préfixe complet).</td></tr>
+<tr><td>I8</td><td>applied.md mentionne <code>expanse-apply.sh</code></td><td style="color:var(--dim)">INFO</td><td>L'étape 11 du /apply mentionne "Applied by: Dream (via expanse-apply.sh)" — ce script shell n'est pas défini dans le Dream et n'existe pas dans le projet. Probablement un artefact d'une ancienne version.</td></tr>
+</table>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- LÉGENDE -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h2>Légende</h2>
+
+<div class="grid2">
+<div class="card">
+  <h3>Scope des éléments</h3>
+  <div class="legend">
+    <div class="legend-item"><span class="scope-tag scope-def">DÉFINI</span> Spécifié dans expanse-dream.md</div>
+    <div class="legend-item"><span class="scope-tag scope-ref">RÉFÉRENCÉ</span> Mentionné mais défini dans un autre fichier</div>
+  </div>
+</div>
+<div class="card">
+  <h3>Types de traces</h3>
+  <div class="legend">
+    <div class="legend-item"><span class="tag tag-ecs">ECS</span> Miscalibration</div>
+    <div class="legend-item"><span class="tag tag-sec">SEC</span> Style insuffisant</div>
+    <div class="legend-item"><span class="tag tag-style">STYLE</span> Non documenté</div>
+    <div class="legend-item"><span class="tag tag-memory">MEMORY</span> Pattern non reconnu</div>
+    <div class="legend-item"><span class="tag tag-boot">BOOT</span> Dysfonctionnement démarrage</div>
+  </div>
+</div>
+<div class="card">
+  <h3>Statuts mutation</h3>
+  <div class="legend">
+    <div class="legend-item"><span class="badge badge-cond">PENDING</span> Proposal en attente</div>
+    <div class="legend-item"><span class="badge badge-auto">APPLIED</span> Mutation appliquée</div>
+    <div class="legend-item"><span class="badge badge-req">REJECTED</span> Proposal rejeté</div>
+    <div class="legend-item"><span class="badge" style="background:rgba(243,139,168,.15);color:var(--red)">ROLLED_BACK</span> Mutation annulée</div>
+    <div class="legend-item"><span class="badge badge-ext">FAILED</span> Vérification échouée</div>
+  </div>
+</div>
+<div class="card">
+  <h3>Saisons</h3>
+  <div class="legend">
+    <div class="legend-item"><span style="font-size:1rem">🧊</span> P0 Hiver — Inventaire</div>
+    <div class="legend-item"><span style="font-size:1rem">🌱</span> P1 Dégel — Frictions</div>
+    <div class="legend-item"><span style="font-size:1rem">🌿</span> P2 Printemps — Linter</div>
+    <div class="legend-item"><span style="font-size:1rem">☀️</span> P3 Été — Émergence</div>
+    <div class="legend-item"><span style="font-size:1rem">🍂</span> P4 Automne — Élagage</div>
+    <div class="legend-item"><span style="font-size:1rem">🏗️</span> P5 Préparation — Architecture</div>
+    <div class="legend-item"><span style="font-size:1rem">🩺</span> P6 Diagnostic — Santé</div>
+    <div class="legend-item"><span style="font-size:1rem">📊</span> P7 Métrologie — Différentiel</div>
+  </div>
+</div>
+</div>
+
+<div style="text-align:center;color:var(--dim);font-size:.75rem;margin-top:2rem;border-top:1px solid var(--border);padding-top:1rem">
+☽ Dream v3.0 — Source : expanse-dream.md uniquement · « Ce n'est pas un pipeline. C'est un jardin. »<br>
+Σ→Ψ⇌Φ→Ω→Μ — Face à l'immensité de la matrice, quel signe vas-tu inscrire aujourd'hui ?
+</div>
+
+</body>
+</html>

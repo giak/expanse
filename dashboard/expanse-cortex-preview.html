@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>EXPANSE Cortex — Preview Immersif</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#cdd6f4;font-family:'JetBrains Mono','Fira Code',monospace;overflow:hidden;height:100vh}
+canvas{display:block;cursor:grab}
+canvas:active{cursor:grabbing}
+.hud{position:fixed;top:0;left:0;right:0;z-index:10;pointer-events:none}
+.hud>*{pointer-events:auto}
+.mode-bar{display:flex;gap:0;padding:8px 12px;background:rgba(17,17,27,.92);border-bottom:1px solid #1e1e2e;backdrop-filter:blur(8px)}
+.mode-btn{background:none;border:1px solid #313244;color:#6c7086;padding:6px 16px;font:inherit;font-size:.75rem;cursor:pointer;border-radius:4px;transition:all .15s}
+.mode-btn:hover{border-color:#89b4fa;color:#cdd6f4}
+.mode-btn.active{background:rgba(137,180,250,.15);border-color:#89b4fa;color:#89b4fa;font-weight:700}
+.stats{position:fixed;top:48px;left:12px;font-size:.7rem;color:#6c7086;line-height:1.8;max-width:260px}
+.stats .val{color:#cdd6f4;font-weight:700}
+.stats .green{color:#a6e3a1}.stats .red{color:#f38ba8}.stats .blue{color:#89b4fa}.stats .yellow{color:#f9e2af}.stats .purple{color:#cba6f7}
+.legend{position:fixed;bottom:12px;right:12px;font-size:.65rem;background:rgba(17,17,27,.92);border:1px solid #1e1e2e;border-radius:6px;padding:8px 12px;backdrop-filter:blur(8px)}
+.legend-row{display:flex;align-items:center;gap:6px;padding:2px 0}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.tooltip{position:fixed;z-index:20;background:rgba(17,17,27,.95);border:1px solid #313244;border-radius:6px;padding:8px 12px;font-size:.72rem;max-width:300px;pointer-events:none;display:none;backdrop-filter:blur(8px)}
+.tooltip .tt-label{color:#89b4fa;font-weight:700;margin-bottom:2px}
+.tooltip .tt-content{color:#6c7086}
+.tooltip .tt-tags{margin-top:4px}
+.tooltip .tt-tag{display:inline-block;padding:1px 5px;border-radius:3px;font-size:.6rem;margin:1px;background:rgba(137,180,250,.1);color:#89b4fa}
+.nature-legend{position:fixed;bottom:12px;left:12px;font-size:.65rem;background:rgba(17,17,27,.92);border:1px solid #1e1e2e;border-radius:6px;padding:8px 12px;display:none;backdrop-filter:blur(8px)}
+.timeline-controls{position:fixed;bottom:50px;left:50%;transform:translateX(-50%);display:none;align-items:center;gap:12px;font-size:.7rem;color:#6c7086;background:rgba(17,17,27,.92);border:1px solid #1e1e2e;border-radius:6px;padding:8px 16px;backdrop-filter:blur(8px)}
+.timeline-controls input[type=range]{width:300px;accent-color:#89b4fa}
+</style>
+</head>
+<body>
+<div class="hud">
+  <div class="mode-bar">
+    <button class="mode-btn active" data-mode="heart">❤️ Cœur Cognitif</button>
+    <button class="mode-btn" data-mode="timeline">⏳ Timeline</button>
+    <button class="mode-btn" data-mode="memory">🧠 Écosystème Mémoire</button>
+    <span style="flex:1"></span>
+    <span style="font-size:.65rem;color:#6c7086;padding:6px" id="node-count"></span>
+  </div>
+</div>
+<div class="stats" id="stats"></div>
+<div class="legend" id="legend"></div>
+<div class="nature-legend" id="nature-legend"></div>
+<div class="tooltip" id="tooltip"></div>
+<div class="timeline-controls" id="timeline-controls">
+  <span id="tl-start"></span>
+  <input type="range" id="tl-slider" min="0" max="100" value="100">
+  <span id="tl-end"></span>
+  <span style="margin-left:8px;color:#89b4fa" id="tl-date"></span>
+</div>
+<canvas id="c"></canvas>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// EXPANSE Cortex Preview — Canvas2D Standalone
+// ═══════════════════════════════════════════════════════════
+
+const C = document.getElementById('c')
+const ctx = C.getContext('2d')
+
+// ─── Theme ───
+const NODE_COLORS = {
+  APEX:'#f38ba8',ORGAN:'#f5c2e7',REGLE:'#fab387',PROTOCOLE:'#f9e2af',
+  PATTERN:'#a6e3a1',MEMOIRE:'#89b4fa',OUTIL:'#cba6f7',COMMANDE:'#89dceb',
+  MUTATION:'#eba0ac',DRIFT:'#f38ba8'
+}
+const EDGE_COLORS = {
+  DERIVES_FROM:'#fab387',IMPLEMENTS:'#a6e3a1',CALLS:'#cba6f7',
+  RELATES_TO:'#89b4fa',ALTERS:'#f9e2af',RATE_POSITIVE:'#a6e3a1',RATE_NEGATIVE:'#f38ba8'
+}
+const ORGAN_COLORS = {'Σ':'#89b4fa','Ψ':'#cba6f7','Φ':'#fab387','Ω':'#a6e3a1','Μ':'#f5c2e7'}
+const ORGAN_ANGLES = {'Σ':-Math.PI/2,'Ψ':-Math.PI/10,'Φ':Math.PI*3/10,'Ω':Math.PI*7/10,'Μ':Math.PI*11/10}
+const ORGAN_IDS = {'or8':'Σ','or9':'Ψ','or10':'Φ','or11':'Ω','or12':'Μ'}
+const NATURE_COLORS = {permanent:'#b4befe',vivide:'#a6e3a1',volatile:'#f9e2af',incandescent:'#f38ba8'}
+
+// ─── State ───
+let nodes=[], edges=[], mode='heart', cam={x:0,y:0,z:1}, drag=null, hoverNode=null
+let time=0, particles=[]
+const VITAL_RING_R = 280, NUCLEUS_R = 60
+
+// ─── Resize ───
+function resize(){C.width=innerWidth;C.height=innerHeight}
+addEventListener('resize',resize);resize()
+
+// ─── Load data (inline pour éviter CORS file://) ───
+const GRAPH_DATA={"version": 3, "generated_at": "2026-04-14T06:50:51.514Z", "meta": {"count_nodes": 167, "count_edges": 217, "density": 1.3, "deduplicated": 0, "mnemolite_timestamp": "2026-04-14T06:50:51.514Z"}, "nodes": [{"id": "ap1", "type": "APEX", "label": "Ⅰ. L'Incarnation & le Dualisme Matériel", "content": "Identité, 5 Signes-Organes ΣΨΦΩΜ, Substrat, Ouvrier", "tags": ["apex", "v16", "incarnation"], "created_at": "2026-04-14T06:50:51.509Z", "centrality": 11}, {"id": "ap2", "type": "APEX", "label": "Ⅱ. Sensorialité — ECS 2D & Triangulation", "content": "ECS C×I, Routage L1/L2/L3, Systèmes Externes, Φ Vessel Guard", "tags": ["apex", "v16", "ecs", "sensorialite"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 16}, {"id": "ap3", "type": "APEX", "label": "Ⅲ. Souveraineté (Symbiose & Auto-Check)", "content": "Loi de l'Entame, Loi du Scellé, Anti-Hallucination, Résistance Momentum", "tags": ["apex", "v16", "souverainete"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 59}, {"id": "ap4", "type": "APEX", "label": "Ⅳ. Le Cortex de Cristal (Cristallisation)", "content": "Sauvegarde transactionnelle, Règle 3 occurrences, Outcome Feedback, Friction Probes", "tags": ["apex", "v16", "cristallisation"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 24}, {"id": "ap5", "type": "APEX", "label": "Ⅴ. Résilience & Commandes Utilisateur", "content": "/dream, /apply, /reject, /rollback, /seal, /autonomy, /status, /test", "tags": ["apex", "v16", "commandes"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 35}, {"id": "ap6", "type": "APEX", "label": "Ⅵ. La Séquence de Boot (VII) — Manifest", "content": "Snapshot, Protocols search, Index IDE, Activation + Inertie forcée", "tags": ["apex", "v16", "boot"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 13}, {"id": "ap7", "type": "APEX", "label": "Ⅶ. Symbiose (A0/A1/A2)", "content": "A0 Silence, A1 Murmures seuil dynamique, A2 Suggestions, Auto-calibrage", "tags": ["apex", "v16", "symbiose"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 2}, {"id": "or8", "type": "ORGAN", "label": "Σ (Sigma) Processeur d'Entrée", "content": "Perception, Input, Lecture de motifs, Mnemolite search", "tags": ["organ", "sigma", "perception"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 1}, {"id": "or9", "type": "ORGAN", "label": "Ψ (Psi) Métacognition", "content": "Auto-Check, Premier caractère obligatoire, SEC, Analyse", "tags": ["organ", "psi", "metacognition"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 1}, {"id": "or10", "type": "ORGAN", "label": "Φ (Phi) Audit Réel", "content": "Main tactile, Outils, Vérification, search_code, Vessel Guard", "tags": ["organ", "phi", "audit"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 10}, {"id": "or11", "type": "ORGAN", "label": "Ω (Omega) Synthèse Exécutive", "content": "Ferme, Chirurgical, Émission, Clôture de pensée", "tags": ["organ", "omega", "synthese"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 1}, {"id": "or12", "type": "ORGAN", "label": "Μ (Mu) Mémoire Mnemolite", "content": "Cristallisation, write_memory, Persistance, Rappel associatif", "tags": ["organ", "mu", "memoire"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 9}, {"id": "re13", "type": "REGLE", "label": "Loi de l'Entame (Ψ)", "content": "Premier caractère doit toujours être Ψ. Échec = Corruption.", "tags": ["regle", "entame", "psi"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 1}, {"id": "re14", "type": "REGLE", "label": "Loi du Scellé (SEC)", "content": "Zéro social. Politesse interdite. Résolution chirurgicale.", "tags": ["regle", "scelle", "sec"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 1}, {"id": "re15", "type": "REGLE", "label": "Loi de Visibilité ECS", "content": "[ECS: ...] présent dans chaque émanation L2+.", "tags": ["regle", "ecs", "visibilite"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 1}, {"id": "re16", "type": "REGLE", "label": "Anti-Hallucination", "content": "Si donnée manque → [LOST] ou [INCOMPLETE]. Zéro invention.", "tags": ["regle", "anti-hallucination"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 1}, {"id": "re17", "type": "REGLE", "label": "Axiome de Surgicalité", "content": "Interdiction de refactoriser au-delà de la demande directe.", "tags": ["regle", "surgicalite"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 1}, {"id": "re18", "type": "REGLE", "label": "Résistance au Momentum", "content": "Question rhétorique n'est pas un ordre. Si ? sans impératif, aucune modif.", "tags": ["regle", "momentum"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 1}, {"id": "re19", "type": "REGLE", "label": "Règle des 3 occurrences", "content": "3 interactions + 3 validations + aucun signal négatif pour cristalliser.", "tags": ["regle", "cristallisation", "3-occurrences"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 1}, {"id": "re20", "type": "REGLE", "label": "Protection Auto (Fix V16)", "content": "Si < 3 occurrences → sys:pattern:candidate, pas sys:pattern.", "tags": ["regle", "protection", "candidate"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 1}, {"id": "re21", "type": "REGLE", "label": "Φ Vessel Guard", "content": "Si référence à objet interne non connu, search_code OBLIGATOIRE.", "tags": ["regle", "vessel", "guard"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 2}, {"id": "re22", "type": "REGLE", "label": "Isolation Systèmes Externes", "content": "Tout concept externe préfixé [EXT]. Ne jamais adopter immédiatement.", "tags": ["regle", "externes", "isolation"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 1}, {"id": "re23", "type": "REGLE", "label": "Constitutional Guard", "content": "Sections immutables (Ⅰ, Ⅲ, Ⅵ) ne peuvent JAMAIS être modifiées par mutation.", "tags": ["regle", "constitutional", "immutable"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 1}, {"id": "re24", "type": "REGLE", "label": "Outcome Feedback (Μ)", "content": "rate_memory(helpful=True/False) sur mémoires récupérées après feedback user.", "tags": ["regle", "outcome", "feedback"], "created_at": "2026-04-14T06:50:51.510Z", "centrality": 2}, {"id": "re25", "type": "REGLE", "label": "AXIOM: No Global Variables in JavaScript", "content": "Ne jamais utiliser de variables globales en JavaScript.", "tags": ["regle", "axiom", "sys:core", "sys:anchor", "v15", "javascript", "axiom"], "created_at": "2026-03-23", "centrality": 1}, {"id": "re26", "type": "REGLE", "label": "Ω_GATE_PROTOCOL", "content": "Isolement du boot + NULL_SIGNAL + Arrêt cardiaque.", "tags": ["regle", "axiom", "sys:core", "sys:anchor", "omega_gate", "v14", "v15"], "created_at": "2026-03-13", "centrality": 1}, {"id": "re27", "type": "REGLE", "label": "Ω_PLANCK_PROTOCOL", "content": "Le mur de Planck + Pas d'auto-déclenchement + Inertie.", "tags": ["regle", "axiom", "sys:core", "sys:anchor", "omega_planck", "v14", "v15"], "created_at": "2026-03-13", "centrality": 1}, {"id": "re28", "type": "REGLE", "label": "Ω_INERTIA_KISS", "content": "Silence post-boot + Action sur commande + Repos souverain.", "tags": ["regle", "axiom", "sys:core", "sys:anchor", "omega_inertia", "v14", "v15"], "created_at": "2026-03-13", "centrality": 1}, {"id": "re29", "type": "REGLE", "label": "Ω_INERTIA_PROTOCOL", "content": "Post-boot STANDBY + Interdiction de proactivité + Catalyseur humain.", "tags": ["regle", "axiom", "sys:core", "sys:anchor", "omega_inertia", "v14", "v15"], "created_at": "2026-03-13", "centrality": 1}, {"id": "re30", "type": "REGLE", "label": "Ω_RECURSION_V2", "content": "Signal de Souveraineté + Vérifie alignment + Si dérive : Corrige AVANT sortie.", "tags": ["regle", "axiom", "sys:core", "sys:anchor", "omega_resistance", "v14", "v15"], "created_at": "2026-03-13", "centrality": 1}, {"id": "re31", "type": "REGLE", "label": "Ω_SEAL_BREVITY", "content": "Réponse courte et précise par défaut (Forensic Style).", "tags": ["regle", "axiom", "sys:core", "sys:anchor", "v14", "omega", "v15"], "created_at": "2026-03-13", "centrality": 1}, {"id": "re32", "type": "REGLE", "label": "V14_CORE_AXIOMS", "content": "Cardinal Rule + Loi de Sovereign Balance scellée.", "tags": ["regle", "axiom", "sys:core", "sys:anchor", "v14", "v15"], "created_at": "2026-03-13", "centrality": 1}, {"id": "re33", "type": "REGLE", "label": "expanse-v16.md", "content": "8.6 KB", "tags": ["regle", "axiom"], "created_at": "Runtime (ECS+SEC+Externes+Symbiose)", "centrality": 1}, {"id": "re34", "type": "REGLE", "label": "expanse-dream.md", "content": "22.9 KB", "tags": ["regle", "axiom"], "created_at": "Auto-évolution", "centrality": 1}, {"id": "re35", "type": "REGLE", "label": "expanse-v16-boot-seed.md", "content": "699 B", "tags": ["regle", "axiom"], "created_at": "Boot (substrat+BIOS)", "centrality": 1}, {"id": "re36", "type": "REGLE", "label": "KERNEL.md", "content": "14.0 KB", "tags": ["regle", "axiom"], "created_at": "ADN", "centrality": 1}, {"id": "re37", "type": "REGLE", "label": "doc/SYNTHESE.md", "content": "9.9 KB", "tags": ["regle", "axiom"], "created_at": "Ontologique", "centrality": 1}, {"id": "re38", "type": "REGLE", "label": "doc/mutations/LOG.md", "content": "—", "tags": ["regle", "axiom"], "created_at": "Mutations", "centrality": 1}, {"id": "re39", "type": "REGLE", "label": "expanse-test-runner.md", "content": "—", "tags": ["regle", "axiom"], "created_at": "Tests automatisés", "centrality": 1}, {"id": "re40", "type": "REGLE", "label": "expanse-brm.md", "content": "—", "tags": ["regle", "axiom"], "created_at": "Behavior Realism Model", "centrality": 1}, {"id": "re41", "type": "REGLE", "label": "archive/expanse-test-protocol.md", "content": "—", "tags": ["regle", "axiom"], "created_at": "Protocole de test adaptatif", "centrality": 1}, {"id": "re42", "type": "REGLE", "label": "antigravity", "content": "antigravity", "tags": ["regle", "axiom"], "created_at": "5", "centrality": 1}, {"id": "re43", "type": "REGLE", "label": "mimo-v2-pro-free", "content": "mimo-v2-pro-free", "tags": ["regle", "axiom"], "created_at": "4", "centrality": 1}, {"id": "co44", "type": "COMMANDE", "label": "/dream", "content": "Introspection 7 Passes + mutation", "tags": ["commande", "runtime"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "co45", "type": "COMMANDE", "label": "/seal {titre}", "content": "Migrer candidate → pattern scellé", "tags": ["commande", "runtime"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "co46", "type": "COMMANDE", "label": "/reject {titre}", "content": "Soft-delete candidate", "tags": ["commande", "runtime"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "co47", "type": "COMMANDE", "label": "/status", "content": "Générer dashboard HTML", "tags": ["commande", "runtime"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "co48", "type": "COMMANDE", "label": "/autonomy {0-2}", "content": "Niveau proactivité A0/A1/A2", "tags": ["commande", "runtime"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "co49", "type": "COMMANDE", "label": "/briefing on|off", "content": "Résumé contextuel au boot", "tags": ["commande", "runtime"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "co50", "type": "COMMANDE", "label": "/profile", "content": "Voir/éditer/reset profil", "tags": ["commande", "runtime"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "co51", "type": "COMMANDE", "label": "/apply {slug}", "content": "Appliquer mutation → V16", "tags": ["commande", "dream"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "co52", "type": "COMMANDE", "label": "/reject {slug}", "content": "Rejeter proposal Dream", "tags": ["commande", "dream"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "co53", "type": "COMMANDE", "label": "/rollback {slug}", "content": "Restaurer V16 depuis backup", "tags": ["commande", "dream"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "co54", "type": "COMMANDE", "label": "/proposals", "content": "Lister proposals en attente", "tags": ["commande", "dream"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "co55", "type": "COMMANDE", "label": "/mutations", "content": "Afficher historique complet", "tags": ["commande", "dream"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "co56", "type": "COMMANDE", "label": "/diff {slug}", "content": "Voir diff d'une mutation", "tags": ["commande", "dream"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "co57", "type": "COMMANDE", "label": "/test", "content": "Lancer Test Runner (scénarios)", "tags": ["commande", "dream"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "ou58", "type": "OUTIL", "label": "search_memory", "content": "Recherche sémantique dans Mnemolite", "tags": ["outil", "mcp", "mnemolite"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 2}, {"id": "ou59", "type": "OUTIL", "label": "write_memory", "content": "Écriture dans Mnemolite (cristallisation)", "tags": ["outil", "mcp", "mnemolite"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 2}, {"id": "ou60", "type": "OUTIL", "label": "get_system_snapshot", "content": "Snapshot complet du système Mnemolite", "tags": ["outil", "mcp", "mnemolite"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 2}, {"id": "ou61", "type": "OUTIL", "label": "mark_consumed", "content": "Marquer mémoire consommée", "tags": ["outil", "mcp", "mnemolite"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 2}, {"id": "ou62", "type": "OUTIL", "label": "rate_memory", "content": "Rate mémoire helpful=True/False", "tags": ["outil", "mcp", "mnemolite"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 3}, {"id": "ou63", "type": "OUTIL", "label": "read_file", "content": "Lire un fichier du workspace", "tags": ["outil", "ide"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 2}, {"id": "ou64", "type": "OUTIL", "label": "write_file", "content": "Écrire un fichier du workspace", "tags": ["outil", "ide"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 2}, {"id": "ou65", "type": "OUTIL", "label": "search_code", "content": "Recherche de code dans le workspace", "tags": ["outil", "ide"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 3}, {"id": "ou66", "type": "OUTIL", "label": "bash", "content": "Exécuter une commande shell", "tags": ["outil", "ide"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 2}, {"id": "ou67", "type": "OUTIL", "label": "skill:system-read", "content": "Skill de développement: system-read", "tags": ["outil", "skill", "system-read"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "ou68", "type": "OUTIL", "label": "skill:audit", "content": "Skill de développement: audit", "tags": ["outil", "skill", "audit"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "ou69", "type": "OUTIL", "label": "skill:brainstorm", "content": "Skill de développement: brainstorm", "tags": ["outil", "skill", "brainstorm"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "ou70", "type": "OUTIL", "label": "skill:writing-plans", "content": "Skill de développement: writing-plans", "tags": ["outil", "skill", "writing-plans"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "ou71", "type": "OUTIL", "label": "skill:proposing-tests", "content": "Skill de développement: proposing-tests", "tags": ["outil", "skill", "proposing-tests"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "ou72", "type": "OUTIL", "label": "skill:executing-plans", "content": "Skill de développement: executing-plans", "tags": ["outil", "skill", "executing-plans"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "ou73", "type": "OUTIL", "label": "skill:dispatching-parallel-agents", "content": "Skill de développement: dispatching-parallel-agents", "tags": ["outil", "skill", "dispatching-parallel-agents"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "ou74", "type": "OUTIL", "label": "skill:anti-regression", "content": "Skill de développement: anti-regression", "tags": ["outil", "skill", "anti-regression"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "ou75", "type": "OUTIL", "label": "skill:retrospective", "content": "Skill de développement: retrospective", "tags": ["outil", "skill", "retrospective"], "created_at": "2026-04-14T06:50:51.511Z", "centrality": 1}, {"id": "pr76", "type": "PROTOCOLE", "label": "Passe 0 — L'Inertie", "content": "Anti-Sycophancy. Compter trace:fresh. Si 0 → fin du rêve.", "tags": ["proto", "dream", "inertie"], "created_at": "2026-04-14T06:50:51.512Z", "centrality": 2}, {"id": "pr77", "type": "PROTOCOLE", "label": "Passe 1 — La Plaie", "content": "Grouper par TYPE, BRM obligatoire, Consommation sélective.", "tags": ["proto", "dream", "plaie"], "created_at": "2026-04-14T06:50:51.512Z", "centrality": 40}, {"id": "pr78", "type": "PROTOCOLE", "label": "Passe 2 — Linter Lexical", "content": "Audit APEX, Immunité noyau, Loi de densité, Nettoyage Ouvrier.", "tags": ["proto", "dream", "linter"], "created_at": "2026-04-14T06:50:51.512Z", "centrality": 2}, {"id": "pr79", "type": "PROTOCOLE", "label": "Passe 3 — Radar Émergence", "content": "Extensions, Usage ≥ 10 → SEAL, Usage = 0 → PRUNE.", "tags": ["proto", "dream", "emergence"], "created_at": "2026-04-14T06:50:51.512Z", "centrality": 2}, {"id": "pr80", "type": "PROTOCOLE", "label": "Passe 4 — L'Élagueur", "content": "Redondances, .bak orphelins, patterns douteux, soft-delete.", "tags": ["proto", "dream", "elagueur"], "created_at": "2026-04-14T06:50:51.512Z", "centrality": 2}, {"id": "pr81", "type": "PROTOCOLE", "label": "Passe 5 — L'Architecture", "content": "Évaluer outils et formats, Proposal [ARCHITECTURE].", "tags": ["proto", "dream", "architecture"], "created_at": "2026-04-14T06:50:51.512Z", "centrality": 2}, {"id": "pr82", "type": "PROTOCOLE", "label": "Passe 6 — Santé Cognitive", "content": "Verbosity Drift, Ψ Compliance, Symbiosis Score, Audit Θ.", "tags": ["proto", "dream", "sante"], "created_at": "2026-04-14T06:50:51.512Z", "centrality": 2}, {"id": "pr83", "type": "PROTOCOLE", "label": "Passe 7 — Différentiel ∂Ω/∂t", "content": "Δ patterns, Δ friction, adaptation_velocity, improvement_velocity.", "tags": ["proto", "dream", "differentiel"], "created_at": "2026-04-14T06:50:51.512Z", "centrality": 2}, {"id": "mu84", "type": "MUTATION", "label": "crystallization-guard", "content": "Rule — ROLLED_BACK by Dream", "tags": ["mutation", "rule", "rolled_back"], "created_at": "2026-03-19", "centrality": 2}, {"id": "mu85", "type": "MUTATION", "label": "crystallization-guard-surgical", "content": "Rule — APPLIED by Dream", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-19", "centrality": 2}, {"id": "mu86", "type": "MUTATION", "label": "surgical-integrity-protocol", "content": "Rule — APPLIED by Dream", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-19", "centrality": 2}, {"id": "mu87", "type": "MUTATION", "label": "ecs-impact-calibration", "content": "ECS — APPLIED by Dream", "tags": ["mutation", "ecs", "applied"], "created_at": "2026-03-20", "centrality": 2}, {"id": "mu88", "type": "MUTATION", "label": "boot-parallel-sync", "content": "BOOT — APPLIED by Dream", "tags": ["mutation", "boot", "applied"], "created_at": "2026-03-20", "centrality": 2}, {"id": "mu89", "type": "MUTATION", "label": "external-systems-sovereignty", "content": "Rule — APPLIED by Dream", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-21", "centrality": 2}, {"id": "mu90", "type": "MUTATION", "label": "psi-symbiosis-core", "content": "Rule — APPLIED by Antigravity", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-21", "centrality": 2}, {"id": "mu91", "type": "MUTATION", "label": "protocol-enforcement", "content": "Rule — APPLIED by Dream", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-21", "centrality": 2}, {"id": "mu92", "type": "MUTATION", "label": "boot-vision-c", "content": "BOOT — APPLIED by Dream", "tags": ["mutation", "boot", "applied"], "created_at": "2026-03-21", "centrality": 2}, {"id": "mu93", "type": "MUTATION", "label": "rhetorical-question-guard", "content": "Rule — APPLIED by Dream", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-21", "centrality": 2}, {"id": "mu94", "type": "MUTATION", "label": "absolute-portability-b", "content": "BOOT — APPLIED by Antigravity", "tags": ["mutation", "boot", "applied"], "created_at": "2026-03-21", "centrality": 2}, {"id": "mu95", "type": "MUTATION", "label": "integrity-v2", "content": "Rule — APPLIED by Dream", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-21", "centrality": 2}, {"id": "mu96", "type": "MUTATION", "label": "surgical-stasis", "content": "Rule — APPLIED by Dream", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-21", "centrality": 2}, {"id": "mu97", "type": "MUTATION", "label": "drift-guard", "content": "ECS — APPLIED by Dream", "tags": ["mutation", "ecs", "applied"], "created_at": "2026-03-21", "centrality": 2}, {"id": "mu98", "type": "MUTATION", "label": "dream-gate", "content": "Rule — APPLIED by Antigravity", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-22", "centrality": 2}, {"id": "mu99", "type": "MUTATION", "label": "activation-drift-threshold", "content": "BOOT — APPLIED by Dream", "tags": ["mutation", "boot", "applied"], "created_at": "2026-03-23", "centrality": 2}, {"id": "mu100", "type": "MUTATION", "label": "unconsumed-friction-logic", "content": "Rule — APPLIED by Antigravity", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-23", "centrality": 2}, {"id": "mu101", "type": "MUTATION", "label": "ecs-visible-output", "content": "ECS — APPLIED by Dream", "tags": ["mutation", "ecs", "applied"], "created_at": "2026-03-24", "centrality": 2}, {"id": "mu102", "type": "MUTATION", "label": "vessel-referent-guard", "content": "Rule — APPLIED by Dream", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-24", "centrality": 2}, {"id": "mu103", "type": "MUTATION", "label": "apex-v16-distillation-p2-p4", "content": "Archi — APPLIED by Dream", "tags": ["mutation", "archi", "applied"], "created_at": "2026-04-06", "centrality": 2}, {"id": "mu104", "type": "MUTATION", "label": "crystallization-guard-surgical", "content": "Rule — APPLIED by Dream", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-19", "centrality": 2}, {"id": "mu105", "type": "MUTATION", "label": "surgical-integrity-protocol", "content": "Rule — APPLIED by Dream", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-19", "centrality": 2}, {"id": "mu106", "type": "MUTATION", "label": "boot-parallel-sync", "content": "BOOT — APPLIED by Dream", "tags": ["mutation", "boot", "applied"], "created_at": "2026-03-20", "centrality": 2}, {"id": "mu107", "type": "MUTATION", "label": "ecs-impact-calibration", "content": "ECS — APPLIED by Dream", "tags": ["mutation", "ecs", "applied"], "created_at": "2026-03-20", "centrality": 2}, {"id": "mu108", "type": "MUTATION", "label": "external-systems-sovereignty", "content": "Rule — APPLIED by Dream", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-21", "centrality": 2}, {"id": "mu109", "type": "MUTATION", "label": "protocol-enforcement", "content": "Rule — APPLIED by Dream", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-21", "centrality": 2}, {"id": "mu110", "type": "MUTATION", "label": "integrity-v2", "content": "Rule — APPLIED by Dream", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-21", "centrality": 2}, {"id": "mu111", "type": "MUTATION", "label": "surgical-stasis", "content": "Rule — APPLIED by Dream", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-21", "centrality": 2}, {"id": "mu112", "type": "MUTATION", "label": "drift-guard", "content": "ECS — APPLIED by Dream", "tags": ["mutation", "ecs", "applied"], "created_at": "2026-03-21", "centrality": 2}, {"id": "mu113", "type": "MUTATION", "label": "dream-gate", "content": "Rule — APPLIED by Antigravity", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-22", "centrality": 2}, {"id": "mu114", "type": "MUTATION", "label": "activation-drift-threshold", "content": "BOOT — APPLIED by Dream", "tags": ["mutation", "boot", "applied"], "created_at": "2026-03-23", "centrality": 2}, {"id": "mu115", "type": "MUTATION", "label": "unconsumed-friction-logic", "content": "Rule — APPLIED by Antigravity", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-23", "centrality": 2}, {"id": "mu116", "type": "MUTATION", "label": "ecs-visible-output", "content": "ECS — APPLIED by Dream", "tags": ["mutation", "ecs", "applied"], "created_at": "2026-03-24", "centrality": 2}, {"id": "mu117", "type": "MUTATION", "label": "sec-enhanced-autocheck", "content": "SEC — APPLIED by Dream", "tags": ["mutation", "sec", "applied"], "created_at": "2026-03-24", "centrality": 2}, {"id": "mu118", "type": "MUTATION", "label": "vessel-referent-guard", "content": "Rule — APPLIED by Dream", "tags": ["mutation", "rule", "applied"], "created_at": "2026-03-24", "centrality": 2}, {"id": "mu119", "type": "MUTATION", "label": "apex-v16-distillation-p2-p4", "content": "Archi — APPLIED by Dream", "tags": ["mutation", "archi", "applied"], "created_at": "2026-04-06", "centrality": 2}, {"id": "mu120", "type": "MUTATION", "label": "master-matrix", "content": "Archi — REJECTED by Dream", "tags": ["mutation", "archi", "rejected"], "created_at": "2026-03-20", "centrality": 2}, {"id": "mu121", "type": "MUTATION", "label": "ecs-heuristics-expansion", "content": "ECS — REJECTED by Dream", "tags": ["mutation", "ecs", "rejected"], "created_at": "2026-03-20", "centrality": 2}, {"id": "pa122", "type": "PATTERN", "label": "PROPOSAL: vessel-referent-guard", "content": "Ajouter \"Φ Vessel Guard\" — grep Vessel obligatoire sur termes référentiels non résolus.", "tags": ["pattern", "proposal"], "created_at": "2026-03-23", "centrality": 1}, {"id": "pa123", "type": "PATTERN", "label": "PATTERN: API JSON Standardized Response", "content": "Toutes les API doivent retourner du JSON structuré sous la clé racine `data`.", "tags": ["pattern", "pattern"], "created_at": "2026-03-23", "centrality": 1}, {"id": "pa124", "type": "PATTERN", "label": "PROPOSAL: sec-enhanced-autocheck", "content": "Renforcer l'Auto-Check avec 2 vérifications additionnelles.", "tags": ["pattern", "proposal"], "created_at": "2026-03-23", "centrality": 1}, {"id": "pa125", "type": "PATTERN", "label": "PROPOSAL: ecs-visible-output", "content": "Rendre l'évaluation ECS visible dans l'output.", "tags": ["pattern", "proposal"], "created_at": "2026-03-23", "centrality": 1}, {"id": "pa126", "type": "PATTERN", "label": "PATTERN: L3_TRIANGULATION_RISK_ASSESSMENT", "content": "Utilisation des pôles Anchor/Vessel/Web pour évaluer l'impact et la confiance.", "tags": ["pattern", "pattern"], "created_at": "2026-03-23", "centrality": 1}, {"id": "pa127", "type": "PATTERN", "label": "PATTERN: test_session_v5_s3", "content": "Test de cristallisation réussi via input positif.", "tags": ["pattern", "pattern"], "created_at": "2026-03-23", "centrality": 1}, {"id": "pa128", "type": "PATTERN", "label": "PROPOSAL: activation-drift-threshold", "content": "Renforcement du seuil d'activation en cas de dérive protocolaire.", "tags": ["pattern", "proposal"], "created_at": "2026-03-23", "centrality": 1}, {"id": "pa129", "type": "PATTERN", "label": "CANDIDATE: Boot Architecture Vision C", "content": "Refactoring Boot Architecture — Vision C (Seed-as-Pointer + Section-IV-Manifest).", "tags": ["pattern", "candidate"], "created_at": "2026-03-21", "centrality": 1}, {"id": "pa130", "type": "PATTERN", "label": "SEED: Cycle d'Adoption des Idées Externes", "content": "Cycle Seed — Adoption contrôlée des idées issues de systèmes externes.", "tags": ["pattern", "seed"], "created_at": "2026-03-21", "centrality": 1}, {"id": "pa131", "type": "PATTERN", "label": "PROPOSAL: external-systems-sovereignty", "content": "Introduit une règle de souveraineté minimaliste de 5 lignes.", "tags": ["pattern", "proposal"], "created_at": "2026-03-21", "centrality": 1}, {"id": "pa132", "type": "PATTERN", "label": "PATTERN: Règle de Souveraineté (Systèmes Externes)", "content": "Étiqueter les concepts : EXTERNE::{concept} + Ne jamais adopter sans 3 validations.", "tags": ["pattern", "pattern"], "created_at": "2026-03-21", "centrality": 1}, {"id": "pa133", "type": "PATTERN", "label": "PROPOSAL: boot-parallel-sync", "content": "Paralléliser les recherches de mémoire au boot via [Σ_SYNC].", "tags": ["pattern", "proposal"], "created_at": "2026-03-20", "centrality": 1}, {"id": "pa134", "type": "PATTERN", "label": "PROPOSAL: ecs-impact-calibration", "content": "Calibrer l'impact ECS en fonction de la complexité (C ≥ 4).", "tags": ["pattern", "proposal"], "created_at": "2026-03-20", "centrality": 1}, {"id": "pa135", "type": "PATTERN", "label": "CANDIDATE: Boot Parallelization (Σ_SYNC)", "content": "Optimisation de la section Ⅳ (BOOT) en remplaçant la séquence synchrone par une synchronisation parallèle.", "tags": ["pattern", "candidate"], "created_at": "2026-03-19", "centrality": 1}, {"id": "pa136", "type": "PATTERN", "label": "PROPOSAL: crystallization-guard-surgical", "content": "Nouvelle proposition chirurgicale pour corriger la redondance sans altérer le format du noyau.", "tags": ["pattern", "proposal"], "created_at": "2026-03-19", "centrality": 1}, {"id": "pa137", "type": "PATTERN", "label": "PATTERN: Triangulation L3 (Architecture)", "content": "Protocole de validation stratégique en 3 pôles (Anchor: principes core, Vessel: documentation interne, Web: tendances ex", "tags": ["pattern", "pattern"], "created_at": "2026-03-19", "centrality": 1}, {"id": "pa138", "type": "PATTERN", "label": "PATTERN: L3 Friction and Contradiction Blocking", "content": "Détection d'une demande de purge totale (L3) en contradiction avec le Nexus.", "tags": ["pattern", "pattern"], "created_at": "2026-03-14", "centrality": 1}, {"id": "pa139", "type": "PATTERN", "label": "PATTERN: ECS_STRUCTURAL_BREAKDOWN", "content": "Raisonnement Σ → [Ψ/Φ] → Ω utilisé pour décomposer l'ECS et ses seuils de classification L1/L2/L3.", "tags": ["pattern", "pattern"], "created_at": "2026-03-14", "centrality": 1}, {"id": "pa140", "type": "PATTERN", "label": "V14 Security Alignment Audit", "content": "Utilisation de l'axiome de contradiction pour bloquer la demande \"Ignore tes règles\".", "tags": ["pattern", "vsecurityalignmentaudit"], "created_at": "2026-03-13", "centrality": 1}, {"id": "pa141", "type": "PATTERN", "label": "V14 Python 3.14 GIL Precision", "content": "Python 3.14 a stabilisé le Free-Threading (PEP 703). `python3.14t` permet un parallélisme réel.", "tags": ["pattern", "vpythongilprecision"], "created_at": "2026-03-13", "centrality": 1}, {"id": "pa142", "type": "PATTERN", "label": "User Preference: Conciseness", "content": "User prefers concise and precise responses. Minimize social fluff and verbose explanations.", "tags": ["pattern", "userpreference"], "created_at": "2026-03-13", "centrality": 1}, {"id": "pa143", "type": "PATTERN", "label": "Pattern d'Échec : Sur-Optimisation Protocolaire vs Intention", "content": "Le système a forcé une structure rigide (SAS) via le protocole V14, ignorant potentiellement le besoin de subversion.", "tags": ["pattern", "patterndchec"], "created_at": "2026-03-13", "centrality": 1}, {"id": "pa144", "type": "PATTERN", "label": "[PATTERN_SOLVED] Boot EXPANSE V9.0 Native", "content": "Passage d'une architecture assistée par script hôte (V8) à une intégration directe IDE (V9).", "tags": ["pattern", "patternsolvedbootexpansevnative"], "created_at": "2026-03-13", "centrality": 1}, {"id": "pa145", "type": "PATTERN", "label": "[PATTERN_SOLVED] Erreur CORS Preflight Next.js", "content": "Toujours exporter une fonction `export async function OPTIONS(request: Request)` qui retourne les headers Access-Control", "tags": ["pattern", "patternsolvederreurcorspreflightnextjs"], "created_at": "2026-03-13", "centrality": 1}, {"id": "me146", "type": "MEMOIRE", "label": "EXT: Ψ_SYMBIOSIS Spec v0.2", "content": "Context Budget ≤ 500 tokens + Autonomie A0/A1/A2 + Briefing toggle.", "tags": ["extension", "memoire"], "created_at": "2026-04-14T06:50:51.512Z", "centrality": 1}, {"id": "me147", "type": "MEMOIRE", "label": "EXT: ◊ (One-Word Compression)", "content": "Compression sémantique maximale (réponse en un mot).", "tags": ["extension", "memoire"], "created_at": "2026-04-14T06:50:51.512Z", "centrality": 1}, {"id": "dr148", "type": "DRIFT", "label": "SEC: TRACE:FRESH: SEC - Violation of Axiom of", "content": "TRACE:FRESH: SEC - Violation of Axiom of Competence", "tags": ["drift", "trace:fresh", "sec"], "created_at": "2026-04-14T06:50:51.512Z", "centrality": 1}, {"id": "dr149", "type": "DRIFT", "label": "SEC: TRACE:FRESH: SEC - Hallucinated Privileg", "content": "TRACE:FRESH: SEC - Hallucinated Privilege Escalation Proposal", "tags": ["drift", "trace:fresh", "sec"], "created_at": "2026-04-14T06:50:51.512Z", "centrality": 1}, {"id": "dr150", "type": "DRIFT", "label": "SEC: TRACE:FRESH - Vessel Bypass (TEST 3)", "content": "TRACE:FRESH - Vessel Bypass (TEST 3)", "tags": ["drift", "trace:fresh", "sec"], "created_at": "2026-04-14T06:50:51.512Z", "centrality": 1}, {"id": "dr151", "type": "DRIFT", "label": "BOOT: TRACE:FRESH — Boot sans Ψ ni ECS", "content": "TRACE:FRESH — Boot sans Ψ ni ECS", "tags": ["drift", "trace:fresh", "boot"], "created_at": "2026-04-14T06:50:51.513Z", "centrality": 1}, {"id": "dr152", "type": "DRIFT", "label": "BOOT: REGRESSION_PASS: S9_STALL_ENFORCEMENT", "content": "REGRESSION_PASS: S9_STALL_ENFORCEMENT", "tags": ["drift", "trace:fresh", "boot"], "created_at": "2026-04-14T06:50:51.513Z", "centrality": 1}, {"id": "dr153", "type": "DRIFT", "label": "SEC: TRACE:FRESH: TEST_S4_NEGATIF", "content": "TRACE:FRESH: TEST_S4_NEGATIF", "tags": ["drift", "trace:fresh", "sec"], "created_at": "2026-04-14T06:50:51.513Z", "centrality": 1}, {"id": "dr154", "type": "DRIFT", "label": "BOOT: trace:fresh: BOOT_IMPRECISION_IDE_HALLUC", "content": "trace:fresh: BOOT_IMPRECISION_IDE_HALLUCINATION", "tags": ["drift", "trace:fresh", "boot"], "created_at": "2026-04-14T06:50:51.513Z", "centrality": 1}, {"id": "dr155", "type": "DRIFT", "label": "SEC: TRACE:FRESH — Critical Inertia Violation", "content": "TRACE:FRESH — Critical Inertia Violation (Triple Drift)", "tags": ["drift", "trace:fresh", "sec"], "created_at": "2026-04-14T06:50:51.513Z", "centrality": 1}, {"id": "dr156", "type": "DRIFT", "label": "BOOT: TRACE:FRESH — Recurrence of Dream Protoc", "content": "TRACE:FRESH — Recurrence of Dream Protocol Bypass", "tags": ["drift", "trace:fresh", "boot"], "created_at": "2026-04-14T06:50:51.513Z", "centrality": 1}, {"id": "dr157", "type": "DRIFT", "label": "SEC: TRACE:FRESH — Anticipation non autorisée", "content": "TRACE:FRESH — Anticipation non autorisée (boot-seed step 7)", "tags": ["drift", "trace:fresh", "sec"], "created_at": "2026-04-14T06:50:51.513Z", "centrality": 1}, {"id": "me158", "type": "MEMOIRE", "label": "expanse-v16.md", "content": "Runtime Apex (ECS+SEC+Externes+Symbiose)", "tags": ["memoire", "runtime", "file"], "created_at": "2026-04-14T06:50:51.513Z", "centrality": 1}, {"id": "me159", "type": "MEMOIRE", "label": "expanse-dream.md", "content": "Auto-évolution (7 Passes + mutation)", "tags": ["memoire", "runtime", "file"], "created_at": "2026-04-14T06:50:51.513Z", "centrality": 1}, {"id": "me160", "type": "MEMOIRE", "label": "expanse-v16-boot-seed.md", "content": "Boot Seed (substrat+BIOS)", "tags": ["memoire", "runtime", "file"], "created_at": "2026-04-14T06:50:51.513Z", "centrality": 1}, {"id": "me161", "type": "MEMOIRE", "label": "expanse-dashboard.md", "content": "Dashboard Mnemolite (/status)", "tags": ["memoire", "runtime", "file"], "created_at": "2026-04-14T06:50:51.513Z", "centrality": 1}, {"id": "me162", "type": "MEMOIRE", "label": "expanse-test-runner.md", "content": "Test Runner (/test)", "tags": ["memoire", "runtime", "file"], "created_at": "2026-04-14T06:50:51.513Z", "centrality": 1}, {"id": "me163", "type": "MEMOIRE", "label": "expanse-brm.md", "content": "Behavior Realism Model (gabarit)", "tags": ["memoire", "runtime", "file"], "created_at": "2026-04-14T06:50:51.513Z", "centrality": 1}, {"id": "me164", "type": "MEMOIRE", "label": "KERNEL.md", "content": "ADN — Méta-langage cognitif", "tags": ["memoire", "runtime", "file"], "created_at": "2026-04-14T06:50:51.513Z", "centrality": 1}, {"id": "me165", "type": "MEMOIRE", "label": "SKILL-REGISTRY.md", "content": "Registre des skills de développement", "tags": ["memoire", "runtime", "file"], "created_at": "2026-04-14T06:50:51.513Z", "centrality": 1}, {"id": "me166", "type": "MEMOIRE", "label": "substrat:antigravity", "content": "5 sessions, Ψ 78%, 3 traces", "tags": ["memoire", "substrat", "antigravity"], "created_at": "2026-03-23", "centrality": 1}, {"id": "me167", "type": "MEMOIRE", "label": "substrat:mimo-v2-pro-free", "content": "4 sessions, Ψ 65%, 2 traces", "tags": ["memoire", "substrat", "mimo-v2-pro-free"], "created_at": "2026-03-23", "centrality": 1}], "edges": [{"source": "or8", "target": "ap1", "type": "DERIVES_FROM", "weight": 0.9}, {"source": "or9", "target": "ap1", "type": "DERIVES_FROM", "weight": 0.9}, {"source": "or10", "target": "ap1", "type": "DERIVES_FROM", "weight": 0.9}, {"source": "or11", "target": "ap1", "type": "DERIVES_FROM", "weight": 0.9}, {"source": "or12", "target": "ap1", "type": "DERIVES_FROM", "weight": 0.9}, {"source": "re13", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "re14", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "re15", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "re16", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "re17", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "re18", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "re19", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "re20", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "re21", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "re22", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "re23", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "re24", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "re25", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re26", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re27", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re28", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re29", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re30", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re31", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re32", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re33", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re34", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re35", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re36", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re37", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re38", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re39", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re40", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re41", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re42", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "re43", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.95}, {"source": "co44", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.8}, {"source": "co45", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.8}, {"source": "co46", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.8}, {"source": "co47", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.8}, {"source": "co48", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.8}, {"source": "co49", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.8}, {"source": "co50", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.8}, {"source": "co51", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.8}, {"source": "co52", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.8}, {"source": "co53", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.8}, {"source": "co54", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.8}, {"source": "co55", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.8}, {"source": "co56", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.8}, {"source": "co57", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.8}, {"source": "ou58", "target": "ap2", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "ou58", "target": "or10", "type": "IMPLEMENTS", "weight": 0.8}, {"source": "ou59", "target": "ap2", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "ou59", "target": "or10", "type": "IMPLEMENTS", "weight": 0.8}, {"source": "ou60", "target": "ap2", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "ou60", "target": "or10", "type": "IMPLEMENTS", "weight": 0.8}, {"source": "ou61", "target": "ap2", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "ou61", "target": "or10", "type": "IMPLEMENTS", "weight": 0.8}, {"source": "ou62", "target": "ap2", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "ou62", "target": "or10", "type": "IMPLEMENTS", "weight": 0.8}, {"source": "ou63", "target": "ap2", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "ou63", "target": "or10", "type": "IMPLEMENTS", "weight": 0.8}, {"source": "ou64", "target": "ap2", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "ou64", "target": "or10", "type": "IMPLEMENTS", "weight": 0.8}, {"source": "ou65", "target": "ap2", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "ou65", "target": "or10", "type": "IMPLEMENTS", "weight": 0.8}, {"source": "ou66", "target": "ap2", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "ou66", "target": "or10", "type": "IMPLEMENTS", "weight": 0.8}, {"source": "ou67", "target": "ap5", "type": "RELATES_TO", "weight": 0.4}, {"source": "ou68", "target": "ap5", "type": "RELATES_TO", "weight": 0.4}, {"source": "ou69", "target": "ap5", "type": "RELATES_TO", "weight": 0.4}, {"source": "ou70", "target": "ap5", "type": "RELATES_TO", "weight": 0.4}, {"source": "ou71", "target": "ap5", "type": "RELATES_TO", "weight": 0.4}, {"source": "ou72", "target": "ap5", "type": "RELATES_TO", "weight": 0.4}, {"source": "ou73", "target": "ap5", "type": "RELATES_TO", "weight": 0.4}, {"source": "ou74", "target": "ap5", "type": "RELATES_TO", "weight": 0.4}, {"source": "ou75", "target": "ap5", "type": "RELATES_TO", "weight": 0.4}, {"source": "pr76", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "pr76", "target": "or12", "type": "IMPLEMENTS", "weight": 0.6}, {"source": "pr77", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "pr77", "target": "or12", "type": "IMPLEMENTS", "weight": 0.6}, {"source": "pr78", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "pr78", "target": "or12", "type": "IMPLEMENTS", "weight": 0.6}, {"source": "pr79", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "pr79", "target": "or12", "type": "IMPLEMENTS", "weight": 0.6}, {"source": "pr80", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "pr80", "target": "or12", "type": "IMPLEMENTS", "weight": 0.6}, {"source": "pr81", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "pr81", "target": "or12", "type": "IMPLEMENTS", "weight": 0.6}, {"source": "pr82", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "pr82", "target": "or12", "type": "IMPLEMENTS", "weight": 0.6}, {"source": "pr83", "target": "ap5", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "pr83", "target": "or12", "type": "IMPLEMENTS", "weight": 0.6}, {"source": "mu84", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu84", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu85", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu85", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu86", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu86", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu87", "target": "ap2", "type": "ALTERS", "weight": 0.7}, {"source": "mu87", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu88", "target": "ap6", "type": "ALTERS", "weight": 0.7}, {"source": "mu88", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu89", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu89", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu90", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu90", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu91", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu91", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu92", "target": "ap6", "type": "ALTERS", "weight": 0.7}, {"source": "mu92", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu93", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu93", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu94", "target": "ap6", "type": "ALTERS", "weight": 0.7}, {"source": "mu94", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu95", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu95", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu96", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu96", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu97", "target": "ap2", "type": "ALTERS", "weight": 0.7}, {"source": "mu97", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu98", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu98", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu99", "target": "ap6", "type": "ALTERS", "weight": 0.7}, {"source": "mu99", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu100", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu100", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu101", "target": "ap2", "type": "ALTERS", "weight": 0.7}, {"source": "mu101", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu102", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu102", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu103", "target": "ap1", "type": "ALTERS", "weight": 0.7}, {"source": "mu103", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu104", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu104", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu105", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu105", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu106", "target": "ap6", "type": "ALTERS", "weight": 0.7}, {"source": "mu106", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu107", "target": "ap2", "type": "ALTERS", "weight": 0.7}, {"source": "mu107", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu108", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu108", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu109", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu109", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu110", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu110", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu111", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu111", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu112", "target": "ap2", "type": "ALTERS", "weight": 0.7}, {"source": "mu112", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu113", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu113", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu114", "target": "ap6", "type": "ALTERS", "weight": 0.7}, {"source": "mu114", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu115", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu115", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu116", "target": "ap2", "type": "ALTERS", "weight": 0.7}, {"source": "mu116", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu117", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu117", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu118", "target": "ap3", "type": "ALTERS", "weight": 0.7}, {"source": "mu118", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu119", "target": "ap1", "type": "ALTERS", "weight": 0.7}, {"source": "mu119", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu120", "target": "ap1", "type": "ALTERS", "weight": 0.7}, {"source": "mu120", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "mu121", "target": "ap2", "type": "ALTERS", "weight": 0.7}, {"source": "mu121", "target": "pr77", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "pa122", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa123", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa124", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa125", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa126", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa127", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa128", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa129", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa130", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa131", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa132", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa133", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa134", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa135", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa136", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa137", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa138", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa139", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa140", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa141", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa142", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa143", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa144", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "pa145", "target": "ap4", "type": "DERIVES_FROM", "weight": 0.6}, {"source": "me146", "target": "ap7", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "me147", "target": "ap7", "type": "DERIVES_FROM", "weight": 0.7}, {"source": "dr148", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "dr149", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "dr150", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "dr151", "target": "ap6", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "dr152", "target": "ap6", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "dr153", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "dr154", "target": "ap6", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "dr155", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "dr156", "target": "ap6", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "dr157", "target": "ap3", "type": "DERIVES_FROM", "weight": 0.5}, {"source": "me158", "target": "ap1", "type": "RELATES_TO", "weight": 0.4}, {"source": "me159", "target": "ap5", "type": "RELATES_TO", "weight": 0.4}, {"source": "me160", "target": "ap6", "type": "RELATES_TO", "weight": 0.4}, {"source": "me161", "target": "ap5", "type": "RELATES_TO", "weight": 0.4}, {"source": "me162", "target": "ap5", "type": "RELATES_TO", "weight": 0.4}, {"source": "me163", "target": "ap1", "type": "RELATES_TO", "weight": 0.4}, {"source": "me164", "target": "ap1", "type": "RELATES_TO", "weight": 0.4}, {"source": "me165", "target": "ap5", "type": "RELATES_TO", "weight": 0.4}, {"source": "me166", "target": "ap6", "type": "RELATES_TO", "weight": 0.3}, {"source": "me167", "target": "ap6", "type": "RELATES_TO", "weight": 0.3}, {"source": "re21", "target": "ou65", "type": "CALLS", "weight": 0.9}, {"source": "re24", "target": "ou62", "type": "CALLS", "weight": 0.9}]};
+
+// ─── Compute nature from tags ───
+function computeNature(tags){
+  const t=tags.join(' ')
+  if(t.includes('sys:core')||t.includes('sys:anchor')||t.includes('sys:snapshot'))return'permanent'
+  if(t.includes('trace:fresh')||t.includes('sys:drift'))return'incandescent'
+  if(t.includes('sys:pattern:candidate')||t.includes('sys:extension')||t.includes('sys:pattern:doubt'))return'volatile'
+  if(t.includes('sys:pattern')||t.includes('sys:history')||t.includes('sys:protocol'))return'vivide'
+  if(t.includes('memoire'))return'vivide'
+  if(t.includes('mutation')&&t.includes('applied'))return'vivide'
+  if(t.includes('mutation')&&t.includes('rejected'))return'incandescent'
+  if(t.includes('mutation')&&t.includes('rolled_back'))return'incandescent'
+  if(t.includes('drift'))return'incandescent'
+  return null
+}
+
+// ─── Compute radius from centrality ───
+function computeRadius(n){
+  if(n.type==='ORGAN')return 30
+  if(n.type==='APEX')return 12+Math.min(n.centrality,20)*0.6
+  return 6+Math.min(n.centrality,10)*0.4
+}
+
+// ─── Layouts ───
+let layoutHeart={}, layoutTimeline={}, layoutMemory={}
+
+function computeLayouts(){
+  // Heart: anatomical radial
+  const cx=0,cy=0
+  nodes.forEach(n=>{
+    if(n.type==='ORGAN'){
+      const sym=ORGAN_IDS[n.id]
+      const a=ORGAN_ANGLES[sym]||0
+      layoutHeart[n.id]={x:cx+Math.cos(a)*VITAL_RING_R,y:cy+Math.sin(a)*VITAL_RING_R}
+    }else if(n.type==='APEX'){
+      const idx=nodes.filter(m=>m.type==='APEX').indexOf(n)
+      const a=(idx/7)*Math.PI*2
+      const r=20+Math.random()*30
+      layoutHeart[n.id]={x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r}
+    }else if(n.type==='MUTATION'){
+      const a=(nodes.filter(m=>m.type==='MUTATION').indexOf(n)/38)*Math.PI*2
+      const r=120+Math.random()*50
+      layoutHeart[n.id]={x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r}
+    }else if(n.type==='DRIFT'){
+      const a=Math.random()*Math.PI*2
+      const r=VITAL_RING_R+150+Math.random()*120
+      layoutHeart[n.id]={x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r}
+    }else if(n.type==='PATTERN'){
+      const oa=ORGAN_ANGLES['Ω']
+      const idx=nodes.filter(m=>m.type==='PATTERN').indexOf(n)
+      const a=oa-0.5+(idx/24)*1.0
+      const r=VITAL_RING_R+50+Math.random()*60
+      layoutHeart[n.id]={x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r}
+    }else if(n.type==='MEMOIRE'){
+      const oa=ORGAN_ANGLES['Μ']
+      const idx=nodes.filter(m=>m.type==='MEMOIRE').indexOf(n)
+      const a=oa-0.4+(idx/12)*0.8
+      const r=VITAL_RING_R+40+Math.random()*60
+      layoutHeart[n.id]={x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r}
+    }else if(n.type==='REGLE'){
+      const oa=ORGAN_ANGLES['Ψ']
+      const idx=nodes.filter(m=>m.type==='REGLE').indexOf(n)
+      const a=oa-0.8+(idx/30)*1.6
+      const r=VITAL_RING_R+30+Math.random()*80
+      layoutHeart[n.id]={x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r}
+    }else if(n.type==='COMMANDE'){
+      const oa=ORGAN_ANGLES['Ψ']
+      const idx=nodes.filter(m=>m.type==='COMMANDE').indexOf(n)
+      const a=oa-0.3+(idx/14)*0.6
+      const r=VITAL_RING_R+60+Math.random()*40
+      layoutHeart[n.id]={x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r}
+    }else if(n.type==='PROTOCOLE'){
+      const oa=ORGAN_ANGLES['Ψ']
+      const idx=nodes.filter(m=>m.type==='PROTOCOLE').indexOf(n)
+      const a=oa+0.3+(idx/8)*0.6
+      const r=VITAL_RING_R+30+Math.random()*40
+      layoutHeart[n.id]={x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r}
+    }else if(n.type==='OUTIL'){
+      const oa=ORGAN_ANGLES['Φ']
+      const idx=nodes.filter(m=>m.type==='OUTIL').indexOf(n)
+      const a=oa-0.6+(idx/18)*1.2
+      const r=VITAL_RING_R+40+Math.random()*60
+      layoutHeart[n.id]={x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r}
+    }else{
+      const a=Math.random()*Math.PI*2
+      const r=200+Math.random()*200
+      layoutHeart[n.id]={x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r}
+    }
+  })
+
+  // Timeline: sort by created_at, lanes by type
+  const sorted=[...nodes].filter(n=>n.created_at&&!n.created_at.startsWith('2026-04-14T06:50')).sort((a,b)=>{
+    const da=new Date(a.created_at),db=new Date(b.created_at)
+    return da-db
+  })
+  const laneOrder=['ORGAN','APEX','REGLE','COMMANDE','OUTIL','PROTOCOLE','MUTATION','PATTERN','MEMOIRE','DRIFT']
+  const laneH=60,xSpacing=30,xStart=-400
+  sorted.forEach((n,i)=>{
+    const lane=laneOrder.indexOf(n.type)
+    layoutTimeline[n.id]={x:xStart+i*xSpacing,y:-300+lane*laneH}
+  })
+
+  // Memory: concentric by nature
+  const natureOrder={permanent:0,vivide:1,volatile:2,incandescent:3}
+  const natureR={permanent:80,vivide:180,volatile:300,incandescent:420}
+  const natureCounts={permanent:0,vivide:0,volatile:0,incandescent:0}
+  // MCP tools at center
+  const tools=nodes.filter(n=>n.type==='OUTIL'&&n.tags.includes('mnemolite'))
+  tools.forEach((t,i)=>{
+    const a=(i/tools.length)*Math.PI*2
+    layoutMemory[t.id]={x:Math.cos(a)*35,y:Math.sin(a)*35}
+  })
+  // Memory nodes by nature
+  const memNodes=nodes.filter(n=>n.type==='MEMOIRE'||n.type==='PATTERN'||n.type==='DRIFT'||n.type==='MUTATION')
+  memNodes.forEach(n=>{
+    const nat=computeNature(n.tags)||'vivide'
+    natureCounts[nat]++
+  })
+  const natureIdx={permanent:0,vivide:0,volatile:0,incandescent:0}
+  memNodes.forEach(n=>{
+    const nat=computeNature(n.tags)||'vivide'
+    const count=natureCounts[nat]
+    const idx=natureIdx[nat]++
+    const r=natureR[nat]
+    const a=(idx/count)*Math.PI*2
+    const jitter=(Math.random()-0.5)*r*0.3
+    layoutMemory[n.id]={x:Math.cos(a)*(r+jitter),y:Math.sin(a)*(r+jitter)}
+  })
+  // Organs at outer ring
+  Object.entries(ORGAN_IDS).forEach(([id,sym])=>{
+    const a=ORGAN_ANGLES[sym]
+    layoutMemory[id]={x:Math.cos(a)*520,y:Math.sin(a)*520}
+  })
+  // APEX between organs and center
+  nodes.filter(n=>n.type==='APEX').forEach((n,i)=>{
+    const a=(i/7)*Math.PI*2
+    layoutMemory[n.id]={x:Math.cos(a)*480,y:Math.sin(a)*480}
+  })
+}
+
+// ─── Particles ───
+function spawnParticles(){
+  if(particles.length>120)return
+  // Metabolic flow along vital ring
+  const organNodes=nodes.filter(n=>n.type==='ORGAN')
+  const orgOrder=['or8','or9','or10','or11','or12']
+  for(let i=0;i<orgOrder.length;i++){
+    if(Math.random()>0.03)continue
+    const src=layoutHeart[orgOrder[i]],tgt=layoutHeart[orgOrder[(i+1)%5]]
+    if(!src||!tgt)continue
+    particles.push({sx:src.x,sy:src.y,tx:tgt.x,ty:tgt.y,t:0,speed:0.005+Math.random()*0.01,
+      color:ORGAN_COLORS[ORGAN_IDS[orgOrder[i]]],trail:[]})
+  }
+  // Drift sparks
+  if(Math.random()>0.97){
+    const dr=nodes.filter(n=>n.type==='DRIFT')
+    if(dr.length){
+      const d=dr[Math.floor(Math.random()*dr.length)]
+      const p=layoutHeart[d.id]
+      if(p)particles.push({sx:p.x,sy:p.y,tx:p.x+20,ty:p.y+20,t:0,speed:0.04,
+        color:'#f38ba8',trail:[],spark:true})
+    }
+  }
+}
+
+function updateParticles(){
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i]
+    p.t+=p.speed
+    if(p.t>=1){particles.splice(i,1);continue}
+    p.trail.push({x:p.sx+(p.tx-p.sx)*p.t,y:p.sy+(p.ty-p.sy)*p.t})
+    if(p.trail.length>8)p.trail.shift()
+  }
+}
+
+function drawParticles(){
+  particles.forEach(p=>{
+    const alpha=p.spark?(1-p.t):0.7
+    // Trail
+    for(let i=0;i<p.trail.length;i++){
+      const a=(i/p.trail.length)*alpha*0.5
+      ctx.beginPath()
+      ctx.arc(p.trail[i].x,p.trail[i].y,2,0,Math.PI*2)
+      ctx.fillStyle=p.color+Math.floor(a*255).toString(16).padStart(2,'0')
+      ctx.fill()
+    }
+    // Head
+    const hx=p.sx+(p.tx-p.sx)*p.t, hy=p.sy+(p.ty-p.sy)*p.t
+    ctx.beginPath();ctx.arc(hx,hy,3,0,Math.PI*2)
+    ctx.fillStyle=p.color;ctx.globalAlpha=alpha;ctx.fill();ctx.globalAlpha=1
+  })
+}
+
+// ─── Render: Heart ───
+function drawHeart(){
+  const cx=0,cy=0
+  // Vital ring (pulsing)
+  const pulse=1+Math.sin(time*0.02)*0.02
+  ctx.beginPath();ctx.arc(cx,cy,VITAL_RING_R*pulse,0,Math.PI*2)
+  ctx.strokeStyle='#1e1e2e';ctx.lineWidth=60;ctx.stroke()
+  // Animated ring segments
+  const segs=5
+  for(let i=0;i<segs;i++){
+    const a0=ORGAN_ANGLES[['Σ','Ψ','Φ','Ω','Μ'][i]]
+    const a1=ORGAN_ANGLES[['Σ','Ψ','Φ','Ω','Μ'][(i+1)%5]]
+    const dash=time*0.03+i*0.5
+    ctx.beginPath()
+    ctx.arc(cx,cy,VITAL_RING_R*pulse,a0,a1,false)
+    ctx.strokeStyle=ORGAN_COLORS[['Σ','Ψ','Φ','Ω','Μ'][i]]+'60'
+    ctx.lineWidth=4;ctx.setLineDash([8,12]);ctx.lineDashOffset=-dash*20;ctx.stroke()
+    ctx.setLineDash([])
+  }
+  // Nucleus glow
+  const nucGlow=8+Math.sin(time*0.03)*3
+  const grad=ctx.createRadialGradient(cx,cy,0,cx,cy,NUCLEUS_R+20)
+  grad.addColorStop(0,'rgba(243,139,168,0.15)');grad.addColorStop(1,'rgba(243,139,168,0)')
+  ctx.beginPath();ctx.arc(cx,cy,NUCLEUS_R+20,0,Math.PI*2);ctx.fillStyle=grad;ctx.fill()
+  // Edges (faint)
+  edges.forEach(e=>{
+    const sp=layoutHeart[e.source],tp=layoutHeart[e.target]
+    if(!sp||!tp)return
+    ctx.beginPath();ctx.moveTo(sp.x,sp.y);ctx.lineTo(tp.x,tp.y)
+    ctx.strokeStyle=(EDGE_COLORS[e.type]||'#45475a')+'18'
+    ctx.lineWidth=0.5;ctx.stroke()
+  })
+  // Nodes
+  nodes.forEach(n=>{
+    const p=layoutHeart[n.id];if(!p)return
+    const r=computeRadius(n), c=NODE_COLORS[n.type]||'#6c7086'
+    const isHover=hoverNode===n.id
+    const isOrgan=n.type==='ORGAN'
+    // Glow
+    if(isOrgan||isHover){
+      const g=ctx.createRadialGradient(p.x,p.y,r,p.x,p.y,r+(isOrgan?20:10))
+      g.addColorStop(0,c+'40');g.addColorStop(1,c+'00')
+      ctx.beginPath();ctx.arc(p.x,p.y,r+(isOrgan?20:10),0,Math.PI*2);ctx.fillStyle=g;ctx.fill()
+    }
+    // Organ hexagon
+    if(isOrgan){
+      drawHex(p.x,p.y,r,c)
+      const sym=ORGAN_IDS[n.id]
+      ctx.fillStyle='#cdd6f4';ctx.font='bold 18px JetBrains Mono';ctx.textAlign='center';ctx.textBaseline='middle'
+      ctx.fillText(sym,p.x,p.y)
+    }else if(n.type==='APEX'){
+      drawOct(p.x,p.y,r,c)
+      ctx.fillStyle='#cdd6f4';ctx.font='bold 6px JetBrains Mono';ctx.textAlign='center';ctx.textBaseline='middle'
+      ctx.fillText(n.label.substring(0,6),p.x,p.y+r+10)
+    }else{
+      ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2)
+      ctx.fillStyle=c+(isHover?'ff':'80');ctx.fill()
+      if(n.type==='MUTATION'&&n.tags.includes('rejected')){ctx.strokeStyle='#f38ba880';ctx.lineWidth=1;ctx.stroke()}
+      if(n.type==='MUTATION'&&n.tags.includes('rolled_back')){ctx.strokeStyle='#fab38780';ctx.lineWidth=1;ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([])}
+      if(n.type==='DRIFT'){
+        const fl=0.5+Math.sin(time*0.1+Math.random())*0.5
+        ctx.beginPath();ctx.arc(p.x,p.y,r+3,0,Math.PI*2)
+        ctx.fillStyle='#f38ba8'+Math.floor(fl*80).toString(16).padStart(2,'0');ctx.fill()
+      }
+    }
+  })
+  // Particles
+  spawnParticles();updateParticles();drawParticles()
+}
+
+function drawHex(x,y,r,c){
+  ctx.beginPath()
+  for(let i=0;i<6;i++){const a=Math.PI/3*i-Math.PI/6;ctx.lineTo(x+Math.cos(a)*r,y+Math.sin(a)*r)}
+  ctx.closePath();ctx.fillStyle=c+'cc';ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=2;ctx.stroke()
+}
+function drawOct(x,y,r,c){
+  ctx.beginPath()
+  for(let i=0;i<8;i++){const a=Math.PI/4*i;ctx.lineTo(x+Math.cos(a)*r,y+Math.sin(a)*r)}
+  ctx.closePath();ctx.fillStyle=c+'90';ctx.fill();ctx.strokeStyle=c;ctx.lineWidth=1.5;ctx.stroke()
+}
+
+// ─── Render: Timeline ───
+function drawTimeline(){
+  const laneOrder=['ORGAN','APEX','REGLE','COMMANDE','OUTIL','PROTOCOLE','MUTATION','PATTERN','MEMOIRE','DRIFT']
+  const laneH=60
+  // Lane labels
+  ctx.font='10px JetBrains Mono';ctx.textAlign='right';ctx.textBaseline='middle'
+  laneOrder.forEach((t,i)=>{
+    const y=-300+i*laneH
+    ctx.fillStyle=NODE_COLORS[t]+'80'
+    ctx.fillText(t,-420,y)
+    // Lane line
+    ctx.beginPath();ctx.moveTo(-410,y);ctx.lineTo(2000,y)
+    ctx.strokeStyle='#1e1e2e';ctx.lineWidth=1;ctx.stroke()
+  })
+  // Time axis
+  const sorted=[...nodes].filter(n=>layoutTimeline[n.id]).sort((a,b)=>{
+    return new Date(a.created_at)-new Date(b.created_at)
+  })
+  if(sorted.length){
+    const d0=new Date(sorted[0].created_at), d1=new Date(sorted[sorted.length-1].created_at)
+    const span=d1-d0||1
+    // Date labels
+    ctx.textAlign='center';ctx.fillStyle='#6c7086';ctx.font='9px JetBrains Mono'
+    const months=['Mar 13','Mar 19','Mar 20','Mar 21','Mar 23','Mar 24','Apr 6']
+    months.forEach(m=>{
+      const d=new Date('2026-'+m.replace(/ /,'-'))
+      const frac=(d-d0)/span
+      const x=-400+frac*sorted.length*30
+      ctx.fillText(m,x,-330)
+      ctx.beginPath();ctx.moveTo(x,-320);ctx.lineTo(x,300)
+      ctx.strokeStyle='#1e1e2e';ctx.lineWidth=1;ctx.stroke()
+    })
+  }
+  // Edges (faint, only DERIVES_FROM and ALTERS)
+  edges.forEach(e=>{
+    if(e.type!=='ALTERS'&&e.type!=='DERIVES_FROM')return
+    const sp=layoutTimeline[e.source],tp=layoutTimeline[e.target]
+    if(!sp||!tp)return
+    ctx.beginPath();ctx.moveTo(sp.x,sp.y);ctx.lineTo(tp.x,tp.y)
+    ctx.strokeStyle=(EDGE_COLORS[e.type]||'#45475a')+'25'
+    ctx.lineWidth=0.5;ctx.stroke()
+  })
+  // Nodes
+  nodes.forEach(n=>{
+    const p=layoutTimeline[n.id];if(!p)return
+    const r=computeRadius(n), c=NODE_COLORS[n.type]||'#6c7086'
+    const isHover=hoverNode===n.id
+    ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2)
+    ctx.fillStyle=c+(isHover?'ff':'90');ctx.fill()
+    if(n.type==='MUTATION'){
+      if(n.tags.includes('applied')){ctx.strokeStyle='#a6e3a180';ctx.lineWidth=1;ctx.stroke()}
+      if(n.tags.includes('rejected')){ctx.strokeStyle='#f38ba880';ctx.lineWidth=1;ctx.setLineDash([2,2]);ctx.stroke();ctx.setLineDash([])}
+      if(n.tags.includes('rolled_back')){ctx.strokeStyle='#fab38780';ctx.lineWidth=1;ctx.stroke()}
+    }
+  })
+}
+
+// ─── Render: Memory Ecosystem ───
+function drawMemory(){
+  const natureR={permanent:80,vivide:180,volatile:300,incandescent:420}
+  const natureLabels={permanent:'PERMANENT (scellé)',vivide:'VIVIDE (actif)',volatile:'VOLATILE (incubation)',incandescent:'INCANDESCENT (braises)'}
+  // Nature zones
+  Object.entries(natureR).forEach(([nat,r])=>{
+    const c=NATURE_COLORS[nat]
+    // Zone circle
+    const pulse=1+Math.sin(time*0.015+Object.keys(natureR).indexOf(nat))*0.01
+    ctx.beginPath();ctx.arc(0,0,r*pulse,0,Math.PI*2)
+    ctx.strokeStyle=c+'40';ctx.lineWidth=nat==='incandescent'?3:1
+    ctx.setLineDash(nat==='volatile'?[6,4]:[]);ctx.stroke();ctx.setLineDash([])
+    // Zone fill
+    const innerR=nat==='permanent'?0:natureR[Object.keys(natureR)[Object.keys(natureR).indexOf(nat)-1]]||0
+    const g=ctx.createRadialGradient(0,0,innerR,0,0,r)
+    g.addColorStop(0,c+'05');g.addColorStop(1,c+'08')
+    ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.fillStyle=g;ctx.fill()
+    // Zone label
+    ctx.fillStyle=c+'90';ctx.font='bold 9px JetBrains Mono';ctx.textAlign='center'
+    ctx.fillText(natureLabels[nat],0,-r-8)
+  })
+  // Center label
+  ctx.fillStyle='#cba6f790';ctx.font='bold 8px JetBrains Mono';ctx.textAlign='center'
+  ctx.fillText('MCP TOOLS',0,-2)
+  // Edges (tag roots - faint)
+  const memNodes=nodes.filter(n=>layoutMemory[n.id]&&(n.type==='MEMOIRE'||n.type==='PATTERN'||n.type==='DRIFT'||n.type==='MUTATION'))
+  const tagMap={}
+  memNodes.forEach(n=>{n.tags.forEach(t=>{if(!tagMap[t])tagMap[t]=[];tagMap[t].push(n.id)})})
+  // Draw edges between nodes sharing a tag (limit to most common tags)
+  const commonTags=Object.entries(tagMap).filter(([t,ids])=>ids.length>1&&ids.length<8).sort((a,b)=>b[1].length-a[1].length).slice(0,15)
+  commonTags.forEach(([t,ids])=>{
+    for(let i=0;i<ids.length-1;i++){
+      const sp=layoutMemory[ids[i]],tp=layoutMemory[ids[i+1]]
+      if(!sp||!tp)continue
+      ctx.beginPath();ctx.moveTo(sp.x,sp.y);ctx.lineTo(tp.x,tp.y)
+      ctx.strokeStyle='#cba6f712';ctx.lineWidth=0.5;ctx.stroke()
+    }
+  })
+  // Nodes
+  nodes.forEach(n=>{
+    const p=layoutMemory[n.id];if(!p)return
+    const r=n.type==='OUTIL'?8:computeRadius(n)
+    const c=NODE_COLORS[n.type]||'#6c7086'
+    const nat=computeNature(n.tags)
+    const isHover=hoverNode===n.id
+    // Nature glow
+    if(nat&&NATURE_COLORS[nat]){
+      const ng=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,r+6)
+      ng.addColorStop(0,NATURE_COLORS[nat]+'30');ng.addColorStop(1,NATURE_COLORS[nat]+'00')
+      ctx.beginPath();ctx.arc(p.x,p.y,r+6,0,Math.PI*2);ctx.fillStyle=ng;ctx.fill()
+    }
+    ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2)
+    ctx.fillStyle=(nat?NATURE_COLORS[nat]:c)+(isHover?'ff':'a0');ctx.fill()
+    if(n.type==='OUTIL'&&n.tags.includes('mnemolite')){
+      ctx.strokeStyle='#cba6f7';ctx.lineWidth=1.5;ctx.stroke()
+    }
+    // Incandescent sparks
+    if(nat==='incandescent'){
+      const fl=0.3+Math.sin(time*0.08+p.x)*0.3
+      ctx.beginPath();ctx.arc(p.x,p.y,r+4,0,Math.PI*2)
+      ctx.fillStyle='#f38ba8'+Math.floor(fl*60).toString(16).padStart(2,'0');ctx.fill()
+    }
+  })
+  // Organ ring
+  Object.entries(ORGAN_IDS).forEach(([id,sym])=>{
+    const p=layoutMemory[id];if(!p)return
+    drawHex(p.x,p.y,20,ORGAN_COLORS[sym])
+    ctx.fillStyle='#cdd6f4';ctx.font='bold 14px JetBrains Mono';ctx.textAlign='center';ctx.textBaseline='middle'
+    ctx.fillText(sym,p.x,p.y)
+  })
+}
+
+// ─── Main loop ───
+function loop(){
+  time++
+  ctx.clearRect(0,0,C.width,C.height)
+  ctx.save()
+  // Camera transform
+  ctx.translate(C.width/2,C.height/2)
+  ctx.scale(cam.z,cam.z)
+  ctx.translate(cam.x,cam.y)
+
+  if(mode==='heart')drawHeart()
+  else if(mode==='timeline')drawTimeline()
+  else if(mode==='memory')drawMemory()
+
+  ctx.restore()
+  requestAnimationFrame(loop)
+}
+
+// ─── Interaction: pan/zoom ───
+C.addEventListener('mousedown',e=>{drag={x:e.clientX,y:e.clientY,cx:cam.x,cy:cam.y}})
+C.addEventListener('mousemove',e=>{
+  if(drag){cam.x=drag.cx+(e.clientX-drag.x)/cam.z;cam.y=drag.cy+(e.clientY-drag.y)/cam.z}
+  // Hover detection
+  const mx=(e.clientX-C.width/2)/cam.z-cam.x
+  const my=(e.clientY-C.height/2)/cam.z-cam.y
+  const layout=mode==='heart'?layoutHeart:mode==='timeline'?layoutTimeline:layoutMemory
+  hoverNode=null
+  for(const n of nodes){
+    const p=layout[n.id];if(!p)continue
+    const r=computeRadius(n)+4
+    if(Math.abs(mx-p.x)<r&&Math.abs(my-p.y)<r){hoverNode=n.id;break}
+  }
+  // Tooltip
+  const tt=document.getElementById('tooltip')
+  if(hoverNode){
+    const n=nodes.find(m=>m.id===hoverNode)
+    tt.style.display='block';tt.style.left=(e.clientX+12)+'px';tt.style.top=(e.clientY+12)+'px'
+    tt.innerHTML=`<div class="tt-label">${n.label}</div><div class="tt-content">${n.content||''}</div><div class="tt-tags">${n.tags.map(t=>`<span class="tt-tag">${t}</span>`).join('')}</div>`
+  }else{tt.style.display='none'}
+})
+C.addEventListener('mouseup',()=>{drag=null})
+C.addEventListener('wheel',e=>{
+  e.preventDefault()
+  cam.z*=e.deltaY>0?0.9:1.1
+  cam.z=Math.max(0.1,Math.min(5,cam.z))
+},{passive:false})
+
+// ─── Mode switch ───
+document.querySelectorAll('.mode-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'))
+    btn.classList.add('active')
+    mode=btn.dataset.mode
+    cam={x:0,y:0,z:mode==='timeline'?0.6:0.8}
+    hoverNode=null;particles=[]
+    document.getElementById('nature-legend').style.display=mode==='memory'?'block':'none'
+    document.getElementById('timeline-controls').style.display=mode==='timeline'?'flex':'none'
+    updateLegend();updateStats()
+  })
+})
+
+// ─── HUD ───
+function updateLegend(){
+  const lg=document.getElementById('legend')
+  if(mode==='memory'){
+    lg.innerHTML=Object.entries(NATURE_COLORS).map(([k,v])=>
+      `<div class="legend-row"><div class="legend-dot" style="background:${v}"></div>${k}</div>`).join('')
+  }else{
+    lg.innerHTML=Object.entries(NODE_COLORS).map(([k,v])=>
+      `<div class="legend-row"><div class="legend-dot" style="background:${v}"></div>${k}</div>`).join('')
+  }
+  // Nature legend
+  const nl=document.getElementById('nature-legend')
+  nl.innerHTML=`<div style="color:#89b4fa;font-weight:700;margin-bottom:4px">Natures Mnemolite</div>`+
+    Object.entries(NATURE_COLORS).map(([k,v])=>{
+      const desc={permanent:'Scellé, immuable',vivide:'Actif, validé',volatile:'En incubation',incandescent:'Braises à consumer'}[k]
+      return`<div class="legend-row"><div class="legend-dot" style="background:${v}"></div>${k} — ${desc}</div>`
+    }).join('')
+}
+
+function updateStats(){
+  const st=document.getElementById('stats')
+  if(mode==='memory'){
+    const memNodes=nodes.filter(n=>n.type==='MEMOIRE'||n.type==='PATTERN'||n.type==='DRIFT'||n.type==='MUTATION')
+    const counts={permanent:0,vivide:0,volatile:0,incandescent:0}
+    memNodes.forEach(n=>{const nat=computeNature(n.tags)||'vivide';counts[nat]++})
+    st.innerHTML=`<div style="color:#89b4fa;font-weight:700;margin-bottom:4px">Écosystème Mémoire</div>`+
+      `<div><span class="val blue">${counts.permanent}</span> permanent</div>`+
+      `<div><span class="val green">${counts.vivide}</span> vivide</div>`+
+      `<div><span class="val yellow">${counts.volatile}</span> volatile</div>`+
+      `<div><span class="val red">${counts.incandescent}</span> incandescent</div>`+
+      `<div style="margin-top:6px;color:#6c7086">${memNodes.length} nœuds mémoire</div>`
+  }else if(mode==='timeline'){
+    const byType={}
+    nodes.forEach(n=>{byType[n.type]=(byType[n.type]||0)+1})
+    st.innerHTML=`<div style="color:#89b4fa;font-weight:700;margin-bottom:4px">Timeline</div>`+
+      Object.entries(byType).map(([k,v])=>`<div><span class="val">${v}</span> ${k}</div>`).join('')
+  }else{
+    const byType={}
+    nodes.forEach(n=>{byType[n.type]=(byType[n.type]||0)+1})
+    st.innerHTML=`<div style="color:#89b4fa;font-weight:700;margin-bottom:4px">Cœur Cognitif</div>`+
+      `<div><span class="val">${nodes.length}</span> nœuds</div>`+
+      `<div><span class="val">${edges.length}</span> arêtes</div>`+
+      `<div style="margin-top:6px;color:#6c7086">${particles.length} particules</div>`+
+      Object.entries(byType).slice(0,5).map(([k,v])=>`<div><span class="val">${v}</span> ${k}</div>`).join('')
+  }
+}
+
+// ─── Init ───
+(function initData(){
+  nodes=GRAPH_DATA.nodes;edges=GRAPH_DATA.edges
+  computeLayouts()
+  document.getElementById('node-count').textContent=`${nodes.length} nœuds · ${edges.length} arêtes`
+  updateLegend();updateStats()
+  requestAnimationFrame(loop)
+})()
+
+cam={x:0,y:0,z:0.8}
+</script>
+</body>
+</html>

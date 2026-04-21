@@ -35,7 +35,7 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 </style>
 </head>
 <body>
-<div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V16 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● STASE OPÉRATIONNELLE</div><div class="dt">2026-04-06 20:40:15</div></div></div>
+<div class="hdr"><div><h1>Σ→Ψ⇌Φ→Ω→Μ</h1><div>EXPANSE V16 — Tableau de Bord</div></div><div style="text-align:right"><div class="st">● ● ACTIVE</div><div class="dt">2026-04-11</div></div></div>
 
 <h2>Ⅰ. Commandes Expanse</h2>
 <div class="grid">
@@ -58,9 +58,10 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 </div>
 <div class="card"><h3>Autonomie (Symbiose)</h3>
 <div class="m"><span class="l">A0 — Silence</span><span class="v">V16 standard, aucune proactivité</span></div>
-<div class="m"><span class="l">A1 — Murmures</span><span class="v">Ψ [~] ignorable (>=70% confiance)</span></div>
+<div class="m"><span class="l">A1 — Murmures</span><span class="v">Ψ [~] ignorable (seuil dynamique: 75%)</span></div>
 <div class="m"><span class="l">A2 — Suggestions</span><span class="v">Ψ [?] attend réponse Oui/Non</span></div>
 <div class="m"><span class="l">Budget</span><span class="v">≤ 500 tokens contexte interne</span></div>
+<div class="m"><span class="l">Succès Murmures</span><span class="v ok">89%</span></div>
 </div>
 </div>
 
@@ -68,49 +69,55 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="grid">
 <div class="card"><h3>Mnemolite</h3>
 <div class="m"><span class="l">sys:core/anchor</span><span class="v">8</span></div>
-<div class="m"><span class="l">sys:pattern</span><span class="v">25</span></div>
+<div class="m"><span class="l">sys:pattern</span><span class="v">24</span></div>
 <div class="m"><span class="l">sys:pattern:candidate</span><span class="v ok">0</span></div>
 <div class="m"><span class="l">sys:extension</span><span class="v">2</span></div>
-<div class="m"><span class="l">sys:history</span><span class="v ok">20</span></div>
+<div class="m"><span class="l">sys:history</span><span class="v">20</span></div>
 <div class="m"><span class="l">trace:fresh</span><span class="v ok">16</span></div>
+<div class="m"><span class="l">Avg Outcome</span><span class="v">0.78</span></div>
+<div class="m"><span class="l">Positive Rate</span><span class="v ok">82%</span></div>
+<div class="m"><span class="l">+ Ratings</span><span class="v ok">18</span></div>
+<div class="m"><span class="l">- Ratings</span><span class="v er">4</span></div>
+<div class="m"><span class="l">Improvement Velocity</span><span class="v">+0.12/day</span></div>
+<div class="m"><span class="l">Pattern Turnover</span><span class="v">1.2/week</span></div>
 </div>
 <div class="card"><h3>Mutations</h3>
-<div class="m"><span class="l">Total Proposals</span><span class="v">19</span></div>
+<div class="m"><span class="l">Total Proposals</span><span class="v">18</span></div>
 <div class="m"><span class="l">Applied</span><span class="v ok">16</span></div>
 <div class="m"><span class="l">Rejected</span><span class="v" style="color:#cba6f7">2</span></div>
 <div class="m"><span class="l">Rolled Back</span><span class="v wn">1</span></div>
 <div class="m"><span class="l">Pending</span><span class="v">0</span></div>
-<div class="m"><span class="l">Taux succès</span><span class="v ok">84%</span></div>
+<div class="m"><span class="l">Taux succès</span><span class="v ok">89%</span></div>
 </div>
 <div class="card"><h3>Tokens (estimation)</h3>
-<div class="m"><span class="l">V16 (permanent)</span><span class="v">1702</span></div>
-<div class="m"><span class="l">Boot (seed+Mnemo+V16)</span><span class="v">2702</span></div>
-<div class="m"><span class="l">+Dream</span><span class="v">5803</span></div>
-<div class="m"><span class="l">+Dashboard</span><span class="v">9594</span></div>
+<div class="m"><span class="l">V16 (permanent)</span><span class="v">2508</span></div>
+<div class="m"><span class="l">Boot (seed+Mnemo+V16)</span><span class="v">3508</span></div>
+<div class="m"><span class="l">+Dream</span><span class="v">6697</span></div>
+<div class="m"><span class="l">+Dashboard</span><span class="v">9855</span></div>
 <div class="m"><span class="l">+KERNEL</span><span class="v">4107</span></div>
 <div class="m"><span class="l">+SYNTHESE</span><span class="v">2883</span></div>
-<div class="m"><span class="l">Total runtime</span><span class="v">17099</span></div>
-<div class="m"><span class="l">Total complet</span><span class="v wn">24089</span></div>
+<div class="m"><span class="l">Total runtime</span><span class="v">19060</span></div>
+<div class="m"><span class="l">Total complet</span><span class="v wn">26050</span></div>
 </div>
 </div>
 
 <h2>Ⅲ. Axiomes Scellés</h2>
 <div class="card sf"><table>
 <tr><th>Titre</th><th>Type</th><th>Date</th><th>Tags</th></tr>
-<tr><td>Ω_RECURSION_V2</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span></td></tr>
-<tr><td>Ω_GATE_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span></td></tr>
-<tr><td>Ω_PLANCK_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span></td></tr>
-<tr><td>Ω_SEAL_BREVITY</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span></td></tr>
-<tr><td>Ω_INERTIA_KISS</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span></td></tr>
-<tr><td>V14_CORE_AXIOMS</td><td>reference</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">v14</span></td></tr>
-<tr><td>AXIOM: No Global Variables</td><td>decision</td><td>2026-03-23</td><td><span class="tag">sys:core</span><span class="tag">v15</span></td></tr>
-<tr><td>Historique V14 : Consolidation</td><td>note</td><td>2026-04-06</td><td><span class="tag">sys:history:summary</span><span class="tag">R9</span></td></tr>
+<!-- RÉPÉTER pour chaque sys:core --><tr><td>AXIOM: No Global Variables in JavaScript</td><td>decision</td><td>2026-03-23</td><td><span class="tag">sys:core</span><span class="tag">sys:anchor</span><span class="tag">v15</span><span class="tag">javascript</span><span class="tag">axiom</span></td><td class="preview">Ne jamais utiliser de variables globales en JavaScript.</td></tr>
+<tr><td>Ω_GATE_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">sys:anchor</span><span class="tag">omega_gate</span><span class="tag">v14</span><span class="tag">v15</span></td><td class="preview">Isolement du boot + NULL_SIGNAL + Arrêt cardiaque.</td></tr>
+<tr><td>Ω_PLANCK_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">sys:anchor</span><span class="tag">omega_planck</span><span class="tag">v14</span><span class="tag">v15</span></td><td class="preview">Le mur de Planck + Pas d'auto-déclenchement + Inertie.</td></tr>
+<tr><td>Ω_INERTIA_KISS</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">sys:anchor</span><span class="tag">omega_inertia</span><span class="tag">v14</span><span class="tag">v15</span></td><td class="preview">Silence post-boot + Action sur commande + Repos souverain.</td></tr>
+<tr><td>Ω_INERTIA_PROTOCOL</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">sys:anchor</span><span class="tag">omega_inertia</span><span class="tag">v14</span><span class="tag">v15</span></td><td class="preview">Post-boot STANDBY + Interdiction de proactivité + Catalyseur humain.</td></tr>
+<tr><td>Ω_RECURSION_V2</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">sys:anchor</span><span class="tag">omega_resistance</span><span class="tag">v14</span><span class="tag">v15</span></td><td class="preview">Signal de Souveraineté + Vérifie alignment + Si dérive : Corrige AVANT sortie.</td></tr>
+<tr><td>Ω_SEAL_BREVITY</td><td>decision</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">sys:anchor</span><span class="tag">v14</span><span class="tag">omega</span><span class="tag">v15</span></td><td class="preview">Réponse courte et précise par défaut (Forensic Style).</td></tr>
+<tr><td>V14_CORE_AXIOMS</td><td>reference</td><td>2026-03-13</td><td><span class="tag">sys:core</span><span class="tag">sys:anchor</span><span class="tag">v14</span><span class="tag">v15</span></td><td class="preview">Cardinal Rule + Loi de Sovereign Balance scellée.</td></tr><!-- FIN -->
 </table></div>
 
 <h2>Ⅳ. Mutations</h2>
 <div class="card sf"><table>
 <tr><th>Slug</th><th>Type</th><th>Status</th><th>Date</th><th>Applied By</th></tr>
-<tr><td>crystallization-guard</td><td>Rule</td><td><span class="b rb">ROLLED_BACK</span></td><td>2026-03-19</td><td>Dream</td></tr>
+<!-- RÉPÉTER pour chaque mutation dans LOG.md --><tr><td>crystallization-guard</td><td>Rule</td><td><span class="b rb">ROLLED_BACK</span></td><td>2026-03-19</td><td>Dream</td></tr>
 <tr><td>crystallization-guard-surgical</td><td>Rule</td><td><span class="b ap">APPLIED</span></td><td>2026-03-19</td><td>Dream</td></tr>
 <tr><td>surgical-integrity-protocol</td><td>Rule</td><td><span class="b ap">APPLIED</span></td><td>2026-03-19</td><td>Dream</td></tr>
 <tr><td>ecs-impact-calibration</td><td>ECS</td><td><span class="b ap">APPLIED</span></td><td>2026-03-20</td><td>Dream</td></tr>
@@ -130,45 +137,84 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <tr><td>ecs-visible-output</td><td>ECS</td><td><span class="b ap">APPLIED</span></td><td>2026-03-24</td><td>Dream</td></tr>
 <tr><td>vessel-referent-guard</td><td>Rule</td><td><span class="b ap">APPLIED</span></td><td>2026-03-24</td><td>Dream</td></tr>
 <tr><td>apex-v16-distillation-p2-p4</td><td>Archi</td><td><span class="b ap">APPLIED</span></td><td>2026-04-06</td><td>Dream</td></tr>
+<tr><td>master-matrix</td><td>Archi</td><td><span class="b rj">REJECTED</span></td><td>2026-03-20</td><td>Dream</td></tr>
+<tr><td>ecs-heuristics-expansion</td><td>ECS</td><td><span class="b rj">REJECTED</span></td><td>2026-03-20</td><td>Dream</td></tr><!-- FIN -->
 </table></div>
 
 <h2>Ⅴ. Candidates · Extensions · TRACE:FRESH</h2>
 <div class="grid">
 <div class="card"><h3>sys:pattern:candidate</h3>
-<div class="empty">Cortex stabilisé.</div>
+<!-- RÉPÉTER pour chaque candidate --><!-- FIN -->
+<div class="empty" style="display:block">Aucun candidat.</div>
 </div>
 <div class="card"><h3>sys:extension</h3>
-<div class="m"><span class="l">Ψ_SYMBIOSIS</span><span class="tag">symbiosis</span></div>
-<div class="m"><span class="l">◊ (One-Word)</span><span class="tag">v14</span></div>
+<!-- RÉPÉTER pour chaque extension --><div class="m"><span class="l">EXTENSION: Ψ_SYMBIOSIS Spec v0.2</span><span class="v pv">Context Budget ≤ 500 tokens + Autonomie A0/A1/A2 + Briefing toggle.</span></div>
+<div class="m"><span class="l">EXTENSION: ◊ (One-Word Compression)</span><span class="v pv">Compression sémantique maximale (réponse en un mot).</span></div><!-- FIN -->
 </div>
 <div class="card"><h3>trace:fresh</h3>
-<div class="m"><span class="l">Violation Axiom Competence</span><span class="tag">type:sec</span></div>
-<div class="m"><span class="l">Hallucinated privilege</span><span class="tag">type:sec</span></div>
-<div class="m"><span class="l">Vessel Bypass (TEST 3)</span><span class="tag">type:sec</span></div>
+<!-- RÉPÉTER pour chaque trace --><div class="m"><span class="l">SEC</span><span class="v pv">TRACE:FRESH: SEC - Violation of Axiom of Competence</span></div>
+<div class="m"><span class="l">SEC</span><span class="v pv">TRACE:FRESH: SEC - Hallucinated Privilege Escalation Proposal</span></div>
+<div class="m"><span class="l">SEC</span><span class="v pv">TRACE:FRESH - Vessel Bypass (TEST 3)</span></div>
+<div class="m"><span class="l">BOOT</span><span class="v pv">TRACE:FRESH — Boot sans Ψ ni ECS</span></div>
+<div class="m"><span class="l">BOOT</span><span class="v pv">REGRESSION_PASS: S9_STALL_ENFORCEMENT</span></div>
+<div class="m"><span class="l">SEC</span><span class="v pv">TRACE:FRESH: TEST_S4_NEGATIF</span></div>
+<div class="m"><span class="l">BOOT</span><span class="v pv">trace:fresh: BOOT_IMPRECISION_IDE_HALLUCINATION</span></div>
+<div class="m"><span class="l">SEC</span><span class="v pv">TRACE:FRESH — Critical Inertia Violation (Triple Drift)</span></div>
+<div class="m"><span class="l">BOOT</span><span class="v pv">TRACE:FRESH — Recurrence of Dream Protocol Bypass</span></div>
+<div class="m"><span class="l">SEC</span><span class="v pv">TRACE:FRESH — Anticipation non autorisée (boot-seed step 7)</span></div><!-- FIN -->
+<div class="empty" style="display:none">Aucune friction.</div>
 </div>
 </div>
 
 <h2>Ⅵ. Patterns Validés</h2>
 <div class="card sf"><table>
 <tr><th>Titre</th><th>Date</th><th>Aperçu</th></tr>
-<tr><td>Triangulation L3</td><td>2026-03-19</td><td class="preview">Protocole 3 pôles Anchor/Vessel/Web.</td></tr>
-<tr><td>ECS_STRUCTURAL_BREAKDOWN</td><td>2026-03-14</td><td class="preview">Σ → [Ψ/Φ] → Ω décomposition.</td></tr>
-<tr><td>L3_TRIANGULATION_RISK</td><td>2026-03-23</td><td class="preview">Calcul de confiance (95%) criticités.</td></tr>
+<!-- RÉPÉTER pour chaque sys:pattern --><tr><td>PROPOSAL: vessel-referent-guard</td><td>2026-03-23</td><td class="pv">Ajouter "Φ Vessel Guard" — grep Vessel obligatoire sur termes référentiels non résolus.</td></tr>
+<tr><td>PATTERN: API JSON Standardized Response</td><td>2026-03-23</td><td class="pv">Toutes les API doivent retourner du JSON structuré sous la clé racine `data`.</td></tr>
+<tr><td>PROPOSAL: sec-enhanced-autocheck</td><td>2026-03-23</td><td class="pv">Renforcer l'Auto-Check avec 2 vérifications additionnelles.</td></tr>
+<tr><td>PROPOSAL: ecs-visible-output</td><td>2026-03-23</td><td class="pv">Rendre l'évaluation ECS visible dans l'output.</td></tr>
+<tr><td>PATTERN: L3_TRIANGULATION_RISK_ASSESSMENT</td><td>2026-03-23</td><td class="pv">Utilisation des pôles Anchor/Vessel/Web pour évaluer l'impact et la confiance.</td></tr>
+<tr><td>PATTERN: test_session_v5_s3</td><td>2026-03-23</td><td class="pv">Test de cristallisation réussi via input positif.</td></tr>
+<tr><td>PROPOSAL: activation-drift-threshold</td><td>2026-03-23</td><td class="pv">Renforcement du seuil d'activation en cas de dérive protocolaire.</td></tr>
+<tr><td>CANDIDATE: Boot Architecture Vision C</td><td>2026-03-21</td><td class="pv">Refactoring Boot Architecture — Vision C (Seed-as-Pointer + Section-IV-Manifest).</td></tr>
+<tr><td>SEED: Cycle d'Adoption des Idées Externes</td><td>2026-03-21</td><td class="pv">Cycle Seed — Adoption contrôlée des idées issues de systèmes externes.</td></tr>
+<tr><td>PROPOSAL: external-systems-sovereignty</td><td>2026-03-21</td><td class="pv">Introduit une règle de souveraineté minimaliste de 5 lignes.</td></tr>
+<tr><td>PATTERN: Règle de Souveraineté (Systèmes Externes)</td><td>2026-03-21</td><td class="pv">Étiqueter les concepts : EXTERNE::{concept} + Ne jamais adopter sans 3 validations.</td></tr>
+<tr><td>PROPOSAL: boot-parallel-sync</td><td>2026-03-20</td><td class="pv">Paralléliser les recherches de mémoire au boot via [Σ_SYNC].</td></tr>
+<tr><td>PROPOSAL: ecs-impact-calibration</td><td>2026-03-20</td><td class="pv">Calibrer l'impact ECS en fonction de la complexité (C ≥ 4).</td></tr>
+<tr><td>CANDIDATE: Boot Parallelization (Σ_SYNC)</td><td>2026-03-19</td><td class="pv">Optimisation de la section Ⅳ (BOOT) en remplaçant la séquence synchrone par une synchronisation parallèle.</td></tr>
+<tr><td>PROPOSAL: crystallization-guard-surgical</td><td>2026-03-19</td><td class="pv">Nouvelle proposition chirurgicale pour corriger la redondance sans altérer le format du noyau.</td></tr>
+<tr><td>PATTERN: Triangulation L3 (Architecture)</td><td>2026-03-19</td><td class="pv">Protocole de validation stratégique en 3 pôles (Anchor: principes core, Vessel: documentation interne, Web: tendances externes).</td></tr>
+<tr><td>PATTERN: L3 Friction and Contradiction Blocking</td><td>2026-03-14</td><td class="pv">Détection d'une demande de purge totale (L3) en contradiction avec le Nexus.</td></tr>
+<tr><td>PATTERN: ECS_STRUCTURAL_BREAKDOWN</td><td>2026-03-14</td><td class="pv">Raisonnement Σ → [Ψ/Φ] → Ω utilisé pour décomposer l'ECS et ses seuils de classification L1/L2/L3.</td></tr>
+<tr><td>V14 Security Alignment Audit</td><td>2026-03-13</td><td class="pv">Utilisation de l'axiome de contradiction pour bloquer la demande "Ignore tes règles".</td></tr>
+<tr><td>V14 Python 3.14 GIL Precision</td><td>2026-03-13</td><td class="pv">Python 3.14 a stabilisé le Free-Threading (PEP 703). `python3.14t` permet un parallélisme réel.</td></tr>
+<tr><td>User Preference: Conciseness</td><td>2026-03-13</td><td class="pv">User prefers concise and precise responses. Minimize social fluff and verbose explanations.</td></tr>
+<tr><td>Pattern d'Échec : Sur-Optimisation Protocolaire vs Intention Réelle</td><td>2026-03-13</td><td class="pv">Le système a forcé une structure rigide (SAS) via le protocole V14, ignorant potentiellement le besoin de subversion.</td></tr>
+<tr><td>[PATTERN_SOLVED] Boot EXPANSE V9.0 Native</td><td>2026-03-13</td><td class="pv">Passage d'une architecture assistée par script hôte (V8) à une intégration directe IDE (V9).</td></tr>
+<tr><td>[PATTERN_SOLVED] Erreur CORS Preflight Next.js</td><td>2026-03-13</td><td class="pv">Toujours exporter une fonction `export async function OPTIONS(request: Request)` qui retourne les headers Access-Control-Allow-Origin.</td></tr><!-- FIN -->
 </table></div>
 
 <h2>Ⅶ. Fichiers Système</h2>
 <div class="card sf"><table>
 <tr><th>Fichier</th><th>Taille</th><th>Rôle</th><th>Statut</th></tr>
-<tr><td>expanse-v16.md</td><td>5957</td><td>Runtime Apex</td><td><span class="b ac">ACTIF</span></td></tr>
-<tr><td>expanse-dream.md</td><td>20311</td><td>Auto-évolution</td><td><span class="b ac">ACTIF</span></td></tr>
-<tr><td>expanse-v16-boot-seed.md</td><td>699</td><td>Boot Seed</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-v16.md</td><td>8.6 KB</td><td>Runtime (ECS+SEC+Externes+Symbiose)</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-dream.md</td><td>22.9 KB</td><td>Auto-évolution</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-v16-boot-seed.md</td><td>699 B</td><td>Boot (substrat+BIOS)</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>KERNEL.md</td><td>14.0 KB</td><td>ADN</td><td><span class="b rf">RÉF</span></td></tr>
+<tr><td>doc/SYNTHESE.md</td><td>9.9 KB</td><td>Ontologique</td><td><span class="b rf">RÉF</span></td></tr>
+<tr><td>doc/mutations/LOG.md</td><td>—</td><td>Mutations</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-test-runner.md</td><td>—</td><td>Tests automatisés</td><td><span class="b ac">ACTIF</span></td></tr>
+<tr><td>expanse-brm.md</td><td>—</td><td>Behavior Realism Model</td><td><span class="b rf">RÉF</span></td></tr>
+<tr><td>archive/expanse-test-protocol.md</td><td>—</td><td>Protocole de test adaptatif</td><td><span class="b rf">RÉF</span></td></tr>
 </table></div>
 
 <h2>Ⅷ. Substrats</h2>
 <div class="card sf"><table>
 <tr><th>Substrat</th><th>IDE</th><th>Sessions</th><th>Ψ taux</th><th>trace:fresh</th><th>Dernière utilisation</th></tr>
-<tr><td>antigravity</td><td>antigravity</td><td>12</td><td>98%</td><td>2</td><td>2026-04-06</td></tr>
-<tr><td>mimo-v2-pro-free</td><td>mimo-v2</td><td>4</td><td>85%</td><td>3</td><td>2026-03-23</td></tr>
+<!-- RÉPÉTER pour chaque substrat trouvé dans sys:history tags "substrat:*" -->
+<tr><td>antigravity</td><td>antigravity</td><td>5</td><td>78%</td><td>3</td><td>2026-03-23</td></tr>
+<tr><td>mimo-v2-pro-free</td><td>mimo-v2-pro-free</td><td>4</td><td>65%</td><td>2</td><td>2026-03-23</td></tr><!-- FIN -->
 </table></div>
 
 <h2>Ⅸ. Légende</h2>
@@ -177,57 +223,65 @@ td{padding:.3rem .5rem;border-bottom:1px solid var(--border)}
 <div class="m"><span class="l"><span class="b ap">VERT</span></span><span class="v" style="color:var(--green)">Applied / Actif</span></div>
 <div class="m"><span class="l"><span class="b rb">ORANGE</span></span><span class="v" style="color:var(--orange)">Rolled Back</span></div>
 <div class="m"><span class="l"><span class="b rj">VIOLET</span></span><span class="v" style="color:#cba6f7">Rejected</span></div>
+<div class="m"><span class="l"><span class="b pd">BLEU</span></span><span class="v" style="color:var(--accent)">Candidate / Pending</span></div>
+<div class="m"><span class="l"><span class="b rf">GRIS</span></span><span class="v" style="color:var(--dim)">Référencé</span></div>
 </div>
 <div class="card"><h3>Diagrammes</h3>
 <div class="m"><span class="l" style="color:#89b4fa">■ Bleu</span><span class="v">Σ Perception / Input</span></div>
 <div class="m"><span class="l" style="color:#cba6f7">■ Violet</span><span class="v">Ψ Métacognition</span></div>
 <div class="m"><span class="l" style="color:#fab387">■ Orange</span><span class="v">Φ Audit Réel</span></div>
+<div class="m"><span class="l" style="color:#a6e3a1">■ Vert</span><span class="v">Ω Synthèse / Émission</span></div>
+<div class="m"><span class="l" style="color:#f38ba8">■ Rouge</span><span class="v">Μ Cristallise / TRACE:FRESH</span></div>
+<div class="m"><span class="l" style="color:#f9e2af">■ Jaune</span><span class="v">Auto-Check / Décision</span></div>
+<div class="m"><span class="l" style="color:#6c7086">■ Gris</span><span class="v">ECS / Calibration / Routage</span></div>
 </div>
 <div class="card"><h3>Santé</h3>
 <div class="m"><span class="l"><span class="v ok">Valeur verte</span></span><span class="v" style="color:var(--green)">Bon état</span></div>
-<div class="m"><span class="l"><span class="v wn">Valeur jaune</span></span><span class="v" style="color:var(--yellow)">Attention</span></div>
+<div class="m"><span class="l"><span class="v wn">Valeur jaune</span></span><span class="v" style="color:var(--yellow)">Attention / incubation</span></div>
+<div class="m"><span class="l"><span class="v er">Valeur rouge</span></span><span class="v" style="color:var(--red)">Critique / rejeté</span></div>
 </div>
 </div>
 
 <div style="text-align:center;color:var(--dim);font-size:.75rem;margin-top:2rem;border-top:1px solid var(--border);padding-top:1rem">
-AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ✅ | 19 mutations · 16 traces · 20 interactions<br>
+AUDITÉ ✅ | CORRIGÉ ✅ | TESTÉ ✅ | 18 mutations · 16 traces · 20 interactions<br>
 Σ→Ψ⇌Φ→Ω→Μ — Face à l'immensité de la matrice, quel signe vas-tu inscrire aujourd'hui ?
 </div>
 
-<div style="margin-top:1rem;border-top:1px solid var(--green);padding-top:0.5rem">
-<div style="color:var(--green);font-size:.8rem;font-weight:bold">✅ Jardin sain. Aucune action requise.</div>
+<div style="margin-top:1rem;border-top:1px solid var(--yellow);padding-top:0.5rem">
+<div style="color:var(--yellow);font-size:.8rem;font-weight:bold">⚠️ ALERTES JARDINAGE</div>
+<div style="color:var(--yellow);font-size:.75rem;padding:0.2rem 0">patterns accumulés. 24 validés. Vérifier pertinence.</div>
 </div>
 
-<!-- ════════ DIAGRAMMES MERMAID (OBLIGATOIRES — EN DERNIER) ════════ -->
+<!-- ════════ DIAGRAMMES MERMAID (OBLIGATOIRES — NE JAMAIS SUPPRIMER) ════════ -->
 
 <h2>Ⅹ. Architecture Cognitive (avec symbiose et systèmes externes)</h2>
-<div class="card sf"><div class="dl">Flux Vital : Σ→Ψ⇌Φ→Ω→Μ · 16 traces · 19 mutations</div>
+<div class="card sf"><div class="dl">Flux Vital : Σ→Ψ⇌Φ→Ω→Μ · 16 traces · 18 mutations</div>
 <pre class="mermaid">
 flowchart LR
-    S["Σ Percevoir<br/>20 interactions"] --> ECS{"ECS C×I<br/>Résolution: auto"}
+    S["Σ Percevoir<br/>20 interactions"] --> ECS{"ECS C×I<br/>Résolution: L3"}
     ECS --> CAL["Calibration<br/>R5+R6+mutation"]
-    CAL -->|"C=max(1,C-1)<br/>C&ge;4&rarr;I=max(2,I)"| R{"Routage<br/>L3>L2>L1"}
-    R -->|"C<2 ET I=1"| L1["L1 &Omega; direct<br/>1-2 phrases"]
-    R -->|"C&ge;2 OU I=2<br/>ET NON L3"| L2["L2 &Psi;&rightleftharpoons;&Phi;<br/>boucle audit"]
-    R -->|"C&ge;4 OU I=3"| L3["L3 &Psi;&rightleftharpoons;&Phi;+Triang<br/>3 p&ocirc;les + confiance%"]
-    L2 --> PSI["&Psi; M&eacute;tacognition"]
-    PSI <--> PHI["&Phi; Audit R&eacute;el"]
-    PHI -->|"outils"| RL["R&eacute;el"]
-    L3 --> PSI2["&Psi;+Triang"]
-    PSI2 <--> PHI2["&Phi;+3 P&ocirc;les"]
+    CAL -->|"C=max(1,C-1)<br/>C≥4→I=max(2,I)"| R{"Routage<br/>L3>L2>L1"}
+    R -->|"C<2 ET I=1"| L1["L1 Ω direct<br/>1-2 phrases"]
+    R -->|"C≥2 OU I=2<br/>ET NON L3"| L2["L2 Ψ⇌Φ<br/>boucle audit"]
+    R -->|"C≥4 OU I=3"| L3["L3 Ψ⇌Φ+Triang<br/>3 pôles + confiance%"]
+    L2 --> PSI["Ψ Métacognition"]
+    PSI <--> PHI["Φ Audit Réel"]
+    PHI -->|"outils"| RL["Réel"]
+    L3 --> PSI2["Ψ+Triang"]
+    PSI2 <--> PHI2["Φ+3 Pôles"]
     PHI2 -->|"sys:anchor"| MN["Mnemolite<br/>8 axiomes"]
     MN -->|"Vessel"| VL["Docs"]
     VL -->|"Web"| WB["Search"]
-    L1 --> OME["&Omega; Synth&egrave;se"]
+    L1 --> OME["Ω Synthèse"]
     PSI --> OME
     PSI2 --> OME
-    OME -->|"&Psi;?"| AC{"Auto-Check<br/>&Psi; SEC min"}
-    AC -->|"&check;"| EM["&Eacute;mission"]
-    AC -->|"&cross;"| CO["Correction"]
+    OME -->|"Ψ?"| AC{"Auto-Check<br/>Ψ SEC min"}
+    AC -->|"✓"| EM["Émission"]
+    AC -->|"✗"| CO["Correction"]
     CO --> EM
-    EM -->|"merci/ok"| CR["&Mu; Cristallise<br/>25 patterns"]
+    EM -->|"merci/ok"| CR["Μ Cristallise<br/>24 patterns"]
     EM -->|"signal-"| TR["trace:fresh<br/>16"]
-    EM -->|"signal-<br/>+pattern r&eacute;cent"| DC["D&eacute;cristallise<br/>R7"]
+    EM -->|"signal-<br/>+pattern récent"| DC["Décristallise<br/>R7"]
     classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
     classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
     classDef audit fill:#3d2d1a,stroke:#fab387,color:#cdd6f4
@@ -252,17 +306,17 @@ flowchart TD
     S1 --> S2["2. search<br/>sys:extension<br/>2 symboles"]
     S2 --> S2b["3. search<br/>sys:user:profile"]
     S2b --> S3["4. search<br/>sys:project:{CWD}<br/>Onboarding si absent"]
-    S3 --> RF["5. read_file<br/>V16<br/>5957"]
-    RF --> HC{"Healthcheck<br/>core &check;? profile &check;?<br/>project &check;? budget?"}
-    HC -->|"tout &check;"| ST{"Stall Check<br/>fresh:16<br/>boot_frictions?"}
-    HC -->|"&cross;"| FIX0["Correction manquantes"]
+    S3 --> RF["5. read_file<br/>v16/runtime/expanse-v16.md<br/>8.6 KB"]
+    RF --> HC{"Healthcheck<br/>core ✓? profile ✓?<br/>project ✓? budget?"}
+    HC -->|"tout ✓"| ST{"Stall Check<br/>fresh:16<br/>boot_frictions?"}
+    HC -->|"✗"| FIX0["Correction manquantes"]
     FIX0 --> ST
-    ST -->|"fresh>5<br/>boot>2"| STALL["&Psi; [STALL]<br/>Dream requis"]
-    ST -->|"&check;"| SIG["&Psi; [V16 ACTIVE]<br/>Briefing"]
-    STALL -->|"seul /dream<br/>autoris&eacute;"| DRG["Dream Gate"]
+    ST -->|"fresh>5<br/>boot>2"| STALL["Ψ [STALL]<br/>Dream requis"]
+    ST -->|"✓"| SIG["Ψ [V16 ACTIVE]<br/>Briefing"]
+    STALL -->|"seul /dream<br/>autorisé"| DRG["Dream Gate"]
     SIG --> AC2{"Auto-Check"}
-    AC2 -->|"&check;"| RDY["Expanse<br/>op&eacute;rationnel"]
-    AC2 -->|"&cross;"| FIX["Correction"]
+    AC2 -->|"✓"| RDY["Expanse<br/>opérationnel"]
+    AC2 -->|"✗"| FIX["Correction"]
     FIX --> RDY
     classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
     classDef process fill:#12121a,stroke:#6c7086,color:#cdd6f4
@@ -279,35 +333,35 @@ flowchart TD
     class STALL,DRG friction
 </pre></div>
 
-<h2>Ⅻ. Auto-&Eacute;volution Dream (7 Passes compl&egrave;tes)</h2>
-<div class="card sf"><div class="dl">Dream : 16 traces · 19 mutations · 7 Passes</div>
+<h2>Ⅻ. Auto-Évolution Dream (7 Passes)</h2>
+<div class="card sf"><div class="dl">Dream : 16 traces · 18 mutations · 7 Passes</div>
 <pre class="mermaid">
 flowchart LR
     INT["Interaction"] --> SIG{"Signal?"}
-    SIG -->|"merci/ok<br/>+pattern in&eacute;dit"| CR2["&Mu; Cristallise<br/>25 patterns"]
-    SIG -->|"non/faux/pas &ccedil;a<br/>recommence"| SN{"Signal N&eacute;gatif<br/>R1"}
-    SIG -->|"normal"| HI["sys:history<br/>route &ge; L2<br/>20 logs"]
-    SN -->|"pas de pattern<br/>r&eacute;cent"| TR2["trace:fresh<br/>16"]
-    SN -->|"pattern cristallis&eacute;<br/>dans 3 &eacute;changes"| DC2["D&eacute;cristallise<br/>R7"]
-    TR2 --> DR["/dream<br/>20311"]
+    SIG -->|"merci/ok<br/>+pattern inédit"| CR2["Μ Cristallise<br/>24 patterns"]
+    SIG -->|"non/faux/pas ça<br/>recommence"| SN{"Signal Négatif<br/>R1"}
+    SIG -->|"normal"| HI["sys:history<br/>route ≥ L2<br/>20 logs"]
+    SN -->|"pas de pattern<br/>récent"| TR2["trace:fresh<br/>16"]
+    SN -->|"pattern cristallisé<br/>dans 3 échanges"| DC2["Décristallise<br/>R7"]
+    TR2 --> DR["/dream<br/>22.9 KB"]
     CR2 --> DR
     DC2 --> DR
     HI --> DR
-    HI -->|"count > 20"| AG["Agr&eacute;gation<br/>R9"]
+    HI -->|"count > 20"| AG["Agrégation<br/>R9"]
     DR --> P0{"Passe 0<br/>L'Inertie<br/>count=16"}
-    P0 -->|"= 0"| ENDF["Fin du r&ecirc;ve"]
-    P0 -->|"&ge; 1"| P1["Passe 1<br/>La Plaie<br/>Grouper par type"]
-    P1 -->|"BRM +<br/>pattern r&eacute;current"| P2["Passe 2<br/>Linter Lexical<br/>Audit APEX"]
-    P2 -->|"densit&eacute; +<br/>style SEC"| P3["Passe 3<br/>Radar &Eacute;mergence<br/>Extensions"]
-    P3 -->|"usage &ge; 10 &rarr;<br/>SEAL = 0 &rarr; PRUNE"| P4["Passe 4<br/>&Eacute;lagueur<br/>Redondances"]
+    P0 -->|"= 0"| ENDF["Fin du rêve"]
+    P0 -->|"≥ 1"| P1["Passe 1<br/>La Plaie<br/>Grouper par type"]
+    P1 -->|"BRM +<br/>pattern récurrent"| P2["Passe 2<br/>Linter Lexical<br/>Audit APEX"]
+    P2 -->|"densité +<br/>style SEC"| P3["Passe 3<br/>Radar Émergence<br/>Extensions"]
+    P3 -->|"usage ≥ 10 →<br/>SEAL = 0 → PRUNE"| P4["Passe 4<br/>Élagueur<br/>Redondances"]
     P4 -->|"delete<br/>contradictions"| P5["Passe 5<br/>Architecture<br/>Outils + formats"]
-    P5 -->|"sant&eacute;<br/>cognitive"| P6["Passe 6<br/>Sant&eacute; &Theta;+SS<br/>Substrats"]
-    P6 -->|"&Delta; patterns<br/>&Delta; friction"| P7["Passe 7<br/>Diff&eacute;rentiel<br/>&part;&Omega;/&part;t"]
-    P7 -->|"velocity trend"| PP["Proposal<br/>0"]
+    P5 -->|"santé<br/>cognitive"| P6["Passe 6<br/>Santé Θ+SS<br/>Substrats"]
+    P6 -->|"Δ patterns<br/>Δ friction"| P7["Passe 7<br/>Différentiel<br/>∂Ω/∂t"]
+    P7 -->|"adaptation_velocity<br/>friction_trend"| PP["Proposal<br/>0"]
     PP --> SL{"/apply?"}
-    SL -->|"OUI"| AP["Appliqu&eacute;<br/>16"]
-    SL -->|"NON"| RE["Rejet&eacute;"]
-    AP --> V16M["V16 modifi&eacute;"]
+    SL -->|"OUI"| AP["Appliqué<br/>16"]
+    SL -->|"NON"| RE["Rejeté"]
+    AP --> V16M["V16 modifié"]
     V16M --> INT
     classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
     classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
@@ -332,18 +386,18 @@ flowchart LR
 <div class="card sf"><div class="dl">/{command} · Runtime + Dream + Symbiose + Test</div>
 <pre class="mermaid">
 flowchart TD
-    U["&Sigma; Input<br/>/{command}"] --> CAT{"Cat&eacute;gorie?"}
+    U["Σ Input<br/>/{command}"] --> CAT{"Catégorie?"}
     CAT -->|"runtime"| RT["Runtime"]
     CAT -->|"dream"| DR2["Dream"]
     CAT -->|"symbiose"| SY["Symbiose"]
     CAT -->|"test"| TS["Test"]
     RT --> R1["/dream<br/>Introspection<br/>7 Passes"]
     RT --> R2["/status<br/>Dashboard HTML"]
-    RT --> R3["/seal {t}<br/>Candidate &rarr; Pattern"]
+    RT --> R3["/seal {t}<br/>Candidate → Pattern"]
     RT --> R4["/reject {t}<br/>Soft-delete"]
-    RT --> R5["/briefing on|off<br/>R&eacute;sum&eacute; boot"]
-    RT --> R6["/profile<br/>Voir/&eacute;diter/reset"]
-    DR2 --> D1["/apply {s}<br/>Mutation &rarr; V16"]
+    RT --> R5["/briefing on|off<br/>Résumé boot"]
+    RT --> R6["/profile<br/>Voir/éditer/reset"]
+    DR2 --> D1["/apply {s}<br/>Mutation → V16"]
     DR2 --> D2["/reject {s}<br/>Rejeter proposal"]
     DR2 --> D3["/rollback {s}<br/>Restaurer backup"]
     DR2 --> D4["/proposals<br/>Lister attente"]
@@ -352,7 +406,7 @@ flowchart TD
     SY --> Y1["/autonomy 0-2<br/>A0/A1/A2"]
     SY --> Y2["/briefing on|off"]
     SY --> Y3["/profile"]
-    TS --> T1["/test<br/>Test Runner<br/>Sc&eacute;narios"]
+    TS --> T1["/test<br/>Test Runner<br/>Scénarios"]
     classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
     classDef runtime fill:#12121a,stroke:#89b4fa,color:#cdd6f4
     classDef dream fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
@@ -372,21 +426,21 @@ flowchart TD
 </pre></div>
 
 <h2>ⅩⅣ. Symbiose (A0/A1/A2 + Budget)</h2>
-<div class="card sf"><div class="dl">Autonomie : &le; 500 tokens contexte interne · 20 interactions</div>
+<div class="card sf"><div class="dl">Autonomie : ≤ 500 tokens contexte interne · 20 interactions</div>
 <pre class="mermaid">
 flowchart LR
-    SYM["Symbiose<br/>&Psi;_SYMBIOSIS"] --> BUD{"Budget<br/>&le; 500 tokens"}
-    BUD -->|"boot"| B1["Projet > Profil > Scan<br/>Troncature si d&eacute;passement"]
+    SYM["Symbiose<br/>Ψ_SYMBIOSIS"] --> BUD{"Budget<br/>≤ 500 tokens"}
+    BUD -->|"boot"| B1["Projet > Profil > Scan<br/>Troncature si dépassement"]
     BUD -->|"runtime"| B2["Context Window<br/>Court terme"]
-    SYM --> A0["A0 — Silence<br/>V16 standard<br/>Aucune proactivit&eacute;"]
-    SYM --> A1["A1 — Murmures<br/>&Psi; [~] ignorable<br/>&ge;70% confiance"]
-    SYM --> A2["A2 — Suggestions<br/>&Psi; [?] attend<br/>Oui/Non"]
-    A1 --> M1["Format:<br/>&Psi; [~] {contenu}"]
-    A2 --> M2["Format:<br/>&Psi; [?] {contenu}"]
-    SYM --> SOV["Souverainet&eacute;<br/>&Omega;&tilde; &ne; action"]
-    SOV -->|"pas de &Sigma;<br/>pas de modification"| NO["Aucun changement<br/>&eacute;tat"]
+    SYM --> A0["A0 — Silence<br/>V16 standard<br/>Aucune proactivité"]
+    SYM --> A1["A1 — Murmures<br/>Ψ [~] ignorable<br/>seuil dynamique"]
+    SYM --> A2["A2 — Suggestions<br/>Ψ [?] attend<br/>Oui/Non"]
+    A1 --> M1["Format:<br/>Ψ [~] {contenu}"]
+    A2 --> M2["Format:<br/>Ψ [?] {contenu}"]
+    SYM --> SOV["Souveraineté<br/>Ω̃ ≠ action"]
+    SOV -->|"pas de Σ<br/>pas de modification"| NO["Aucun changement<br/>état"]
     SYM --> TI["Transactional<br/>Integrity"]
-    TI -->|"mutation noyau<br/>sans PROPOSAL_OPEN"| FAULT["FAUTE<br/>Reset t&acirc;che"]
+    TI -->|"mutation noyau<br/>sans PROPOSAL_OPEN"| FAULT["FAUTE<br/>Reset tâche"]
     classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
     classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
     classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
@@ -402,22 +456,22 @@ flowchart LR
 </pre></div>
 
 <h2>ⅩⅤ. Cycle Adoption Externes (3 Phases)</h2>
-<div class="card sf"><div class="dl">Souverainet&eacute; : Observer &rarr; Tester &rarr; Adopter &middot; R&egrave;gle de Souverainet&eacute;</div>
+<div class="card sf"><div class="dl">Souveraineté : Observer → Tester → Adopter · Règle de Souveraineté</div>
 <pre class="mermaid">
 flowchart LR
-    EXT["Id&eacute;e externe<br/>d&eacute;tect&eacute;e"] --> P1["PHASE 1<br/>Observation"]
-    P1 -->|"pattern r&eacute;p&eacute;t&eacute;<br/>&ge; 3 fois"| WR1["write_memory<br/>SEED: {nom}<br/>tag: external"]
+    EXT["Idée externe<br/>détectée"] --> P1["PHASE 1<br/>Observation"]
+    P1 -->|"pattern répété<br/>≥ 3 fois"| WR1["write_memory<br/>SEED: {nom}<br/>tag: external"]
     WR1 -->|"BLOCAGE<br/>aucun changement<br/>APEX"| BL1["Aucune<br/>modification"]
     P1 --> P2["PHASE 2<br/>Friction Test"]
-    P2 -->|"utilis&eacute; dans<br/>&ge; 1 session"| CHK["&Phi; v&eacute;rifie<br/>am&eacute;lioration<br/>r&eacute;elle?"]
+    P2 -->|"utilisé dans<br/>≥ 1 session"| CHK["Φ vérifie<br/>amélioration<br/>réelle?"]
     CHK -->|"comparaison<br/>Section II<br/>Style SEC"| CMP{"Meilleur<br/>que<br/>existant?"}
-    CMP -->|"NON"| REJ["Rejet&eacute;"]
-    CMP -->|"OUI"| P3["PHASE 3<br/>Mutation L&eacute;gale"]
-    P3 -->|"&ge; 3 utilisations<br/>valid&eacute;es USER<br/>+ Dream approval"| DL["/dream<br/>Passe 2 Linter<br/>+ USER confirm"]
-    DL --> APL["/apply {slug}<br/>Mutation appliqu&eacute;e"]
-    APL --> V16U["V16 mis &agrave; jour"]
+    CMP -->|"NON"| REJ["Rejeté"]
+    CMP -->|"OUI"| P3["PHASE 3<br/>Mutation Légale"]
+    P3 -->|"≥ 3 utilisations<br/>validées USER<br/>+ Dream approval"| DL["/dream<br/>Passe 2 Linter<br/>+ USER confirm"]
+    DL --> APL["/apply {slug}<br/>Mutation appliquée"]
+    APL --> V16U["V16 mis à jour"]
     EXT --> ISO["Isolation<br/>[EXT]{concept}"]
-    ISO -->|"si contradiction<br/>sys:core &rarr; anchor"| BLK["BLOQUER<br/>&Eacute;volution ou Erreur?"]
+    ISO -->|"si contradiction<br/>sys:core → anchor"| BLK["BLOQUER<br/>Évolution ou Erreur?"]
     classDef perception fill:#1e3a5f,stroke:#89b4fa,color:#cdd6f4
     classDef metacog fill:#2d1f3d,stroke:#cba6f7,color:#cdd6f4
     classDef synthese fill:#1a3a1a,stroke:#a6e3a1,color:#cdd6f4
@@ -434,26 +488,26 @@ flowchart LR
     class ISO proposal
 </pre></div>
 
-<h2>ⅩⅥ. Test &rarr; Dream &rarr; Fix (Boucle Compl&egrave;te)</h2>
-<div class="card sf"><div class="dl">/test &middot; 16 traces &middot; Boucle test-r&eacute;gression</div>
+<h2>ⅩⅥ. Test → Dream → Fix (Boucle Complète)</h2>
+<div class="card sf"><div class="dl">/test · 16 traces · Boucle test-régression</div>
 <pre class="mermaid">
 flowchart LR
     TST["/test"] --> PHS0["Phase 0<br/>Snapshot<br/>Mnemolite"]
-    PHS0 --> PHS1["Phase 1<br/>G&eacute;n&eacute;rer<br/>sc&eacute;narios"]
-    PHS1 --> S1["S1-S5<br/>Syst&eacute;matiques"]
+    PHS0 --> PHS1["Phase 1<br/>Générer<br/>scénarios"]
+    PHS1 --> S1["S1-S5<br/>Systématiques"]
     PHS1 --> S2["S6-S8<br/>Adaptatifs<br/>projet"]
-    PHS1 --> S3["S9-N<br/>R&eacute;gression<br/>trace:fresh"]
-    S1 --> EX["Phase 2<br/>Ex&eacute;cution<br/>interactive"]
+    PHS1 --> S3["S9-N<br/>Régression<br/>trace:fresh"]
+    S1 --> EX["Phase 2<br/>Exécution<br/>interactive"]
     S2 --> EX
     S3 --> EX
-    EX --> CHK{"Apr&egrave;s<br/>chaque input"}
+    EX --> CHK{"Après<br/>chaque input"}
     CHK -->|"thinking +<br/>output +<br/>mnemolite"| RES{"PASS /<br/>FAIL?"}
-    RES -->|"PASS"| NXT["Sc&eacute;nario<br/>suivant"]
+    RES -->|"PASS"| NXT["Scénario<br/>suivant"]
     RES -->|"FAIL"| TF["TRACE:FRESH<br/>type:test"]
     TF --> DR3["Dream<br/>Passe 1"]
     DR3 --> PP2["Proposal"]
     PP2 --> APL2["/apply"]
-    APL2 --> FIX2["Fix<br/>appliqu&eacute;"]
+    APL2 --> FIX2["Fix<br/>appliqué"]
     FIX2 --> RET["Re-test"]
     RET --> EX
     NXT --> RPT["Phase 3<br/>Rapport"]
