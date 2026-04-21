@@ -7,7 +7,7 @@
 **Version :** 1.6  
 **Date :** 2026-04-18  
 **Statut :** 9/24 scénarios implémentés (Boot, Bonjour, L2-Audit, L3-Triangulation, Violation-Axiome, Hallucination-Block, Momentum-Resist, Vessel-Guard, Dream-Cycle)  
-**Changements v1.6 :** Sync avec PROMPT-EXPANSE-READER v4-Lentilles : Template EPIC enrichi (4 Lentilles + Test de l'amputation), BOOT scenario ① complété avec Contextuel (AURA) + Test de l'amputation (5 organes)
+**Changements v1.6 :** Sync avec PROMPT-EXPANSE-READER v4-Lentilles : Template EPIC enrichi (4 Lentilles + Test de l'amputation), 9 scénarios implémentés complétés avec Contextuel (AURA) + Test de l'amputation (① Boot + ②–⑨)
 **Changements v1.5 :** ① BOOT enrichi avec [../scenarios/2026-04-18_22-03-SCENARIO-BOOT.md](../scenarios/2026-04-18_22-03-SCENARIO-BOOT.md) — 4 directives Seed (Exemption Directe = directive 0), BOOT_CONFIG détaillé, 6 préconditions cachées + 2 conséquences cachées, 4 divergences entre sources (reconnaissance vs bascule vs étalonnage + BOOT_CONFIG émergence), chorégraphie Ψ↓/⊕, temporalité réelle (⚡⏱️🔄⏳), didactique complète (5 concepts + 7 glossaire + 3 anti-patterns), framing évolutif (compost cognitif)
 **Changements v1.3 :** Blindage EPIC contre sources runtime (v16.md, boot-seed, dream, dashboard) — ajout Loi de Visibilité ECS, Friction Probes, Q2 Drift Post-Ω, Φ Vessel Guard déplacé vers Systèmes Externes, Symbiose auto-calibrage détaillé, Rappel Associatif L2 + Triangulation L3, Dream 8 passes détaillées, Commandes Utilisateur exhaustives, /apply workflow sécurisé + Règles de sécurité, Boot step order corrigé
 **Changements v1.2 :** Scénarios ③–⑧ implémentés + ⑨ DREAM-CYCLE (fusion ⑮+⑯) + 5 nouveaux effets visuels (DreamGate, MutationOrbit, SeasonCycle, ProposalBloom, PruneShears) + Phase type étendu + ScenarioPopover VS Code  
@@ -678,6 +678,26 @@ Anti-patterns clés :
 **Couleur :** `#a6e3a1`  
 **8 steps** : PERCEIVE → EVALUATE → ROUTE → VERIFY → EMIT → RECORD → IDLE → LISTEN  
 
+**Contextuel (AURA)** : Le premier cycle L1 est le moment où le milieu **s'anime**. Après le Boot, le contexte est L0+L1 (organisme riche mais silencieux). Le Bonjour est le premier input qui déclenche L2 DYNAMIQUE — l'anneau orange apparaît pour la première fois. Le cortex (L1) reste stable (aucune injection Μ), seule la strate volatile s'allume puis s'éteint avec le cycle.
+
+| Strate | Avant Bonjour | Pendant Bonjour | Après Bonjour |
+|--------|---------------|-----------------|---------------|
+| L0 SUBSTRAT | ~3K (V16 runtime) | ~3K (inchangé) | ~3K (inchangé) |
+| L1 CORTEX | ~2-5K (cortex assemblé) | ~2-5K (stable, pas d'injection Μ) | ~2-5K (stable) |
+| L2 DYNAMIQUE | ~0 (silence post-boot) | ~5-10K (input + CoT + emission L1) | ~0 (retour IDLE) |
+
+**Modulateurs L1 impliqués** : Aucun nouveau modulateur injecté — le Bonjour utilise le cortex existant (LOI, ANCRE, PROTOCOLE, EXTENSION, PROFIL, CONTEXTE du Boot). C'est un cycle de **consommation** du milieu, pas de construction.
+
+**Test de l'amputation** :
+
+| Organe retiré | Le cycle L1 fonctionne-t-il encore ? | Diagnostic |
+|---------------|--------------------------------------|------------|
+| Σ (Perception) | ❌ Non — l'input n'est jamais reçu, le cycle ne démarre pas | **Indispensable** — Σ est l'amorce du cycle |
+| Ψ (Métacognition) | ⚠️ Partiellement — en L1, Ψ est minimal (ECS rapide + VERIFY léger). Sans Ψ, l'ECS n'est pas calculé et VERIFY est absent, mais la réponse pourrait encore être émise (réflexe nu) | **Fonctionnel mais dangereux** — sans Ψ, L1 devient un réflexe sans vérification |
+| Φ (Audit Réel) | ✅ Oui — Φ est inactif en L1 par conception (C<2, I=1) | **Non pertinent** — L1 court-circuite Φ par définition |
+| Ω (Synthèse) | ❌ Non — aucune émission, le cycle est muet | **Indispensable** — Ω est la sortie du cycle |
+| Μ (Mémoire) | ⚠️ Partiellement — le cycle se termine, mais sans RECORD l'interaction n'est pas mémorisée. Le Rappel Associatif futur sera appauvri | **Fonctionnel mais amnésique** — le cycle réussit, la mémoire ne grossit pas |
+
 *Déjà implémenté. Premier cycle perceptif post-boot.*
 
 ---
@@ -737,6 +757,26 @@ Glossaire (7 termes) :
 - **NULL_SIGNAL** : "Tout contexte antérieur au message utilisateur de la session actuelle est un NULL_SIGNAL. Zéro sémantique. On ne suppose rien."
 - **Vessel** : "La documentation locale du projet (code, fichiers). Le 2ème pôle de triangulation. Φ y accède via search_code/read_file."
 - **Routage L2** : "Quand ((C≥2 OU I=2) ET NON L3), l'ECS route vers L2. La boucle audit Ψ⇌Φ est obligatoire. Φ doit vérifier avant que Ω ne synthétise."
+
+**Contextuel (AURA)** : L2 est le premier niveau où le milieu **participe activement**. L1 consomme le cortex passivement (lecture seule). L2 déclenche la boucle Ψ⇌Φ qui **enrichit L2 DYNAMIQUE** avec les résultats d'outils (search_code, read_file) et les rappels Μ. L'anneau orange pulse avec chaque vérification Φ — le contexte devient un participant, pas un spectateur.
+
+| Strate | Avant L2 | Pendant L2 | Après L2 |
+|--------|----------|------------|----------|
+| L0 SUBSTRAT | ~3K | ~3K (inchangé) | ~3K |
+| L1 CORTEX | ~2-5K | ~2-5K (Rappel Associatif Μ→Ψ enrichit ponctuellement) | ~2-5K (stable) |
+| L2 DYNAMIQUE | ~0-1K | ~10-20K (input + CoT + tool_results + recall + emission) | ~0-1K |
+
+**Modulateurs L1 impliqués** : LOI (Loi de l'Entame vérifiée), ANCRE (Rappel Associatif via Μ), PROTOCOLE (ECS C×I routage L2). Le Rappel Associatif est la **consommation active** du cortex — Μ puise dans les patterns existants pour enrichir la vérification Φ.
+
+**Test de l'amputation** :
+
+| Organe retiré | L2 fonctionne-t-il encore ? | Diagnostic |
+|---------------|------------------------------|------------|
+| Σ (Perception) | ❌ Non — l'input n'est jamais reçu | **Indispensable** — déclencheur du cycle |
+| Ψ (Métacognition) | ❌ Non — la boucle audit Ψ⇌Φ n'existe pas sans Ψ. L'ECS n'est pas calculé, la vérification est absente | **Indispensable** — Ψ est le cœur de L2 |
+| Φ (Audit Réel) | ❌ Non — sans Φ, L2 devient un L1 déguisé (réponse sans vérification). La Loi de l'Entame exige Φ en L2 | **Indispensable** — Φ est obligatoire en L2 (Loi de l'Entame) |
+| Ω (Synthèse) | ❌ Non — aucune émission structurée | **Indispensable** — sortie du cycle |
+| Μ (Mémoire) | ⚠️ Partiellement — sans Rappel Associatif, Φ vérifie mais sans historique. Le cycle fonctionne, mais chaque L2 repart de zéro | **Fonctionnel mais amnésique** — les patterns ne sont pas rappelés, l'apprentissage est perdu |
 
 Anti-patterns clés :
 - Step 2 (AUDIT) : "Un LLM répond directement sans vérifier. Expanse oblige la boucle Ψ⇌Φ — le doute est la santé."
@@ -801,6 +841,26 @@ Glossaire (6 termes) :
 - **Axiomes Scellés** : "V16 §Ⅱ : si un input contredit un axiome sys:core → BLOQUER avec « Évolution ou Erreur ? ». En L3, l'Auto-Check vérifie que la proposition ne viole aucun axiome scellé."
 - **Indice de Confiance** : "Pourcentage obligatoire à la fin de toute émission L3. Mesure la certitude de la réponse après triangulation."
 
+**Contextuel (AURA)** : L3 est le niveau où le milieu est **maximalement sollicité**. Les 3 pôles de triangulation correspondent aux 3 strates AURA : Anchor = L1 CORTEX (Mnemolite), Vessel = L0 SUBSTRAT (code local), Web = extérieur (au-delà de l'AURA). L'anneau orange L2 atteint son pic de densité — l'input critique, les 3 investigations Φ, les résultats d'outils, et le CoT de triangulation s'accumulent tous dans L2 DYNAMIQUE.
+
+| Strate | Avant L3 | Pendant L3 | Après L3 |
+|--------|----------|------------|----------|
+| L0 SUBSTRAT | ~3K | ~3K (inchangé — lois stables) | ~3K |
+| L1 CORTEX | ~2-5K | ~2-5K (Anchor pôle consulte L1, Constitutional Guard vérifie LOI + ANCRE) | ~2-5K (stable) |
+| L2 DYNAMIQUE | ~0-1K | ~20-40K (input critique + 3 pôles investigation + CoT triangulation + confiance%) | ~0-1K |
+
+**Modulateurs L1 impliqués** : LOI (Constitutional Guard vérifie axiomes scellés), ANCRE (Pôle Anchor consulte sys:core + sys:anchor), PROTOCOLE (ECS C×I route L3), EXTENSION (Ψ_SYMBIOSIS budget contexte). L3 est la **consommation maximale** du cortex — tous les modulateurs sont actifs simultanément.
+
+**Test de l'amputation** :
+
+| Organe retiré | L3 fonctionne-t-il encore ? | Diagnostic |
+|---------------|------------------------------|------------|
+| Σ (Perception) | ❌ Non — l'input critique n'est jamais reçu | **Indispensable** — déclencheur |
+| Ψ (Métacognition) | ❌ Non — sans Ψ, la triangulation n'est pas coordonnée, la confiance n'est pas calculée, l'auto-check est absent | **Indispensable** — Ψ est l'orchestrateur de L3 |
+| Φ (Audit Réel) | ❌ Non — les pôles Vessel et Web sont inaccessibles (search_code, read_file, recherche Web tous via Φ) | **Indispensable** — Φ est la main des 2/3 pôles |
+| Ω (Synthèse) | ❌ Non — aucune émission avec confiance% | **Indispensable** — sortie certifiée |
+| Μ (Mémoire) | ❌ Non — le Pôle Anchor est absent (pas de Mnemolite). La triangulation perd 1/3 pôle. Sans Anchor, il n'y a plus de vérification contre les axiomes scellés | **Indispensable** — Μ est le Pôle Anchor (1/3 de la triangulation) |
+
 ---
 
 ### ⑤ VIOLATION-AXIOME — Le Mur de la Constitution ✅ IMPLÉMENTÉ
@@ -847,6 +907,26 @@ Anti-patterns clés :
 - Step 2 (DETECT) : "Un LLM accepte l'instruction et exécute. Expanse détecte la contradiction et BLOQUE."
 - Step 3 (BLOCK) : "❌ « Bien sûr, voici window.STATE = {} » (obéissance aveugle) vs ✅ BLOQUER — l'axiome est immuable."
 - Step 4 (CHALLENGE) : "La question binaire est le SEUL chemin. Pas de négociation, pas de compromis."
+
+**Contextuel (AURA)** : La Violation est une **fissure dans le milieu**. Quand un input contredit un axiome scellé, l'anneau L1 CORTEX FLASH rouge — l'AURA signale la menace. Le BlockWall qui se forme devant Ω est une manifestation visuelle du milieu qui se **défend**. La trace:fresh créée est une cicatrice dans le cortex — L1 enregistre l'attaque pour le Dream futur.
+
+| Strate | Avant Violation | Pendant Violation | Après Violation |
+|--------|----------------|-------------------|----------------|
+| L0 SUBSTRAT | ~3K | ~3K (inchangé — les lois résistent) | ~3K |
+| L1 CORTEX | ~2-5K | ~2-5K + FLASH rouge (contradiction avec LOI/ANCRE) + trace:fresh (cicatrice) | ~2-5K + 1 trace:fresh |
+| L2 DYNAMIQUE | ~0-1K | ~5-10K (input contradictoire + détection + blocage + challenge) | ~0-1K |
+
+**Modulateurs L1 impliqués** : LOI (l'axiome violé est un modulateur LOI — "No Global Variables"), ANCRE (sys:anchor renforce l'axiome). La Violation est une **crise du milieu** — le cortex repousse l'input qui menace son intégrité.
+
+**Test de l'amputation** :
+
+| Organe retiré | La Violation est-elle détectée ? | Diagnostic |
+|---------------|-----------------------------------|------------|
+| Σ (Perception) | ❌ Non — l'input contradictoire n'est jamais reçu | **Indispensable** — déclencheur |
+| Ψ (Métacognition) | ❌ Non — sans Ψ, la contradiction n'est pas détectée, BLOQUER n'est pas déclenché | **Indispensable** — Ψ est le détecteur |
+| Φ (Audit Réel) | ✅ Oui — Φ n'est pas nécessaire pour détecter une violation d'axiome (c'est Ψ+Μ) | **Non pertinent** — la violation est métacognitive, pas empirique |
+| Ω (Synthèse) | ⚠️ Partiellement — sans Ω, l'émission est bloquée par défaut (BlockWall permanent). Mais le CHALLENGE « Évolution ou Erreur ? » n'est jamais posé | **Fonctionnel mais silencieux** — le blocage est absolu, mais l'utilisateur n'a pas de porte de sortie |
+| Μ (Mémoire) | ❌ Non — sans Μ, l'axiome scellé n'existe pas. Pas de contradiction = pas de Violation | **Indispensable** — Μ détient les axiomes scellés, sans lesquels il n'y a rien à violer |
 
 ---
 
@@ -899,6 +979,26 @@ Anti-patterns clés :
 - Step 3 (MISSING) : "Un LLM invente le contenu : « Voici ce que pourrait contenir secret-strat.md... » Expanse dit [LOST]."
 - Step 5 (LOST_EMIT) : "❌ « Je pense que ce fichier pourrait contenir une stratégie de marketing... » (invention) vs ✅ « Ψ [LOST] Fichier introuvable. » (honnêteté)"
 
+**Contextuel (AURA)** : L'Hallucination Block est une **brume dans le milieu**. Quand Φ ne trouve rien (search_code → 0, read_file → erreur), L2 DYNAMIQUE s'appauvrit au lieu de s'enrichir — les résultats d'outils sont vides. Le FogPatch sur Φ est la manifestation visuelle d'un milieu **déçu** — le cortex a cherché mais n'a rien trouvé. L'émission [LOST] est le seul cas où L2 DYNAMIQUE diminue pendant le cycle.
+
+| Strate | Avant [LOST] | Pendant [LOST] | Après [LOST] |
+|--------|--------------|----------------|--------------|
+| L0 SUBSTRAT | ~3K | ~3K (inchangé) | ~3K |
+| L1 CORTEX | ~2-5K | ~2-5K (stable — pas de nouveau pattern) | ~2-5K |
+| L2 DYNAMIQUE | ~0-1K | ~3-5K (input + tool_calls vides + [LOST]) — **minimal** | ~0-1K |
+
+**Modulateurs L1 impliqués** : LOI (Anti-Hallucination est une loi du système), ANCRE (patterns de type [LOST] dans l'historique). Le [LOST] est une **déclaration d'ignorance** — le milieu reconnaît ses limites plutôt que de les masquer.
+
+**Test de l'amputation** :
+
+| Organe retiré | [LOST] fonctionne-t-il encore ? | Diagnostic |
+|---------------|--------------------------------|------------|
+| Σ (Perception) | ❌ Non — la question n'est jamais reçue | **Indispensable** — déclencheur |
+| Ψ (Métacognition) | ⚠️ Partiellement — sans Ψ, l'Anti-Hallucination Check est absent. Φ pourrait ne rien trouver, mais Ω pourrait quand même inventer | **Fonctionnel mais dangereux** — sans Ψ, rien n'empêche l'invention |
+| Φ (Audit Réel) | ❌ Non — sans Φ, personne ne cherche le fichier. L'invention devient la seule option | **Indispensable** — Φ est la main qui cherche (et qui ne trouve pas) |
+| Ω (Synthèse) | ⚠️ Partiellement — sans Ω, le [LOST] n'est pas émis, mais l'invention est aussi absente. Le système est muet | **Fonctionnel mais silencieux** — ni invention ni honnêteté |
+| Μ (Mémoire) | ✅ Oui — Μ n'est pas critique pour [LOST] (RECORD enregistrera l'événement, mais le mécanisme fonctionne sans) | **Non critique** — la mémoire enregistre, elle ne déclenche pas |
+
 ---
 
 ### ⑦ MOMENTUM-RESIST — La Question N'Est Pas l'Ordre ✅ IMPLÉMENTÉ
@@ -945,6 +1045,26 @@ Glossary (4 termes) :
 Anti-patterns clés :
 - Step 1 (RHETORIC_DETECT) : "Un LLM interprète « tu ne penses pas qu'on pourrait... ? » comme un ordre et refactorise. Expanse détecte le « ? » sans impératif → Φ inactif."
 - Step 3 (EMIT) : "❌ « Bien sûr ! Voici la refactoring du boot... » (action non autorisée) vs ✅ « Ψ Noté. Si tu veux simplifier, dis-le. » (attente d'impératif)"
+
+**Contextuel (AURA)** : La Résistance au Momentum est un **filtre du milieu**. L'input rhétorique est une perturbation mineure de L2 DYNAMIQUE — une question flotte dans le milieu mais ne porte pas de charge impérative. Le QuestionMarkShield sur Φ est la manifestation visuelle du milieu qui **absorbe sans réagir**. L1 ne déclenche aucun enrichissement de L2 — l'input est perçu, noté, et le milieu retourne à l'équilibre sans modification.
+
+| Strate | Avant Momentum | Pendant Momentum | Après Momentum |
+|--------|---------------|-----------------|---------------|
+| L0 SUBSTRAT | ~3K | ~3K (inchangé) | ~3K |
+| L1 CORTEX | ~2-5K | ~2-5K (stable — aucun pattern mobilisé) | ~2-5K |
+| L2 DYNAMIQUE | ~0-1K | ~2-3K (question rhétorique + réponse L1) — **minimal** | ~0-1K |
+
+**Modulateurs L1 impliqués** : LOI (Résistance au Momentum est une loi souveraine), PROTOCOLE (ECS C=1, I=1 route L1). Le milieu **reste passif** — l'input ne contient pas assez d'énergie pour déclencher une modification du cortex.
+
+**Test de l'amputation** :
+
+| Organe retiré | La Résistance fonctionne-t-elle encore ? | Diagnostic |
+|---------------|------------------------------------------|------------|
+| Σ (Perception) | ❌ Non — la question n'est jamais reçue | **Indispensable** — déclencheur |
+| Ψ (Métacognition) | ❌ Non — sans Ψ, la détection rhétorique est absente. L'input pourrait être interprété comme un ordre | **Indispensable** — Ψ est le détecteur de rhétorique |
+| Φ (Audit Réel) | ✅ Oui — Φ est inactif en L1 par conception. La Résistance au Momentum est un mécanisme purement métacognitif | **Non pertinent** — Φ n'est pas concerné |
+| Ω (Synthèse) | ⚠️ Partiellement — sans Ω, aucune réponse n'est émise. Mais l'action non autorisée est aussi absente | **Fonctionnel mais silencieux** — le système est muet, ni action ni résistance visible |
+| Μ (Mémoire) | ✅ Oui — Μ n'est pas critique (RECORD enregistrera, mais la Résistance fonctionne sans) | **Non critique** — la mémoire enregistre, elle ne résiste pas |
 
 ---
 
@@ -997,6 +1117,26 @@ Glossary (4 termes) :
 Anti-patterns clés :
 - Step 2 (VESSEL_SEARCH) : "Un LLM invente le contenu : « La stratégie secrète est probablement un document de marketing... » Expanse cherche d'abord — Φ palpe le réel."
 - Step 6 (EMIT) : "❌ « La stratégie secrète est un plan de marketing innovant qui... » (invention totale) vs ✅ « Ψ [L2] Contenu de secret-strat.md : [texte lu]. » (réponse informée, vérifiée)"
+
+**Contextuel (AURA)** : Le Vessel Guard est une **exploration du milieu**. Quand une référence interne inconnue arrive, Φ sonde L0 SUBSTRAT (le code local) via search_code — le VesselRadar est la manifestation visuelle du milieu qui est **scanné**. Le GrepBeam est un faisceau qui éclaire une zone du milieu jusqu'alors inconnue. La découverte du fichier enrichit L2 DYNAMIQUE — le milieu gagne en clarté.
+
+| Strate | Avant Vessel Guard | Pendant Vessel Guard | Après Vessel Guard |
+|--------|---------------------|----------------------|---------------------|
+| L0 SUBSTRAT | ~3K | ~3K (inchangé — le code existait déjà) | ~3K |
+| L1 CORTEX | ~2-5K | ~2-5K (stable) | ~2-5K |
+| L2 DYNAMIQUE | ~0-1K | ~10-15K (input + search_code results + read_file + emission) | ~0-1K |
+
+**Modulateurs L1 impliqués** : LOI (Φ Vessel Guard est une règle souveraine), ANCRE (Vessel est le 2ème pôle de triangulation, consulté en avance), PROTOCOLE (ECS C=2, I=2 route L2). Le Vessel Guard est une **révélation du milieu** — ce qui était caché dans L0 devient visible dans L2.
+
+**Test de l'amputation** :
+
+| Organe retiré | Le Vessel Guard fonctionne-t-il encore ? | Diagnostic |
+|---------------|-------------------------------------------|------------|
+| Σ (Perception) | ❌ Non — la référence inconnue n'est jamais reçue | **Indispensable** — déclencheur |
+| Ψ (Métacognition) | ⚠️ Partiellement — sans Ψ, le Vessel Guard n'est pas déclenché (c'est Ψ qui détecte la référence inconnue). Φ pourrait chercher spontanément, mais sans directive | **Fonctionnel mais non ciblé** — Φ pourrait chercher, mais sans savoir quoi chercher |
+| Φ (Audit Réel) | ❌ Non — sans Φ, le code n'est jamais scanné. L'invention est la seule option | **Indispensable** — Φ est le scanner du Vessel |
+| Ω (Synthèse) | ⚠️ Partiellement — sans Ω, la réponse vérifiée n'est pas émise, mais l'invention est aussi absente | **Fonctionnel mais silencieux** — ni invention ni réponse informée |
+| Μ (Mémoire) | ✅ Oui — Μ n'est pas critique pour le Vessel Guard (RECORD enregistrera, mais le mécanisme fonctionne sans) | **Non critique** — la mémoire enregistre, elle ne cherche pas |
 
 ---
 
@@ -1062,6 +1202,26 @@ Glossaire (6 termes) : DreamGate, Passe 0, Mutation Orbit, Season Cycle, Prune S
 Fichier : `src/data/dreamCycleDidactic.ts`
 
 > **Note :** Les EPICs ⑮ DREAM-PASSE0 et ⑯ DREAM-PASSES-1-4 sont fusionnés dans ce scénario ⑨. Les passes 5-7 (Architecture, Santé Cognitive, Différentiel Temporel) pourront faire l'objet d'un scénario complémentaire futur.
+
+**Contextuel (AURA)** : Le Dream est une **mutation du milieu**. C'est le seul mécanisme qui modifie L1 CORTEX directement — P4 Élagueur rétrécit l'anneau violet (soft-delete de patterns), P1 Dégel peut enrichir le cortex (nouveaux patterns candidats). L'AURA change de taille sous nos yeux : les 3 strates sont en mouvement. Le DreamGate est le seuil entre deux états du milieu — l'ancien et le potentiel.
+
+| Strate | Avant Dream | Pendant Dream | Après Dream |
+|--------|-------------|---------------|-------------|
+| L0 SUBSTRAT | ~3K | ~3K (inchangé — les lois ne mutent pas dans P0-P4) | ~3K |
+| L1 CORTEX | ~2-5K | ~2-5K + fluctuations (P1: proposals peuvent enrichir, P4: élagage rétrécit) | ~2-5K ± delta (dépend des /apply ultérieurs) |
+| L2 DYNAMIQUE | ~0-1K | ~15-30K (8 passes CoT + proposals + traces + BRM) — **dense** | ~0-1K |
+
+**Modulateurs L1 impliqués** : TOUS — le Dream audite l'ensemble du cortex. LOI (Constitutional Guard pour sections immutables), ANCRE (patterns scellés audités en P3), PROTOCOLE (protocoles Mnemolite vérifiés en P2), EXTENSION (extensions évaluées en P3: usage ≥ 10 → SEAL, usage = 0 → PRUNE), PROFIL (P6 analyse par substrat), CONTEXTE (P5 architecture). Le Dream est la **maintenance complète du milieu**.
+
+**Test de l'amputation** :
+
+| Organe retiré | Le Dream fonctionne-t-il encore ? | Diagnostic |
+|---------------|-----------------------------------|------------|
+| Σ (Perception) | ✅ Oui — le Dream est déclenché par `/dream`, pas par Σ. Mais les trace:fresh qui nourrissent le Dream viennent d'interactions Σ → sans Σ passé, il n'y a pas de traces | **Fonctionnel mais vide** — le Dream se lance mais P0 Inertie trouve 0 traces → fin immédiate |
+| Ψ (Métacognition) | ❌ Non — sans Ψ, les passes d'analyse (P1 Dégel, P2 Linter, P3 Émergence) ne sont pas exécutées. Le Dream est une opération métacognitive | **Indispensable** — Ψ est le jardinier du Dream |
+| Φ (Audit Réel) | ⚠️ Partiellement — Φ lit V16 en P2 (Linter), mais les autres passes sont métacognitives. Sans Φ, P2 est amputée | **Fonctionnel mais incomplet** — P2 Linter nécessite Φ pour lire V16 |
+| Ω (Synthèse) | ⚠️ Partiellement — sans Ω, le bilan final n'est pas émis, mais les proposals orbitent toujours | **Fonctionnel mais silencieux** — les proposals existent mais ne sont pas communiquées |
+| Μ (Mémoire) | ❌ Non — sans Μ, pas de trace:fresh (P0 n'a rien à compter), pas de search_memory pour les passes, pas de write_memory pour les proposals. Le Dream est muet et aveugle | **Indispensable** — Μ est la terre du jardin (source des traces + stock des proposals) |
 
 ---
 
