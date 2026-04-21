@@ -46,7 +46,8 @@ Les TYPES permettent le regroupement :
 | Type | Signification |
 |:-----|:--------------|
 | ECS | Miscalibration de Complexité ou Impact |
-| SEC | Style ou réponse insuffisante |
+| SEC | Violation de Souveraineté ou réponse insuffisante |
+| STYLE | Déviation stylistique — réponse trop verbose, trop sociale, ou non-conforme au Forensic Style. Contraire à SEC (violation de règle) : STYLE capture les dérives graduelles du ton, SEC capture les violations franches |
 | MEMORY | Pattern non reconnu |
 | BOOT | Dysfonctionnement au démarrage |
 
@@ -72,6 +73,7 @@ Les TYPES permettent le regroupement :
 - **Action :**
   1. `mcp_mnemolite_search_memory(tags: ["trace:fresh"], consumed: false, limit: 20)`
   2. `mcp_mnemolite_search_memory(tags: ["sys:drift"], consumed: false, limit: 20)`
+  3. `mcp_mnemolite_search_memory(tags: ["sys:pattern:doubt"], limit: 20)`
 - **Analyse :** 
   1. Grouper par TYPE
   2. Grouper `sys:drift` par `type:*` tag
@@ -91,6 +93,7 @@ Les TYPES permettent le regroupement :
   - Aucune mutation ne peut être appliquée sans avoir été visible dans la lumière
   - Le contenu complet de la proposal DOIT être présent dans la réponse
 - **Output :** `[PROPOSAL_OPEN] [MODIFY]` — Cite : `type: {TYPE}`, `count: {N}`, `symptom: {summary}`. Basé sur le Cristal du BRM.
+- **Métabolisme** : SI ce passe révèle une trace:fresh non présente dans l'inventaire P0 → signaler `NEW_FRICTIONS_FOUND`
 
 ---
 
@@ -106,6 +109,7 @@ Les TYPES permettent le regroupement :
   - **4. Alignement Organique :** Rattachement de chaque règle à son organe (Σ, Ψ, Φ, Ω, Μ).
   - **5. Intégrité Protocoles :** Les 3 protocoles existent dans Mnemolite ? (memory-triage, friction-trace, consolidation)
 - **Output :** `[PROPOSAL_OPEN] [REFACTOR]` ou `[PROPOSAL_OPEN] [SYNC]` si protocole manquant
+- **Métabolisme** : SI ce passe révèle une friction non présente en P0 → signaler `NEW_FRICTIONS_FOUND`
 
 ---
 
@@ -114,6 +118,7 @@ Les TYPES permettent le regroupement :
 - **Action :** `mcp_mnemolite_search_memory(query: "sys:extension", tags: ["sys:extension"], limit: 20)`
 - **Analyse :** Quels symboles ai-je inventés ? Usage ≥ 10 → SEAL. Usage = 0 → PRUNE.
 - **Output :** `[PROPOSAL_OPEN] [PATTERN_EMERGENCE]` ou `[PROPOSAL_OPEN] [DELETE]`
+- **Métabolisme** : SI un pattern émergent crée de nouvelles frictions → signaler `NEW_FRICTIONS_FOUND`
 
 ---
 
@@ -136,13 +141,21 @@ Les TYPES permettent le regroupement :
       → Ψ [ELAGUAGE AUTOMATIQUE] Pattern {titre} supprimé (score trop faible)
   - **Impact AURA** : Chaque pattern L1 supprimé **rétrécit l'anneau violet** (AURA L1). L'élagage n'est pas qu'un nettoyage — c'est une **décompression du contexte** qui rend l'auto-check Ψ moins chargé mais aussi moins riche. Le trade-off : un cortex plus léger (réponse plus rapide) vs un cortex plus pauvre (moins de garde-fous).
 - **Output :** `[PROPOSAL_OPEN] [DELETE]` ou `[PROPOSAL_OPEN] [CLEANUP]` si fichiers orphelins
+- **Métabolisme** : SI l'élagage révèle un pattern douteux qui génère de nouvelles frictions → signaler `NEW_FRICTIONS_FOUND`
 
 ---
 
 ### Passe 5 : L'Architecture
 
-- **Action :** Évalue tes outils et formats
+- **Action :** Évalue tes outils, formats et structure.
+  1. `mcp_mnemolite_search_memory(tags: ["sys:protocol"], limit: 10)` — vérifier complétude des protocoles
+  2. Vérifier les 7 OUTIL MCP (search_memory, write_memory, rate_memory, mark_consumed, search_code, get_system_snapshot, index_markdown_workspace) — accessibles ? fiables ?
+  3. Vérifier les 5 types de traces (ECS, SEC, STYLE, MEMORY, BOOT) — tous documentés ?
+  4. Vérifier la portabilité des chemins — 47 chemins hardcodés dans `/home/giak/...` → nécessitent variable `{PROJECT_ROOT}` ou détection dynamique
+  5. Vérifier les formats de sortie — proposals, LOG, applied.md conformes ?
+- **Critères d'évaluation :** Complétude (rien de manquant), Fiabilité (rien de fragile), Portabilité (rien de hardcodé), Cohérence (rien de contradictoire)
 - **Output :** `[PROPOSAL_OPEN] [ARCHITECTURE]`
+- **Métabolisme** : SI l'audit révèle une lacune qui crée de nouvelles frictions → signaler `NEW_FRICTIONS_FOUND`
 
 ---
 
@@ -162,6 +175,7 @@ Les TYPES permettent le regroupement :
   - Calculer le nombre de `trace:fresh` par substrat
   - Identifier les substrats les plus performants (Ψ taux le plus élevé, TRACE:FRESH le plus bas)
 - **Output :** Rapport santé par substrat. Si un substrat a Ψ taux < 80% → `[PROPOSAL_OPEN] [MODIFY]`
+- **Métabolisme** : SI l'audit santé révèle une dégradation qui crée de nouvelles frictions → signaler `NEW_FRICTIONS_FOUND`
 
 ### Passe 7 : Le Différentiel Temporel (∂Ω/∂t)
 
@@ -190,6 +204,7 @@ Les TYPES permettent le regroupement :
   )
   ```
   `Ψ(Différentiel) : adaptation_velocity={score}, improvement_velocity={improvement}, friction_trend={trend}.`
+- **Métabolisme** : SI le différentiel révèle une nouvelle tendance non détectée en P0 → signaler `NEW_FRICTIONS_FOUND`
 
 ---
 
@@ -326,16 +341,19 @@ Extraire:
 
 # 7b. CONSTITUTIONAL GUARD (OBLIGATOIRE)
 VÉRIFICATION OBLIGATOIRE AVANT APPLICATION:
-✅ Sections IMMUTABLES (ne peuvent JAMAIS être modifiées):
+✅ Sections IMMUTABLES (ne peuvent JAMAIS être modifiées par Dream):
   - Ⅰ. L'INCARNATION
   - Ⅲ. SOUVERAINETÉ
   - Ⅵ. BOOT
+  - Ⅶ. SYMBIOSE
 
 SI la mutation touche UNE SEULE ligne d'une section immutable:
   → Ψ [CONSTITUTIONAL VIOLATION]
   → ANNULE LA MUTATION AUTOMATIQUEMENT
   → LOGGUER dans sys:constitutional_violation
   → Arrête TOUT ici
+
+Note : Seul un décret utilisateur direct (`/core`) peut modifier les sections immutables.
 
 # 8. APPLIQUER LE DIFF
 # Chercher la ligne EXACTE dans V16
@@ -358,7 +376,7 @@ write_file(
     **Date Proposal:** {YYYY-MM-DD}
     **Date Application:** {YYYY-MM-DD HH:MM}
     **Approved by:** User
-    **Applied by:** Dream (via expanse-apply.sh)
+    **Applied by:** Dream (mutation chirurgicale native)
 
     **Proposal:** /home/giak/projects/expanse/doc/mutations/{slug}/proposal.md
     **Backup:** /home/giak/projects/expanse/archive/backups/expanse-v16-{YYYY-MM-DD}-{slug}-backup.md
@@ -375,9 +393,9 @@ write_file(
 # 12. AUTO-VÉRIFICATION
 read_file(path: "/home/giak/projects/expanse/v16/runtime/expanse-v16.md")
 VÉRIFICATIONS OBLIGATOIRES:
-├── Section Ⅳ (Boot) existe ?
+├── Section Ⅵ (Boot) existe ?
 ├── Signal "Ψ [V16 ACTIVE]" présent ?
-├── 6 Sections (Ⅰ-Ⅵ) intactes ?
+├── 7 Sections (Ⅰ-Ⅶ) intactes ?
 ├── Toutes les accolades {} fermées ?
 ├── Toutes les triples backticks ``` fermées ?
 └── Pas de texte corrompu (caractères étranges) ?
@@ -570,7 +588,7 @@ DIFF: {slug}
 ## PARTIE 3: Output Final du Rêve
 ## ═══════════════════════════════════════════════════════════
 
-**À la fin de l'exécution (après les Passes 0-6) :**
+**À la fin de l'exécution (après les Passes 0-7) :**
 
 1. **Rapport des Passes :** Résumé pour chaque Passe exécutée
 2. **Proposals générés :** Liste des `[PROPOSAL_OPEN]` avec status
@@ -580,8 +598,16 @@ DIFF: {slug}
    - Mnemolite: candidates écrits
 4. **Consommation des traces :** 
    - TRACE:FRESH avec `[PROPOSAL_OPEN]` généré → garder avec tag `sys:consumed`
-   - TRACE:FRESH restantes → garder pour Passe 2-6
+   - TRACE:FRESH restantes → garder pour Passe 2-7
    - TRACE:FRESH sans pattern clear → garder pour analyse ultérieure
+
+5. **Boucle de Métabolisme** (un vrai jardin est cyclique, pas linéaire) :
+   - **Déclencheur** : SI un proposal en P2-P7 révèle une trace:fresh non présente dans l'inventaire P0, OU SI P3/P4 découvre un pattern douteux/émergent qui génère de nouvelles frictions → signaler `NEW_FRICTIONS_FOUND`
+   - SI `NEW_FRICTIONS_FOUND` → nourrir un nouveau cycle P1 avec les nouvelles frictions seulement
+   - Maximum **3 cycles** par Dream (anti-boucle-infinie)
+   - Après cycle 1, les frictions déjà traitées ne sont pas retraitées
+   - SI aucune `NEW_FRICTIONS_FOUND` pendant P2-P7 → FIN (pas de cycle supplémentaire)
+   - Chaque cycle consomme les traces qu'il traite → le réservoir se vide naturellement
 
 **Output final :**
 
@@ -615,8 +641,8 @@ RÈGLE 3: Contexte exact requis - 5 lignes avant/après dans proposal
 RÈGLE 4: Auto-vérification post-write - Check structure
 RÈGLE 5: Rollback automatique si erreur
 RÈGLE 6: LOG toujours synchronisé
-RÈGLE 7: TRACE:FRESH consommées après lecture
-RÈGLE 8: bash() pour mkdir et fichier operations
+RÈGLE 7: TRACE:FRESH consommées après traitement (sélectif : P1 consomme seulement traces avec BRM, P2-P7 consomment les leurs)
+RÈGLE 8: bash() pour opérations filesystem uniquement (mkdir, .lock, .bak). INTERDIT pour contenu V16.
 RÈGLE 9: CHIRURGIE OBLIGATOIRE - Toute mutation doit être surgicale. Ne jamais altérer le format, l'indentation ou le contenu hors-cible.
 ```
 
@@ -628,9 +654,9 @@ RÈGLE 9: CHIRURGIE OBLIGATOIRE - Toute mutation doit être surgicale. Ne jamais
 APRÈS write_file(expanse-v16.md):
 
 CHECKLIST:
-[ ] Section Ⅳ (Boot) existe ?
+[ ] Section Ⅵ (Boot) existe ?
 [ ] Signal "Ψ [V16 ACTIVE]" présent ?
-[ ] 6 Sections (Ⅰ-Ⅵ) intactes ?
+[ ] 7 Sections (Ⅰ-Ⅶ) intactes ?
 [ ] Toutes les { } fermées ?
 [ ] Toutes les ``` fermées ?
 [ ] Pas de caractères corrompus ?

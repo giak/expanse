@@ -439,45 +439,45 @@ La Constitutional Guard existe dans le /apply workflow (§7b). Les sections Ⅰ/
 
 ### P0 — CRITIQUE (Avant toute utilisation)
 
-| # | Action | Fichier | Impact | Effort |
-|---|--------|---------|--------|--------|
-| P0.1 | **Restaurer V16 comme source de vérité unique** — intégrer les 12 nœuds de boot du /graph dans V16 §Ⅵ (V16 a déjà 7 clés BOOT_CONFIG, il faut ajouter les 5 mécanismes manquants : healthcheck, stall, onboarding, briefing, index_markdown) | V16 | Élimine la divergence spec/code | 2h |
-| P0.2 | **Documenter le Cortex Assembly** dans V16 §Ⅵ — 3 strates, 6 appels MCP, 7 genres L1, formule V16×Cortex | V16 | Transforme V16 de prompt en identité | 1h |
-| P0.3 | **Définir le type STYLE** dans Dream §ENTRÉE ou le supprimer des 5 types déclarés | Dream | Élimine la porte d'entrée pour hallucination | 10min |
-| P0.4 | **Unifier le nombre de passes** — décider 7 ou 8, mettre à jour V16 §Ⅴ, Dream Partie 3, Dashboard, /graph I6 | Cross | Supprime la confusion contractuelle | 30min |
+| # | Action | Fichier | Impact | Effort | Statut |
+|---|--------|---------|--------|--------|-------|
+| P0.1 | **Restaurer V16 comme source de vérité unique** — intégrer les mécanismes boot du /graph dans V16 §Ⅵ (healthcheck, stall_check, onboarding, briefing, index_markdown) | V16 | Élimine la divergence spec/code | 2h | ✅ **FAIT** |
+| P0.2 | **Documenter le Cortex Assembly** dans V16 §Ⅵ — 3 strates, 6 appels MCP, 7 genres L1, formule V16×Cortex, mode dégradé | V16 | Transforme V16 de prompt en identité | 1h | ✅ **FAIT** |
+| P0.3 | **Définir le type STYLE** dans Dream §ENTRÉE ou le supprimer des 5 types déclarés | Dream | Élimine la porte d'entrée pour hallucination | 10min | ✅ **FAIT** (défini, distinction SEC vs STYLE clarifiée) |
+| P0.4 | **Unifier le nombre de passes** — décider 7 ou 8, mettre à jour V16 §Ⅴ, Dream Partie 3, Dashboard, /graph I6 | Cross | Supprime la confusion contractuelle | 30min | ✅ **FAIT** (8 passes P0-P7 partout) |
 
 ### P1 — IMPORTANT (Cette semaine)
 
-| # | Action | Fichier | Impact | Effort |
-|---|--------|---------|--------|--------|
-| P0.5 | **Corriger la vérification post-write** — « 6 Sections (Ⅰ-Ⅵ) » → « 7 Sections (Ⅰ-Ⅶ) » dans /apply §12 + VÉRIFICATIONS OBLIGATOIRES | Dream | Bug fonctionnel : §Ⅶ non vérifiée | 5min |
-| P0.6 | **Étendre Constitutional Guard à §Ⅶ** — ou explicitement documenter pourquoi §Ⅶ n'est pas immutable | Dream + V16 | §Ⅶ est la section la plus vulnérable | 30min |
-| P1.1 | **Ajouter la boucle de métabolisme** dans Dream — P7 peut nourrir un nouveau cycle P1, max 3 cycles | Dream | Transforme le pipeline en jardin | 1h |
-| P1.2 | **Déclarer la Constitution** dans V16 §Ⅲ comme Loi souveraine, pas seulement dans /apply | V16 | La constitution devient principe, pas procédure | 30min |
-| P1.3 | **Restaurer les 5 verbes** dans V16 §Ⅰ — Σ perçoit, Ψ doute, Φ palpe, Ω conclut, Μ cristallise | V16 | Restaure le signal tonal | 15min |
-| P1.4 | **Clarifier R8/R9** — R8 = filesystem ops, R9 = contenu V16, pas de chevauchement | Dream | Supprime la contradiction | 10min |
-| P1.5 | **Documenter l'API Mnemolite** — endpoints, paramètres, mode dégradé | Nouveau fichier | Supprime le contrat API implicite | 1h |
-| P1.6 | **Ajouter la dépendance environnementale** des Friction Probes (session persistante requise) | V16 §Ⅳ | Supprime le faux-semblant universel | 5min |
+| # | Action | Fichier | Impact | Effort | Statut |
+|---|--------|---------|--------|--------|-------|
+| P0.5 | **Corriger la vérification post-write** — « 6 Sections (Ⅰ-Ⅵ) » → « 7 Sections (Ⅰ-Ⅶ) » dans /apply §12 + VÉRIFICATIONS OBLIGATOIRES + Section Ⅳ→Ⅵ | Dream | Bug fonctionnel : §Ⅶ non vérifiée | 5min | ✅ **FAIT** |
+| P0.6 | **Étendre Constitutional Guard à §Ⅶ** — ou explicitement documenter pourquoi §Ⅶ n'est pas immutable | Dream + V16 | §Ⅶ est la section la plus vulnérable | 30min | ✅ **FAIT** (Dream §7b + V16 §Ⅲ Constitution Immuable) |
+| P1.1 | **Ajouter la boucle de métabolisme** dans Dream — P7 peut nourrir un nouveau cycle P1, max 3 cycles | Dream | Transforme le pipeline en jardin | 1h | ✅ **FAIT** |
+| P1.2 | **Déclarer la Constitution** dans V16 §Ⅲ comme Loi souveraine, pas seulement dans /apply | V16 | La constitution devient principe, pas procédure | 30min | ✅ **FAIT** |
+| P1.3 | **Restaurer les 5 verbes** dans V16 §Ⅰ — Σ perçoit, Ψ doute, Φ palpe, Ω conclut, Μ cristallise | V16 | Restaure le signal tonal | 15min | ✅ **FAIT** |
+| P1.4 | **Clarifier R8/R9** — R8 = filesystem ops, R9 = contenu V16, pas de chevauchement | Dream | Supprime la contradiction | 10min | ✅ **FAIT** |
+| P1.5 | **Documenter l'API Mnemolite** — endpoints, paramètres, mode dégradé | Nouveau fichier | Supprime le contrat API implicite | 1h | ❌ Non fait |
+| P1.6 | **Ajouter la dépendance environnementale** des Friction Probes (session persistante requise) | V16 §Ⅳ | Supprime le faux-semblant universel | 5min | ✅ **FAIT** |
 
 ### P2 — AMÉLIORATION (Planifier)
 
-| # | Action | Fichier | Impact | Effort |
-|---|--------|---------|--------|--------|
-| P2.1 | **Remplir Passe 5** avec critères concrets (7 OUTIL, formats, chemins, portabilité) | Dream | Supprime le vide conceptuel | 30min |
-| P2.2 | **Ajouter Triangulation du BRM** — Φ vérifie l'hypothèse du BRM avant proposal | Dream | Réduit la contamination de l'Ouvrier | 1h |
-| P2.3 | **Supprimer `expanse-apply.sh`** du template /apply §11 | Dream | Supprime le Vaporware | 2min |
-| P2.4 | **Ajouter sys:pattern:doubt** dans P1 (pas seulement P4) | Dream | Doubt visible plus tôt | 10min |
-| P2.5 | **ECS heuristiques multilingues** | V16 §Ⅱ | Couverture anglaise | 15min |
-| P2.6 | **Portabilité des chemins** — variable `{PROJECT_ROOT}` ou détection dynamique | Tous | Portabilité | 1h |
+| # | Action | Fichier | Impact | Effort | Statut |
+|---|--------|---------|--------|--------|-------|
+| P2.1 | **Remplir Passe 5** avec critères concrets (7 OUTIL, formats, chemins, portabilité) | Dream | Supprime le vide conceptuel | 30min | ✅ **FAIT** |
+| P2.2 | **Ajouter Triangulation du BRM** — Φ vérifie l'hypothèse du BRM avant proposal | Dream | Réduit la contamination de l'Ouvrier | 1h | ❌ Non fait |
+| P2.3 | **Supprimer `expanse-apply.sh`** du template /apply §11 | Dream | Supprime le Vaporware | 2min | ✅ **FAIT** (remplacé par « mutation chirurgicale native ») |
+| P2.4 | **Ajouter sys:pattern:doubt** dans P1 (pas seulement P4) | Dream | Doubt visible plus tôt | 10min | ✅ **FAIT** |
+| P2.5 | **ECS heuristiques multilingues** | V16 §Ⅱ | Couverture anglaise | 15min | ❌ Non fait |
+| P2.6 | **Portabilité des chemins** — variable `{PROJECT_ROOT}` ou détection dynamique | Tous | Portabilité | 1h | ❌ Non fait |
 
 ### P3 — VISION (Long terme)
 
-| # | Action | Impact | Effort |
-|---|--------|--------|--------|
-| P3.1 | **Test de Rétrogression S14** — V16 on/off comparatif | Validation empirique de l'hypothèse centrale | 2h |
-| P3.2 | **Cortex condensé** — KERNEL ~3KB au boot | Restauration du signal tonal | 1h |
-| P3.3 | **Expérience de la Stase Inversée** — Dream auto toutes les 12h pendant 1 mois | Réponse à la question fondamentale | 1 mois |
-| P3.4 | **AURA temps réel** — visualiser les 3 strates L0/L1/L2 dans le cortex | Rendre le champ visible | 1 sem |
+| # | Action | Impact | Effort | Statut |
+|---|--------|--------|--------|-------|
+| P3.1 | **Test de Rétrogression S14** — V16 on/off comparatif | Validation empirique de l'hypothèse centrale | 2h | ❌ Non fait |
+| P3.2 | **Cortex condensé** — KERNEL ~3KB au boot | Restauration du signal tonal | 1h | ❌ Non fait |
+| P3.3 | **Expérience de la Stase Inversée** — Dream auto toutes les 12h pendant 1 mois | Réponse à la question fondamentale | 1 mois | ❌ Non fait |
+| P3.4 | **AURA temps réel** — visualiser les 3 strates L0/L1/L2 dans le cortex | Rendre le champ visible | 1 sem | ❌ Non fait |
 
 ---
 
