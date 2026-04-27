@@ -1,0 +1,1 @@
+var e={debug:0,info:1,warn:2,error:3,silent:4},t=`warn`;function n(n){return e[n]>=e[t]}var r=`[expanse-cortex]`,i={debug(...e){n(`debug`)&&console.debug(r,...e)},info(...e){n(`info`)&&console.info(r,...e)},warn(...e){n(`warn`)&&console.warn(r,...e)},error(...e){n(`error`)&&console.error(r,...e)}};export{i as t};

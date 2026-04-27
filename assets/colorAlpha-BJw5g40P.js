@@ -1,0 +1,1 @@
+function e(e,t){return e.startsWith(`#`)?e+t.toString(16).padStart(2,`0`):`color-mix(in srgb, ${e} ${Math.round(t/255*100)}%, transparent)`}export{e as t};

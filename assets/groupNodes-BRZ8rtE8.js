@@ -1,0 +1,1 @@
+function e(e,t){let n=new Map;for(let t of e){let e=n.get(t.type)??[];e.push(t),n.set(t.type,e)}if(t)for(let[,e]of n)e.sort(t);return n}function t(t){return Object.fromEntries(e(t))}export{t as n,e as t};

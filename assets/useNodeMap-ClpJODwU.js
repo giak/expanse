@@ -1,0 +1,1 @@
+function e(e){let t=new Map;return e.forEach(e=>t.set(e.id,e)),{nodeMap:t,getNode:e=>t.get(e)}}export{e as t};
