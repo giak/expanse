@@ -25,6 +25,7 @@ const TRIANGULATION_EFFECTS = new Set([
 ])
 
 export default defineConfig({
+  base: '/expanse/',
   plugins: [
     react({
       babel: {
