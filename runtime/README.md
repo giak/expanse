@@ -58,3 +58,14 @@ Conventions de nommage appliquées le 2026-07-03 :
 - **Pas de doublon** : un seul fichier par (topic, version). Vieux fichier = archive/move, pas doublon local.
 
 *README rédigé le 2026-07-03 lors de la réorganisation initiale du projet.*
+
+---
+
+## Suffixes supplementaires acceptés
+
+Le pattern de base est `YYYY-MM-DD_topic_v{N}.md`. Certains fichiers ajoutent des suffixes optionnels pour conserver une information sémantique:
+
+- `-vNN` (ex: `expanse_v16-v01.md`) : compteur de version mineure (v01, v02...)
+- `-iteration-N` (ex: `v17-minimal-iteration-1_v17.md`) : variante majeure d'une même version
+
+Ces suffixes restent tolérés tant que la base `YYYY-MM-DD_topic_v{N}.md` est respectée.
