@@ -16,6 +16,7 @@
 | Dossier | Rôle |
 |---------|------|
 | `runtime/` | Cerveau V17 distant (ISO-date strict, mutation-only) |
+| `doc/` | Workspace V17 : 8 sub-folders screaming-arch + _legacy/, voir `doc/INDEX_V17.md` |
 | `skills/` | 9 capacités agent (audit, brainstorm, ...) |
 | `scripts/` | Helpers dev (`check-broken-links.sh`, `reconcile_audit.py`) |
 | `expanse-cortex/` | Frontend React déployé GitHub Pages |

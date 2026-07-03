@@ -141,10 +141,11 @@ Le repo mappe ses fonctions critiques sur 1 dossier top-level chacun :
 
 - **`/`** — racine invariants : `AGENTS.md`, `KERNEL.md`, `README.md`
 - **`runtime/`** — V17 source-of-truth ISO-date `YYYY-MM-DD_topic_v17.md`, voir `runtime/README.md`
+- **`doc/`** — workspace V17 : 8 sub-folders numérotés `00-kernel/`→`07-mutations/` + `_legacy/` (AGENTS.md §3 ORG.1), voir `doc/README.md`
 - **`skills/`** — 9 capacités agent, convention libre documentée localement, voir `skills/README.md`
 - **`scripts/`** — helpers dev (bash + python), voir `scripts/README.md`
 - **`expanse-cortex/`** — frontend React déployé GitHub Pages, voir `expanse-cortex/README.md`
-- **`archive/`** — musée read-only V15/V16/doc-legacy/lab/dashboard, hierarchie sub-categorisee, **jamais modifié en place**
+- **`archive/`** — musée versions-legacy + lab + dashboard (V15/V16. **PAS** doc/), voir `archive/README.md`
 
 > **Note de scope** : ORG.2 (regex naming), ORG.5 (YAML front-matter), ORG.6 (enforcement futur) **s'appliquent uniquement** aux nouveaux fichiers dans `doc/{00-kernel,01-specs,02-brainstorms,03-plans,04-tests,05-audits,06-artifacts,07-mutations}/`. Chaque top-level dir documente sa propre convention dans son README respectif.
 

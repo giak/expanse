@@ -1,8 +1,8 @@
-# 📜 INDEX V17 — archive/doc-legacy/ navigation catalog
+# 📜 INDEX V17 —  navigation catalog
 
 > Catalogue exhaustif des fichiers V17-related archivés. Pour brainstorming V17 actif, ce fichier sert de point d'entrée.
-> Volume total `archive/doc-legacy/` : ~310 fichiers .md. Seuls les V17-relevant (12 fichiers) sont listés ici.
-> Pour naviguer le reste : `find archive/doc-legacy/ -name '*.md' | head -30` ou `grep -rl '\bV17\b' archive/doc-legacy/`.
+> Volume total `` : ~310 fichiers .md. Seuls les V17-relevant (12 fichiers) sont listés ici.
+> Pour naviguer le reste : `find  -name '*.md' | head -30` ou `grep -rl '\bV17\b' `.
 
 ## 🎨 Brainstorm V17 (idéation divergente)
 
@@ -60,13 +60,13 @@
 
 ```bash
 # Tous les fichiers V17 nommés
-find archive/doc-legacy/ -iname '*v17*'
+find  -iname '*v17*'
 
 # Grep V17 dans contenu (audits, recettes, plans)
-grep -rl '\bV17\b' archive/doc-legacy/ --include='*.md' | head -20
+grep -rl '\bV17\b'  --include='*.md' | head -20
 
 # Quick-restoration d'un fichier précis (verbatim pre-Phase-4)
-git checkout v0.7.0-pre-archive -- archive/doc-legacy/expanse-v17-brainstorm.md
+git checkout v0.7.0-pre-archive -- expanse-v17-brainstorm.md
 ```
 
-> ⚠ `archive/doc-legacy/` = musée read-only. Pour modifier un fichier listé ici, le migrer vers `runtime/` ou `doc/01-specs/` selon son statut (cf. `AGENTS.md` §3 ORG).
+> ⚠ `` = musée read-only. Pour modifier un fichier listé ici, le migrer vers `runtime/` ou `doc/01-specs/` selon son statut (cf. `AGENTS.md` §3 ORG).
