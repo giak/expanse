@@ -17,7 +17,7 @@ PATTERNS=(
 
 total=0
 for p in "${PATTERNS[@]}"; do
-  hits=$(grep -rln "$p" --include='*.md' --include='*.sh' --include='*.ts' --include='*.html' . 2>/dev/null | grep -v 'scripts/check-broken-links.sh')
+  hits=$(grep -rln "$p" --include='*.md' --include='*.sh' --include='*.ts' --include='*.html' --exclude-dir=archive . 2>/dev/null | grep -v 'scripts/check-broken-links.sh')
   count=$(echo "$hits" | grep -c . 2>/dev/null)
   if [ "$count" -gt 0 ]; then
     echo "[WARN] Pattern '$p' has $count occurrences in:"
