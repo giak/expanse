@@ -135,6 +135,23 @@ edit(filePath="/path/file.md",
 
 > **Pilier Phase 3** : la screaming architecture (`doc/{00-kernel,01-specs,02-brainstorms,03-plans,04-tests,05-audits,06-artifacts,07-mutations,_legacy}/`) couplée à un cycle de vie `DRAFT → ACTIVE → ARCHIVED/DEPRECATED`. Spécifications complètes dans `doc/plans/2026-07-03_PLAN_SCREAMING-ARCHITECTURE-PHASE3.md`.
 
+### Règle ORG.0 — Cartographie Racine (lisibilité first-glance)
+
+Le repo mappe ses fonctions critiques sur 1 dossier top-level chacun :
+
+- **`/`** — racine invariants : `AGENTS.md`, `KERNEL.md`, `README.md`
+- **`doc/`** — **seul dossier** où ORG.2-ORG.6 s'appliquent strictement (screaming-arch + regex naming) — voir `doc/README.md`
+- **`skills/`** — 9 capacités agent, convention libre documentée localement — voir `skills/README.md`
+- **`runtime/`** — V17 ISO-date `YYYY-MM-DD_topic_v{N}.md`, **exempt** d'ORG.2 — voir `runtime/README.md`
+- **`versions/`** — v15/v16 archives (même convention que runtime/), **exempt** d'ORG.2 — voir `versions/README.md`
+- **`expanse-cortex/`** — frontend React (code source TS/Vite), voir `expanse-cortex/README.md`
+- **`expanse-lab/`** — Phase 0 scaffold (SPEC §II), voir `expanse-lab/README.md`
+- **`dashboard/`** — 5-6 previews HTML statiques, voir `dashboard/README.md`
+- **`scripts/`** — helpers dev (bash + python), voir `scripts/README.md`
+- **`archive/`** — fourre-tout pré-Phase-2 (TODO inventaire Phase 2.5), voir `archive/README.md`
+
+> **Note de scope** : ORG.2 (regex naming), ORG.5 (YAML front-matter), ORG.6 (enforcement futur) **s'appliquent uniquement** aux nouveaux fichiers dans `doc/{00-kernel,01-specs,02-brainstorms,03-plans,04-tests,05-audits,06-artifacts,07-mutations}/`. Chaque top-level dir documente sa propre convention dans son README respectif.
+
 ### Règle ORG.1 — Tout fichier `.md` (hors legacy) va dans un des 9 dossiers
 
 ```
