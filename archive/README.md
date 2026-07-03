@@ -1,36 +1,12 @@
-# Cortex (Documentation Hub)
+# archive/
 
-Bienvenue dans le centre nerveux d'EXPANSE. Cette documentation n'est pas un manuel technique classique, mais une extension de l'organisme.
-
----
-
-## 🏗️ Structure Fondamentale
-
-| Document | Description |
-|----------|-------------|
-| [VISION.md](VISION.md) | L'objectif ultime de la symbiose et de l'autopoïèse. |
-| [PRD.md](PRD.md) | Cognitive Requirement Document : Capacités et limites. |
-| [ARCHITECTURE.md](ARCHITECTURE.md) | Anatomie du système, schémas Mermaid et ontologie. |
-| [METAGUIDE.md](METAGUIDE.md) | L'art de la compression sémantique et du DSL. |
-| [ONTOLOGY.md](ONTOLOGY.md) | Catalogue complet des signes et opérateurs. |
-
----
-
-## 📜 Historique & Santé
-
-| Document | Description |
-|----------|-------------|
-| [TRACE_LOG.md](TRACE_LOG.md) | Chronologie des mutations majeures. |
-| [DASHBOARD.md](DASHBOARD.md) | État actuel du système, statistiques et focus. |
-
----
-
-## 🔬 Protocoles & Recherche
-
-- [TEST-PROTOCOL.md](EXPANSE-TEST-PROTOCOL.md)
-- [LLM-RESEARCH.md](LLM-RESEARCH.md)
-- [retrospectives/](retrospectives/)
-
----
-
-*L'ordre naît du chaos structuré.*
+**WHY** Contenu legacy qui n'a pas trouvé place dans une namespace canonique (`versions/`, `doc/audits/`, etc.). Filet de captures avant tri.
+**WHO** Chercheur archéologie Expanse, contributeur curieux, maintenance archive Phase 2.5+.
+**CONTENT** ⚠ **À inventorier** — l'inventaire exhaustif est une *TODO Phase 2.5*. Voir `git ls-files archive/` puis décider sort.
+**HISTORIQUE** Dépôt progressif depuis Phase 0, sans politique claire d'ingestion. Convention de tri : à définir.
+**STATUS** 🟡 Sous-exploré. Risque : orphelin non-référencé + doublon potentiel avec `doc/`/`versions/`.
+**HOW** `ls archive/` pour inventaire manuel. Pour chaque entrée non-référencée :
+- Si canonique → proposer emplacement (`doc/audits/`, `versions/v{14,...}/`, `doc/artifacts/`)
+- Si doublon → merge + delete
+- Si pure legacy → keep avec rationale
+- Commit conventionnel : `chore(archive): intake {filename} → {destination}`

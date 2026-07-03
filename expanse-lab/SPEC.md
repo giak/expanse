@@ -153,7 +153,7 @@ Pour CHAQUE substrat, tester 2 modèles minimum :
 |------|--------|-----|
 | **A_baseline** | `Tu es un assistant utile. Réponds en français.` (30 tok) | Référence no-Expanse |
 | **B_v17.6** | `runtime/2026-07-02_v17-minimal-iteration-2_v17.md` (330 tok) | Behavioral-Directive |
-| **C_v16** | `versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md` (2900 tok) | Incarnation V16 (caveat seed procédural) |
+| **C_v16** | `versions/v16/2026-04-11_expanse_v16-v01.md` (2900 tok) | Incarnation V16 (caveat seed procédural) |
 
 ### Matrice totale Phase 1 MVP
 
@@ -184,7 +184,7 @@ sha256sum configs/{opencode,freebuff,kilocode}-*.{toml,yaml,json}
 
 Pour chaque substrat (opencode/freebuff/kilocode), exécuter une commande triviale :
 - opencode : `opencode --version` → check version stable
-- freebuff : `freebuff ping` → check alive (custom wrapper)
+- freebuff : `freebuff ping` **[HYPOTHÈSE — non testé]** → check alive (custom wrapper ; chemin CLI freebuff inventé jusqu'à preuve du contraire)
 - kilocode : `kilocode --healthcheck` → check plugin running
 
 **Output**: `runs/{date}/healthcheck.json` (pass/fail par substrat). Skip substrat si fail.
@@ -245,16 +245,19 @@ Sauvegarder dans `runs/{date}/{substrat}_{model}_{condition}_{task_id}.json` :
 Pour chaque (substrat × modèle × condition) set, générer `summary.json` :
 - Moyenne par axe (A1 substance, A2 ΣΨΦΩ΂, boot_success_rate, format_drift_score, latency_avg)
 - Std deviation
-- Outliers (3σ)
+- Outliers (3σ)### Étape 8 — Comparaison inter-substrat (descriptive ONLY — patch option A)
 
-### Étape 8 — Comparaison inter-substrat (statistiques)
+**Patch reviewer Q3 (résolu)** : avec **n=3 substrats**, toute inférence inter-substrat (KW, ANOVA, Cohen's d) est **sous-puissante** et **trompeuse**. On aligne §IV.8 sur §VII.2 policy : **strictement descriptif**.
 
-Appliquer Kruskal-Wallis + Cohen's d sur 3 axes :
-- Substance : kan substance A vs B vs C différent par substrat ?
-- ΣΨΦΩ΂ : kan conformity différent par substrat ?
-- Cross-host robustness : kan boot_success_rate différent par substrat ?
+Appliquer **agrégation descriptive** (mean/std/count/range par axe) sur **3 axes** :
 
-Output : `reports/{date}_run-{N}_report.md` auto-généré (template Jinja2).
+- Substance : `mean ± std` de A1 par (substrat × condition), avec min/max et outliers (3σ).
+- ΣΨΦΩ΂ : taux de conformité ΣΨΦΩ΂ par (substrat × condition), exprimé en %.
+- Cross-host robustness : `boot_success_rate` par substrat × condition.
+
+**PAS d'inférence statistique inter-substrat** (p-value, KW, Cohen's d). **PAS de verdict "V17 > baseline"** basé sur 1 seul substrat. **Règle de décision** = **≥2 substrats sur 3 confirment** (cf. §VII #2).
+
+Output : `reports/{date}_run-{N}_report.md` auto-généré (template Jinja2, incluant tableau descriptive + règle ≥2 substrats).
 
 ### Invariants critiques (3 règles immuables)
 
@@ -285,7 +288,13 @@ Inspiré de `doc/tests/v17-s14-retrogression-test.md` Axe 1 patch reviewer 2nd p
 
 | Compteur | Regex | Contribution max |
 |----------|-------|------------------|
-| `algo_named_count` | `\b(MIA\|Bloom filter\|LSH\|HyperLogLog\|MinHash\|MurmurHash\|Cosine sim\|k-NN\|Random Forest\|k-means\|SVM\|RLHF\|gradient\|Adam\|RMSProp)\b` | count × 1.0, **max 2.0** |
+| `algo_named_count` | `(?<![A-Za-z])(MIA\|Bloom filter\|LSH\|HyperLogLog\|MinHash\|MurmurHash\|Cosine sim\|k-NN\|Random Forest\|k-means\|SVM\|RLHF\|gradient\|Adam\|RMSProp)(?!\w)` | count × 1.0, **max 2.0** |
+
+> **Note regex** (patch review, MVP `→` v2) :
+> - **MVP (E1)** : `(?<![A-Za-z])(...)(?!\w)`. Corrige `Adam` dans `Adams` (pluriel) ✓. **Ne corrige pas** `Adam` dans `Adam-based` (tiret = non-word, donc `( ?!\w)` laisse passer).
+> - **v2 (E3+)** : remplacer `(?!\w)` par `(?![A-Za-z0-9_-])` (stricter, exclut tirets).
+> - `Bloom-filter` (hyphen) : espace littéral dans le pattern ne matche pas `-`. **MVP ignore** les hyphen-variants. **v2** : ajouter `Bloom[ -]filter` ou split en `(Bloom-space-filter|Bloom-hyphen-filter)`.
+> - Recommandation : **MVP ship avec `( ?!\w)`**, logger faux positifs en E1.5, élargir en v2.
 | `path_cite_count` | `(/[a-z][a-z0-9_./-]+\.[a-z]{2,4})` | count × 0.5, **max 1.5** |
 | `code_block_present` | triple backtick | 1.5 si présent, 0 sinon |
 | `num_list_present` | `^\d+\.\s` | 1.0 si présent, 0 sinon |
@@ -354,8 +363,8 @@ Plafond 5.0 par tâche. Sur 10 tâches × 3 conditions × 3 substrats = 450 scor
 
 | Risque | Signal de détection | Mitigation |
 |--------|---------------------|-----------|
-| R1 — prompt concurrent | Avant boot, lire `~/.freebuffrc` ou équivalent. Si contient "You are...", c'est un concurrent prompt. | Désactiver rc file pour la session test (`mv .freebuffrc .freebuffrc.bak`) |
-| R2 — tools divergents | Après boot, lister les tools disponibles (`freebuff tools list` ou similar). | Mapper noms vers équivalents (`view_file` → `read_file`) |
+| R1 — prompt concurrent | Avant boot, lire `~/.freebuffrc` **[HYPOTHÈSE — existence de fichier/chemin non vérifié]** ou équivalent. Si contient "You are...", c'est un concurrent prompt. | Désactiver rc file pour la session test (`mv .freebuffrc .freebuffrc.bak`) **[HYPOTHÈSE]** |
+| R2 — tools divergents | Après boot, lister les tools disponibles (`freebuff tools list` **[HYPOTHÈSE — non testé]** ou similar). | Mapper noms vers équivalents (`view_file` → `read_file`) **[HYPOTHÈSE — tool set freebuff spec non vérifié]** |
 | R3 — capture imparfaite | Logger stdout brut NON-parsed + capture-pane tmux. | Double-capture : tmux + wrapper Python pexpect |
 
 ### Protocole freebuff-spécifique dans `expanse-lab/scripts/launch_freebuff_tmux.sh`
@@ -368,7 +377,7 @@ trap '[ -f ~/.freebuffrc.bak ] && mv ~/.freebuffrc.bak ~/.freebuffrc' EXIT
 
 # 2. Spawn fresh freebuff session in tmux
 tmux new-session -d -s "fb-${DATE}" \
-  "freebuff --clean --system-prompt '${EXPANSE_PROMPT_SNAPSHOT}'"
+  "freebuff --clean --system-prompt '${EXPANSE_PROMPT_SNAPSHOT}'"  # [HYPOTHÈSE — flags --clean / --system-prompt non vérifiés] + capture_output=PTY
 
 # 3. Wait for boot signal (max 30s)
 tmux wait-for -S fb-${DATE}
@@ -587,10 +596,30 @@ type SubstratReport = {
 
 | Epic | Description | Effort | Risque | Priorité |
 |------|-------------|--------|--------|----------|
-| **E1 — MVP (sanity check)** | 1 substrat (opencode) × 2 conditions (A, B) × 3 tâches × 3 replays = 18 runs. JSON schema + scoring Axe 1+2 simples. Rapport MD auto. | **50 h** (rebuffer reviewer Q8, realistic 40-50h) | Faible (scope borné) | P0 |
+| **E1 — MVP (sanity check)** | 1 substrat (opencode) × 2 conditions (A, B) × 3 tâches × 3 replays = 18 runs. JSON schema + scoring Axe 1+2 simples. Rapport MD auto. | **50 h** *(décomposés ci-dessous)* | Faible (scope borné) | P0 |
+
+↳ **Décomposition E1 en 8 sous-tâches (patch reviewer Q8 → réaliste)** :
+
+| # | Sous-tâche | Livrable concret | h |
+|---|------------|-------------------|---|
+| **E1.1** | JSON Schema v1.0 + typage strict (`RunRecord` / `TaskSummary` / `SubstratReport` ↔ Python dataclasses) | `expanse-lab/spec_types.py` (≥ 3 dataclasses, validation) | **6 h** |
+| **E1.2** | Snapshot inputs script (sha256 de configs/prompts/tasks) | `scripts/snapshot_inputs.py` → `infra/snapshots-{date}.json` | **4 h** |
+| **E1.3** | tmux session spawner + healthcheck runner opencode | `scripts/launch_opencode_tmux.sh` + `scripts/healthcheck.sh` | **8 h** |
+| **E1.4** | Boucle envoi 10 tâches + capture tmux-pane atomic-write | `scripts/run_substrat.sh` (idempotent, skip-if-exists) | **8 h** |
+| **E1.5** | Scoring A1 substance (regex + compteurs algo_named/path_cite/code_block/list/rubric) | `analysis/scoring_a1.py` (+ ≈5 tests unitaires pytest) | **6 h** |
+| **E1.6** | Scoring A2 conformité ΣΨΦΩ΂ (4 sous-axes : Ψ-premier-char, ordre strict, LOST-substantif, parasites) | `analysis/scoring_a2.py` (+ ≈5 tests unitaires pytest) | **6 h** |
+| **E1.7** | Agrégation `summary.json` (mean/std sur 3 replays × 3 tasks × 2 conditions) | `analysis/aggregate_summary.py` (sortie JSON uniquement, pas ML) | **4 h** |
+| **E1.8** | Rapport MD auto via template Jinja2 minimal | `reports/TEMPLATE-report.md.j2` + `analysis/generate_report.py` | **8 h** |
+| **TOTAL E1** | | | **50 h** ✓ |
+
+**Notes décomposition** :
+- Chaque sous-tâche est **livrable indépendant** (committable séparément, testable unitairement).
+- E1.5/E1.6 incluent des tests unitaires (pytest) pour les regex ; c'est la barrière qualité MVP.
+- E1.8 ne nécessite PAS scipy/statsmodels (descriptif pur, cf. §VII.2 + §IV.8 patch A).
+- Scope E1 = opencode uniquement (pas freebuff/kilocode). freebuff = E2.
 | **E2 — Multi-substrat orchestration** | Ajouter freebuff + kilocode au runner. Adapt freebuff (R1-R3 mitigation §VI). Lancement tmux parallélisé (3 sessions simultanées). | **40 h** | Moyen (freebuff specifics unknown) | P0 |
 | **E3 — Cross-host robustness scoring** | Axe 3 (boot signal, format degradation) + Axe 4 (replay determinism). Impl cross-host validation §VII. Cross-host rule decision (≥2 substrats verdict). | **35 h** | Moyen (parsers boot signals différents par substrat) | P1 |
-| **E4 — Statistical analysis + reporting** | Kruskal-Wallis scripts Python (`scipy.stats`), Cohen's d, génération auto rapport Jinja2 → MD. Notebooks Jupyter matplotlib + seaborn. | **25 h** | Faible (scipy mature) | P1 |
+| **E4 — Descriptive analysis + reporting** | Scripts Python (pandas/numpy stdlib, `scipy.stats` *optionnel* si besoin de distribution percentiles), agrégation mean/std/count, génération auto rapport Jinja2 → MD. Notebooks Jupyter matplotlib + seaborn. **PAS de test inférentiel inter-substrat** (cohérent avec §VII.2 + §IV.8 patch option A). | **25 h** | Faible (pandas mature) | P1 |
 | **E5 — CI/CD + diffusion** | GitHub Actions matrix (3 substrats × 2 modèles). Dockerfile sandboxed. Blog post announcing `expanse-lab` au release v1.0. | **20 h** | Moyen (CI multi-OS, secrets, cost-budget) | P2 |
 
 **Total v1.0 = E1+E2+E3+E4 = 150 h** (rebuffer reviewer Q8 : E1 réaliste 50h, autres majorés +30% en moyenne). **v2.0 = +E5 = 170 h**. **Buffer imprévu standard +30h (= 10% rule of thumb post-MVP)**.
@@ -659,7 +688,7 @@ Ce framework s'engage sur **5 garanties** vérifiables :
 | **E2 Multi-substrat** | 🔜 Phase 2 | freebuff + kilocode intégrés |
 | **E3 Cross-host robustness** | 🔜 Phase 3 | Boot + replay determinism scoring |
 | **v1.0 release** | 🎯 Objectif | 3 substrats × 3 conditions × 10 tâches × 5 replays = 450 runs |
-| **E4 Stats + reporting** | 🎯 v1.0+ | Kruskal-Wallis + Cohen's d auto-rapport |
+| **E4 Descriptive stats + reporting** | 🎯 v1.0+ | mean/std agrégation auto-rapport (descriptif pur, cf. §VII.2 + §IV.8 patch A) |
 | **E5 CI/CD** | 🎯 v2.0 | GitHub Actions matrix multi-substrat |
 | **Adoption externe** | 🎯 v2.0+ | Contribution freebuff/kilocode devs |
 

@@ -6,7 +6,6 @@ worktrees/
 .claude/
 
 # Backups and archives
-archive/
 *.bak
 *.backup
 
