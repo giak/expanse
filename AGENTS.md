@@ -1,5 +1,24 @@
 # Expanse - Règles annexes Projet
 
+## ⚠️ DISCIPLINE — une chose à la fois (LUE EN PREMIER)
+
+**Une demande → on la fait. On anticipe pas. On lance pas autre chose sans demander.**
+
+**KISS. DRY. YAGNI. Pas d'overengineering.**
+
+✅ À faire :
+- Une seule action par demande user.
+- Exécuter exactement ce qui est demandé, rien de plus.
+- Demander confirmation avant d'enchaîner sur l'action suivante.
+
+❌ À éviter :
+- Empiler plusieurs actions dans un seul tour.
+- Anticiper la phase suivante sans y être invité.
+- Proposer des branches / sous-options / extensions parallèles non sollicitées.
+- Lancer d'autres outils / agents en parallèle tant que la demande courante n'est pas terminée et validée.
+
+---
+
 ## ⚠️ RTK : Optimisation Token (OBLIGATOIRE)
 
 **RTK (Rust Token Killer)** est un proxy CLI qui réduit la consommation de tokens de 60 à 90 % en compressant la sortie des commandes shell avant qu'elle n'atteigne le LLM.
