@@ -35,7 +35,7 @@ mcp_mnemolite_search_memory(query="trace:fresh", tags=["trace:fresh"], limit=50)
 ### 2. Lire les fichiers d'état
 
 ```
-read_file(path="runtime/expanse-v15-apex.md")
+read_file(path="versions/v15/2026-03-20_v15-apex_v15.md")
 read_file(path="doc/mutations/LOG.md")
 ```
 

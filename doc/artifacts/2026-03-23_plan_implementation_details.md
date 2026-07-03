@@ -42,7 +42,7 @@ Ce plan couvre la transformation d'Expanse d'un système **purement réactif** (
    b. search_memory(tags=["trace:fresh"], limit=50)
    c. Compter M1, M2
 3. Calculer M3 une fois :
-   wc -c runtime/expanse-v15-apex.md \
+   wc -c versions/v15/2026-03-20_v15-apex_v15.md \
         runtime/expanse-v15-boot-seed.md \
         KERNEL.md doc/SYNTHESE.md
    → total / 3.5 = tokens boot
@@ -86,7 +86,7 @@ Le rappel est un **pré-requis sensoriel**, pas un acte de souveraineté. Il se 
 
 ### Vérification
 ```bash
-grep "Rappel Associatif" runtime/expanse-v15-apex.md  # Attendu : 1 résultat dans §Ⅰ
+grep "Rappel Associatif" versions/v15/2026-03-20_v15-apex_v15.md  # Attendu : 1 résultat dans §Ⅰ
 ```
 
 ---
@@ -372,7 +372,7 @@ Phase 8 (Némésis)            ← dépend de Phase 7 (axiomes à challenger)
 ## ROLLBACK GLOBAL
 
 ```bash
-git checkout main -- runtime/expanse-v15-apex.md runtime/expanse-dream.md
+git checkout main -- versions/v15/2026-03-20_v15-apex_v15.md runtime/expanse-dream.md
 ```
 
 ---

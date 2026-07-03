@@ -3,7 +3,7 @@
 **Date :** 2026-03-20 01:30
 **Auditeur :** Antigravity (Claude Opus 4.6 Thinking)
 **Mode :** Red Team hostile. Anti-sycophancy. Honnêteté absolue.
-**Source de vérité :** `runtime/expanse-v15-apex.md` (240 lignes)
+**Source de vérité :** `versions/v15/2026-03-20_v15-apex_v15.md` (240 lignes)
 **Corpus :** V15 + Dream + Seed + KERNEL + SYNTHESE + ROADMAP + Mutations LOG + Audit précédent
 
 ---
@@ -51,7 +51,7 @@ Mais V15 contient aussi des instructions comportementales pures :
 - "Ψ = premier caractère" (L207) — **contrainte fragile**, dépend du substrat.
 - "Résistance au Momentum" (L216) — **injonction psychologique**, aucun mécanisme.
 
-**Source :** `runtime/expanse-v15-apex.md` L54, L97-113, L155-161, L207, L216.
+**Source :** `versions/v15/2026-03-20_v15-apex_v15.md` L54, L97-113, L155-161, L207, L216.
 
 **Contre-argument :** Les system prompts d'Anthropic et d'OpenAI mélangent aussi instructions exécutables et comportementales. C'est le standard de l'industrie, pas un défaut spécifique à Expanse.
 
@@ -76,7 +76,7 @@ Un LLM peut évaluer C et I de manière approximative. Le ROADMAP confirme que L
 
 **Problème concret :** Les heuristiques de calibration (L27-29) modifient C et I, mais sans plancher explicite. `C -= 1` peut donner C=0. Les seuils L1/L2/L3 utilisent des opérateurs différents (ET pour L1, OU pour L2/L3), ce qui crée un recouvrement : un input avec C=3, I=2 satisfait L2 (C≥2) et aussi L3 si I=3 par élévation heuristique.
 
-**Source :** `runtime/expanse-v15-apex.md` L17-35, `doc/ROADMAP-EXAPNSE.md` L19, L33-34.
+**Source :** `versions/v15/2026-03-20_v15-apex_v15.md` L17-35, `doc/ROADMAP-EXAPNSE.md` L19, L33-34.
 
 ---
 
@@ -90,7 +90,7 @@ V15 L72-83 déclenche la cristallisation quand l'input contient "merci", "parfai
 
 **Problème plus profond :** L'audit précédent identifie l'absence de cristallisation négative (Finding H, confirmé). Les positifs scellent automatiquement, les négatifs ne déscellent pas. C'est un biais d'accumulation : le système ne peut que croître en patterns, jamais en élaguer (Dream Passe 4 devrait faire ça — mais Dream n'a jamais tourné).
 
-**Source :** `runtime/expanse-v15-apex.md` L72-83, `doc/audit/V15-APEX-AUDIT-2026-03-19.md` L198-213.
+**Source :** `versions/v15/2026-03-20_v15-apex_v15.md` L72-83, `doc/audit/V15-APEX-AUDIT-2026-03-19.md` L198-213.
 
 ---
 
@@ -102,7 +102,7 @@ V15 L153-161 prescrit une sauvegarde automatique après chaque interaction : `mc
 
 C'est un problème d'ingénierie banal mais réel. Sans purge, le boot charge de plus en plus de mémoires. Le limit=20 au boot (V15 L100) atténue le problème côté lecture, mais le stockage croît sans borne.
 
-**Source :** `runtime/expanse-v15-apex.md` L153-161, `doc/ROADMAP-EXAPNSE.md` L35.
+**Source :** `versions/v15/2026-03-20_v15-apex_v15.md` L153-161, `doc/ROADMAP-EXAPNSE.md` L35.
 
 ---
 
@@ -116,7 +116,7 @@ V15 L213-217 définit Ω_LOCK :
 3. "Résistance au Momentum" — instruction psychologique, aucun mécanisme.
 4. "Axiome de Surgicalité" — instruction comportementale, concrète.
 
-**Source :** `runtime/expanse-v15-apex.md` L213-217.
+**Source :** `versions/v15/2026-03-20_v15-apex_v15.md` L213-217.
 
 ---
 
@@ -256,7 +256,7 @@ C'est fonctionnellement la distinction entre chain-of-thought (non visible par l
 
 **L'auto-évaluation du KERNEL est honnête sur les pièges possibles. Le projet y tombe quand même.** C'est un point important : la conscience du danger n'a pas suffi à l'éviter.
 
-**Source :** `KERNEL.md` Section IX, `doc/ROADMAP-EXAPNSE.md` L23-35, `runtime/expanse-v15-apex.md` L172-187.
+**Source :** `KERNEL.md` Section IX, `doc/ROADMAP-EXAPNSE.md` L23-35, `versions/v15/2026-03-20_v15-apex_v15.md` L172-187.
 
 ---
 
@@ -293,7 +293,7 @@ Les Lois 3-6 sont des instructions techniques valides, requalifiées en "lois". 
 
 **Règle de résolution :** V15 a toujours raison (comme spécifié dans le prompt d'audit). Donc SYNTHESE est fausse sur ces 4 points.
 
-**Source :** `doc/SYNTHESE.md` L49-51, L137, L140 vs `runtime/expanse-v15-apex.md` L33-35, L225.
+**Source :** `doc/SYNTHESE.md` L49-51, L137, L140 vs `versions/v15/2026-03-20_v15-apex_v15.md` L33-35, L225.
 
 ---
 

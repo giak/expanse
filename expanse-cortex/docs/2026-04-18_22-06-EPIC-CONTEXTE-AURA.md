@@ -653,7 +653,8 @@ interface ScenarioContext {
 
 function deriveAuraState(step: ProcessStep, ctx: ScenarioContext): AuraState {
   const l1Active = ctx.cortexItemCount > 0
-  const l2Active = ctx.dynamicActivity > 0 || step.organ !== undefined
+  // L2 actif dès qu'il y a activité dynamique (EPIC §Ⅸ : "L2 apparaît avec l'activité dynamique")
+  const l2Active = ctx.dynamicActivity > 0
 
   return {
     l0Radius:  step.phase === 'INIT' ? 0 : 60,        // 0 avant lecture boot-seed

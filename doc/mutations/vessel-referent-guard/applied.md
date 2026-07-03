@@ -29,5 +29,5 @@
 
 ## Rollback
 ```bash
-cp /home/giak/projects/expanse/archive/backups/expanse-v15-2026-03-24-vessel-referent-guard-backup.md /home/giak/projects/expanse/runtime/expanse-v15-apex.md
+cp /home/giak/projects/expanse/archive/backups/expanse-v15-2026-03-24-vessel-referent-guard-backup.md /home/giak/projects/expanse/versions/v15/2026-03-20_v15-apex_v15.md
 ```

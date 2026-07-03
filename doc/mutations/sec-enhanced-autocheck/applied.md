@@ -32,4 +32,4 @@
 ---
 
 ## Rollback
-cat /home/giak/projects/expanse/archive/backups/expanse-v15-2026-03-24-sec-enhanced-autocheck-backup.md > /home/giak/projects/expanse/runtime/expanse-v15-apex.md
+cat /home/giak/projects/expanse/archive/backups/expanse-v15-2026-03-24-sec-enhanced-autocheck-backup.md > /home/giak/projects/expanse/versions/v15/2026-03-20_v15-apex_v15.md

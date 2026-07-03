@@ -13,7 +13,7 @@
 ## Reference Documents
 
 - Current technical doc: `docs/explain/EXPANSE V14.3 — Comment ça Marche (Sous le Capot).md`
-- Bible (features): `doc/EXPANSE-BIBLE-Resurrection.md`
+- Bible (features): `versions/v15/2026-07-02_bible-resurrection_v15.md`
 - Philosophy: `KERNEL.md`
 - Compression methodology: `docs/METAGUIDE.md`
 
@@ -23,7 +23,7 @@
 
 **Files:**
 - Read: `docs/explain/EXPANSE V14.3 — Comment ça Marche (Sous le Capot).md`
-- Read: `doc/EXPANSE-BIBLE-Resurrection.md` (first 150 lines)
+- Read: `versions/v15/2026-07-02_bible-resurrection_v15.md` (first 150 lines)
 - Read: `KERNEL.md`
 
 **Step 1: Read all reference documents**

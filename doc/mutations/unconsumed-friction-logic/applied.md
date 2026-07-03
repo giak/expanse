@@ -27,4 +27,4 @@
 ---
 
 ## Rollback
-bash(command: "cat /home/giak/projects/expanse/archive/backups/expanse-v15-2026-03-23-unconsumed-friction-logic-backup.md > /home/giak/projects/expanse/runtime/expanse-v15-apex.md")
+bash(command: "cat /home/giak/projects/expanse/archive/backups/expanse-v15-2026-03-23-unconsumed-friction-logic-backup.md > /home/giak/projects/expanse/versions/v15/2026-03-20_v15-apex_v15.md")

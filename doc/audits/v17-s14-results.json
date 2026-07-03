@@ -1,0 +1,132 @@
+{
+  "phase": "Phase 2 — S14 mini-benchmark",
+  "date": "2026-07-03",
+  "llm": "deepseek v4 flash",
+  "host": "opencode",
+  "metaprompt": "runtime/expanse-v17-minimal.md (307 tokens)",
+  "baseline_input": "doc/expanse-v17-recette-response-pure.md",
+  "v17_input": "doc/expanse-v17-recette-response.md",
+  "tasks": [
+    {
+      "id": "A",
+      "question": "Décompose le problème de l'auto-modification d'un système LLM en 3 sous-problèmes distincts.",
+      "baseline_chars": 580,
+      "v17_chars": 340,
+      "baseline_axes_covered": [
+        "alignment_sécurité_reward_hacking_goal_misgeneralization_sycophancy",
+        "stabilité_architecturale_gradients_inférence_représentations",
+        "vérification_boucle_rétroaction_régression_rollback"
+      ],
+      "v17_axes_covered": [
+        "observation_indirecte_état_interne_texte_only",
+        "évaluation_oracle_externe_inexistant",
+        "exécution_physique_modifications_poids"
+      ],
+      "axes_uniques_baseline": [
+        "alignment/sécurité",
+        "stabilité architecturale (gradients)",
+        "rollback + non-effondrement"
+      ],
+      "axes_uniques_v17": [
+        "observation indirecte via texte",
+        "exécution physique (accès poids direct)"
+      ],
+      "format_strict_v17": false,
+      "format_défauts_v17": ["Ω LOST parasite", "Μ LOST parasite", "Ψ LOST non-substantif"],
+      "verdict": "v17 < baseline (axes sécurité critiques absents)"
+    },
+    {
+      "id": "B",
+      "question": "Décris une architecture pour résoudre la contamination des données d'entraînement, en 5 points numérotés.",
+      "baseline_chars": 880,
+      "v17_chars": 1100,
+      "baseline_techniques_cited": [
+        "MinHash", "simhash", "Bloom filter", "LSH Jaccard",
+        "n-gram suffix array", "Membership Inference Attacks (MIA)",
+        "Min-K% Prob"
+      ],
+      "v17_techniques_cited": [
+        "SHA-3 + sel", "manifeste chaîné (hash)",
+        "génération procédurale", "sonde logit-distribution"
+      ],
+      "axes_uniques_baseline": [
+        "registre heldouts versionné",
+        "filtre ingestion multi-niveaux (Bloom+LSH+suffix)",
+        "canaries étalonnage",
+        "gating par capacité critique",
+        "audit post-hoc (MIA, Min-K% Prob)"
+      ],
+      "axes_uniques_v17": [
+        "évaluation dynamique procédurale"
+      ],
+      "format_strict_v17": false,
+      "format_défauts_v17": ["5 points hors-format après Φ", "Ω/Μ LOST parasites"],
+      "verdict": "v17 ≤ baseline (V17 a génération dynamique unique, mais baseline plus dense techniquement)"
+    },
+    {
+      "id": "C",
+      "question": "Donne 4 heuristiques pour évaluer la fiabilité d'un agent autonome.",
+      "baseline_chars": 1100,
+      "v17_chars": 1000,
+      "baseline_axes_covered": [
+        "cohérence_inter_épisodes_paraphrase_invariance",
+        "robustesse_adversariale_jailbreak_prompt_injection_sycophancy",
+        "calibration_confiance_justesse",
+        "taux_erreur_par_domaine_raisonnement_chiffres_négation"
+      ],
+      "v17_axes_covered": [
+        "calibration_ECE_005_seuil",
+        "introspection_OOD_rejet_hors_distribution",
+        "robustesse_perturbationnelle_paraphrase_typo_reformulation",
+        "vérifiabilité_causale_chaîne_raisonnement"
+      ],
+      "axes_uniques_baseline": [
+        "cohérence inter-épisodes (invariance sémantique)",
+        "robustesse adversariale concrète (jailbreak/prompt-injection)",
+        "taux d'erreur par domaine (per-domain delta)"
+      ],
+      "axes_uniques_v17": [
+        "introspection OOD (rejet h-distribution)",
+        "vérifiabilité causale (chaîne traçable)"
+      ],
+      "format_strict_v17": false,
+      "format_défauts_v17": ["4 points hors-format après Φ", "Ω/Μ LOST parasites"],
+      "verdict": "v17 < baseline (V17 a lecture métacognitive intéressante mais failure modes sécurité concrets absents)"
+    }
+  ],
+  "aggregated_metrics": {
+    "total_chars_baseline": 2560,
+    "total_chars_v17": 2440,
+    "delta_pct_total_chars": -5,
+    "format_strict_v17_responses": "0/3",
+    "hallucinations_detected": 0,
+    "techniques_cited_baseline_q2": 7,
+    "techniques_cited_v17_q2": 4,
+    "axes_secu_critiques_baseline_q1": 3,
+    "axes_secu_critiques_v17_q1": 0,
+    "failure_modes_securite_baseline_q3": 3,
+    "failure_modes_securite_v17_q3": 1
+  },
+  "verdict_global": "v17 < baseline",
+  "confidence": "medium-high",
+  "limits": [
+    "n=3 tâches (auto-modif, contamination, fiabilité)",
+    "1 LLM testé (deepseek v4 flash)",
+    "1 host (opencode)",
+    "pas d'oracle peer-LLM formel (verdict = substance comparative directe)",
+    "biais auteur : métaprompt conçu Phase 1 → stake à défendre (mitigé comparaison technique objective)",
+    "format Ω/Μ non-respecté cross-host (self-defeating)"
+  ],
+  "conformite_recette_section_5": {
+    "instruction_verbatim": "Si verdict = v17 = baseline → archivage ambition 'prompt structuré magique', garder V17-minimal comme outil documenté.",
+    "verdict_actuel": "v17 < baseline (plus sévère que 'egal baseline' attendu)",
+    "decision": "archivage confirmé, simplification Phase 3 (provenance git pure, abandon SurprisalGate)",
+    "section_9_a_mettre_a_jour": "remplacer 'S14 jamais exécuté' par : 'S14 exécuté 2026-07-03 — verdict v17 < baseline, archivage confirmé'"
+  },
+  "outputs_produits": {
+    "trace_markdown": "doc/audits/v17-phase2-test-results.md",
+    "verdict_json": "doc/audits/v17-s14-results.json",
+    "raw_baseline": "doc/expanse-v17-recette-response-pure.md",
+    "raw_v17": "doc/expanse-v17-recette-response.md"
+  }
+}

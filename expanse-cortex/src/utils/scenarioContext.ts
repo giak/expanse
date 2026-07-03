@@ -1,6 +1,10 @@
 // ══════════════════════════════════════════════════════════════
 // SCENARIO CONTEXT — shared derivation layer for AURA + Dendrites
-// Source canonique : EPIC-CONTEXTE-AURA.md §Ⅸ + §5.6 + §Ⅷ
+// Source canonique : EPIC-CONTEXTE-AURA.md §Ⅸ + §5.3 + §Ⅷ
+//
+// Les constantes AURA ci-dessous sont alignées sur la spec EPIC §Ⅸ.
+// Tout écart par rapport à cette spec doit être justifié ou reverti.
+// Range summary (§5.3) : L0 ≈60px · L1 0→120px · L2 0→200px.
 // ══════════════════════════════════════════════════════════════
 
 import type { ProcessStep, Organ } from '../types/signal'
@@ -10,37 +14,46 @@ import { INITIAL_SCENARIO_CONTEXT } from '../types/aura'
 import { DREAM_PHASES } from '../constants/phases'
 import { formatToolCall } from './formatToolCall'
 
-// ─── Constants ───
+// ─── AURA constants (EPIC-CONTEXTE-AURA.md §Ⅸ) ───
+//
+// L0 activation rule = `step.phase !== 'INIT'`. The historical `L0_ACTIVE_PHASES`
+// set (38 phases) was deliberately removed: the EPIC §Ⅸ spec is "toutes phases
+// sauf 'INIT'", not a closed enumeration. Don't reintroduce a phase list without
+// first updating EPIC §Ⅸ itself.
+//
+// Per spec formulas:
+//   l0Opacity: step.phase === 'INIT' ? 0 : 0.15
+//   l1Radius:  l1Active ? 60 + count * 15 : 0          (max 120 à count=4)
+//   l1Opacity: l1Active ? 0.10 + count * 0.05 : 0      (max 0.35 à count=5)
+//   l2Radius:  l2Active ? (60 + count * 15) + activity * 50 : 0
+//   l2Opacity: l2Active ? 0.10 + activity * 0.15 : 0
+//
+// Note: l2Active is gated on `ctx.dynamicActivity > 0` only — no fallback on
+// `step.organ !== undefined`. EPIC §Ⅸ: "L2 apparaît avec l'activité dynamique".
+// Side-effect: L2 is invisible during pure phase-transition steps with no
+// tool calls/hasInput (e.g. SEED, APEX, BRIEFING). This is a deliberate EPIC
+// fidelity choice, not a bug.
 
-/** L0 fixed radius after Boot step 1 — inner core, surrounds nucleus */
-const L0_RADIUS = 120
-/** L0 fixed opacity after Boot step 1 */
-const L0_OPACITY = 0.12
-/** L1 radius increment per cortex item — grows past organ ring */
-const L1_RADIUS_PER_ITEM = 40
-/** L1 base radius — starts where L0 ends */
-const L1_RADIUS_BASE = 130
-/** L1 opacity increment per cortex item */
-const L1_OPACITY_PER_ITEM = 0.045
-/** L1 base opacity */
-const L1_OPACITY_BASE = 0.08
-/** L2 radius increment per unit of dynamicActivity — extends beyond organ ring */
-const L2_RADIUS_PER_ACTIVITY = 120
-/** L2 base opacity */
-const L2_OPACITY_BASE = 0.06
-/** L2 opacity increment per unit of dynamicActivity */
-const L2_OPACITY_PER_ACTIVITY = 0.12
+/** L0 fixed radius after Boot step 1 — inner core (EPIC §Ⅸ) */
+const L0_RADIUS = 60
+/** L0 fixed opacity after Boot step 1 (EPIC §Ⅸ) */
+const L0_OPACITY = 0.15
+/** L1 base radius — starts where L0 ends (EPIC §Ⅸ) */
+const L1_RADIUS_BASE = 60
+/** L1 radius increment per cortex item — grows with Μ injections (EPIC §Ⅸ) */
+const L1_RADIUS_PER_ITEM = 15
+/** L1 opacity base (EPIC §Ⅸ) */
+const L1_OPACITY_BASE = 0.10
+/** L1 opacity increment per cortex item (EPIC §Ⅸ) */
+const L1_OPACITY_PER_ITEM = 0.05
+/** L2 radius increment per unit of dynamicActivity — extends past L1 (EPIC §Ⅸ) */
+const L2_RADIUS_PER_ACTIVITY = 50
+/** L2 opacity base (EPIC §Ⅸ) */
+const L2_OPACITY_BASE = 0.10
+/** L2 opacity increment per unit of dynamicActivity (EPIC §Ⅸ) */
+const L2_OPACITY_PER_ACTIVITY = 0.15
 
-/** Phases where L0 has been read (substrat exists in context) */
-const L0_ACTIVE_PHASES = new Set<string>([
-  'SEED', 'APEX', 'INDEX', 'MEMORY', 'CHECK', 'BRIEFING', 'READY', 'LISTEN',
-  'PERCEIVE', 'EVALUATE', 'ROUTE', 'VERIFY', 'EMIT', 'RECORD', 'IDLE',
-  'AUDIT', 'TOOL_CALL', 'RECALL', 'SYNTHESIZE',
-  'TRIANGULATE', 'ANCHOR_POLE', 'VESSEL_POLE', 'WEB_POLE',
-  'DETECT', 'BLOCK', 'CHALLENGE', 'MISSING', 'LOST_EMIT',
-  'RHETORIC_DETECT', 'VESSEL_SEARCH', 'VESSEL_FOUND',
-  'DREAM_INIT', 'WINTER', 'FRESH_COUNT', 'DEGEL', 'LINTER', 'EMERGENCE', 'ELAGAGE',
-])
+// ─── Cortex item counters (used by accumulateScenarioContext) ───
 
 /** Μ search phases — increment cortexItemCount */
 const CORTEX_INJECT_PHASES = new Set<string>(['MEMORY', 'RECALL', 'ANCHOR_POLE'])
@@ -140,7 +153,7 @@ export function accumulateScenarioContext(
   }
 
   // ── L0 tokens: present after Boot step 1 (SEED reads boot-seed + V16) ──
-  if (L0_ACTIVE_PHASES.has(step.phase ?? '') && budget.l0Tokens === 0) {
+  if (step.phase !== 'INIT' && budget.l0Tokens === 0) {
     budget.l0Tokens = 3000
   }
 
@@ -189,21 +202,36 @@ export function buildScenarioContextUpTo(
 
 /** Derive AURA visual state from the current step and accumulated context.
  *  Pure function — no side effects. Matches EPIC §Ⅸ deriveAuraState().
+ *
+ *  Per EPIC-CONTEXTE-AURA.md §Ⅸ :
+ *    - L0 actif dès que le boot-seed est lu (toutes phases sauf 'INIT')
+ *    - L1 croît avec chaque injection Μ (rayon = 60 + count * 15)
+ *    - L2 apparaît avec l'activité dynamique (L2_RADIUS_PER_ACTIVITY = 50)
+ *    - pulseSpeed ∈ [0.2 (L3/Dream) · 0.5 (inertie)] selon dynamicActivity
  */
 export function deriveAuraState(step: ProcessStep, ctx: ScenarioContext): AuraState {
-  const phase = step.phase ?? ''
-  const l0Active = L0_ACTIVE_PHASES.has(phase)
+  // L0 actif dès que boot-seed est lu (EPIC §Ⅸ : 0 avant INIT, 60 ensuite)
+  const l0Active = step.phase !== 'INIT'
+  // L1 actif dès que le cortex a au moins 1 item L1 (post-Μ injection)
   const l1Active = ctx.cortexItemCount > 0
-  const l2Active = ctx.dynamicActivity > 0 || step.organ !== undefined
+  // L2 actif dès qu'il y a activité dynamique (EPIC §Ⅸ : "L2 apparaît avec l'activité dynamique")
+  const l2Active = ctx.dynamicActivity > 0
+
+  const l1Radius = l1Active ? L1_RADIUS_BASE + ctx.cortexItemCount * L1_RADIUS_PER_ITEM : 0
+  const l1Opacity = l1Active ? L1_OPACITY_BASE + ctx.cortexItemCount * L1_OPACITY_PER_ITEM : 0
+
+  // L2 growth base reuses the L1-equivalent position (count-conditional) so L2
+  // physically encompasses L1 regardless of L1 visibility (EPIC §Ⅸ formula).
+  const l2Radius = l2Active
+    ? (L1_RADIUS_BASE + ctx.cortexItemCount * L1_RADIUS_PER_ITEM) + ctx.dynamicActivity * L2_RADIUS_PER_ACTIVITY
+    : 0
 
   return {
     l0Radius:  l0Active ? L0_RADIUS : 0,
     l0Opacity: l0Active ? L0_OPACITY : 0,
-    l1Radius:  l1Active ? L1_RADIUS_BASE + ctx.cortexItemCount * L1_RADIUS_PER_ITEM : 0,
-    l1Opacity: l1Active ? L1_OPACITY_BASE + ctx.cortexItemCount * L1_OPACITY_PER_ITEM : 0,
-    l2Radius:  l2Active
-      ? (L1_RADIUS_BASE + ctx.cortexItemCount * L1_RADIUS_PER_ITEM) + ctx.dynamicActivity * L2_RADIUS_PER_ACTIVITY
-      : 0,
+    l1Radius,
+    l1Opacity,
+    l2Radius,
     l2Opacity: l2Active ? L2_OPACITY_BASE + ctx.dynamicActivity * L2_OPACITY_PER_ACTIVITY : 0,
     pulseSpeed: ctx.dynamicActivity > 0.7 ? 0.2 : ctx.dynamicActivity > 0.3 ? 0.35 : 0.5,
     fissure: ctx.fissure,

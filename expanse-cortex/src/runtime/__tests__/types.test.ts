@@ -223,8 +223,8 @@ describe('runtime/types', () => {
   })
 
   it('VesselChunk has path and content', () => {
-    const chunk: VesselChunk = { path: '/runtime/expanse-v15-apex.md', content: '# APEX' }
-    expect(chunk.path).toBe('/runtime/expanse-v15-apex.md')
+    const chunk: VesselChunk = { path: '/versions/v15/2026-03-20_v15-apex_v15.md', content: '# APEX' }
+    expect(chunk.path).toBe('/versions/v15/2026-03-20_v15-apex_v15.md')
   })
 
   it('FileMatch has path, line, content', () => {

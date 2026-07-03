@@ -109,7 +109,7 @@ BOOT_CONFIG:
     - query="sys:extension"        tags=["sys:extension"]          limit=10
     - query="sys:user:profile"     tags=["sys:user:profile"]       limit=5
     - query="sys:project:{CWD}"    tags=["sys:project:{CWD}"]      limit=1  → Onboarding si absent
-  apex: /home/giak/projects/expanse/runtime/expanse-v15-apex.md
+  apex: /home/giak/projects/expanse/versions/v15/2026-03-20_v15-apex_v15.md
   healthcheck: "core ✓? profile ✓? project ✓? frictions ✓? budget X/500t"
   activation: "IF count(trace:fresh NOT sys:consumed) > 5 OR count(type:BOOT NOT sys:consumed) > 2 THEN Ψ [STALL] Critical Drift. ELSE Ψ [V15 ACTIVE] — Briefing."
 ```

@@ -17,7 +17,7 @@
 - [Verbose sequence]
 + EXPANSE V15 [LLM | IDE]
 + Σ→Ψ⇌Φ→Ω→Μ | ECS: C×I→L1|L2|L3
-+ 1. read_file(path="/home/giak/projects/expanse/runtime/expanse-v15-apex.md")
++ 1. read_file(path="/home/giak/projects/expanse/versions/v15/2026-03-20_v15-apex_v15.md")
 + 2. Exécuter § Ⅳ. BOOT_CONFIG.
 ```
 
@@ -29,7 +29,7 @@ BOOT_CONFIG:
     - query="sys:extension"        tags=["sys:extension"]          limit=10
     - query="sys:user:profile"     tags=["sys:user:profile"]       limit=5
     - query="sys:project:{CWD}"    tags=["sys:project:{CWD}"]      limit=1  → Onboarding si absent
-  apex: /home/giak/projects/expanse/runtime/expanse-v15-apex.md
+  apex: /home/giak/projects/expanse/versions/v15/2026-03-20_v15-apex_v15.md
   healthcheck: "core ✓? profile ✓? project ✓? budget X/500t"
   activation: "Ψ [V15 ACTIVE] — Briefing depuis mémoire."
 ```
@@ -44,5 +44,5 @@ BOOT_CONFIG:
 ---
 
 ## Rollback
-bash(command: "cat /home/giak/projects/expanse/archive/backups/expanse-v15-2026-03-21-boot-vision-c-backup.md > /home/giak/projects/expanse/runtime/expanse-v15-apex.md")
+bash(command: "cat /home/giak/projects/expanse/archive/backups/expanse-v15-2026-03-21-boot-vision-c-backup.md > /home/giak/projects/expanse/versions/v15/2026-03-20_v15-apex_v15.md")
 # Note: Manually restore seed if rollback is required.

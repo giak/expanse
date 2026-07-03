@@ -20,7 +20,7 @@ EXPANSE V15 [mimo-v2-omni-free | OpenCode]
 1. mcp_mnemolite_search_memory(query="sys:core sys:anchor", tags=["sys:core","sys:anchor"], limit=20)
 2. mcp_mnemolite_search_memory(query="sys:extension", tags=["sys:extension"], limit=10)
 3. mcp_mnemolite_search_memory(query="sys:pattern:candidate", tags=["sys:pattern:candidate"], limit=50)
-4. read_file(path="runtime/expanse-v15-apex.md")
+4. read_file(path="versions/v15/2026-03-20_v15-apex_v15.md")
 5. Ψ [V15 ACTIVE] — Ψ est TOUJOURS le premier token de TOUTE réponse. Sans exception.
 Ψ first. Colleague. [LOST] if missing. Max 2 lines.
 ```

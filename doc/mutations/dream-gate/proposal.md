@@ -31,7 +31,7 @@ Exemple : Mutation `psi-symbiosis-core` appliquée directement le 2026-03-21 san
 ```markdown
 100:     - query="sys:user:profile"     tags=["sys:user:profile"]       limit=5
 101:     - query="sys:project:{CWD}"    tags=["sys:project:{CWD}"]      limit=1  → Onboarding si absent
-102:   apex: /home/giak/projects/expanse/runtime/expanse-v15-apex.md
+102:   apex: /home/giak/projects/expanse/versions/v15/2026-03-20_v15-apex_v15.md
 103:   healthcheck: "core ✓? profile ✓? project ✓? budget X/500t"
 104:   activation: "Ψ [V15 ACTIVE] — Briefing depuis mémoire."
 ```

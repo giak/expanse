@@ -56,7 +56,7 @@ SIGNAUX NÉGATIFS (détection) :
 - L137 : remplacer "cinq phases" par "7 passes (1 gate + 6 introspection) + workflow mutation"
 - L140 : aligner /seal sur la définition V15
 
-**Option B (radicale) :** Ajouter en tête de SYNTHESE : `⚠️ Ce document est une synthèse philosophique. Pour la spécification technique, voir runtime/expanse-v15-apex.md qui fait autorité.`
+**Option B (radicale) :** Ajouter en tête de SYNTHESE : `⚠️ Ce document est une synthèse philosophique. Pour la spécification technique, voir versions/v15/2026-03-20_v15-apex_v15.md qui fait autorité.`
 
 **Recommandation :** Option B. La SYNTHESE ne devrait pas dupliquer la spec technique.
 

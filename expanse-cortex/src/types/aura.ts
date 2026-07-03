@@ -1,6 +1,10 @@
 // ══════════════════════════════════════════════════════════════
 // AURA TYPES — shared derivation layer for AURA + Dendrites
 // Source canonique : EPIC-CONTEXTE-AURA.md §Ⅶ + §5.6 + §Ⅸ
+//
+// These inline comments are a human-readable MIRROR of the constants block in
+// utils/scenarioContext.ts (EPIC §Ⅸ-aligned). Edit the constants there first,
+// then sync these comments to avoid drift.
 // ══════════════════════════════════════════════════════════════
 
 /** État de l'AURA — dérivé du step courant et du cumul Μ.
@@ -8,18 +12,20 @@
  *  Cette définition est la référence ; toute autre occurrence doit être identique.
  */
 export interface AuraState {
-  /** Rayon L0 (substrat) — 0 avant Boot step 1, puis 120 */
-  l0Radius: number      // 0 → 120
-  /** Opacité L0 — 0 avant Boot step 1, puis 0.12 */
-  l0Opacity: number     // 0 → 0.12
-  /** Rayon L1 (cortex) — croît avec les injections Μ */
-  l1Radius: number      // 0 → 290
-  /** Opacité L1 — croît avec les injections Μ */
-  l1Opacity: number     // 0 → 0.26
-  /** Rayon L2 (dynamique) — volatile */
-  l2Radius: number      // 0 → 410
-  /** Opacité L2 — volatile */
-  l2Opacity: number     // 0 → 0.18
+  /** Rayon L0 (substrat) — 0 avant Boot step 1, puis 60 (EPIC §Ⅸ) */
+  l0Radius: number      // fix 0 avant INIT, puis 60
+  /** Opacité L0 — 0 avant Boot step 1, puis 0.15 (EPIC §Ⅸ) */
+  l0Opacity: number     // fix 0 avant INIT, puis 0.15
+  /** Rayon L1 (cortex) — croît avec les injections Μ, EPIC §Ⅸ : 60 + count * 15 */
+  l1Radius: number      // 60 + count * 15 (count can exceed 4 via L2/L3 recall)
+  /** Opacité L1 — croît avec les injections Μ, EPIC §Ⅸ : 0.10 + count * 0.05 */
+  l1Opacity: number     // 0.10 + count * 0.05 (NOT 15 — historical bug class)
+  /** Rayon L2 (dynamique) — volatile, EPIC §Ⅸ : (60 + count*15) + activity * 50
+   *  Growth base reuses L1-equivalent position so L2 encompasses L1 regardless
+   *  of L1 visibility. Base is unconditional within l2Active (≠ step.organ gate). */
+  l2Radius: number      // (60 + count * 15) + activity * 50, max ≈170 (count=4, activity=1)
+  /** Opacité L2 — volatile, EPIC §Ⅸ : 0.10 + activity * 0.15 */
+  l2Opacity: number     // 0.10 + activity * 0.15, max 0.25
   /** Vitesse de pulsation — 0.5s (inertie) → 0.2s (L3/Dream) */
   pulseSpeed: number    // 0.5 (inertie) → 0.2 (L3/Dream)
   /** VIOLATION : L1 flash rouge quand true */

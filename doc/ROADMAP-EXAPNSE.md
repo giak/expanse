@@ -109,7 +109,7 @@ Principes documentés par SWE-agent (Princeton), Anthropic (Claude Code), OpenAI
 | `doc/audit/V15-APEX-LIVE-TESTS-2026-03-19.md` | Journal de tests vivants |
 | `doc/audit/V15-APEX-BOOT-BRAINSTORM-2026-03-19.md` | Boot : 21 itérations brainstorm |
 | `runtime/expanse-v15-boot-seed.md` | Seed boot (9 lignes) |
-| `runtime/expanse-v15-apex.md` | Runtime V15 |
+| `versions/v15/2026-03-20_v15-apex_v15.md` | Runtime V15 |
 | `runtime/expanse-dream.md` | Auto-évolution Dream |
 | `runtime/expanse-dashboard.md` | Dashboard Mnemolite |
 | `dashboard/expanse-dashboard.html` | Dashboard généré |

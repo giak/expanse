@@ -28,7 +28,7 @@
 
 1. `prompts/expanse-v14-catalyst.md` — Technical implementation
 2. `KERNEL.md` — Philosophy (NOTE: Some parts are poetic/obsolete)
-3. `doc/EXPANSE-BIBLE-Resurrection.md` — What works
+3. `versions/v15/2026-07-02_bible-resurrection_v15.md` — What works
 4. `docs/explain/EXPANSE V14.3 — Comment ça Marche` — Technical doc
 
 ---

@@ -99,7 +99,7 @@ BOOT_CONFIG:
     - query="sys:extension"        tags=["sys:extension"]          limit=10
     - query="sys:user:profile"     tags=["sys:user:profile"]       limit=5
     - query="sys:project:{CWD}"    tags=["sys:project:{CWD}"]      limit=1  → Onboarding si absent
-  apex: /home/giak/projects/expanse/runtime/expanse-v15-apex.md
+  apex: /home/giak/projects/expanse/versions/v15/2026-03-20_v15-apex_v15.md
   healthcheck: "core ✓? profile ✓? project ✓? budget X/500t"
   activation: "Ψ [V15 ACTIVE] — Briefing depuis mémoire."
 ```

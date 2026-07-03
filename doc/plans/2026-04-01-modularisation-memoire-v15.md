@@ -12,7 +12,7 @@
 
 ### Situation initiale
 
-L'Apex (`runtime/expanse-v15-apex.md`, 320 lignes) contient une Section Ⅴ (Mémoire — Triptyque Temporel) de ~96 lignes (lignes 150-246) qui détaille :
+L'Apex (`versions/v15/2026-03-20_v15-apex_v15.md`, 320 lignes) contient une Section Ⅴ (Mémoire — Triptyque Temporel) de ~96 lignes (lignes 150-246) qui détaille :
 - Le tableau des tags Mnemolite (8 tags) — lignes 158-167
 - La sauvegarde automatique post-interaction — lignes 169-170
 - La rétention sys:history / Consolidation — lignes 172-200
@@ -93,7 +93,7 @@ Mnemolite (SEULE source de vérité)
   ├── PROTOCOL: friction-trace     (sys:protocol, protocol:friction-trace)
   └── PROTOCOL: consolidation      (sys:protocol, protocol:consolidation)
 
-runtime/expanse-v15-apex.md (coordinateur)
+versions/v15/2026-03-20_v15-apex_v15.md (coordinateur)
   ├── Section Ⅲ : Cristallisation (inchangée — pilier du runtime)
   └── Section Ⅴ : réduite à ~15 lignes de références
 ```
@@ -280,7 +280,7 @@ BOOT_CONFIG:
     - query="sys:user:profile"       tags=["sys:user:profile"]         limit=5
     - query="sys:project:{CWD}"      tags=["sys:project:{CWD}"]        limit=1
     - query="sys:protocol"           tags=["sys:protocol"]             limit=10  # ← NOUVEAU
-  apex: /home/giak/projects/expanse/runtime/expanse-v15-apex.md
+  apex: /home/giak/projects/expanse/versions/v15/2026-03-20_v15-apex_v15.md
   healthcheck: "core ✓? profile ✓? project ✓? protocols ✓? frictions ✓? budget X/500t"
 ```
 
@@ -332,7 +332,7 @@ Ajouter dans la Section Ⅵ (Commandes Utilisateur) de l'Apex :
 
 ```
 1. read_file(runtime/expanse-v15-boot-seed.md)
-2. read_file(runtime/expanse-v15-apex.md)
+2. read_file(versions/v15/2026-03-20_v15-apex_v15.md)
 3. search_memory(tags: ["sys:protocol"], limit: 10)
 4. Vérifier : 3 protocoles chargés
 5. OUTPUT: Ψ [V15 ACTIVE] — BOOT OK

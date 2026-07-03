@@ -2,7 +2,7 @@
 
 **Statut** : DRAFT v0.2 (Minimal)
 **Type**   : Extension optionnelle — Section Ⅵ de V15
-**Cœur**   : [expanse-v15-apex.md](file:///home/giak/projects/expanse/runtime/expanse-v15-apex.md)
+**Cœur**   : [expanse-v15-apex.md](file:///home/giak/projects/expanse/versions/v15/2026-03-20_v15-apex_v15.md)
 
 ---
 

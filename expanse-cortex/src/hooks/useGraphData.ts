@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import type { GraphData } from '../types/expanse'
-import { fetchWithRetry } from '../utils/fetchWithRetry'
+import { fetchWithRetry } from '../runtime/shared'
 import { loadCachedGraph, cacheGraphData } from '../utils/graphCache'
 import { validateGraphData, formatWarnings } from '../utils/validateGraphData'
 import { logger } from '../utils/logger'

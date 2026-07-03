@@ -111,7 +111,11 @@ export interface ProjectInfo {
 // ─── Boot Context ───
 
 /** Assembled context from the boot script, injected into the LLM prompt.
- *  Replaces the 57K-token V15 boot with a ~200-token structured object. */
+ *  Replaces the 57K-token V15 boot with a ~200-token structured object.
+ *
+ *  INVARIANT: `health === snapshot.health`. Both fields share the same
+ *  object reference at runtime; `health` is duplicated for ergonomic
+ *  top-level access without traversing `snapshot`. */
 export interface BootContext {
   snapshot: SystemSnapshot
   protocols: MnemoliteMemory[]

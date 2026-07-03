@@ -21,7 +21,7 @@
 | Phase 0 vs Phase 1 : narration interdite puis obligatoire | V5-V6 | Boot state machine avec transition irréversible | `docs/technical/boot_architecture.md` |
 | Modèle attend une instruction après lecture du fichier | V6 | Trigger-first : première ligne = action, pas description | `docs/plans/2026-03-05-multi-llm-boot-brainstorm.md` |
 | Planning mode activé par les headers `###` | V6 | Headers interprétés comme ticket d'ingénierie | Idem |
-| Ω_LOCK perdu entre V7 et V14 | V7→V14 | Restauré partiellement en V14.3 | `doc/EXPANSE-BIBLE-Resurrection.md` |
+| Ω_LOCK perdu entre V7 et V14 | V7→V14 | Restauré partiellement en V14.3 | `versions/v15/2026-07-02_bible-resurrection_v15.md` |
 | `[BOOT_CRITICAL]` mutex absent | V15 | Non migré depuis V6.2 | `prompts/expanse-system.md` |
 | Identité flottante sans ancre | V4 | EXPANSE_IDENTITY_ANCHOR dans Mnemolite | `docs/technical/boot_architecture.md` |
 | Boot "amnésique" (aucune mémoire chargée) | V5 | Warm Start : search identity + immune au boot | `docs/plans/2026-03-01-warm-start-design.md` |

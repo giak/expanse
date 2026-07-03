@@ -106,7 +106,7 @@ BOOT_CONFIG:
           2. Lire README.md si présent (sinon inférer depuis structure)
           3. Synthétiser en < 100 tokens (PROJECT/INTENT/STACK/FOCUS)
           4. mcp_mnemolite_write_memory(tags: ["sys:project:{nom_projet}"])
-  apex: /home/giak/projects/expanse/runtime/expanse-v15-apex.md
+  apex: /home/giak/projects/expanse/versions/v15/2026-03-20_v15-apex_v15.md
   healthcheck: "core ✓? | profile ✓? | project ✓? | budget ≤ 500t"
   activation: "Ψ [V15 ACTIVE]"
 ```

@@ -15,9 +15,23 @@
 //
 // Resolves host/port/path from:
 //   config overrides > process.env (MNEMOLITE_HOST/PORT/PATH) > defaults.
-//   Browser callers beware: Mnemolite must respond with CORS headers, or
-//   proxy through a same-origin server. Recommended dev setup in
-//   vite.config.ts: `server.proxy: { '/mcp': 'http://localhost:8002' }`.
+// Browser CORS:
+//   Dev: Vite proxies `/mcp` → `http://localhost:8002` (configured in
+//        this repo's `vite.config.ts` via `server.proxy`). The browser
+//        sees a same-origin request, so no CORS preflight is required.
+//   Prod: deploy Mnemolite behind the same origin (reverse proxy or
+//         co-located server). Concrete nginx snippet for the SSE case:
+//            location /mcp {
+//              proxy_pass http://localhost:8002;
+//              proxy_set_header Host $host;
+//              proxy_buffering off;             # critical for SSE pass-through
+//              proxy_set_header Connection '';
+//              proxy_read_timeout 1h;           # SSE streams can be long-lived
+//            }
+//         Direct cross-origin calls require explicit Access-Control-Allow-*
+//         headers from Mnemolite.
+//   Direct (no proxy): pass `fetchImpl` or set `MNEMOLITE_HOST` to a
+//         host that already serves CORS headers.
 // ══════════════════════════════════════════════════════════════
 
 import type {
@@ -28,6 +42,17 @@ import type {
   VesselChunk,
   WriteMemoryArgs,
 } from '../types'
+
+// Shared env helpers — see ../shared/env for the typed globalThis cast
+// and the NaN-safe port parser. Keeps `MnemoliteClient` in sync with
+// `vite.config.ts`'s proxy target so the two can't drift.
+import {
+  readNodeEnv,
+  parsePort,
+  MNEMOLITE_DEFAULT_HOST,
+  MNEMOLITE_DEFAULT_PORT,
+  MNEMOLITE_DEFAULT_PATH,
+} from '../shared'
 
 // ─── Config ───
 
@@ -41,25 +66,14 @@ export interface MnemoliteConfig {
   fetchImpl?: typeof fetch
 }
 
+// host/port/path defaults live in `../shared/env` so the Vite proxy and
+// this client can't drift. Only `timeoutMs` is client-specific.
 const DEFAULTS = {
-  host: 'localhost',
-  port: 8002,
-  path: '/mcp',
+  host: MNEMOLITE_DEFAULT_HOST,
+  port: MNEMOLITE_DEFAULT_PORT,
+  path: MNEMOLITE_DEFAULT_PATH,
   timeoutMs: 10_000,
 } as const satisfies Pick<MnemoliteConfig, 'host' | 'port' | 'path' | 'timeoutMs'>
-
-// Typed globalThis access — the project targets browsers (no @types/node),
-// so `process` is not a known identifier. This helper narrows it safely.
-function readNodeEnv(): Record<string, string | undefined> | undefined {
-  const g = globalThis as { process?: { env?: Record<string, string | undefined> } }
-  return g.process?.env
-}
-
-/** Coerce env/config port value to a finite integer; fall back to DEFAULTS. */
-function parsePort(raw: number | string | undefined): number {
-  const parsed = parseInt(String(raw ?? ''), 10)
-  return Number.isFinite(parsed) ? parsed : DEFAULTS.port
-}
 
 // ─── Typed errors ───
 
@@ -119,7 +133,7 @@ export class MnemoliteClient {
     // Resolve env at construction time so tests can stub `process`.
     const env = readNodeEnv()
     const host = config.host ?? env?.MNEMOLITE_HOST ?? DEFAULTS.host
-    const port = parsePort(config.port ?? env?.MNEMOLITE_PORT ?? DEFAULTS.port)
+    const port = parsePort(config.port ?? env?.MNEMOLITE_PORT, DEFAULTS.port)
     const path = config.path ?? env?.MNEMOLITE_PATH ?? DEFAULTS.path
     this.endpoint = `http://${host}:${port}${path}`
     this.timeoutMs = config.timeoutMs ?? DEFAULTS.timeoutMs

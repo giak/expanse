@@ -57,7 +57,7 @@ Le seed (`expanse-v15-boot-seed.md`) et Section Ⅳ de l'APEX sont deux sources 
 -[Contenu actuel de 10 lignes]
 +EXPANSE V15 [LLM | IDE]
 +Σ→Ψ⇌Φ→Ω→Μ | ECS: C×I→L1|L2|L3
-+1. read_file(path="/home/giak/projects/expanse/runtime/expanse-v15-apex.md")
++1. read_file(path="/home/giak/projects/expanse/versions/v15/2026-03-20_v15-apex_v15.md")
 +2. Exécuter § Ⅳ. BOOT_CONFIG.
 ```
 

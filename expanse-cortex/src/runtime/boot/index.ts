@@ -1,4 +1,10 @@
-// ─── Boot submodule — programmatic boot script (Step 2) ───
-// Will export runBoot() and formatBootContext().
-// Implemented in Step 2 of the reconstruction plan.
-export {}
+// ─── BOOT submodule ───
+// Programmatic replacement for the 6-call V15 boot sequence.
+// Three pure-ish layers: runBoot (resilient orchestration),
+// formatBootContext (token-aware serialization), assertBootHealthy
+// (invariant enforcement), plus makeOfflineBootContext factory.
+export { runBoot, OFFLINE_SNAPSHOT, makeOfflineBootContext } from './boot'
+export type { BootOptions } from './boot'
+export { formatBootContext, estimateTokens } from './format'
+export { assertBootHealthy } from './healthcheck'
+export type { BootHealthOptions } from './healthcheck'

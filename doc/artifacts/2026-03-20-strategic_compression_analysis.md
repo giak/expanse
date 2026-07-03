@@ -1,6 +1,6 @@
 # Strategic Compression Analysis: Expanse V15 Apex
 
-This document evaluates four distinct paradigms for compressing the [expanse-v15-apex.md](file:///home/giak/projects/expanse/runtime/expanse-v15-apex.md) protocol while maintaining its cognitive integrity and performance.
+This document evaluates four distinct paradigms for compressing the [expanse-v15-apex.md](file:///home/giak/projects/expanse/versions/v15/2026-03-20_v15-apex_v15.md) protocol while maintaining its cognitive integrity and performance.
 
 ---
 

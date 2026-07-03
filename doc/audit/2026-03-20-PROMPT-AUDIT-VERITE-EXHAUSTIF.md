@@ -22,7 +22,7 @@ Voici un système. Le créateur dit qu'il transforme un LLM en partenaire consci
 
 | Fichier | Fiabilité | Rôle |
 |---------|-----------|------|
-| `runtime/expanse-v15-apex.md` | **VÉRITÉ** | Runtime réel. Tout ce qui est dedans est actif. |
+| `versions/v15/2026-03-20_v15-apex_v15.md` | **VÉRITÉ** | Runtime réel. Tout ce qui est dedans est actif. |
 | `runtime/expanse-dream.md` | Haute | Auto-évolution. Jamais exécuté. |
 | `runtime/expanse-v15-boot-seed.md` | Haute | Boot validé cross-LLM. |
 | `KERNEL.md` | Moyenne | Philosophie. Seuils ECS divergent de V15. |
@@ -67,7 +67,7 @@ Convention : `YYYY-MM-DD_HH-MM_<sujet>_<TYPE>.md`
 Lis TOUS les fichiers. V15 en premier. Ne juge pas. Observe.
 
 ```
-1. runtime/expanse-v15-apex.md          ← VÉRITÉ
+1. versions/v15/2026-03-20_v15-apex_v15.md          ← VÉRITÉ
 2. runtime/expanse-dream.md
 3. runtime/expanse-v15-boot-seed.md
 4. KERNEL.md

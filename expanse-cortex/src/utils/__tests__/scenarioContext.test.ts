@@ -102,14 +102,14 @@ describe('deriveAuraState', () => {
     const step = makeStep({ organ: 'Σ', label: 'test', phase: 'PERCEIVE' })
     const ctx = { ...INITIAL_SCENARIO_CONTEXT, budget: { ...INITIAL_SCENARIO_CONTEXT.budget } }
     const aura = deriveAuraState(step, ctx)
-    // PERCEIVE is in L0_ACTIVE_PHASES
+    // L0 actif dès que boot-seed lu (toute phase ≠ INIT, EPIC §Ⅸ)
     expect(aura.l0Radius).toBe(60)
     expect(aura.l0Opacity).toBe(0.15)
   })
 
   it('returns zero radii for inactive phase', () => {
     const step = makeStep({ organ: 'Σ', label: 'test', phase: 'INIT' })
-    // INIT is NOT in L0_ACTIVE_PHASES
+    // L0 inactif en phase INIT (EPIC §Ⅸ : substrat pas encore lu)
     const ctx = { ...INITIAL_SCENARIO_CONTEXT, budget: { ...INITIAL_SCENARIO_CONTEXT.budget } }
     const aura = deriveAuraState(step, ctx)
     expect(aura.l0Radius).toBe(0)
@@ -130,6 +130,56 @@ describe('deriveAuraState', () => {
     const aura = deriveAuraState(step, ctx)
     expect(aura.l2Radius).toBe(60 + 0.5 * 50) // 85
     expect(aura.l2Opacity).toBeCloseTo(0.175, 2) // 0.1 + 0.5 * 0.15
+  })
+
+  it('returns L2 max when cortexItemCount=4 and dynamicActivity=1 (regression for EPIC §Ⅸ unconditional base)', () => {
+    // L2 formula: (L1_RADIUS_BASE + count * L1_RADIUS_PER_ITEM) + activity * L2_RADIUS_PER_ACTIVITY
+    // = 60 + 4*15 + 1*50 = 170. Locks in that L2 base is unconditional within l2Active
+    // (not gated on l1Active — would have collapsed to 50 if gated on l1Radius).
+    const step = makeStep({ organ: 'Σ', label: 'test', phase: 'PERCEIVE' })
+    const ctx = { cortexItemCount: 4, dynamicActivity: 1, fissure: false, budget: { ...INITIAL_SCENARIO_CONTEXT.budget } }
+    const aura = deriveAuraState(step, ctx)
+    expect(aura.l2Radius).toBe(170)
+    expect(aura.l2Opacity).toBeCloseTo(0.25, 2) // 0.1 + 1 * 0.15
+  })
+
+  it('returns zero L2 when dynamicActivity = 0 (l2Active gated on activity, EPIC §Ⅸ)', () => {
+    const step = makeStep({ organ: 'Σ', label: 'test', phase: 'PERCEIVE' })
+    const ctx = { cortexItemCount: 3, dynamicActivity: 0, fissure: false, budget: { ...INITIAL_SCENARIO_CONTEXT.budget } }
+    const aura = deriveAuraState(step, ctx)
+    expect(aura.l2Radius).toBe(0)
+    expect(aura.l2Opacity).toBe(0)
+    // l1 still grows independently
+    expect(aura.l1Radius).toBe(60 + 3 * 15) // 105
+  })
+
+  it('returns 60 + 2*15 + 0.3*50 = 105 for intermediate L2 (locks EPIC §Ⅸ unconditional base)', () => {
+    // Exercises both axes simultaneously — covers the case where a future
+    // refactor that re-gates l2Radius on l1Active would emit a different value
+    // (gated on l1Radius would give 0.3 * 50 = 15 instead of 105).
+    const step = makeStep({ organ: 'Σ', label: 'test', phase: 'PERCEIVE' })
+    const ctx = { cortexItemCount: 2, dynamicActivity: 0.3, fissure: false, budget: { ...INITIAL_SCENARIO_CONTEXT.budget } }
+    const aura = deriveAuraState(step, ctx)
+    // L1 axes (independent of L2)
+    expect(aura.l1Radius).toBe(60 + 2 * 15) // 90 (per-item = 15)
+    expect(aura.l1Opacity).toBeCloseTo(0.1 + 2 * 0.05, 2) // 0.20 (per-item = 0.05, NOT 15)
+    // L2 axes (unconditional base + activity increment)
+    expect(aura.l2Radius).toBe(60 + 2 * 15 + 0.3 * 50) // 105
+    expect(aura.l2Opacity).toBeCloseTo(0.1 + 0.3 * 0.15, 2) // 0.145
+  })
+
+  it('returns zero L2 during phase-transition steps with no tool calls (locks l2Active tightening)', () => {
+    // SEED is a phase-transition step with no tool calls → dynamicActivity stays 0
+    // even though step.organ is set. Per EPIC §Ⅸ "L2 apparaît avec l'activité dynamique",
+    // L2 must NOT appear. Locks in the dropped `|| step.organ !== undefined` fallback.
+    const step = makeStep({ organ: 'Μ', label: 'boot-seed', phase: 'SEED' })
+    const ctx = { ...INITIAL_SCENARIO_CONTEXT, budget: { ...INITIAL_SCENARIO_CONTEXT.budget } }
+    const aura = deriveAuraState(step, ctx)
+    expect(aura.l2Radius).toBe(0)
+    expect(aura.l2Opacity).toBe(0)
+    // L0 still lit (SEED ≠ INIT) and L1 still null (cortexItemCount=0)
+    expect(aura.l0Radius).toBe(60)
+    expect(aura.l1Radius).toBe(0)
   })
 
   it('computes pulseSpeed from dynamicActivity', () => {

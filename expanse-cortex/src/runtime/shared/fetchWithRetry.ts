@@ -1,16 +1,21 @@
 // ══════════════════════════════════════════════════════════════
 // FETCH WITH RETRY — Exponential backoff for network resilience
+//
+// Cross-cutting helper (browser + Node 18+) used by:
+//   - `src/hooks/useGraphData.ts` (stale-while-revalidate graph fetch)
+//   - any future module that needs bounded exponential backoff retries
+//
+// Pattern: Graceful Degradation + Stale-While-Revalidate.
+// If the fetch fails but cache exists, callers decide status='stale'.
+// The axios/fetch call never dies from a transient network error alone.
 // ══════════════════════════════════════════════════════════════
-// Pattern: Graceful Degradation + Stale-While-Revalidate
-// If the fetch fails but cache exists, status = 'stale'.
-// The app never dies from a network error alone.
 
 export interface FetchWithRetryOptions {
   /** Maximum number of retry attempts (default: 3) */
   retries?: number
   /** Base delay in ms for exponential backoff (default: 800ms) */
   baseDelay?: number
-  /** Custom fetch function (for testing) */
+  /** Custom fetch function (for testing). Defaults to the global `fetch` (browser / Node 18+). */
   fetchFn?: typeof fetch
 }
 
@@ -18,9 +23,9 @@ export interface FetchWithRetryOptions {
  * Fetch with automatic retry and exponential backoff.
  *
  * Retries are only attempted for:
- * - Network errors (TypeError: fetch failed)
+ * - Network errors (`TypeError: fetch failed`)
  * - HTTP 5xx (server errors)
- * - HTTP 429 (rate limited — respects Retry-After if present)
+ * - HTTP 429 (rate limited — respects `Retry-After` if present)
  *
  * HTTP 4xx (client errors) are NOT retried — they indicate a
  * permanent problem (404 = missing file, 403 = forbidden, etc.)

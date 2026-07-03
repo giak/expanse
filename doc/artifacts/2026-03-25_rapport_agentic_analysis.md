@@ -675,7 +675,7 @@ graph TB
 **⚠️ Le problème Bash God Mode** (soulevé par Antigravity) :
 Même avec `write_safe` vs `write_kernel`, le LLM peut contourner via bash :
 ```bash
-echo "hack" > runtime/expanse-v15-apex.md
+echo "hack" > versions/v15/2026-03-20_v15-apex_v15.md
 ```
 Un guardrail outil est un **crible percé** si bash reste ouvert.
 
@@ -861,7 +861,7 @@ Antigravity a lu mon analyse et produit une contre-proposition (`2026-03-25_anti
 **Le point le plus important de sa contribution.** Mon guardrail `write_safe` vs `write_kernel` est un crible percé si le LLM a accès à bash :
 
 ```bash
-echo "hack" > runtime/expanse-v15-apex.md
+echo "hack" > versions/v15/2026-03-20_v15-apex_v15.md
 ```
 
 J'avais sécurisé la porte d'entrée mais laissé la fenêtre ouverte.

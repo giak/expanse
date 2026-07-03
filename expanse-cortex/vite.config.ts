@@ -2,6 +2,11 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
+// Shared env helpers — single source of truth for MNEMOLITE_HOST/PORT/PATH.
+// `MnemoliteClient` reads from the same module, so the proxy target here
+// and the client's `endpoint` URL can never drift out of sync (audit F.11).
+import { getMnemoliteEndpointFromEnv } from './src/runtime/shared/env'
+
 // ─── Domain chunk mappings (module-level for build perf) ───
 // Group lazy-loaded effects by domain into shared chunks instead of
 // 19 individual chunks. Reduces HTTP requests and improves caching.
@@ -69,6 +74,27 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+    proxy: {
+      // Proxy /mcp to the local Mnemolite MCP server so the browser
+      // sees a same-origin request → no CORS preflight required. Target
+      // honors MNEMOLITE_PORT env var (default 8002) so Vite and
+      // MnemoliteClient stay in sync.
+      '/mcp': {
+        target: `http://localhost:${getMnemoliteEndpointFromEnv().port}`,
+        // Rewrite Host header so Mnemolite's host-filter sees its own
+        // origin (localhost:8002) rather than the browser's origin.
+        changeOrigin: true,
+        // Defense against mid-stream keepalive resets (rare). Vite's
+        // http-proxy already streams bytes without buffering, so SSE
+        // pass-through works without this — included as belt-and-suspenders
+        // for upstream servers that don't gracefully drain chunked responses.
+        configure: (proxy) => {
+          proxy.on('proxyReq', (proxyReq) => {
+            proxyReq.setHeader('Connection', 'close')
+          })
+        },
+      },
+    },
   },
   test: {
     globals: true,

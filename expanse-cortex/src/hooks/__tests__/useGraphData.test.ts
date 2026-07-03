@@ -12,7 +12,9 @@ const { mockLoadCachedGraph, mockCacheGraphData } = vi.hoisted(() => ({
   mockCacheGraphData: vi.fn(),
 }))
 
-vi.mock('../../utils/fetchWithRetry', () => ({
+// Mock the specific module, NOT the barrel — otherwise any future
+// shared/ export imported transitively would be auto-mocked.
+vi.mock('../../runtime/shared/fetchWithRetry', () => ({
   fetchWithRetry: vi.fn(),
 }))
 
@@ -47,7 +49,16 @@ const FRESH_GRAPH: GraphData = { ...VALID_GRAPH, generated_at: '2026-04-21T14:00
 
 // ─── Import mocked fetchWithRetry ───
 
-import { fetchWithRetry } from '../../utils/fetchWithRetry'
+// Import directly from the sub-module (matches the vi.mock path).
+// Note: production code in `src/hooks/useGraphData.ts` keeps using
+// `../../runtime/shared` (the barrel) for ergonomic single-import.
+//
+// Load-bearing ordering: this lazy import MUST stay AFTER the
+// `vi.mock(...)` factories above. Vitest hoists `vi.mock` calls but
+// does NOT hoist ES imports — if you move this line to the top of
+// the file, the mock will silently stop intercepting and the test
+// will hit the real `fetchWithRetry` (which can hang on real fetches).
+import { fetchWithRetry } from '../../runtime/shared/fetchWithRetry'
 const mockFetchWithRetry = vi.mocked(fetchWithRetry)
 
 // ─── Helper: deferred fetch ───

@@ -36,7 +36,7 @@ Le fait que Mnemolite supporte désormais le parsing `.md` (MarkdownChunker) est
 C'est le pivot de la physique d'Expanse. OpenCode dit : *"Le LLM n'a pas accès à write_kernel sans lock"*. **Mais attention au Tiers-Inclus (Le terminal IDE) :**
 
 *Le paradoxe du Bash :*
-Si le modèle a accès à l'outil `bash`, aucune restriction sur `write_file` ne l'empêchera d'exécuter `echo "hack" > runtime/expanse-v15-apex.md`. L'outil Command Terminal est un "God Mode".
+Si le modèle a accès à l'outil `bash`, aucune restriction sur `write_file` ne l'empêchera d'exécuter `echo "hack" > versions/v15/2026-03-20_v15-apex_v15.md`. L'outil Command Terminal est un "God Mode".
 
 *La vraie Physique (Comment contraindre le Bash ?) :*
 Pour que le Guardrail soit absolu :
