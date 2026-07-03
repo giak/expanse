@@ -128,3 +128,72 @@ edit(filePath="/path/file.md",
 ```
 
 **NE JAMAIS :** tenter un `write()` de >5000 caractères en une passe. Ça échouera et gaspillera des tours de conversation.
+
+---
+
+## ⚠️ ORG — Organisation, Nommage, LIFECYCLE (Phase 3)
+
+> **Pilier Phase 3** : la screaming architecture (`doc/{00-kernel,01-specs,02-brainstorms,03-plans,04-tests,05-audits,06-artifacts,07-mutations,_legacy}/`) couplée à un cycle de vie `DRAFT → ACTIVE → ARCHIVED/DEPRECATED`. Spécifications complètes dans `doc/plans/2026-07-03_PLAN_SCREAMING-ARCHITECTURE-PHASE3.md`.
+
+### Règle ORG.1 — Tout fichier `.md` (hors legacy) va dans un des 9 dossiers
+
+```
+doc/
+├── 00-kernel/       # invariants (KERNEL, BIBLE, PHILOSOPHY)
+├── 01-specs/        # specs frozen (PRD, EXIGENCES)
+├── 02-brainstorms/  # exploration divergente
+├── 03-plans/        # plans committed (Phase 0/1/2/3)
+├── 04-tests/        # protocoles + résultats
+├── 05-audits/       # forensique
+├── 06-artifacts/    # POC outputs
+├── 07-mutations/    # incréments
+└── _legacy/         # quarantaine (naming libre, non-enforced)
+```
+
+### Règle ORG.2 — Naming canonique
+
+Format unique : `{YYYY-MM-DD}_v{N}_{TYPE}_{SLUG}_{STATUS}.md`
+
+**Regex de validation** : `^[0-9]{4}-[0-9]{2}-[0-9]{2}_v(15|16|17|18|all)_(KERNEL|SPEC|BIBLE|PRD|RECETTE|BRAINSTORM|PLAN|TEST|AUDIT|ARTIFACT|MUTATION)_[a-z0-9-]+_(DRAFT|ACTIVE|ARCHIVED|DEPRECATED)\.md$`
+
+### Règle ORG.3 — LIFECYCLE parmi {DRAFT, ACTIVE, ARCHIVED, DEPRECATED}
+
+| Statut | Définition | Transitions |
+|--------|-----------|-------------|
+| `DRAFT` | exploratoire, mutable | → ACTIVE / → ARCHIVED |
+| `ACTIVE` | référence canonique | → DEPRECATED / → ARCHIVED |
+| `ARCHIVED` | figé à un moment T | (terminal) |
+| `DEPRECATED` | supplanté (utiliser `superseded_by:` dans YAML) | → ARCHIVED |
+
+Suffixe nom + YAML `status:` **doivent matcher**. Pas d'états supplémentaires (`WIP`, `LEGACY`) — utiliser `DRAFT`/`ARCHIVED` à la place.
+
+### Règle ORG.4 — Avant de créer un fichier, pose 3 questions
+
+1. **Phase cognitive ?** (kernel / spec / brainstorm / plan / test / audit / artifact / mutation)
+2. **Statut ?** (DRAFT / ACTIVE / ARCHIVED / DEPRECATED)
+3. **Version ?** (v15 / v16 / v17 / v18 / all)
+
+Tes 3 réponses = `{TYPE}_{STATUS}_v{N}` = chemin unique dans `doc/`.
+
+### Règle ORG.5 — Front-matter YAML obligatoire (sauf README/AGENTS/KERNEL)
+
+Tout nouveau `.md` créé dans `doc/{00-kernel,01-specs,02-brainstorms,03-plans,04-tests,05-audits,06-artifacts,07-mutations}/` doit démarrer par un bloc YAML minimum : `type:` / `version:` / `status:` / `title:` / `created:` (cf. §6 du plan complet).
+
+### Règle ORG.6 — Enforcement (Phase 3.5 future)
+
+`scripts/check_docs_lifecycle.py` validera les nouveaux fichiers hors `_legacy/` selon ORG.2 + ORG.5. **Pas encore livré** — gated sur extension future.
+
+### Migration : opportuniste (pas de bulk-edit)
+
+Aucun fichier existant ne sera migré en bulk. Un fichier legacy est migré vers le nouveau namespace + renommé selon ORG.2 **seulement quand** un agent/user l'édite ou le consulte activement. Critère : **si on l'édite, on le migre**.
+
+### Lecture rapide (1 minute)
+
+```
+"Je veux poser un truc"            → ORG.4 (3 questions) → doc/02-brainstorms/ ou doc/07-mutations/
+"Je documente une exploration"     → doc/02-brainstorms/
+"Je m'engage sur une direction"   → doc/03-plans/
+"Je teste / vérifie"               → doc/04-tests/
+"J'enquête a posteriori"           → doc/05-audits/
+"J'ai un fichier existant flou"    → doc/_legacy/ (conservé tel quel)
+```
