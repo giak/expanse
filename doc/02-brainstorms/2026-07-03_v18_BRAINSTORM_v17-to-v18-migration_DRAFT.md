@@ -11,7 +11,6 @@ related:
   - "../01-specs/expanse-v17-recette.md"
   - "../01-specs/expanse-v17-recette-response.md"
 tags: [v17-to-v18, mutation, kernel, v18, cristallisats]
-supersedes: ""
 ---
 
 # 🧬 V17 → V18 — BRAINSTORM MUTATIONS (4 increments)
@@ -217,6 +216,8 @@ jobs:
 
 ## §3 — TIMELINE V18 (proposition)
 
+> **⚠️ WARNING — M4 LLM-judge gatekeeper** (audit V17 §E.6 *Mirror CFR 60%*). Un LLM qui évalue un autre LLM porte le même biais compositionnel. **Si le judge hallucine, hard-blocker des PRs valides** sur des hallucinations d'évaluation. V18.1 M4 ne doit PAS être déployé en CI gatekeeper strict tant que : (a) budget $10 max, (b) manual override obligatoire, (c) re-run possible. Cf. §1 M4 *Risque CRITIQUE* pour détails.
+
 ```
 V18.0 (semaine 1 — focus M1+M2)
 ├── J1   scaffold cristallisats/ + README
@@ -242,11 +243,16 @@ V18.2 (semaine 3 — bilan)
 
 ## §5 — NEXT STEPS USER-FACING
 
-1. **Approuve M1+M2 scope V18.0** ou amender (cf. Section §1 spec).
-2. **Decide deferrement overload** : M3+M4 V18.1 vs directement V18.0 ?
-3. **Pour M4** : valider budget $10/mois acceptable, OU alternative offline-judge (heuristique locale vs LLM peer-review).
-4. **Pour M3** : valider fail-fast (no degraded mode) OU tolerer degraded mode persona-only ?
-5. **Pour promote ACTIVE** : apres V18.0 S14 PASS, run 'cristallisats/2026-XX-XX_v18-promo/' avec validated.json = {pass:true, ts_passed:N}.
+3 décisions critiques V18 :
+
+1. **Approuve M1+M2 scope V18.0 ?** (cf. §1 M1+M2 spec technique).
+2. **Confirme deferrement overload M3+M4 → V18.1 ?** (vs tout livrer V18.0).
+3. **Budget M4 acceptable ?** : $10/mois LLM-judge, OU alternative offline-judge (heuristique locale vs LLM peer-review).
+
+**Defaults assumés** (à challenger si pas OK) :
+
+- **M3 fail-fast** (no degraded mode) — choix retenu : observabilité stricte V17 (cf. §1 M3 *Risque*).
+- **Promote ACTIVE** (item 5 retiré du scope user) : post-V18.0 S14-PASS, run `cristallisats/2026-XX-XX_v18-promo/` avec `validated.json` = `{pass:true, ts_passed:N}` + **4 reviews humaines** (cf. §4 méta-clarification).
 
 ## §6 — CE QUI N'EST PAS DANS CE BRAINSTORM (souci d'honnêteté)
 
