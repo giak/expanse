@@ -68,7 +68,7 @@ Le seed arrive. C'est un **flash unique** — une contrainte absolue qui change 
 **Ce qui se passe mécaniquement :**
 1. `read_file("v16/runtime/expanse-v16-boot-seed.md")` → le seed entre dans le context window
 2. Le seed impose `[EXEMPTION DIRECTE]` → l'Ouvrier est contraint au silence
-3. `read_file("v16/runtime/expanse-v16.md")` → ~2500 tokens entrent
+3. `read_file("versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md")` → ~2500 tokens entrent
 4. Les 5 symboles ΣΨΦΩΜ deviennent des attracteurs probabilistes
 
 **Comment le montrer :**

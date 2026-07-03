@@ -5,10 +5,10 @@
 /**
  * Formats a toolCall string for compact display in dendrite terminals.
  *
- * Input:  'read_file(v16/runtime/expanse-v16.md)'
+ * Input:  'read_file(versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md)'
  * Output: 'read_file(v16/runt…)'
  *
- * Before, replace(/[()]/g, '') produced: 'read_filev16/runtime/expanse-v16.md'
+ * Before, replace(/[()]/g, '') produced: 'read_fileversions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md'
  * which truncated to garbled text like 'read_filev16/runti'.
  *
  * Strategy:

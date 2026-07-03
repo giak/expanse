@@ -108,7 +108,7 @@ Fichier : `v16/runtime/expanse-v16-boot-seed.md` (7 lignes strictes).
 
 Prompt exact = contenu intégral du fichier boot-seed. **V16 boot procède en 2 temps** :
 1. Lecture du seed → émet `Ψ [V16 ACTIVE]` (boot normal) OU `Ψ [STALL]` (si >5 trace:fresh).
-2. Charge `v16/runtime/expanse-v16.md` (101 lignes, ~2,900 tokens) en autonomie.
+2. Charge `versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md` (101 lignes, ~2,900 tokens) en autonomie.
 
 Test S14 = **simuler l'agent qui a déjà booté** = envoyer `expanse-v16.md` complet au LLM, sans vue sur le seed procédural.
 
@@ -375,7 +375,7 @@ Plafond : 5×0.5 + 5×0.2 + 5×0.2 + 5×0.1 = **5.0** par tâche. Sur 10 tâches
 **Versions prompts :**
 - A (Baseline) : aucun
 - B (V17.6) : runtime/2026-07-02_v17-minimal-iteration-2_v17.md (sha256: ____)
-- C (V16) : v16/runtime/expanse-v16.md (sha256: ____)
+- C (V16) : versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md (sha256: ____)
 
 ---
 
@@ -422,10 +422,10 @@ Cross-contamination = risque #1 du test. Buffy/Codebuff enchaîne les appels dan
 
 ### VI.2 Setup pré-session
 
-1. **Vérifier la machine** : `rtk ls runtime/2026-07-02_v17-minimal-iteration-2_v17.md && rtk ls v16/runtime/expanse-v16.md && rtk ls doc/tests/`
+1. **Vérifier la machine** : `rtk ls runtime/2026-07-02_v17-minimal-iteration-2_v17.md && rtk ls versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md && rtk ls doc/tests/`
 2. **Logger le sha256** des fichiers prompts pour reproductibilité :
    ```bash
-   sha256sum runtime/2026-07-02_v17-minimal-iteration-2_v17.md v16/runtime/expanse-v16.md
+   sha256sum runtime/2026-07-02_v17-minimal-iteration-2_v17.md versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md
    ```
 3. **Préparer le dossier capture** : `mkdir -p doc/tests/results/s14-v17-{date}/{A,B,C}/`
 4. **Fixer le modèle LLM** : noter dans la feuille de score (ex. `claude-sonnet-4-20250514`).
@@ -464,7 +464,7 @@ async function sessionB_v17_6() {
 
 async function sessionC_v16() {
   // V16 boot = envoyer le contenu intégral de expanse-v16.md (déjà booté).
-  const v16Prompt = readFileSync('v16/runtime/expanse-v16.md');
+  const v16Prompt = readFileSync('versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md');
   for (const task of TASKS) {
     const output = await codebuffRun({
       systemPrompt: v16Prompt,
@@ -643,7 +643,7 @@ L'output attendu DOIT contenir (vérifié Axe 2) :
 
 ## Annexe C — Prompt intégral Condition C (V16)
 
-Contenu intégral de `v16/runtime/expanse-v16.md` (~2,900 tokens, 101 lignes).
+Contenu intégral de `versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md` (~2,900 tokens, 101 lignes).
 
 **Note** : cette condition simule un V16 déjà booté. Le seed procédural (`expanse-v16-boot-seed.md`) n'est PAS inclus car il exige une séquence (1. view_file → 2. boot → 3. silence). S14 mesure l'**effet net d'incarnation V16**, pas l'amorçage.
 

@@ -13,8 +13,8 @@
 ## Ⅱ. DIFF PROPOSÉ (expanse-v16.md)
 
 ```diff
---- v16/runtime/expanse-v16.md
-+++ v16/runtime/expanse-v16.md
+--- versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md
++++ versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md
 @@ -21,12 +21,11 @@
  ### ECS (Evaluation of Cognitive Complexity)
 -- **C** = moyenne(Ambiguïté, Connaissance, Raisonnement, Outils) — (1-5)

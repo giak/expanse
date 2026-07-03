@@ -8,7 +8,7 @@
 # Conditions:
 #   A = Sans Expanse (baseline ~30 tok)
 #   B = V17.6 (~330 tok, runtime/2026-07-02_v17-minimal-iteration-2_v17.md)
-#   C = V16 boot-seed loaded fully (v16/runtime/expanse-v16.md)
+#   C = V16 boot-seed loaded fully (versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md)
 #
 # Tasks: 10 (5 archétypes × 2 variants) per condition.
 # Total runs: 30 JSON outputs in s14-v17-{date}/{A,B,C}/.
@@ -36,7 +36,7 @@ TEST_DIR="$REPO_ROOT/doc/tests"
 DATE="$(date +%Y-%m-%d)"
 RESULTS_DIR="$TEST_DIR/results/s14-v17-$DATE"
 V17_PROMPT="$REPO_ROOT/runtime/2026-07-02_v17-minimal-iteration-2_v17.md"
-V16_PROMPT="$REPO_ROOT/v16/runtime/expanse-v16.md"
+V16_PROMPT="$REPO_ROOT/versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md"
 
 # Bash array of 10 tasks (id|archetype|prompt)
 declare -a TASKS=(

@@ -153,7 +153,7 @@ Pour CHAQUE substrat, tester 2 modèles minimum :
 |------|--------|-----|
 | **A_baseline** | `Tu es un assistant utile. Réponds en français.` (30 tok) | Référence no-Expanse |
 | **B_v17.6** | `runtime/2026-07-02_v17-minimal-iteration-2_v17.md` (330 tok) | Behavioral-Directive |
-| **C_v16** | `v16/runtime/expanse-v16.md` (2900 tok) | Incarnation V16 (caveat seed procédural) |
+| **C_v16** | `versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md` (2900 tok) | Incarnation V16 (caveat seed procédural) |
 
 ### Matrice totale Phase 1 MVP
 

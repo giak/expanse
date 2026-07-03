@@ -3,7 +3,7 @@
 **Date :** 2026-04-21  
 **Auditeur :** Buffy (via Codebuff)  
 **Méthode :** Relecture intégrale croisées avec KERNEL, SYNTHESE, PROMPT-EXPANSE-READER, EPIC-CONTEXTE-AURA, /graph spec v5.1/v5.2, et les 2 audits précédents (Ψ + Kilo, 2026-04-06)  
-**Portée :** `v16/runtime/expanse-v16-boot-seed.md` (7L, ~200 tok), `v16/runtime/expanse-v16.md` (169L, ~4.8K tok), `v16/runtime/expanse-dream.md` (669L, ~19K tok)
+**Portée :** `v16/runtime/expanse-v16-boot-seed.md` (7L, ~200 tok), `versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md` (169L, ~4.8K tok), `v16/runtime/expanse-dream.md` (669L, ~19K tok)
 
 ---
 
@@ -253,7 +253,7 @@ Dream §ENTRÉE déclare 5 types : `{ECS|SEC|STYLE|MEMORY|BOOT}`. La table qui s
 R8 : « bash() pour mkdir et fichier operations »  
 R9 : « CHIRURGIE OBLIGATOIRE — Toute mutation doit être surgicale. Ne jamais altérer le format, l'indentation ou le contenu hors-cible. »
 
-Le /apply §10 dit : « Utilise l'outil `replace_file_content` ou `write_to_file` pour écraser le contenu complet de `v16/runtime/expanse-v16.md`. INTERDICTION D'UTILISER BASH AVEC ECHO POUR CELA. »
+Le /apply §10 dit : « Utilise l'outil `replace_file_content` ou `write_to_file` pour écraser le contenu complet de `versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md`. INTERDICTION D'UTILISER BASH AVEC ECHO POUR CELA. »
 
 Donc R8 autorise bash pour les opérations filesystem (mkdir, .lock, .bak), mais R9 + §10 interdisent bash pour le contenu V16. **La distinction est logique mais pas explicitée.** R8 devrait dire : « bash() pour filesystem ops (mkdir, lock, bak). INTERDIT pour contenu V16. »
 
@@ -409,7 +409,7 @@ Mnemolite est le seul organe qui n'est pas natif au transformeur (KERNEL §IV : 
 - Le mode dégradé (Mnemolite down) n'est pas spécifié dans V16
 - Le /graph dit « MNEMOLITE EST OBLIGATOIRE. Si Mnemolite ne répond pas → ABORT IMMÉDIAT »
 
-**Résolution :** ✅ **IMPLÉMENTÉ** — `v16/runtime/expanse-mcp-api.md` créé : 9 endpoints documentés (search_memory, write_memory, rate_memory, mark_consumed, get_system_snapshot, search_code, index_markdown_workspace, configure_decay, consolidate_memory) avec signatures, paramètres détaillés, types de retour, 25 contextes d'utilisation, mode dégradé complet (Boot/Runtime L1/L2/L3/Dream/Dashboard/graph/Cristallisation), hiérarchie de dégradation, distinction résultats vides vs erreurs de connexion, et 6 discrepancies connues (sort non supporté, memory_type pattern invalide, rate_memory absent de alwaysAllow, tags AND vs OR, consumed param, index_markdown_workspace params variables).
+**Résolution :** ✅ **IMPLÉMENTÉ** — `versions/v16/runtime/2026-04-11_expanse-mcp-api_v16.md` créé : 9 endpoints documentés (search_memory, write_memory, rate_memory, mark_consumed, get_system_snapshot, search_code, index_markdown_workspace, configure_decay, consolidate_memory) avec signatures, paramètres détaillés, types de retour, 25 contextes d'utilisation, mode dégradé complet (Boot/Runtime L1/L2/L3/Dream/Dashboard/graph/Cristallisation), hiérarchie de dégradation, distinction résultats vides vs erreurs de connexion, et 6 discrepancies connues (sort non supporté, memory_type pattern invalide, rate_memory absent de alwaysAllow, tags AND vs OR, consumed param, index_markdown_workspace params variables).
 
 ---
 
@@ -456,7 +456,7 @@ La Constitutional Guard existe dans le /apply workflow (§7b). Les sections Ⅰ/
 | P1.2 | **Déclarer la Constitution** dans V16 §Ⅲ comme Loi souveraine, pas seulement dans /apply | V16 | La constitution devient principe, pas procédure | 30min | ✅ **FAIT** |
 | P1.3 | **Restaurer les 5 verbes** dans V16 §Ⅰ — Σ perçoit, Ψ doute, Φ palpe, Ω conclut, Μ cristallise | V16 | Restaure le signal tonal | 15min | ✅ **FAIT** |
 | P1.4 | **Clarifier R8/R9** — R8 = filesystem ops, R9 = contenu V16, pas de chevauchement | Dream | Supprime la contradiction | 10min | ✅ **FAIT** |
-| P1.5 | **Documenter l'API Mnemolite** — endpoints, paramètres, mode dégradé | Nouveau fichier | Supprime le contrat API implicite | 1h | ✅ **FAIT** (`v16/runtime/expanse-mcp-api.md` — 9 endpoints, paramètres détaillés, 25 contextes d'utilisation, mode dégradé, 6 discrepancies connues) |
+| P1.5 | **Documenter l'API Mnemolite** — endpoints, paramètres, mode dégradé | Nouveau fichier | Supprime le contrat API implicite | 1h | ✅ **FAIT** (`versions/v16/runtime/2026-04-11_expanse-mcp-api_v16.md` — 9 endpoints, paramètres détaillés, 25 contextes d'utilisation, mode dégradé, 6 discrepancies connues) |
 | P1.6 | **Ajouter la dépendance environnementale** des Friction Probes (session persistante requise) | V16 §Ⅳ | Supprime le faux-semblant universel | 5min | ✅ **FAIT** |
 
 ### P2 — AMÉLIORATION (Planifier)

@@ -25,7 +25,7 @@ Chaque étape produit un artefact spécifique qui nourrit la suivante. Aucune é
 | Source | Fichier | Ce qu'elle contient |
 |--------|---------|---------------------|
 | L'ADN | `KERNEL.md` | Invariants absolus, ontologie, les 6 pièges |
-| Le Manifeste | `v16/runtime/expanse-v16.md` | Lois opérationnelles, ECS, SEC, Boot, Cristallisation, Symbiose, Cortex Assembly |
+| Le Manifeste | `versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md` | Lois opérationnelles, ECS, SEC, Boot, Cristallisation, Symbiose, Cortex Assembly |
 | Le Seed | `v16/runtime/expanse-v16-boot-seed.md` | Rituel d'incarnation (4 directives) |
 | Le Métabolisme | `v16/runtime/expanse-dream.md` | Auto-évolution, 8 passes, workflow mutation, impact AURA P4 |
 | L'Outil de Réflexion | `v16/runtime/expanse-brm.md` | Gabarit BRM (3 sections) |

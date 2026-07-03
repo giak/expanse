@@ -16,7 +16,7 @@ Les deux fichiers runtime :
 
 ```
 v16/runtime/expanse-v16-boot-seed.md    (699 B)
-v16/runtime/expanse-v16.md              (8.6 KB)
+versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md              (8.6 KB)
 ```
 
 ne sont qu'un **substrat ADN minimal**. Ils ne contiennent PAS la totalité de ce que le LLM a dans sa fenêtre de contexte au moment où il est opérationnel. Μ injecte des prompts typés (sys:core, sys:protocol, etc.) qui enrichissent le contexte — ce sont des **modulateurs de comportement**, pas de la donnée stockée.

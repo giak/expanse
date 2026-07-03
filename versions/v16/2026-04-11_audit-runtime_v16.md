@@ -18,7 +18,7 @@
 | Documentation | 8/10 | BONNE |
 | **SCORE GLOBAL** | **6.4/10** | **MOYEN** |
 
-**Problème critique identifié:** Incohérence de chemins entre les modules. Le Dream référence `/runtime/expanse-v16.md` alors que le fichier réel est en `/v16/runtime/expanse-v16.md`. Cette divergence casse le workflow de mutation.
+**Problème critique identifié:** Incohérence de chemins entre les modules. Le Dream référence `/runtime/expanse-v16.md` alors que le fichier réel est en `/versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md`. Cette divergence casse le workflow de mutation.
 
 ---
 
@@ -54,7 +54,7 @@ Ligne 314: read_file(path: "/home/giak/projects/expanse/runtime/expanse-v16.md")
 
 **Le chemin correct devrait être:**
 ```
-/home/giak/projects/expanse/v16/runtime/expanse-v16.md
+/home/giak/projects/expanse/versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md
 ```
 
 **Impact:**
@@ -65,7 +65,7 @@ Ligne 314: read_file(path: "/home/giak/projects/expanse/runtime/expanse-v16.md")
 **Réparation requise:**
 ```diff
 - /home/giak/projects/expanse/runtime/expanse-v16.md
-+ /home/giak/projects/expanse/v16/runtime/expanse-v16.md
++ /home/giak/projects/expanse/versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md
 ```
 
 ---
@@ -112,7 +112,7 @@ Le fichier `doc/mutations/LOG.md` titre "EXPANSE V15" alors que le système est 
 
 | Ligne | Chemin | Attendu |
 |-------|--------|---------|
-| 80 | `/home/giak/projects/expanse/runtime/expanse-v16.md` | `/home/giak/projects/expanse/v16/runtime/expanse-v16.md` |
+| 80 | `/home/giak/projects/expanse/runtime/expanse-v16.md` | `/home/giak/projects/expanse/versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md` |
 | 104 | `/home/giak/projects/expanse/runtime/` | `/home/giak/projects/expanse/v16/runtime/` |
 | 175 | `/home/giak/projects/expanse/doc/mutations/{slug}/` | Correct |
 | 262 | `/home/giak/projects/expanse/runtime/expanse-v16.md` | Incorrect |

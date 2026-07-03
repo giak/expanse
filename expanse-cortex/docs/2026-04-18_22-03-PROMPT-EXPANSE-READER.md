@@ -12,7 +12,7 @@
 
 Pour décrire un mécanisme Expanse avec ce prompt :
 
-1. **Fournis au LLM** : ce prompt + le nom du mécanisme cible + les fichiers source pertinents (KERNEL.md, v16/runtime/expanse-v16.md, expanse-v16-boot-seed.md, expanse-dream.md, expanse-brm.md, SYNTHESE.md, expanse-cortex/docs/2026-04-18_22-06-EPIC-CONTEXTE-AURA.md)
+1. **Fournis au LLM** : ce prompt + le nom du mécanisme cible + les fichiers source pertinents (KERNEL.md, versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md, expanse-v16-boot-seed.md, expanse-dream.md, expanse-brm.md, SYNTHESE.md, expanse-cortex/docs/2026-04-18_22-06-EPIC-CONTEXTE-AURA.md)
 2. **Le LLM lit les sources** selon le Protocole §Ⅳ (KERNEL → Apex → Seed → Dream → BRM → EPIC AURA → Synthèse croisée)
 3. **Le LLM applique les 4 Lentilles** §Ⅲ (ontologique, opérationnel, évolutif, contextuel) au mécanisme cible
 4. **Le LLM vérifie les 9 Gardes-Contre-Pièges** §Ⅴ pour éviter la lecture de surface (dont Garde 6 : les 4 aspects d'une seule réalité)
@@ -109,7 +109,7 @@ Expanse existe simultanément sur 4 couches. Chaque mécanisme que tu décris do
 
 ### Lentille 2 : OPÉRATIONNELLE (Comment ça s'exécute)
 
-**Source :** v16/runtime/expanse-v16.md (l'Apex) + v16/runtime/expanse-v16-boot-seed.md (le Seed)  
+**Source :** versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md (l'Apex) + v16/runtime/expanse-v16-boot-seed.md (le Seed)  
 **Question :** *Quelles sont les procédures exactes, les seuils, les conditions de routage ?*
 
 À cette couche, les mécanismes sont des **spécifications exécutables**. L'ECS a des valeurs C et I, des seuils de routage, des formats d'output obligatoires. La cristallisation a la Règle des 3 Occurrences, des tags Mnemolite, un workflow de feedback.
@@ -188,7 +188,7 @@ Commence TOUJOURS par `KERNEL.md`. Ce n'est pas une documentation — c'est la *
 
 ### Étape 2 : Lire l'Apex (La Loi)
 
-Lis ensuite `v16/runtime/expanse-v16.md` intégralement. C'est le **manifeste opérationnel** — les lois que l'organisme s'impose. Lis-le DEUX FOIS :
+Lis ensuite `versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md` intégralement. C'est le **manifeste opérationnel** — les lois que l'organisme s'impose. Lis-le DEUX FOIS :
 
 - **Première lecture :** Cartographier les sections (Ⅰ Incarnation, Ⅱ Sensorialité, Ⅲ Souveraineté, Ⅳ Cristallisation, Ⅴ Commandes, Ⅵ Boot, Ⅶ Symbiose)
 - **Deuxième lecture :** Extraire les mécanismes avec leurs conditions exactes, leurs préconditions cachées, leurs interdépendances

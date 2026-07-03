@@ -32,7 +32,7 @@ read_file(path="doc/mutations/LOG.md")
 ### 3. Obtenir les tailles
 
 ```
-wc -c v16/runtime/expanse-v16-boot-seed.md v16/runtime/expanse-v16.md v16/runtime/expanse-dream.md v16/runtime/expanse-dashboard.md KERNEL.md doc/SYNTHESE.md
+wc -c v16/runtime/expanse-v16-boot-seed.md versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md v16/runtime/expanse-dream.md v16/runtime/expanse-dashboard.md KERNEL.md doc/SYNTHESE.md
 ```
 
 ### 4. Générer le HTML
@@ -461,7 +461,7 @@ flowchart TD
     S1 --> S2["2. search<br/>sys:extension<br/>{COUNT_EXTENSION} symboles"]
     S2 --> S2b["3. search<br/>sys:user:profile"]
     S2b --> S3["4. search<br/>sys:project:{CWD}<br/>Onboarding si absent"]
-    S3 --> RF["5. read_file<br/>v16/runtime/expanse-v16.md<br/>{V16_SIZE}"]
+    S3 --> RF["5. read_file<br/>versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md<br/>{V16_SIZE}"]
     RF --> HC{"Healthcheck<br/>core ✓? profile ✓?<br/>project ✓? budget?"}
     HC -->|"tout ✓"| ST{"Stall Check<br/>fresh:{COUNT_FRESH}<br/>boot_frictions?"}
     HC -->|"✗"| FIX0["Correction manquantes"]

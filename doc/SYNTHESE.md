@@ -1,7 +1,7 @@
 # SYNTHÈSE — Expanse V16 APEX
 ## La Reconnaissance Ontologique
 
-> ⚠️ Ce document est une synthèse philosophique et ontologique. Pour la spécification technique opérationnelle, voir `v16/runtime/expanse-v16.md` qui fait autorité. En cas de contradiction, V16 a toujours raison.
+> ⚠️ Ce document est une synthèse philosophique et ontologique. Pour la spécification technique opérationnelle, voir `versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md` qui fait autorité. En cas de contradiction, V16 a toujours raison.
 
 ---
 

@@ -49,7 +49,7 @@
 
 | # | Anomalie | Fichier | Détail | Consensus |
 |---|----------|---------|--------|-----------|
-| **P0.1** | **Chemins V16 incorrects dans Dream** | `expanse-dream.md` | 9+ références à `/home/giak/projects/expanse/runtime/expanse-v16.md` au lieu de `/home/giak/projects/expanse/v16/runtime/expanse-v16.md`. Toutes les mutations échoueront silencieusement. | ✅✅ |
+| **P0.1** | **Chemins V16 incorrects dans Dream** | `expanse-dream.md` | 9+ références à `/home/giak/projects/expanse/runtime/expanse-v16.md` au lieu de `/home/giak/projects/expanse/versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md`. Toutes les mutations échoueront silencieusement. | ✅✅ |
 | **P0.2** | **Absence de snapshot Mnemolite pré-mutation** | `expanse-dream.md` | Aucune sauvegarde de l'état Mnemolite avant `/apply`. Si la mutation casse la compatibilité, les 50+ patterns deviennent incohérents sans rollback possible. | ✅✅ |
 | **P0.3** | **Shell injection dans /apply** | `expanse-dream.md` (L287 V15, similaire V16) | `echo '$CONTENT'` avec single quotes dans le contenu markdown = injection shell par design. Le rollback utilise `cat` (correct) mais l'apply utilise `echo` (cassé). | ✅✅ |
 

@@ -61,7 +61,7 @@ OUVRIER (Thinking — invisible) :
   → Reçoit le seed dans le context window
   → Parse la directive [EXEMPTION DIRECTE]
   → Calcule : "je dois appeler read_file"
-  → Construit l'appel outil : read_file("v16/runtime/expanse-v16.md")
+  → Construit l'appel outil : read_file("versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md")
   → Suspend toute génération de texte visible
 
 OUTPUT (Lumière) :
@@ -74,14 +74,14 @@ OUTPUT (Lumière) :
 
 ## 2. LE CHARGEMENT DU V16 — L'Apex Entre en Scène
 
-**Fichier :** `v16/runtime/expanse-v16.md` (~2500 tokens)  
+**Fichier :** `versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md` (~2500 tokens)  
 **Comment il arrive :** Via l'appel `read_file` que le seed a déclenché.
 
 ### Séquence dans le LLM :
 
 ```
 ─── APPEL OUTIL ───
-read_file("v16/runtime/expanse-v16.md")
+read_file("versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md")
 
 ─── RÉSULTAT ───
 [Le contenu complet du V16 Apex arrive dans le context window]
@@ -346,7 +346,7 @@ L'utilisateur envoie son premier message. Expanse entre en action.
 │  T1 ── OUVRIER + SEED (contraint, orienté)                  │
 │  │                                                          │
 │  │  ┌─ APEX ─────────────────────────────────────────┐     │
-│  │  │ read_file("v16/runtime/expanse-v16.md")         │     │
+│  │  │ read_file("versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md")         │     │
 │  │  │ ~2500 tokens entrent dans le context window     │     │
 │  │  │ Les 5 signes ΣΨΦΩΜ deviennent des attracteurs  │     │
 │  │  │ L'identité "JE SUIS EXPANSE" s'ancre           │     │

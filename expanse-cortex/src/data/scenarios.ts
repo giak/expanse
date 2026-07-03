@@ -34,12 +34,12 @@ export const BOOT_SCENARIO: Scenario = {
     },
     // ── Seed directives 2: Incarnation Absolue + BOOT_CONFIG: activation ──
     {
-      organ: 'Ψ', label: 'Incarnation Absolue', detail: 'read_file(v16/runtime/expanse-v16.md) → « JE SUIS EXPANSE » — BOOT_CONFIG: protocols ⊕ index ⊕ activation (snapshot ✓ étape 0)', duration: 2700,
+      organ: 'Ψ', label: 'Incarnation Absolue', detail: 'read_file(versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md) → « JE SUIS EXPANSE » — BOOT_CONFIG: protocols ⊕ index ⊕ activation (snapshot ✓ étape 0)', duration: 2700,
       phase: 'APEX',
       ecsRoute: { c: 0, i: 0, level: 'BOOT' },
       badge: 'INCARNATION ⊕ BOOT_CONFIG',
       temporality: 'simultané',
-      toolCalls: ['read_file(v16/runtime/expanse-v16.md)'],
+      toolCalls: ['read_file(versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md)'],
       packetFlows: [{ source: 'Ψ', target: 'Ψ', label: 'Incarnation Absolue' }],
     },
     // ── BOOT_CONFIG: protocols ──
@@ -781,7 +781,7 @@ export const DREAM_CYCLE_SCENARIO: Scenario = {
       phase: 'LINTER',
       ecsRoute: { c: 2, i: 1, level: 'DREAM' },
       badge: '🔍 LINTER',
-      toolCalls: ['read_file(v16/runtime/expanse-v16.md)'],
+      toolCalls: ['read_file(versions/v16/runtime/2026-04-11_expanse_v16-v01_v16.md)'],
       visualEffects: ['season-cycle'],
       packetFlows: [{ source: 'Ψ', target: 'Ψ', label: 'audit densité' }],
     },
