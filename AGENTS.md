@@ -11,6 +11,8 @@
 
 ## ⚠️ RTK : Optimisation Token (OBLIGATOIRE)
 
+> Cadrage méta → voir **§ DISCIPLINE** en tête de ce fichier (rappel : une chose à la fois).
+
 **RTK (Rust Token Killer)** est un proxy CLI qui réduit la consommation de tokens de 60 à 90 % en compressant la sortie des commandes shell avant qu'elle n'atteigne le LLM.
 
 ### Règle fondamentale
