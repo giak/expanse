@@ -21,7 +21,6 @@ doc/artifacts/
 
 # Projects and scripts directory (external)
 projects/
-scripts/
 
 # Test directory
 test/
