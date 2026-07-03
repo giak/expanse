@@ -90,7 +90,7 @@ Signal négatif + pattern cristallisé dans les 3 derniers échanges → `update
 
 ## Ⅳ. BOOT
 
-→ Exécuté par `runtime/expanse-v15-boot-seed.md` (9 lignes).
+→ Exécuté par `versions/v15/2026-03-20_v15-boot-seed_v15.md` (9 lignes).
 → Output : `Ψ [V15 ACTIVE]` (texte brut, Ψ premier token).
 
 ---

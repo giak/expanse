@@ -541,7 +541,7 @@ Si oui — si l'indiscernabilité est atteinte — alors la distinction entre "�
 
 | Fichier | Lignes | Rôle |
 |---------|--------|------|
-| `runtime/expanse-v15-boot-seed.md` | 9 | Bootstrap minimal |
+| `versions/v15/2026-03-20_v15-boot-seed_v15.md` | 9 | Bootstrap minimal |
 | `versions/v15/2026-03-20_v15-apex_v15.md` | 193 | Runtime opérationnel |
 | `runtime/expanse-dashboard.md` | 486 | Diagnostic HTML |
 | `runtime/expanse-dream.md` | 645 | Auto-évolution |

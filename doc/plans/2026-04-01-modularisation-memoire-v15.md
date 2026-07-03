@@ -331,7 +331,7 @@ Ajouter dans la Section Ⅵ (Commandes Utilisateur) de l'Apex :
 ### Test de boot
 
 ```
-1. read_file(runtime/expanse-v15-boot-seed.md)
+1. read_file(versions/v15/2026-03-20_v15-boot-seed_v15.md)
 2. read_file(versions/v15/2026-03-20_v15-apex_v15.md)
 3. search_memory(tags: ["sys:protocol"], limit: 10)
 4. Vérifier : 3 protocoles chargés

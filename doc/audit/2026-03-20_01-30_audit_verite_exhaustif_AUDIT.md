@@ -173,7 +173,7 @@ Le ROADMAP dit "Boot cross-LLM (3/3) : Seed MCP validé OpenCode, Gemini, Big Pi
 
 **Mais :** Le seed n'est pas un amorce cognitif. C'est un script de chargement de contexte. Il dit au LLM : "lis ce fichier, lance ces requêtes". Tout system prompt fait ça. La différence est que le seed charge V15 dynamiquement au lieu de l'inclure statiquement — ce qui est une bonne pratique d'ingénierie (permets de modifier V15 sans modifier le seed).
 
-**Source :** `runtime/expanse-v15-boot-seed.md` (intégralité), `doc/ROADMAP-EXAPNSE.md` L12-13.
+**Source :** `versions/v15/2026-03-20_v15-boot-seed_v15.md` (intégralité), `doc/ROADMAP-EXAPNSE.md` L12-13.
 
 ---
 

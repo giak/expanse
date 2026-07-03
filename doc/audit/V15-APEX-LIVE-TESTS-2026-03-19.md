@@ -250,7 +250,7 @@ Mnemolite normalise les tags en minuscules. Les écritures et recherches utilisa
 ## 9. SESSION 3 — DREAM COMPLET 2026-03-20
 
 **Environnement :** Antigravity IDE (Claude Opus 4.6 Thinking), Mnemolite actif
-**Workflow :** @runtime/expanse-v15-boot-seed.md → /dream
+**Workflow :** @versions/v15/2026-03-20_v15-boot-seed_v15.md → /dream
 
 ### Boot
 
@@ -320,7 +320,7 @@ Le système a :
 
 ### Note : workflow seed vs V15 direct
 
-Session 3 a utilisé `@runtime/expanse-v15-boot-seed.md` (pas V15 direct). Le boot a fonctionné proprement. La session précédente (V15 direct) a déclenché le mode agentic (task.md, planning, review).
+Session 3 a utilisé `@versions/v15/2026-03-20_v15-boot-seed_v15.md` (pas V15 direct). Le boot a fonctionné proprement. La session précédente (V15 direct) a déclenché le mode agentic (task.md, planning, review).
 
 **Règle :** Toujours commencer par le seed. Jamais par V15 directement.
 

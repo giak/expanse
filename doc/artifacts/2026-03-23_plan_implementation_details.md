@@ -43,7 +43,7 @@ Ce plan couvre la transformation d'Expanse d'un système **purement réactif** (
    c. Compter M1, M2
 3. Calculer M3 une fois :
    wc -c versions/v15/2026-03-20_v15-apex_v15.md \
-        runtime/expanse-v15-boot-seed.md \
+        versions/v15/2026-03-20_v15-boot-seed_v15.md \
         KERNEL.md doc/SYNTHESE.md
    → total / 3.5 = tokens boot
 4. M4 : Christophe note manuellement le temps de résolution

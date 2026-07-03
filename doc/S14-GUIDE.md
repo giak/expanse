@@ -312,7 +312,7 @@ flowchart TD
 | R2 | **Dépassement budget** sur T4 (output 5K tokens) | faible | moyen | Hard cap $5; preemptive halt au $4 ; alerte Slack si > $3 |
 | R3 | **Notation manuelle biaisée** (l'ordre A→B→C inférence) | haute | haut | Randomisation + double notation (cf. §5) |
 | R4 | **Modèle mis à jour silencieusement** pendant les 30 calls | faible | haut | Pin `claude-sonnet-4-20250514` dans `runner.ts` ; pas de pattern latest-pattern |
-| R5 | **V15 pristine.txt absent** (condition A impossible à monter) | certaine si pas préparé | bloquant | Allouer 2-3 jours pour **reconstituer** le prompt V15 depuis `versions/v15/2026-03-20_v15-apex_v15.md` + `runtime/expanse-v15-boot-seed.md` (s'ils existent dans le repo) |
+| R5 | **V15 pristine.txt absent** (condition A impossible à monter) | certaine si pas préparé | bloquant | Allouer 2-3 jours pour **reconstituer** le prompt V15 depuis `versions/v15/2026-03-20_v15-apex_v15.md` + `versions/v15/2026-03-20_v15-boot-seed_v15.md` (s'ils existent dans le repo) |
 | R6 | **Biais de sélection des tâches** (les 10 tâches favorisent B) | moyenne | haut | Validation croisée avec un benchmark public (HumanEval? ou 5 tâches hors-référence) |
 
 ---

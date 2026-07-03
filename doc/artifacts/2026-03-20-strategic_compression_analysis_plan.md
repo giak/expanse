@@ -39,7 +39,7 @@ Le seed (9 lignes, 545 octets) contient déjà toute la logique de boot.
 **Remplacement proposé** :
 ```markdown
 ## Ⅳ. BOOT
-→ Exécuté par runtime/expanse-v15-boot-seed.md (9 lignes).
+→ Exécuté par versions/v15/2026-03-20_v15-boot-seed_v15.md (9 lignes).
 ```
 **Gain** : ~800 octets (~228 tokens permanents). **Perte fonctionnelle** : zéro.
 

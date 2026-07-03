@@ -29,7 +29,7 @@ Le seed (`expanse-v15-boot-seed.md`) et Section Ⅳ de l'APEX sont deux sources 
 90: 
 91: ## Ⅳ. BOOT
 92: 
-93: → Exécuté par `runtime/expanse-v15-boot-seed.md`.
+93: → Exécuté par `versions/v15/2026-03-20_v15-boot-seed_v15.md`.
 94: 
 95: ### Protocole Projet (Step 5 du Seed)
 ...
@@ -41,7 +41,7 @@ Le seed (`expanse-v15-boot-seed.md`) et Section Ⅳ de l'APEX sont deux sources 
 
 ### Mutation 1: Refactoring Section Ⅳ (APEX)
 ```diff
--→ Exécuté par `runtime/expanse-v15-boot-seed.md`.
+-→ Exécuté par `versions/v15/2026-03-20_v15-boot-seed_v15.md`.
 +→ BOOT_CONFIG (Source de Vérité) :
 +  1. mcp_mnemolite_search_memory (tags: ["sys:core", "sys:anchor"], limit=20)
 +  2. mcp_mnemolite_search_memory (tags: ["sys:extension"], limit=10)
