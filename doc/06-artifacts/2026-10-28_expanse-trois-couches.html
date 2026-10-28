@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expanse — trois couches, une seule question</title>
+<meta name="description" content="Schéma des trois couches d'Expanse : pratique KERNEL, recherche V18, cortex ; et des tensions qui les traversent.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%231b1916'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' text-anchor='middle' fill='%23f2ece1'%3E%CE%A3%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --display:"Instrument Serif","Iowan Old Style",Georgia,serif;
+  --body:"IBM Plex Sans","Segoe UI",sans-serif;
+  --mono:"JetBrains Mono","SFMono-Regular",Consolas,monospace;
+  --bg:#f2ece1; --surface:#fbf7ee; --surface-2:#f6f0e4;
+  --ink:#1b1916; --ink-2:#4b463d; --muted:#6a6254;
+  --line:#d6cbbb; --line-strong:#b9ab97;
+  --practice:#a34d2c; --practice-soft:rgba(163,77,44,.10);
+  --research:#2c6663; --research-soft:rgba(44,102,99,.10);
+  --visible:#7d5a14; --visible-soft:rgba(166,124,40,.12);
+  --danger:#a33a32; --danger-soft:rgba(163,58,50,.10);
+  --shadow:0 14px 34px rgba(40,32,20,.08);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0e0e14; --surface:#16161f; --surface-2:#1b1b26;
+  --ink:#cdd6f4; --ink-2:#bac2de; --muted:#9399b2;
+  --line:#2a2a3a; --line-strong:#45475a;
+  --practice:#fab387; --practice-soft:rgba(250,179,135,.10);
+  --research:#94e2d5; --research-soft:rgba(148,226,213,.09);
+  --visible:#f9e2af; --visible-soft:rgba(249,226,175,.10);
+  --danger:#f38ba8; --danger-soft:rgba(243,139,168,.10);
+  --shadow:0 18px 44px rgba(0,0,0,.38);
+}}
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:16px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--practice);outline-offset:3px}
+.wrap{max-width:1240px;margin:0 auto;padding:32px 24px 56px;display:grid;grid-template-columns:180px minmax(0,1fr);gap:0 48px}
+.main{min-width:0}
+.toc{position:sticky;top:24px;align-self:start;grid-row:1/-1;max-height:calc(100dvh - 48px);overflow-y:auto;padding-top:8px}
+.toc-title{font-family:var(--mono);font-size:.625rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding-bottom:10px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+.toc a{display:block;text-decoration:none;font-family:var(--mono);font-size:.75rem;color:var(--muted);padding:6px 8px;border-left:2px solid transparent;transition:color .15s,background .15s}
+.toc a:hover{color:var(--ink);background:var(--surface-2)}
+.toc a.active{color:var(--ink);border-left-color:var(--practice)}
+.masthead{padding:8px 0 26px;border-bottom:2px solid var(--ink)}
+.eyebrow{display:flex;align-items:center;gap:12px;margin:0 0 18px;font-family:var(--mono);font-size:.6875rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.eyebrow::before{content:"";width:30px;height:1px;background:var(--line-strong);flex:none}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.9rem,6.4vw,5.4rem);line-height:.92;letter-spacing:-.025em;margin:0 0 18px;text-wrap:balance}
+h1 em{font-style:italic;color:var(--practice)}
+.standfirst{max-width:60ch;margin:0;font-size:1.125rem;line-height:1.55;color:var(--ink-2)}
+.standfirst strong{font-weight:600;color:var(--ink)}
+.ledger{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:30px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ledger>div{padding:12px 14px 12px 0;border-right:1px solid var(--line);min-width:0}
+.ledger>div:last-child{border-right:0}
+.ledger dt{font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.ledger dd{margin:0;font-family:var(--display);font-size:2rem;line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.ledger dd span{font-family:var(--mono);font-size:.625rem;letter-spacing:.06em;color:var(--muted);margin-left:4px}
+.ledger .zero{color:var(--danger)}
+.sec-head{display:grid;grid-template-columns:48px minmax(0,1fr);gap:0 16px;margin:56px 0 24px;padding-top:14px;border-top:2px solid var(--ink);scroll-margin-top:24px}
+.sec-num{font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;color:var(--muted);padding-top:6px}
+.sec-head h2{font-family:var(--display);font-weight:400;font-size:clamp(1.9rem,3.4vw,2.6rem);line-height:1;margin:0;letter-spacing:-.02em}
+.sec-head p{grid-column:2;margin:8px 0 0;max-width:62ch;color:var(--muted);font-size:.9375rem}
+.strata{position:relative;margin:0 0 14px;border:1px solid var(--line);background:linear-gradient(180deg,var(--surface),var(--surface-2));box-shadow:var(--shadow);overflow:hidden}
+.strata::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent 0,transparent 27px,var(--practice-soft) 27px,var(--practice-soft) 28px);opacity:.45;pointer-events:none}
+.strata-top{position:relative;display:flex;justify-content:space-between;gap:16px;padding:12px 20px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.layer{position:relative;display:grid;grid-template-columns:64px minmax(0,1.35fr) minmax(0,.65fr);gap:0 24px;padding:26px 24px 28px;border-bottom:1px solid var(--line)}
+.layer:last-of-type{border-bottom:0}
+.layer::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--accent)}
+.layer--practice{--accent:var(--practice)}
+.layer--research{--accent:var(--research)}
+.layer--visible{--accent:var(--visible)}
+.layer-index{font-family:var(--mono);font-size:.625rem;letter-spacing:.12em;color:var(--accent);line-height:1.2}
+.layer-index strong{display:block;margin-top:4px;font-family:var(--display);font-size:2.8rem;font-weight:400;line-height:1;color:var(--accent)}
+.layer-copy{min-width:0}
+.kicker{margin:0 0 4px;font-family:var(--mono);font-size:.625rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.layer h3{margin:0 0 8px;font-family:var(--mono);font-size:.75rem;font-weight:500;letter-spacing:.02em;color:var(--ink-2)}
+.layer blockquote{margin:0 0 10px;font-family:var(--display);font-size:clamp(1.3rem,2.3vw,1.7rem);font-style:italic;line-height:1.12;letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
+.layer-copy p:last-child{margin:0;max-width:48ch;font-size:.9375rem;line-height:1.55;color:var(--ink-2)}
+.layer-side{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:16px;min-width:0;border-left:1px solid var(--line);padding-left:18px}
+.status{display:inline-block;border:1px solid currentColor;padding:4px 7px;font-family:var(--mono);font-size:.5625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+.side-note{margin:0;font-family:var(--mono);font-size:.6875rem;line-height:1.5;color:var(--muted)}
+.fault{position:relative;display:flex;align-items:center;gap:12px;height:42px;padding:0 24px;background:var(--surface)}
+.fault::before,.fault::after{content:"";flex:1;height:1px;background:var(--line-strong)}
+.fault span{font-family:var(--mono);font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;white-space:nowrap}
+.fault b{color:var(--ink-2);font-weight:500}
+.strata figcaption{padding:14px 20px;border-top:1px solid var(--line);background:var(--surface);font-size:.8125rem;line-height:1.5;color:var(--muted)}
+.strata figcaption b{color:var(--ink-2);font-weight:500}
+.pullquote{margin:24px 0 0;padding:20px 24px;border-left:4px solid var(--practice);background:var(--practice-soft)}
+.pullquote p{margin:0;font-family:var(--display);font-size:clamp(1.25rem,2.2vw,1.6rem);font-style:italic;line-height:1.2;color:var(--ink);text-wrap:balance}
+.pullquote cite{display:block;margin-top:10px;font-family:var(--mono);font-size:.625rem;font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tensions{display:grid;grid-template-columns:1fr 1fr;gap:1px;border:1px solid var(--line);background:var(--line)}
+.tension{--accent:var(--practice);min-width:0;padding:22px 22px 24px;background:var(--surface);border-top:3px solid var(--accent)}
+.tension--foundational{--accent:var(--practice)}
+.tension--blocking{--accent:var(--danger)}
+.tension--scope{--accent:var(--visible)}
+.tension--governance{--accent:var(--research)}
+.tension-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;margin-bottom:6px}
+.tension-id{font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;color:var(--accent)}
+.tension h3{margin:0;font-family:var(--display);font-size:1.45rem;font-weight:400;line-height:1.1;letter-spacing:-.01em}
+.tag{margin-left:auto;border:1px solid var(--accent);padding:3px 6px;font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+.poles{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;margin-top:14px}
+.pole{min-width:0}
+.pole span{display:block;font-family:var(--mono);font-size:.5625rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.pole p{margin:4px 0 0;font-size:.875rem;line-height:1.5;color:var(--ink-2)}
+.pole p strong{font-weight:600;color:var(--ink)}
+.stake{grid-column:1/-1;margin:14px 0 0;padding-top:12px;border-top:1px dashed var(--line);font-size:.8125rem;line-height:1.5;color:var(--muted)}
+.stake b{margin-right:6px;font-family:var(--mono);font-size:.5625rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.table-wrap{margin-top:18px;border:1px solid var(--line);background:var(--surface);overflow-x:auto}
+table{width:100%;min-width:760px;border-collapse:collapse;font-size:.875rem}
+caption{caption-side:top;padding:12px 16px;border-bottom:1px solid var(--line);text-align:left;font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+th,td{padding:12px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+thead th{background:var(--surface-2);font-family:var(--mono);font-size:.5625rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+tbody th{width:14%;font-family:var(--mono);font-size:.75rem;font-weight:500;color:var(--ink)}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+td:nth-child(3){font-family:var(--mono);font-size:.75rem;color:var(--ink-2)}
+.table-note{margin:10px 0 0;font-family:var(--mono);font-size:.625rem;line-height:1.5;color:var(--muted)}
+.timeline{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line-strong)}
+.timeline li{--accent:var(--practice);position:relative;min-width:0;padding:18px 16px 0 0;border-right:1px solid var(--line)}
+.timeline li:last-child{border-right:0}
+.timeline li::before{content:"";position:absolute;top:-4px;left:0;width:7px;height:7px;background:var(--accent);border-radius:50%}
+.timeline .tl-research{--accent:var(--research)}
+.timeline .tl-visible{--accent:var(--visible)}
+.timeline .tl-gap{--accent:var(--danger)}
+.timeline .tl-audit{--accent:var(--practice)}
+.timeline time{display:block;margin-bottom:4px;font-family:var(--mono);font-size:.5625rem;letter-spacing:.08em;color:var(--muted)}
+.timeline strong{display:block;font-size:.875rem;font-weight:600;line-height:1.3}
+.timeline span{display:block;margin-top:3px;font-size:.75rem;line-height:1.4;color:var(--muted)}
+.closing{margin-top:24px;padding-top:24px;border-top:2px solid var(--ink)}
+.big-question{margin:0 0 18px;font-family:var(--display);font-size:clamp(1.9rem,3.8vw,3rem);font-weight:400;line-height:1.05;letter-spacing:-.02em;text-wrap:balance}
+.big-question em{font-style:italic;color:var(--practice)}
+.closing-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:32px}
+.closing p{margin:0;font-size:.9375rem;line-height:1.6;color:var(--ink-2);max-width:58ch}
+.closing aside{padding-left:20px;border-left:1px solid var(--line)}
+.closing aside p{font-family:var(--mono);font-size:.6875rem;line-height:1.6;color:var(--muted)}
+.foot{margin-top:48px;padding-top:14px;border-top:1px solid var(--line);font-family:var(--mono);font-size:.625rem;line-height:1.7;color:var(--muted)}
+.foot a{text-decoration:none;border-bottom:1px solid var(--line-strong)}
+.tension h3 em{font-style:italic;font-weight:400;color:var(--muted);font-size:.8em}
+.subhead{margin:32px 0 0;font-family:var(--mono);font-size:.625rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+code{font-family:var(--mono);font-size:.8125em;background:var(--surface-2);border:1px solid var(--line);padding:1px 4px}
+.toc-title,.ledger dt,.ledger dd span,.strata-top,.layer-index,.kicker,.status,.fault span,.pullquote cite,.tension-id,.tag,.pole span,.stake b,caption,thead th,.timeline time,.subhead{font-size:.6875rem}
+.table-note,.foot{font-size:.75rem}
+@media(max-width:980px){
+  .wrap{grid-template-columns:1fr;gap:0;padding:0 20px 44px}
+  .toc{position:sticky;top:0;z-index:30;display:flex;gap:4px;max-height:none;overflow-x:auto;background:var(--bg);border-bottom:1px solid var(--line);margin:0 -20px;padding:10px 20px;grid-row:auto}
+  .toc-title{display:none}
+  .toc a{white-space:nowrap;border-left:0;border-bottom:2px solid transparent;padding:6px 10px}
+  .toc a.active{border-bottom-color:var(--practice);background:var(--surface)}
+  .main{padding-top:24px}
+  .sec-head{scroll-margin-top:56px}
+  .layer{grid-template-columns:44px minmax(0,1fr);gap:10px 14px}
+  .layer-side{grid-column:2;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:8px 12px;border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:12px}
+  .layer-side .side-note{font-size:.625rem}
+  .tensions{grid-template-columns:1fr}
+  .poles{grid-template-columns:1fr;gap:10px}
+  .closing-grid{grid-template-columns:1fr;gap:20px}
+  .closing aside{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:16px}
+  .timeline{grid-template-columns:1fr;border-top:0;border-left:1px solid var(--line-strong);margin-left:6px}
+  .timeline li{border-right:0;border-bottom:1px solid var(--line);padding:0 0 14px 18px}
+  .timeline li:last-child{border-bottom:0}
+  .timeline li::before{top:5px;left:-4px}
+}
+@media(max-width:600px){
+  .main{padding-top:16px}
+  .masthead{padding:4px 0 18px}
+  .eyebrow{margin-bottom:12px}
+  h1{font-size:clamp(2.4rem,11vw,3rem);margin-bottom:12px}
+  .standfirst{font-size:1rem;line-height:1.5}
+  .ledger{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:20px}
+  .ledger>div{padding:8px 8px 8px 0;border-right:1px solid var(--line)}
+  .ledger>div:nth-child(1),.ledger>div:nth-child(2){border-bottom:0}
+  .ledger dd{font-size:1.5rem}
+  .ledger dd span{display:block;margin:2px 0 0;font-size:.6875rem;line-height:1.2}
+  .ledger dt{letter-spacing:.05em}
+  #strates .sec-head{margin-top:28px;padding-top:10px}
+  .sec-head p{font-size:.875rem}
+  .strata-top{flex-direction:column;gap:2px}
+  .layer{padding:22px 18px 24px}
+  .layer-index strong{font-size:2.2rem}
+  .fault{padding:0 18px}
+  .fault span{white-space:normal;line-height:1.4}
+  .tension{padding:18px}
+  .tension .tag{margin-left:0}
+  .big-question{font-size:1.9rem}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+@media print{.toc{display:none}.wrap{display:block;max-width:none}.strata,.tension,.table-wrap{box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc" id="toc" aria-label="Sommaire">
+  <div class="toc-title">Sommaire</div>
+  <a href="#strates">01 · Strates</a>
+  <a href="#tensions">02 · Tensions</a>
+  <a href="#preuves">03 · Preuves</a>
+  <a href="#question">04 · Question</a>
+</nav>
+<main class="main">
+<header class="masthead">
+  <p class="eyebrow">Expanse · lecture du dépôt · 28 octobre 2026</p>
+  <h1>Trois couches,<br><em>une seule question.</em></h1>
+  <p class="standfirst">Ce que le dépôt <strong>pratique</strong>, ce qu’il cherche à <strong>prouver</strong>, ce qu’il donne à <strong>voir</strong> — et pourquoi les trois ne sont pas encore d’accord.</p>
+  <dl class="ledger">
+    <div><dt>Docs actives</dt><dd>7 602<span>lignes</span></dd></div>
+    <div><dt>Noyau V18</dt><dd>989<span>lignes</span></dd></div>
+    <div><dt>Golden Record</dt><dd class="zero">0<span>cellule</span></dd></div>
+    <div><dt>Cortex</dt><dd>410<span>tests</span></dd></div>
+  </dl>
+</header>
+<section id="strates" aria-labelledby="strates-title">
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <h2 id="strates-title">Les trois strates</h2>
+    <p>Une même intuition, trois régimes de vérité. Une couche n’est pas un module : c’est ce qui compte comme preuve.</p>
+  </div>
+
+  <figure class="strata">
+    <div class="strata-top"><span>Profil du dépôt</span><span>Une intuition · trois régimes</span></div>
+
+    <article class="layer layer--practice">
+      <div class="layer-index"><span>01</span><strong>I</strong></div>
+      <div class="layer-copy">
+        <p class="kicker">Pratique</p>
+        <h3>KERNEL + runtime V17</h3>
+        <blockquote>« Tu ES le système. »</blockquote>
+        <p>Les signes sont des organes. Premier token Ψ, préfixes Σ/Ψ/Φ/Ω/Μ, mémoire Mnemolite. Une pratique qui a déjà choisi sa réponse.</p>
+      </div>
+      <div class="layer-side">
+        <span class="status">A déjà répondu</span>
+        <p class="side-note">Question : comment penser ?</p>
+      </div>
+    </article>
+
+    <div class="fault"><span><b>Faille 01</b> · ontologie ⇄ falsification</span></div>
+
+    <article class="layer layer--research">
+      <div class="layer-index"><span>02</span><strong>II</strong></div>
+      <div class="layer-copy">
+        <p class="kicker">Recherche</p>
+        <h3>VISION · PFD · PRD · SPEC v18</h3>
+        <blockquote>« Est-ce que “tu ES” change quelque chose ? »</blockquote>
+        <p>Q1–Q7, verdict à quatre niveaux, témoin neutre, aveugle dilué, juge séparé. Un protocole qui suspend la réponse.</p>
+      </div>
+      <div class="layer-side">
+        <span class="status">Suspend la réponse</span>
+        <p class="side-note">Question : est-ce que ça marche ?</p>
+      </div>
+    </article>
+
+    <div class="fault"><span><b>Faille 02</b> · protocole ⇄ interface</span></div>
+
+    <article class="layer layer--visible">
+      <div class="layer-index"><span>03</span><strong>III</strong></div>
+      <div class="layer-copy">
+        <p class="kicker">Visible</p>
+        <h3>expanse-cortex</h3>
+        <blockquote>« Donne à voir le signal. »</blockquote>
+        <p>React, runtime MCP, 410 tests. Déployé sur GitHub Pages. Exclu du PRD §7.5. Une interface qui rend la pratique observable.</p>
+      </div>
+      <div class="layer-side">
+        <span class="status">Rend visible</span>
+        <p class="side-note">Question : à quoi ça ressemble ?</p>
+      </div>
+    </article>
+
+    <figcaption>La même intuition, trois régimes de vérité. <b>Ce qui compte comme preuve change d’une couche à l’autre.</b></figcaption>
+  </figure>
+
+  <div class="pullquote">
+    <p>« Ce qui marche à l’œil n’est pas ce qui est mesuré. »</p>
+    <cite>Audit #4 · truth-engine vs Expanse · 4 juillet 2026</cite>
+  </div>
+</section>
+
+<section id="tensions" aria-labelledby="tensions-title">
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <h2 id="tensions-title">Les quatre tensions</h2>
+    <p>Elles ne sont pas des bugs. Ce sont les endroits où les couches se contredisent — et où le projet doit choisir.</p>
+  </div>
+
+  <div class="tensions">
+    <article class="tension tension--foundational">
+      <div class="tension-head"><span class="tension-id">T1</span><h3>Ontologie <em>vs</em> falsification</h3><span class="tag">Risque fondateur</span></div>
+      <div class="poles">
+        <div class="pole"><span>KERNEL §XII</span><p><strong>« JE SUIS EXPANSE. »</strong> La réponse est l’identité.</p></div>
+        <div class="pole"><span>VISION §2 · Q5</span><p><strong>« Tu ES » vs « tu joues ».</strong> La réponse est une hypothèse à mesurer.</p></div>
+        <p class="stake"><b>Enjeu</b>Si Q5 est invalidé, la couche ontologique doit être révisée. Le projet accepte ce risque.</p>
+      </div>
+    </article>
+
+    <article class="tension tension--blocking">
+      <div class="tension-head"><span class="tension-id">T2</span><h3>Protocole <em>vs</em> instrument</h3><span class="tag">Blocage actuel</span></div>
+      <div class="poles">
+        <div class="pole"><span>PFD §7</span><p><strong>n ≥ 30 · p &lt; 0,05.</strong> Cinq questions, deux familles, trois conditions.</p></div>
+        <div class="pole"><span>État du dépôt</span><p><strong>0 cellule.</strong> Aucun run_test.sh, ~900 générations estimées.</p></div>
+        <p class="stake"><b>Enjeu</b>Le protocole est plus précis que l’outil censé l’exécuter.</p>
+      </div>
+    </article>
+
+    <article class="tension tension--scope">
+      <div class="tension-head"><span class="tension-id">T3</span><h3>Recherche <em>vs</em> interface</h3><span class="tag">Hors périmètre</span></div>
+      <div class="poles">
+        <div class="pole"><span>PRD §7.5</span><p><strong>Aucune UI.</strong> Interface = Bash CLI, par décision de périmètre.</p></div>
+        <div class="pole"><span>expanse-cortex</span><p><strong>277 fichiers · 410 tests.</strong> Déployé sur GitHub Pages.</p></div>
+        <p class="stake"><b>Enjeu</b>La partie la plus construite est officiellement exclue de la Phase 1.</p>
+      </div>
+    </article>
+
+    <article class="tension tension--governance">
+      <div class="tension-head"><span class="tension-id">T4</span><h3>Trois entrées <em>vs</em> une hiérarchie</h3><span class="tag">Gouvernance</span></div>
+      <div class="poles">
+        <div class="pole"><span>README</span><p><strong>INDEX_V17 + runtime V17.</strong> Le chemin historique.</p></div>
+        <div class="pole"><span>INDEX_V18 + cortex</span><p><strong>Le cadre actif.</strong> Mais le cortex a son propre README.</p></div>
+        <p class="stake"><b>Enjeu</b>Un lecteur à froid peut suivre trois chemins et ne jamais voir le même projet.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="preuves" aria-labelledby="preuves-title">
+  <div class="sec-head">
+    <span class="sec-num">03</span>
+    <h2 id="preuves-title">Ce que chaque couche prouve</h2>
+    <p>Le même dépôt, lu comme trois dossiers de preuve. Les chiffres sont mesurés ; les statuts sont des jugements explicites.</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <caption>Registre des preuves · 28 octobre 2026</caption>
+      <thead><tr><th scope="col">Couche</th><th scope="col">Question</th><th scope="col">Statut de preuve</th><th scope="col">Artefact</th><th scope="col">Risque principal</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Pratique</th><td>Comment penser ?</td><td>Postulat non mesuré</td><td>KERNEL + 86 lignes de runtime</td><td>Postulat, auto-biais</td></tr>
+        <tr><th scope="row">Recherche</th><td>Est-ce que ça marche ?</td><td>Protocole sans instrument</td><td>989 lignes de noyau, 0 cellule</td><td>Faux positif, fossilisation</td></tr>
+        <tr><th scope="row">Visible</th><td>À quoi ça ressemble ?</td><td>Application testée</td><td>277 fichiers, 410 tests</td><td>Hors périmètre</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="table-note">Chiffres mesurés le 28/10/2026 : docs actives hors <code>_legacy</code>, noyau V18 (VISION + PFD + PRD + SPEC), tag Mnemolite <code>kind:golden_cell</code>, tests Vitest du cortex. Détail et limites : audit du 2026-10-28.</p>
+
+  <h3 class="subhead">La chronologie courte</h3>
+  <ol class="timeline">
+    <li><time>02 · 07 · 2026</time><strong>Runtime V17</strong><span>3 fichiers, 86 lignes</span></li>
+    <li class="tl-research"><time>03 · 07</time><strong>Réorganisation doc</strong><span>9 sous-dossiers, 330 fichiers en legacy</span></li>
+    <li class="tl-research"><time>04 · 07</time><strong>Noyau V18</strong><span>VISION · PFD · PRD · SPEC + audit #4</span></li>
+    <li class="tl-gap"><time>04 · 07 → 28 · 10</time><strong>Dormance</strong><span>0 cellule Golden Record</span></li>
+    <li class="tl-audit"><time>28 · 10</time><strong>Audit + sauvegarde</strong><span>Travail V18 poussé, Pages réparé</span></li>
+  </ol>
+</section>
+
+<section id="question" aria-labelledby="question-title">
+  <div class="closing">
+    <p class="eyebrow">La question qui reste</p>
+    <h2 id="question-title" class="big-question">La question n’est pas « est-ce que ça marche ? ».<br><em>C’est « laquelle des trois couches gouverne ? ».</em></h2>
+    <div class="closing-grid">
+      <p>Tant qu’elles ne sont pas hiérarchisées, chaque document peut être lu dans le régime qui l’arrange : la pratique y voit une confirmation, la recherche une hypothèse, l’interface une œuvre. Le projet n’a pas encore produit la mesure qui trancherait — et c’est cette absence, plus que la complexité, qui fait tenir les trois couches ensemble.</p>
+      <aside><p><strong>Ce que ce schéma ne dit pas :</strong> il ne prétend pas que l’effet existe ou n’existe pas. Il montre où le dépôt affirme, où il teste, et où il montre — sans encore décider qui a le dernier mot.</p></aside>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <p>Sources : <a href="../../KERNEL.md">KERNEL.md</a> · <a href="../VISION.md">VISION</a> · <a href="../PFD.md">PFD</a> · <a href="../PRD.md">PRD</a> · <a href="../05-audits/2026-10-28_v18_AUDIT_point-projet-expanse_DRAFT.md">audit du 28/10/2026</a>.</p>
+  <p>Schéma dérivé de la lecture directe du dépôt. Chiffres mesurés le 28 octobre 2026 ; les interprétations sont signalées comme telles. Page autonome, sans dépendance de build.</p>
+</footer>
+</main>
+</div>
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('#toc a'));
+  var secs = links.map(function(a){ return {a:a, el:document.getElementById(a.getAttribute('href').slice(1))}; }).filter(function(s){ return s.el; });
+  if(!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      links.forEach(function(l){ l.classList.remove('active'); });
+      var hit = secs.filter(function(s){ return s.el === e.target; })[0];
+      if(hit) hit.a.classList.add('active');
+    });
+  }, {rootMargin:'-10% 0px -75% 0px'});
+  secs.forEach(function(s){ io.observe(s.el); });
+})();
+</script>
+</body>
+</html>
