@@ -73,7 +73,7 @@ function App() {
         {/* HUD: Title */}
         <div className="fixed top-6 left-6 z-10 hud">
           <h1 className="text-fg text-lg font-semibold mb-2">Σ→Ψ⇌Φ→Ω→Μ</h1>
-          <p className="text-fg text-sm mb-1 opacity-90">EXPANSE V16 — CARTOGRAPHIE</p>
+          <p className="text-fg text-sm mb-1 opacity-90">EXPANSE V18 — CARTOGRAPHIE</p>
           <p className="text-overlay0 text-xs opacity-70">
             Click noeud pour inspecter • Molette zoom • Drag pan
           </p>
