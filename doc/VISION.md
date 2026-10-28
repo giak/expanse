@@ -1,13 +1,30 @@
 ---
 type: VISION
-version: v17
+version: v18
 status: ACTIVE
 title: "Vision — Cadre empirique de validation d'un méta-langage cognitif LLM"
 created: 2026-07-04
+last_revised: 2026-07-04
 project: Expanse (pré-cadrage — pas une implémentation)
+# Note : VISION est le doc RACINE de la hiérarchie documentaire Expanse. Les 3 docs listés ci-dessous ne sont PAS des dépendances amont (au sens littéral « VISION ne peut exister sans eux ») mais des descendants : PFD/PRD/SPEC op.érationnalisent VISION. Le label `depends_on` est conservé par convention croisée avec PFD/PRD (qui eux dépendent littéralement de VISION) ; l'inversion de sens dans VISION est assumée et documentée ici pour les parseurs YAML en mode strict.
+depends_on:
+  - doc/PFD.md (v6 ACTIVE, descendant) — cadrage opérationnel, infrastructure exécutive Phase 1, op.érationnalise ce VISION
+  - doc/PRD.md (v1.1 ACTIVE, descendant) — exigences produit concrètes et testables, formalise les critères §2/§5/§8/§9 de ce VISION
+  - doc/01-specs/2026-07-04_v18_SPEC_juge-semantique-d8_ACTIVE.md (descendant) — spécification opérationnelle du juge D8, op.érationnalise §2 Q2/Q5 + §4 protocole bic.éphale de ce VISION
+audit_trail: "v1 → v18 : document macroscopique, itère sans dupliquer PFD/PRD/SPEC. v17 → v18 : cross-doc dette refermée — ajout des dépendances descendantes (PFD v6 + PRD v1.1 + SPEC v18.1) rendues nécessaires après création du PRD (post-VISION v17) ; ajout du bloc 'Voir aussi — hiérarchie documentaire' (Au-dessus = c'est le doc racine / Ce document = VISION v18 / En-dessous = PFD + PRD + SPEC) ; ajout d'une mention v18 (2026-07-04) documentant la clôture de l'audit antagoniste profond #4 vs truth-engine v2 (cf. doc/05-audits/2026-07-04_truth-engine-vs-expanse_AUDIT-04.md) — la contrainte de neutralité thématique (PRD v1.1 §5.1 EF-1 corollaire Anti-TE + CA-S-4 + PFD v6 §4 H5) est compatible avec VISION §6 (agnosticité) et VISION §9-a (témoins neutres) sans modification des sept questions Q1-Q7."
 ---
 
 # VISION — Cadre de validation d'un méta-langage cognitif LLM
+
+> **Voir aussi — hiérarchie documentaire Expanse (VISION = doc racine).**
+> - **Au-dessus** : néant (VISION est la racine, pas de doc parent dans cette hiérarchie).
+> - **Ce document** : VISION v18 (cadrage macroscopique : pourquoi + quoi, 9 sections, agnosticité Q1-Q7).
+> - **En-dessous (docs dérivés)** :
+>   - `doc/PFD.md` (v6 ACTIVE) — **opérationnalise** VISION en posant les décisions D1-D8, hypothèses H1-H5, risques R1-R3, livrables Phase 1.
+>   - `doc/PRD.md` (v1.1 ACTIVE) — **exigences produit concrètes** : 9 sections + 14 EF + 16 ENF + 9 CA-I + 10 CA-S + 3 personas + 4 R-PRD. Formalise les critères de succès Q1-Q7.
+>   - `doc/01-specs/2026-07-04_v18_SPEC_juge-semantique-d8_ACTIVE.md` — **spécification opérationnelle** du juge LLM tiers local (8 sections, opérationnalise PFD D8 pour Q2/Q5).
+>
+> VISION ne duplique ni PFD, ni PRD, ni SPEC. Les sept questions de recherche (§2), les critères de succès (§5), les contraintes (§6), les exclusions (§7) et les critères d'arrêt (§8) restent la **référence non-négociable**. Pour toute question d'opérationnalisation (comment mesurer, comment juger, quel triangle abc), voir les docs dérivés.
 
 > **Positionnement.** Ce document de vision définit le **pourquoi** et le **quoi** d'une investigation empirique sur l'opportunité, la mesurabilité et les conditions d'efficacité d'un méta-langage cognitif dédié pour les LLM — projet dénommé *Expanse*. Il ne fixe pas le **comment** (architecture, scripts, schémas) — c'est le rôle de la spécification. Il reste macroscopique. Il est volontairement agnostique : il ne définit pas les symboles particuliers, ni n'adopte un jargon interne.
 
