@@ -4,7 +4,7 @@ version: v1.1
 status: ACTIVE
 title: "Product Requirements Document — Expanse Phase 1 (Framework de mesure empirique)"
 created: 2026-07-04
-last_revised: 2026-07-04
+last_revised: 2026-10-28
 project: "Expanse (Phase 1 : recherche empirique sur méta-langage cognitif LLM)"
 depends_on:
   - doc/VISION.md
@@ -94,6 +94,8 @@ Obtenir un **Golden Record défendable** (cf. `PFD §7`) — archive complète e
 | **O4** | Significativité statistique | p-value < 0.05 par cellule, IC 95 % reporté (cf. PFD §7) | Fin Phase 1 |
 | **O5** | Reproductibilité multi-substrat | Au moins **2 modèles de familles architecturales distinctes** par question testée (cf. PFD H4) | Chaque test dès la 1re itération |
 | **O6** | Taux de rejets parse/variance | ≤ 5 % des cellules marquées `JUDGE_PARSE_FAILURE` ou `JUDGE_VARIANCE_FAILURE` (cf. SPEC v18.1 §5) | Glissant, sur chaque batch de 50 runs |
+
+> **Note d'interprétation (2026-10-28).** O1 vise la première **cellule Golden Record** Q1 ; les runs exploratoires n'en font pas partie. O1 reste inchangé. Décision et conséquences : [plan du pilote Q1](03-plans/2026-10-28_v18_PLAN_pilote-q1_DRAFT.md).
 
 ### §3.3 — Objectif d'arrêt (pour cadrage)
 
