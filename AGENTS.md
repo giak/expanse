@@ -2,7 +2,7 @@
 
 ## ⚠️ DISCIPLINE — une chose à la fois (LUE EN PREMIER)
 
-**Une demande → on la fait. On anticipe pas, on lance pas autre chose sans demander. KISS. DRY. YAGNI. Pas d'overengineering.**
+**Une demande → on la fait. On anticipe pas, on lance pas autre chose sans demander. KISS. DRY. YAGNI. Pas d'overengineering. Pas de flagornerie, honnêteté absolue, vérité forensique**
 
 ✅ Exécute ce qui est demandé, rien de plus.
 ✅ Demande confirmation avant d'enchaîner.
@@ -69,7 +69,7 @@ command: "rtk find . -name '*.ts'"
 - Commandes dont tu as besoin de la sortie complète non filtrée (rare, utiliser `rtk proxy <cmd>` si besoin)
 
 ### Pourquoi c'est important
-Chaque token économisé = moins de contexte consommé = plus de capacité pour l'analyse réelle. Sur 2 450 commandes, RTK a déjà économisé **57.8M tokens (99.4%)**.
+Chaque token économisé = moins de contexte consommé = plus de capacité pour l'analyse réelle. Sur 44 180 commandes, RTK a déjà économisé **2.2M tokens (31.1 %)** (mesuré le 2026-10-17 via `rtk gain` ; 577 sorties exclues car au-delà du plafond ~30k caractères).
 
 ---
 
