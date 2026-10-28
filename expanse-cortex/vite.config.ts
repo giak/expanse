@@ -29,8 +29,8 @@ const TRIANGULATION_EFFECTS = new Set([
   'TriPoleOrbit', 'ConfianceGauge', 'PacketFlowRenderer',
 ])
 
-export default defineConfig({
-  base: '/expanse/',
+export default defineConfig(({ mode }) => ({
+  base: mode === 'production' ? '/expanse/' : '/',
   plugins: [
     react({
       babel: {
@@ -102,4 +102,4 @@ export default defineConfig({
     setupFiles: './src/test/setup.ts',
     include: ['src/**/__tests__/*.test.{ts,tsx}'],
   },
-})
+}))
