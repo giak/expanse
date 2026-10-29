@@ -1,6 +1,6 @@
 # 📜 INDEX V17 —  navigation catalog
 
-> Catalogue exhaustif des fichiers V17-related archivés. Pour brainstorming V17 actif, ce fichier sert de point d'entrée.
+> Catalogue exhaustif des fichiers V17-related archivés. Pour consulter le corpus V17 archivé, ce fichier sert de point d'entrée.
 > Volume total `` : ~310 fichiers .md. Seuls les V17-relevant (12 fichiers) sont listés ici.
 > Pour naviguer le reste : `find  -name '*.md' | head -30` ou `grep -rl '\bV17\b' `.
 
@@ -50,7 +50,7 @@
 | Fichier | Lignes | Description |
 |---------|--------|-------------|
 | `04-tests/2026-07-03_v17_TEST_s14-retrogression_ARCHIVED.md` | 729 | 🧪 Test S14 Rétrogression — Expanse V17.6 vs V16 vs Baseline. **Date :** 2026-07-03 — **ARCHIVED** |
-| `tests/exec-s14-v17.sh` | 174 | =============================================================================. set -euo pipefail |
+| `04-tests/exec-s14-v17.sh` | 174 | =============================================================================. set -euo pipefail |
 
 ## 🗺️ Adjacents
 

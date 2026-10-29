@@ -14,7 +14,7 @@ L'audit V16 + brainstorm multi-LLM ont identifié **un gap critique** : Expanse 
 **Scope user-confirmed** :
 - ✅ freebuff = substrat LLM à tester (équivalent opencode/kilocode/claude-code)
 - ✅ Métriques : substance technique + conformité Expanse ΣΨΦΩ΂ + cross-host robustness
-- ❌ **PAS** de Style SEC (sera testé dans `doc/tests/` séparément)
+- ❌ **PAS** de Style SEC (sera testé dans `doc/04-tests/` séparément)
 - ✅ Architecture : sous-projet dédié `expanse-lab/`
 - ✅ Horizon : **spéc d'abord, code ensuite** (ce doc + README — pas de code cette itération)
 
@@ -22,15 +22,15 @@ L'audit V16 + brainstorm multi-LLM ont identifié **un gap critique** : Expanse 
 
 ## §I. Contexte et motivation
 
-### Pourquoi un SOUS-PROJET (pas une extension de doc/tests)
+### Pourquoi un SOUS-PROJET (pas une extension de doc/04-tests)
 
 **3 raisons structurelles** :
 
-1. **Isolation des deps** : cross-host nécessite API key externes (Anthropic, OpenAI, claude-code API, freebuff si dispo), shell sandbox spécifiques, et un workflow CI/CD propre. Polluer `doc/tests/` avec ces deps casserait la portabilité actuelle.
+1. **Isolation des deps** : cross-host nécessite API key externes (Anthropic, OpenAI, claude-code API, freebuff si dispo), shell sandbox spécifiques, et un workflow CI/CD propre. Polluer `doc/04-tests/` avec ces deps casserait la portabilité actuelle.
 
 2. **Living experiment vs frozen protocol** : `doc/04-tests/2026-07-03_v17_TEST_s14-retrogression_ARCHIVED.md` = protocole archivé (référence pour reproductibilité). `expanse-lab/` = living experiment (changelog, versioning, releases, benchmarks successifs).
 
-3. **3 communautés cibles différentes** : `doc/tests/` = chercheurs Expanse interne (giak, OpenCode audit). `expanse-lab/` = contributeurs externes (open-source prompt-eval community, freebuff devs, kilocode devs).
+3. **3 communautés cibles différentes** : `doc/04-tests/` = chercheurs Expanse interne (giak, OpenCode audit). `expanse-lab/` = contributeurs externes (open-source prompt-eval community, freebuff devs, kilocode devs).
 
 ### Le gap identifié — citations audit
 
@@ -117,7 +117,7 @@ expanse-lab/                                  ← ce sous-projet, dédié
 - **Atomic writes** : chaque `runs/{date}/{substrat}/{exp_prompt}/{task}.json` est écrit en une opération (pas de demi-JSON si crash).
 - **Idempotent** : relancer un run vérifie l'existence du fichier avant d'appel LLM.
 - **Reproducible from git** : clone du repo à une SHA donnée = rejouer exactement le même run avec les mêmes seeds.
-- **Decoupled from doc/tests/** : expanse-lab a sa propre histoire git, sa propre CI. Contrib externe ne pollue pas le projet principal.
+- **Decoupled from doc/04-tests/** : expanse-lab a sa propre histoire git, sa propre CI. Contrib externe ne pollue pas le projet principal.
 
 ---
 
@@ -280,7 +280,7 @@ Output : `reports/{date}_run-{N}_report.md` auto-généré (template Jinja2, inc
 
 **Patch reviewer Q4** : A1 substance remontée à 50% (la mesure la plus substrat-indépendante), A2 réduite à 20% (substrat-dépendant car KiloCode/opencode auto-inject). A4 = **QC Indicator** (info debug), pas dans `score_total`.
 
-**Note** : STYLE SEC (zéro politesse, concision) est **hors scope** user-confirmed. Mesuré séparément dans `doc/tests/`. Pas dans `expanse-lab/`.
+**Note** : STYLE SEC (zéro politesse, concision) est **hors scope** user-confirmed. Mesuré séparément dans `doc/04-tests/`. Pas dans `expanse-lab/`.
 
 ### A1 — Substance technique (comptables observables)
 

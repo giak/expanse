@@ -14,7 +14,7 @@
 # Total runs: 30 JSON outputs in s14-v17-{date}/{A,B,C}/.
 #
 # Usage:
-#   bash doc/tests/exec-s14-v17.sh [--dry-run] [--quick-test]
+#   bash doc/04-tests/exec-s14-v17.sh [--dry-run] [--quick-test]
 #
 # Options:
 #   --dry-run    Print commands without executing
@@ -32,7 +32,7 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-TEST_DIR="$REPO_ROOT/doc/tests"
+TEST_DIR="$REPO_ROOT/doc/04-tests"
 DATE="$(date +%Y-%m-%d)"
 RESULTS_DIR="$TEST_DIR/results/s14-v17-$DATE"
 V17_PROMPT="$REPO_ROOT/runtime/2026-07-02_v17-minimal-iteration-2_v17.md"
@@ -164,9 +164,9 @@ done
 
 echo ""
 echo "Next steps:"
-echo "  1. Annoter la feuille de score: doc/tests/results/s14-v17-scoresheet-template.md"
-echo "  2. Exécuter l'analyse:        python doc/tests/results/analyze-s14-v17.py"
-echo "  3. Vérifier le verdict:       cat doc/tests/results/s14-v17-$DATE/analysis.md"
+echo "  1. Annoter la feuille de score: doc/04-tests/results/s14-v17-scoresheet-template.md"
+echo "  2. Exécuter l'analyse:        python doc/04-tests/results/analyze-s14-v17.py"
+echo "  3. Vérifier le verdict:       cat doc/04-tests/results/s14-v17-$DATE/analysis.md"
 echo ""
 
 # =============================================================================
