@@ -1,12 +1,15 @@
 ---
 type: TEST
 version: v17
-status: ACTIVE
+status: ARCHIVED
 title: "Simulation — Socle minimal du framework de test (Ollama)"
 created: 2026-07-04
-updated: 2026-07-04
+updated: 2026-10-28
 supersedes: "Version complexe multi-modèle/multi-question (obsolète)"
 ---
+
+> **Document historique V17 — non compatible avec V18.**
+> Ne pas l'utiliser comme framework courant. Les contradictions et les briques réutilisables sont documentées dans [l'audit V17 vs V18](../05-audits/2026-10-28_v18_AUDIT_v17-bricks-vs-v18_DRAFT.md).
 
 # SIMULATION — Socle minimal du framework de test
 

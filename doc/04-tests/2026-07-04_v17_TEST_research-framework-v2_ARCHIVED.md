@@ -1,12 +1,15 @@
 ---
 type: TEST
 version: v17
-status: ACTIVE
+status: ARCHIVED
 title: "Expanse Research Framework — Spec v2"
 created: 2026-07-04
-updated: 2026-07-04
-supersedes: "doc/04-tests/2026-07-04_v17_TEST_test-framework-spec_ACTIVE.md"
+updated: 2026-10-28
+supersedes: "doc/04-tests/2026-07-04_v17_TEST_test-framework-spec_ARCHIVED.md"
 ---
+
+> **Document historique V17 — non compatible avec V18.**
+> Ne pas l'utiliser comme framework courant. Les contradictions et les briques réutilisables sont documentées dans [l'audit V17 vs V18](../05-audits/2026-10-28_v18_AUDIT_v17-bricks-vs-v18_DRAFT.md).
 
 # EXPANSE RESEARCH FRAMEWORK — Spec v2
 
@@ -439,8 +442,8 @@ INCERTAINES. Isoler la calibration de l'incertitude.
 
 | Fichier | Contenu |
 |---------|---------|
-| `doc/04-tests/2026-07-04_v17_TEST_research-framework-v2_ACTIVE.md` | Cette spec |
-| `doc/04-tests/2026-07-04_v17_TEST_protocol-simulation_ACTIVE.md` | Simulation complète (Ollama) |
+| `doc/04-tests/2026-07-04_v17_TEST_research-framework-v2_ARCHIVED.md` | Cette spec |
+| `doc/04-tests/2026-07-04_v17_TEST_protocol-simulation_ARCHIVED.md` | Simulation complète (Ollama) |
 | `doc/04-tests/definitions/` | Fichiers JSON de définition des tests |
 | `run_test.sh` | Script orchestrateur (bash + ollama) |
 

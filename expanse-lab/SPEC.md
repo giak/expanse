@@ -3,7 +3,7 @@
 **Date** : 2026-07-03
 **Statut** : ⚡ Spéc d'abord, code ensuite (Phase 0 du sous-projet)
 **Auteur** : Buffy (Codebuff) — brainstorm validé par user via Q&R
-**Inspiration** : audit-prompt-v16-rapport.md §13 ("le test que personne ne fait"), versions/v15/2026-07-02_s14-guide_v15.md (V15 S14 v1), doc/tests/v17-s14-retrogression-test.md (V17 S14 ready-to-execute), audit V16 §V.1 (Rétrogression)
+**Inspiration** : audit-prompt-v16-rapport.md §13 ("le test que personne ne fait"), versions/v15/2026-07-02_s14-guide_v15.md (V15 S14 v1), doc/04-tests/2026-07-03_v17_TEST_s14-retrogression_ARCHIVED.md (V17 S14 archivé), audit V16 §V.1 (Rétrogression)
 
 ---
 
@@ -28,7 +28,7 @@ L'audit V16 + brainstorm multi-LLM ont identifié **un gap critique** : Expanse 
 
 1. **Isolation des deps** : cross-host nécessite API key externes (Anthropic, OpenAI, claude-code API, freebuff si dispo), shell sandbox spécifiques, et un workflow CI/CD propre. Polluer `doc/tests/` avec ces deps casserait la portabilité actuelle.
 
-2. **Living experiment vs frozen protocol** : `doc/tests/v17-s14-retrogression-test.md` = protocole frozen (référence pour reproductibilité). `expanse-lab/` = living experiment (changelog, versioning, releases, benchmarks successifs).
+2. **Living experiment vs frozen protocol** : `doc/04-tests/2026-07-03_v17_TEST_s14-retrogression_ARCHIVED.md` = protocole archivé (référence pour reproductibilité). `expanse-lab/` = living experiment (changelog, versioning, releases, benchmarks successifs).
 
 3. **3 communautés cibles différentes** : `doc/tests/` = chercheurs Expanse interne (giak, OpenCode audit). `expanse-lab/` = contributeurs externes (open-source prompt-eval community, freebuff devs, kilocode devs).
 
@@ -284,7 +284,7 @@ Output : `reports/{date}_run-{N}_report.md` auto-généré (template Jinja2, inc
 
 ### A1 — Substance technique (comptables observables)
 
-Inspiré de `doc/tests/v17-s14-retrogression-test.md` Axe 1 patch reviewer 2nd pass :
+Inspiré de `doc/04-tests/2026-07-03_v17_TEST_s14-retrogression_ARCHIVED.md` Axe 1 patch reviewer 2nd pass :
 
 | Compteur | Regex | Contribution max |
 |----------|-------|------------------|

@@ -1,7 +1,19 @@
+---
+type: TEST
+version: v17
+status: ARCHIVED
+title: "S14 — guide du test Expanse vs baseline"
+created: 2026-07-02
+updated: 2026-10-28
+---
+
+> **Document historique V17 — non compatible avec V18.**
+> Ne pas l'utiliser comme protocole courant. Les contradictions et les briques réutilisables sont documentées dans [l'audit V17 vs V18](../05-audits/2026-10-28_v18_AUDIT_v17-bricks-vs-v18_DRAFT.md).
+
 # 🎯 Step 4 — Guide Concret : Le Test S14 (Expanse vs Baseline)
 
 **Date :** 2 juillet 2026
-**Statut :** ⚡ À exécuter (Steps 0–3 ✅)
+**Statut :** archivé le 2026-10-28 — historique V17, ne pas exécuter.
 **Coût :** ~$1.50 total (30 appels LLM × ~$0.05)
 **Durée réelle :** ≤ 1h de calcul + ≤ 3j d'analyse humaine
 

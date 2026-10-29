@@ -8,7 +8,7 @@ created: 2026-07-03
 last_reviewed: 2026-07-03
 related:
   - "../02-brainstorms/expanse-v17-brainstorm.md"
-  - "../01-specs/expanse-v17-recette.md"
+  - "../01-specs/2026-07-02_v17_RECETTE_expanse-v17_ARCHIVED.md"
   - "../01-specs/expanse-v17-recette-response.md"
 tags: [v17-to-v18, mutation, kernel, v18, cristallisats]
 ---

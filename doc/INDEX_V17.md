@@ -4,6 +4,8 @@
 > Volume total `` : ~310 fichiers .md. Seuls les V17-relevant (12 fichiers) sont listés ici.
 > Pour naviguer le reste : `find  -name '*.md' | head -30` ou `grep -rl '\bV17\b' `.
 
+> **Mise à jour 2026-10-28 :** les trois protocoles exécutables V17 (S14 guide, S14 rétrogression, recette) sont archivés — voir [l'audit V17 vs V18](05-audits/2026-10-28_v18_AUDIT_v17-bricks-vs-v18_DRAFT.md).
+
 ## 🎨 Brainstorm V17 (idéation divergente)
 
 | Fichier | Lignes | Description |
@@ -14,7 +16,7 @@
 
 | Fichier | Lignes | Description |
 |---------|--------|-------------|
-| `expanse-v17-recette.md` | 588 | EXPANSE V17 — RECETTE ARCHITECTURALE. **Date :** 2 juillet 2026 |
+| `01-specs/2026-07-02_v17_RECETTE_expanse-v17_ARCHIVED.md` | 588 | EXPANSE V17 — RECETTE ARCHITECTURALE. **Date :** 2 juillet 2026 — **ARCHIVED** |
 
 ## 🍳 Réponses Recette V17
 
@@ -47,14 +49,14 @@
 
 | Fichier | Lignes | Description |
 |---------|--------|-------------|
-| `tests/v17-s14-retrogression-test.md` | 729 | 🧪 Test S14 Rétrogression — Expanse V17.6 vs V16 vs Baseline. **Date :** 2026-07-03 |
+| `04-tests/2026-07-03_v17_TEST_s14-retrogression_ARCHIVED.md` | 729 | 🧪 Test S14 Rétrogression — Expanse V17.6 vs V16 vs Baseline. **Date :** 2026-07-03 — **ARCHIVED** |
 | `tests/exec-s14-v17.sh` | 174 | =============================================================================. set -euo pipefail |
 
 ## 🗺️ Adjacents
 
 | Fichier | Lignes | Description |
 |---------|--------|-------------|
-| `S14-GUIDE.md` | 380 | 🎯 Step 4 — Guide Concret : Le Test S14 (Expanse vs Baseline). **Date :** 2 juillet 2026 |
+| `04-tests/2026-07-02_v17_TEST_s14-guide_ARCHIVED.md` | 380 | 🎯 Step 4 — Guide Concret : Le Test S14 (Expanse vs Baseline). **Date :** 2 juillet 2026 — **ARCHIVED** |
 
 ## 🚀 Quick-find commands
 

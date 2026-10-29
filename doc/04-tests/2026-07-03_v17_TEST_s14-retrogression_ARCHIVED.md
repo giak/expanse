@@ -1,7 +1,19 @@
+---
+type: TEST
+version: v17
+status: ARCHIVED
+title: "Test S14 rétrogression — Expanse V17.6 vs V16 vs baseline"
+created: 2026-07-03
+updated: 2026-10-28
+---
+
+> **Document historique V17 — non compatible avec V18.**
+> Ne pas l'utiliser comme protocole courant. Les contradictions et les briques réutilisables sont documentées dans [l'audit V17 vs V18](../05-audits/2026-10-28_v18_AUDIT_v17-bricks-vs-v18_DRAFT.md).
+
 # 🧪 Test S14 Rétrogression — Expanse V17.6 vs V16 vs Baseline
 
 **Date :** 2026-07-03
-**Statut :** ⚡ Ready-to-execute (buffer rédigé, sessions à allumer)
+**Statut :** archivé le 2026-10-28 — historique V17, ne pas exécuter.
 **Coût estimé :** ~$0.50 par session × 3 sessions = ~$1.50 (Buffy/Codebuff interne, pas Anthropic API)
 **Durée réelle :** ≤ 30 min setup + ≤ 3× 20 min sessions
 **Inspiration :** Audit V16 §V.1 (Rétrogression), `versions/v15/2026-07-02_s14-guide_v15.md` (V15 S14 v1), `doc/tests/EXPANSE-TEST-PROTOCOL.md` (méthodologie TIL/TED/TAR)
@@ -609,7 +621,7 @@ flowchart TD
 
 | Fichier/Artefact | Contenu | Audience |
 |------------------|---------|----------|
-| `doc/tests/v17-s14-retrogression-test.md` (ce doc) | Protocole complet | Tous |
+| `doc/04-tests/2026-07-03_v17_TEST_s14-retrogression_ARCHIVED.md` (ce doc) | Protocole complet | Tous |
 | `doc/tests/results/s14-v17-{date}/A/*` (10 JSON) | Outputs verbatim condition A | Audit technique |
 | `doc/tests/results/s14-v17-{date}/B/*` (10 JSON) | Outputs verbatim condition B | Audit technique |
 | `doc/tests/results/s14-v17-{date}/C/*` (10 JSON) | Outputs verbatim condition C | Audit technique |

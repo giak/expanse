@@ -1,11 +1,15 @@
 ---
 type: TEST
 version: v17
-status: ACTIVE
+status: ARCHIVED
 title: "Expanse Test Framework — Spec v1"
 created: 2026-07-04
-supersedes: doc/04-tests/S14-GUIDE.md (partiel — runner manuel)
+updated: 2026-10-28
+supersedes: doc/04-tests/2026-07-02_v17_TEST_s14-guide_ARCHIVED.md (partiel — runner manuel)
 ---
+
+> **Document historique V17 — non compatible avec V18.**
+> Ne pas l'utiliser comme framework courant. Les contradictions et les briques réutilisables sont documentées dans [l'audit V17 vs V18](../05-audits/2026-10-28_v18_AUDIT_v17-bricks-vs-v18_DRAFT.md).
 
 # EXPANSE TEST FRAMEWORK — Spec v1
 

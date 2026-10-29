@@ -25,7 +25,7 @@ evidence_cutoff: 2026-10-28
   - **F-02 (P1)** — Le schéma V17 (`prompt_A`/`prompt_B`, ou `conditions[]`/`tasks[]`) et les tags Mnemolite V17 (`type:test_result`, `project:expanse-research`) sont incompatibles avec D6/EF-2 et ENF-15. Un fichier V17 ne peut pas être ingéré par un harnais V18 sans transformation.
   - **F-03 (P1)** — V17 n'a ni `temperature`/`seed`/`num_predict`, ni empreinte sha256, ni comptage de tokens, ni `n ≥ 30`/p-value/IC, ni aveugle J+1, ni contrôle anti-artefact. Il ne peut pas produire une cellule Golden Record.
   - **F-04 (P1)** — Les exemples V17 (`Ψ`, `[LOST]`, `SEC`/politesse RLHF) ne sont pas des tâches neutres au sens H5/CA-S-4 : Ψ est un symbole Expanse, [LOST] un marqueur du méta-langage, SEC un contraste de style RLHF. Ils ne peuvent pas servir de base au pilote Q1.
-  - **F-05 (P1)** — Les trois specs V17 sont `status: ACTIVE` dans `doc/04-tests/`, alors qu'elles ne sont pas V18-compatibles et ne sont pas référencées par INDEX_V18. Un agent à froid peut les prendre pour le framework courant.
+  - **F-05 (P1, résolu le 2026-10-28)** — Les trois specs V17 étaient `status: ACTIVE` dans `doc/04-tests/`, alors qu'elles ne sont pas V18-compatibles et ne sont pas référencées par INDEX_V18. Elles sont désormais `ARCHIVED`, renommées `_ARCHIVED.md` et portent un bandeau de renvoi. Le même jour, les trois autres protocoles exécutables V17 — `S14-GUIDE`, rétrogression S14 et recette — ont reçu le même traitement.
 - **À préserver :** l'agnosticisme du `test.sh` V17, le principe « un test = un JSON », l'écriture de la réponse brute avant scoring, et la validation humaine du JSON.
 - **Confiance :** haute sur les contradictions textuelles (lignes citées) ; moyenne sur la réutilisabilité, car aucun script V17 n'a été exécuté dans cet audit.
 - **Prochain contrôle :** le harnais Q1 doit rejeter un JSON à 2 prompts et ne produire aucun tag `kind:golden_cell`.
@@ -33,7 +33,7 @@ evidence_cutoff: 2026-10-28
 ## Périmètre, méthode et limites
 
 - **Question :** quelles briques V17 sont réutilisables pour V18, et où le protocole V17 contredit-il V18 ?
-- **Inclus :** `doc/04-tests/2026-07-04_v17_TEST_protocol-simulation_ACTIVE.md`, `..._test-framework-spec_ACTIVE.md`, `..._research-framework-v2_ACTIVE.md`, `runtime/2026-07-02_v17-minimal-iteration-2_v17.md`, `doc/05-audits/v17-phase2-test-results.md`, et les exigences V18 (`VISION`, `PFD`, `PRD`, `SPEC`).
+- **Inclus :** `doc/04-tests/2026-07-04_v17_TEST_protocol-simulation_ARCHIVED.md`, `..._test-framework-spec_ARCHIVED.md`, `..._research-framework-v2_ARCHIVED.md`, `runtime/2026-07-02_v17-minimal-iteration-2_v17.md`, `doc/05-audits/v17-phase2-test-results.md`, et les exigences V18 (`VISION`, `PFD`, `PRD`, `SPEC`).
 - **Exclus :** l'exécution des scripts V17 ; le runner prompt complet (lu par sections) ; les sections §4-§5 du research framework (non lues en entier) ; Mnemolite live ; les 325 fichiers de `doc/_legacy/`.
 - **Sources non inspectées :** le code V17 n'existe pas comme fichier exécutable (`test.sh` est inline dans la spec) ; aucun test V17 n'a été rejoué. Les contradictions sont donc **textuelles**, pas runtime.
 - **Échelle :** P0 = choix de protocole qui rend le harnais non conforme ; P1 = brique inutilisable sans réécriture ou risque de confusion ; P2 = friction. Confiance haute = ligne citée des deux côtés ; moyenne = lecture partielle ou inférence.
@@ -112,12 +112,12 @@ evidence_cutoff: 2026-10-28
 ## Ce que la lecture établit
 
 - **Le noyau réutilisable est une discipline, pas un protocole.** Script neutre, un test à la fois, réponse brute écrite avant scoring, validation humaine : ces quatre choix survivent à V18. Les choix de conditions, de verdict et de juge ne survivent pas.
-**Correspondance des constats :** F-01 = C-01/C-02/C-03 ; F-02 = C-04/C-05 ; F-03 = C-06 à C-11 ; F-04 = C-12/C-13 ; F-05 = statut `ACTIVE` des specs V17.
+**Correspondance des constats :** F-01 = C-01/C-02/C-03 ; F-02 = C-04/C-05 ; F-03 = C-06 à C-11 ; F-04 = C-12/C-13 ; F-05 = statut `ACTIVE` des specs V17 (résolu le 2026-10-28).
 
 - **Les trois contradictions bloquantes (C-01, C-02, C-03) ne se corrigent pas par un patch.** Elles définissent le design de recherche : 2 conditions binaires contre 3 conditions graduées. Un fork du `test.sh` reproduirait le mauvais design avec une nouvelle syntaxe.
 - **Le modèle de données est le piège silencieux.** Un JSON V17 peut être exécuté sans erreur et produire une trace qui n'est ni D6 ni `kind:golden_cell`. Le harnais V18 doit rejeter ce fichier à l'entrée, pas le convertir implicitement.
 - **Les exemples V17 sont le piège le plus visible.** `Ψ`, `[LOST]` et `SEC` ressemblent à des tests prêts à l'emploi, mais ils violent H5, CA-S-4 et le corollaire Anti-TE. Ils ne doivent pas entrer dans le pilote Q1.
-- **Le statut `ACTIVE` des specs V17 est un risque de gouvernance.** Un agent qui cherche « le framework de test » dans `doc/04-tests/` trouve trois documents V17 marqués ACTIVE et aucun renvoi vers V18. C'est F-05.
+- **Le statut `ACTIVE` des specs V17 était un risque de gouvernance.** Un agent qui cherche « le framework de test » dans `doc/04-tests/` trouvait trois documents V17 marqués ACTIVE et aucun renvoi vers V18. C'était F-05 ; corrigé le 2026-10-28 par A-02 (`ARCHIVED` + bandeau).
 
 ## Options comparées
 
@@ -140,7 +140,7 @@ evidence_cutoff: 2026-10-28
 | ID | Constat lié | Action concrète | Priorité | Responsable (rôle) | Effort / dépendances | Critère d'acceptation et vérification |
 |---|---|---|---|---|---|---|
 | **A-01** | C-01, C-02, C-04 | écrire le harnais Q1 à partir des patrons listés ; rejeter un JSON à 2 prompts ; métrique fixe, sans `eval` ; runner Bash/curl | P0 | développeur | S-M | un JSON à 2 prompts sort en erreur ; `grep -R 'eval '` = 0 ; 60 traces valides |
-| **A-02** | F-05 | marquer les trois specs V17 comme historiques (ARCHIVED ou bandeau) et renvoyer à cet audit | P1 | mainteneur doc | S | plus aucune spec V17 `ACTIVE` citée comme framework courant |
+| **A-02** | F-05 | **fait le 2026-10-28** : les trois specs V17 et les trois protocoles S14/recette sont `ARCHIVED`, renommés `_ARCHIVED.md`, avec bandeau de renvoi | P1 | mainteneur doc | S | plus aucun document V17 exécutable `ACTIVE` cité comme courant |
 | **A-03** | C-12, C-13 | ne pas réutiliser les exemples Ψ/[LOST]/SEC ; utiliser la tâche neutre du plan pilote | P1 | développeur | S | aucune définition de test V18 ne contient Ψ, [LOST] ou SEC |
 | **A-04** | C-03 | pour Q2/Q5, utiliser la SPEC juge V18, pas la règle V17 « pas de juge » | P1 | développeur | S | SPEC juge citée ; triplication 42/43/44 |
 | **A-05** | C-18 | traiter le métaprompt V17 comme stimulus Q5, jamais comme harnais | P2 | mainteneur | S | aucun ΣΨΦΩΜ dans le harnais Q1 ; Q5 planifié séparément |
@@ -155,9 +155,9 @@ evidence_cutoff: 2026-10-28
 
 | ID | Source / artefact | Date ou version | Nature | Ce que la source démontre | Limites / accès |
 |---|---|---|---|---|---|
-| **E-01** | `doc/04-tests/2026-07-04_v17_TEST_protocol-simulation_ACTIVE.md` | 2026-07-04, v17 | document | socle 3 fichiers, `test.sh` 2 prompts, `eval`, tags V17 | spec, pas code exécuté |
-| **E-02** | `doc/04-tests/2026-07-04_v17_TEST_test-framework-spec_ACTIVE.md` | 2026-07-04, v17 | document | runner LLM, schéma `conditions/tasks`, Mnemolite | runner prompt lu par sections |
-| **E-03** | `doc/04-tests/2026-07-04_v17_TEST_research-framework-v2_ACTIVE.md` | 2026-07-04, v17 | document | 2 conditions, verdict binaire, labels Bleue/Rouge | §4-§5 non lues en entier |
+| **E-01** | `doc/04-tests/2026-07-04_v17_TEST_protocol-simulation_ARCHIVED.md` | 2026-07-04, v17 | document | socle 3 fichiers, `test.sh` 2 prompts, `eval`, tags V17 | spec, pas code exécuté |
+| **E-02** | `doc/04-tests/2026-07-04_v17_TEST_test-framework-spec_ARCHIVED.md` | 2026-07-04, v17 | document | runner LLM, schéma `conditions/tasks`, Mnemolite | runner prompt lu par sections |
+| **E-03** | `doc/04-tests/2026-07-04_v17_TEST_research-framework-v2_ARCHIVED.md` | 2026-07-04, v17 | document | 2 conditions, verdict binaire, labels Bleue/Rouge | §4-§5 non lues en entier |
 | **E-04** | `doc/05-audits/v17-phase2-test-results.md` | 2026-07-03 | artefact | trace V17 réelle, verbatim + verdict narratif | V17, pas V18 |
 | **E-05** | `runtime/2026-07-02_v17-minimal-iteration-2_v17.md` | 2026-07-02, v17.4 | document | métaprompt Ψ/SEC/ΣΨΦΩΜ | intention, pas mesure |
 | **E-06** | `doc/PFD.md` | v6, 2026-07-04 | document | D2/D3/D6/D7/D8, H4/H5, §7, aveugle | normatif, pas exécuté |

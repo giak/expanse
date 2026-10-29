@@ -3,7 +3,7 @@
 # exec-s14-v17.sh — Launch script for S14 V17 Rétrogression test
 # =============================================================================
 # Spawns 3 fresh Codebuff sessions to run the S14 Rétrogression test defined in
-# doc/tests/v17-s14-retrogression-test.md.
+# doc/04-tests/2026-07-03_v17_TEST_s14-retrogression_ARCHIVED.md.
 #
 # Conditions:
 #   A = Sans Expanse (baseline ~30 tok)

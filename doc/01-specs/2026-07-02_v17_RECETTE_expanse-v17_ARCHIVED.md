@@ -1,10 +1,23 @@
+---
+type: RECETTE
+version: v17
+status: ARCHIVED
+title: "Expanse V17 — recette architecturale"
+created: 2026-07-02
+updated: 2026-10-28
+---
+
+> **Document historique V17 — non compatible avec V18.**
+> Ne pas l'utiliser comme protocole courant. Les contradictions et les briques réutilisables sont documentées dans [l'audit V17 vs V18](../05-audits/2026-10-28_v18_AUDIT_v17-bricks-vs-v18_DRAFT.md).
+
 # EXPANSE V17 — RECETTE ARCHITECTURALE
 
 > **La voie recommandée, étape par étape.**
 > Synthèse honnête après : 2 audits forensiques + 1 brainstorm à 7 paths + 1 audit antagoniste de mon propre travail.
 
 **Date :** 2 juillet 2026  
-**Statut :** Recette consolidée, prête à exécuter  
+**Statut :** archivée le 2026-10-28 — recette historique V17, ne pas exécuter.
+
 **Auteur :** Buffy (Codebuff)  
 **Lecture :** 15-25 minutes (skim en 5 min)  
 **Pré-requis conseillé :** avoir lu `audit-prompt-v16-rapport.md` + `audit-prompt-v16-contre-audit.md` + `expanse-v17-brainstorm.md`
